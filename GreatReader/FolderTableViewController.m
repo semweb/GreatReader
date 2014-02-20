@@ -1,0 +1,106 @@
+//
+//  FolderTableViewController.m
+//  GreatReader
+//
+//  Created by MIYAMOTO Shohei on 2014/01/17.
+//  Copyright (c) 2014 MIYAMOTO Shohei. All rights reserved.
+//
+
+#import "FolderTableViewController.h"
+
+#import "FileCell.h"
+#import "Folder.h"
+#import "PDFDocument.h"
+#import "PDFRecentDocumentList.h"
+#import "PDFDocumentViewController.h"
+#import "FolderTableDataSource.h"
+
+NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewControllerSeguePDFDocument";
+
+@interface FolderTableViewController ()
+@end
+
+@implementation FolderTableViewController
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.title = self.dataSource.title;    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataSource.numberOfSections;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataSource numberOfFilesInSection:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"FileCell";
+    FileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    File *file = [self.dataSource fileAtIndexPath:indexPath];
+    cell.file = file;
+    
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.dataSource titleInSection:section];
+}
+
+#pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    File *file = [self.dataSource fileAtIndexPath:indexPath];
+    if ([file isKindOfClass:Folder.class]) {
+        
+    } else if ([file isKindOfClass:PDFDocument.class]) {
+        [self performSegueWithIdentifier:FolderTableViewControllerSeguePDFDocument
+                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{   
+    if ([segue.identifier isEqualToString:FolderTableViewControllerSeguePDFDocument]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        PDFDocumentViewController *vc =
+                (PDFDocumentViewController *)segue.destinationViewController;
+        PDFDocument *document = (PDFDocument *)[self.dataSource fileAtIndexPath:indexPath];
+        vc.document = [self.documentList open:document];
+        vc.documentList = self.documentList;
+    }
+}
+
+@end
