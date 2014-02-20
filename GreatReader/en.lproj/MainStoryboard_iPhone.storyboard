@@ -257,7 +257,7 @@
                         <segue destination="4Lj-s5-ami" kind="modal" identifier="PDFDocumentViewControllerSegueOutline" id="DfE-rq-8DC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="Setting" id="LV2-B1-wGo">
+                <barButtonItem image="ToolCrop.png" id="LV2-B1-wGo">
                     <connections>
                         <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCrop" id="21x-Bs-xCc"/>
                     </connections>
@@ -273,6 +273,9 @@
             <point key="canvasLocation" x="-107" y="470"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ToolCrop.png" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

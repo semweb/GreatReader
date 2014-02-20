@@ -19,6 +19,7 @@
 		19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
 		19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */; };
 		19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */; };
+		19D8705B18B628B900FA2B66 /* ToolCrop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D8705918B628B900FA2B66 /* ToolCrop@2x.png */; };
 		19D99DB71882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */; };
 		19D99DB81882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */; };
 		19D99DBA18827192006FDA6F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
@@ -100,6 +101,7 @@
 		19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfoView.m; sourceTree = "<group>"; };
 		19CA78AB18B1C41300200362 /* PDFDocumentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentInfo.h; sourceTree = "<group>"; };
 		19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfo.m; sourceTree = "<group>"; };
+		19D8705A18B628B900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ToolCrop@2x.png"; sourceTree = "<group>"; };
 		19D99DB51882713A006FDA6F /* PDFPageContentTiledLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageContentTiledLayer.h; sourceTree = "<group>"; };
 		19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageContentTiledLayer.m; sourceTree = "<group>"; };
 		19D99DB918827192006FDA6F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				19D99E00188A7EB7006FDA6F /* Folder@2x.png */,
+				19D8705918B628B900FA2B66 /* ToolCrop@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
 				19D99E02188A7EB7006FDA6F /* Folder@2x.png in Resources */,
+				19D8705B18B628B900FA2B66 /* ToolCrop@2x.png in Resources */,
 				19F7BA81186052E2009E8916 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +537,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		19D8705918B628B900FA2B66 /* ToolCrop@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19D8705A18B628B900FA2B66 /* en */,
+			);
+			name = "ToolCrop@2x.png";
+			sourceTree = "<group>";
+		};
 		19D99E00188A7EB7006FDA6F /* Folder@2x.png */ = {
 			isa = PBXVariantGroup;
 			children = (
