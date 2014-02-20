@@ -107,7 +107,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DocumentCell" rowHeight="64" id="diM-To-COa" customClass="FileCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="diM-To-COa" id="Hbh-8g-vmK">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="63"/>
@@ -251,18 +251,18 @@
                         <outlet property="settingItem" destination="LV2-B1-wGo" id="pSA-jg-WZz"/>
                     </connections>
                 </viewController>
-                <barButtonItem title="Search" id="EmI-qj-eOJ"/>
-                <barButtonItem title="Outline" id="GDD-o5-YVP">
+                <barButtonItem style="plain" systemItem="search" id="EmI-qj-eOJ"/>
+                <barButtonItem image="ToolOutline.png" style="plain" id="GDD-o5-YVP">
                     <connections>
                         <segue destination="4Lj-s5-ami" kind="modal" identifier="PDFDocumentViewControllerSegueOutline" id="DfE-rq-8DC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="ToolCrop.png" id="LV2-B1-wGo">
+                <barButtonItem image="ToolCrop.png" style="plain" id="LV2-B1-wGo">
                     <connections>
                         <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCrop" id="21x-Bs-xCc"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="History" id="Y10-Uv-7SO">
+                <barButtonItem image="ToolHistory.png" style="plain" id="Y10-Uv-7SO">
                     <connections>
                         <segue destination="7Z7-sa-Qx6" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="UDF-Em-Eeo"/>
                     </connections>
@@ -275,6 +275,8 @@
     </scenes>
     <resources>
         <image name="ToolCrop.png" width="22" height="22"/>
+        <image name="ToolHistory.png" width="22" height="22"/>
+        <image name="ToolOutline.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
