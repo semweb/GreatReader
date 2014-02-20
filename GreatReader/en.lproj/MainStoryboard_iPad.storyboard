@@ -206,20 +206,20 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYR-wa-Uaf" sceneMemberID="firstResponder"/>
                 <exit id="A5M-y9-xh8" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem title="Search" id="oyp-Kw-XpH"/>
-                <barButtonItem title="Outline" id="dyj-Mz-BLh">
+                <barButtonItem style="plain" systemItem="search" id="oyp-Kw-XpH"/>
+                <barButtonItem image="ToolOutline.png" style="plain" id="dyj-Mz-BLh">
                     <connections>
                         <segue destination="kmh-jI-auT" kind="popover" identifier="PDFDocumentViewControllerSegueOutline" popoverAnchorBarButtonItem="dyj-Mz-BLh" id="d84-bK-jom">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="Setting" id="OAS-SY-0oa">
+                <barButtonItem image="ToolCrop.png" style="plain" id="OAS-SY-0oa">
                     <connections>
                         <segue destination="4t9-hJ-dfS" kind="modal" identifier="PDFDocumentViewControllerSegueCrop" id="y87-Ry-eW1"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="History" id="Sp9-E4-Qb7">
+                <barButtonItem image="ToolHistory.png" style="plain" id="Sp9-E4-Qb7">
                     <connections>
                         <segue destination="Zqn-vJ-s2P" kind="popover" identifier="PDFDocumentViewControllerSegueHistory" popoverAnchorBarButtonItem="Sp9-E4-Qb7" id="Zpv-w3-NPb">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -276,6 +276,11 @@
             <point key="canvasLocation" x="1240" y="275"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ToolCrop.png" width="22" height="22"/>
+        <image name="ToolHistory.png" width="22" height="22"/>
+        <image name="ToolOutline.png" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
