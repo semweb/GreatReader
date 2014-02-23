@@ -60,7 +60,8 @@
 
 - (void)awakeFromNib
 {
-    CGFloat width = 14;
+    CGFloat width = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone
+            ? 20 : 30;
     
     self.topKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
     self.leftKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
