@@ -32,6 +32,53 @@
             </objects>
             <point key="canvasLocation" x="-115" y="-274"/>
         </scene>
+        <!--Document Bookmark List View Controller - Root View Controller-->
+        <scene sceneID="wln-lS-Njg">
+            <objects>
+                <tableViewController id="8md-Jg-iXC" customClass="PDFDocumentBookmarkListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Jpf-6H-5e7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BookmarkCell" id="HsX-27-mW6">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HsX-27-mW6" id="B2Q-oh-rP6">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="icj-TY-8kG">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="aOz-kh-yVU">
+                            <connections>
+                                <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentBookmarkListSegueExit" unwindAction="exitBookmark:" id="D3u-dE-iSU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JYN-qD-K6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920" y="-300"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iCG-wd-YBr">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="cq4-M3-lu3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dfB-JL-Ij1">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8md-Jg-iXC" kind="relationship" relationship="rootViewController" id="VTJ-WZ-Lpd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zsK-P2-pEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="388" y="-300"/>
+        </scene>
         <!--Document Outline View Controller - Outline-->
         <scene sceneID="bCd-5F-9R3">
             <objects>
@@ -107,7 +154,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DocumentCell" rowHeight="64" id="diM-To-COa" customClass="FileCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="diM-To-COa" id="Hbh-8g-vmK">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="63"/>
@@ -245,6 +292,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="QXd-EY-aPH"/>
                     <connections>
+                        <outlet property="bookmarkItem" destination="YdC-Xn-u4x" id="VA9-Rs-cOg"/>
                         <outlet property="historyItem" destination="Y10-Uv-7SO" id="kbd-Jo-Ehr"/>
                         <outlet property="outlineItem" destination="GDD-o5-YVP" id="yMG-gf-iw1"/>
                         <outlet property="ribbonOffItem" destination="Cdj-cb-q7X" id="mmD-Mc-8KB"/>
@@ -278,6 +326,11 @@
                 <barButtonItem image="RibbonOff.png" style="plain" id="Cdj-cb-q7X">
                     <connections>
                         <action selector="toggleRibbon:" destination="2" id="Cl9-W1-hVC"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="bookmarks" id="YdC-Xn-u4x">
+                    <connections>
+                        <segue destination="cq4-M3-lu3" kind="modal" identifier="PDFDocumentViewControllerSegueBookmark" id="bZh-LW-56E"/>
                     </connections>
                 </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>

@@ -20,7 +20,7 @@
 @property (nonatomic, strong, readwrite) UIImage *iconImage;
 @property (nonatomic, strong, readwrite) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readwrite) PDFDocumentCrop *crop;
-@property (nonatomic, strong) PDFDocumentBookmarkList *bookmarkList;
+@property (nonatomic, strong, readwrite) PDFDocumentBookmarkList *bookmarkList;
 @property (nonatomic, assign, readwrite) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, copy, readwrite) NSString *title;
 @end

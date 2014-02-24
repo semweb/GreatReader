@@ -10,6 +10,7 @@
 
 #import "File.h"
 
+@class PDFDocumentBookmarkList;
 @class PDFDocumentCrop;
 @class PDFDocumentOutline;
 @class PDFPage;
@@ -18,6 +19,7 @@
 @property (nonatomic, assign, readonly) NSUInteger numberOfPages;
 @property (nonatomic, strong, readonly) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readonly) PDFDocumentCrop *crop;
+@property (nonatomic, strong, readonly) PDFDocumentBookmarkList *bookmarkList;
 @property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 @property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, assign) NSUInteger currentPage;

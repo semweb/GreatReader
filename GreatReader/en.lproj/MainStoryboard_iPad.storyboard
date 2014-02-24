@@ -198,8 +198,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="7fJ-Of-cNI"/>
                     <connections>
+                        <outlet property="bookmarkItem" destination="LNd-Qf-h3l" id="k7c-Ie-Cek"/>
                         <outlet property="historyItem" destination="Sp9-E4-Qb7" id="F07-z4-egO"/>
                         <outlet property="outlineItem" destination="dyj-Mz-BLh" id="VbX-nr-NBj"/>
+                        <outlet property="ribbonOffItem" destination="yKb-0q-ZgJ" id="kWA-Iu-Fg7"/>
+                        <outlet property="ribbonOnItem" destination="MXx-lS-DYj" id="I8O-7K-sH8"/>
                         <outlet property="searchItem" destination="oyp-Kw-XpH" id="uic-1E-hK4"/>
                         <outlet property="settingItem" destination="OAS-SY-0oa" id="FAH-d3-Ekw"/>
                     </connections>
@@ -222,6 +225,24 @@
                 <barButtonItem image="ToolHistory.png" style="plain" id="Sp9-E4-Qb7">
                     <connections>
                         <segue destination="Zqn-vJ-s2P" kind="popover" identifier="PDFDocumentViewControllerSegueHistory" popoverAnchorBarButtonItem="Sp9-E4-Qb7" id="Zpv-w3-NPb">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="RibbonOff.png" id="yKb-0q-ZgJ">
+                    <connections>
+                        <action selector="toggleRibbon:" destination="Mqv-qU-Nyv" id="BLo-DF-Axw"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="RibbonOn.png" id="MXx-lS-DYj">
+                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="toggleRibbon:" destination="Mqv-qU-Nyv" id="gtY-KD-12m"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="bookmarks" id="LNd-Qf-h3l">
+                    <connections>
+                        <segue destination="iNE-PI-BtH" kind="popover" identifier="PDFDocumentViewControllerSegueBookmark" popoverAnchorBarButtonItem="LNd-Qf-h3l" id="Ig3-8H-NJA">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -275,8 +296,57 @@
             </objects>
             <point key="canvasLocation" x="1240" y="275"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Mqz-Sl-ZII">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="iNE-PI-BtH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SUr-05-sq4">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Gp0-VY-DLf" kind="relationship" relationship="rootViewController" id="522-TR-QJ2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vWb-2u-WNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="-862"/>
+        </scene>
+        <!--Document Bookmark List View Controller - Root View Controller-->
+        <scene sceneID="1YO-mY-3JB">
+            <objects>
+                <tableViewController id="Gp0-VY-DLf" customClass="PDFDocumentBookmarkListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="npq-PR-dUr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BookmarkCell" id="uvP-Z8-fak">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uvP-Z8-fak" id="3UZ-FZ-cJp">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="ECi-iX-6ap">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="yB7-Yw-wTD"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFDocumentBookmarkListSegueExit" unwindAction="exitBookmark:" id="jvJ-Ja-fyC"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOz-67-Ngz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1204" y="-862"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="RibbonOff.png" width="22" height="22"/>
+        <image name="RibbonOn.png" width="22" height="22"/>
         <image name="ToolCrop.png" width="22" height="22"/>
         <image name="ToolHistory.png" width="22" height="22"/>
         <image name="ToolOutline.png" width="22" height="22"/>

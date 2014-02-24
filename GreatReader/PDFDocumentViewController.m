@@ -9,6 +9,8 @@
 #import "PDFDocumentViewController.h"
 
 #import "PDFDocument.h"
+#import "PDFDocumentBookmarkList.h"
+#import "PDFDocumentBookmarkListViewController.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentCropViewController.h"
 #import "PDFDocumentInfo.h"
@@ -23,6 +25,7 @@
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
 NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
 NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
+NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewControllerSegueBookmark";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
                               UIPageViewControllerDelegate>
@@ -34,6 +37,7 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *historyItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkItem;
 @property (nonatomic, strong) PDFDocumentPageSlider *slider;
 @property (nonatomic, strong) PDFDocumentInfoView *infoView;
 @end
@@ -190,8 +194,9 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     UIBarButtonItem *ribbon = self.document.currentPageBookmarked
             ? self.ribbonOnItem : self.ribbonOffItem;
     self.navigationItem.rightBarButtonItems = @[self.outlineItem,
-                                                self.settingItem,                                                    
+                                                self.settingItem,
                                                 self.historyItem,
+                                                self.bookmarkItem,
                                                 ribbon];
 }
 
@@ -311,6 +316,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         PDFRecentDocumentListViewController *vc =
                 (PDFRecentDocumentListViewController *)navi.topViewController;
         vc.documentList = self.documentList;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBookmark]) {
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
+        PDFDocumentBookmarkListViewController *vc =
+                (PDFDocumentBookmarkListViewController *)navi.topViewController;
+        vc.bookmarkList = self.document.bookmarkList;
     }
 }
 
@@ -331,6 +342,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue {}
 
 - (IBAction)exitHistory:(UIStoryboardSegue *)segue {}
+
+- (IBAction)exitBookmark:(UIStoryboardSegue *)segue {}
 
 #pragma mark - PDFDocumentPageSlider Delegate, DataSouce
 
