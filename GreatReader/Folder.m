@@ -25,7 +25,28 @@
                                                          YES);
     Folder *folder = [[Folder alloc] initWithPath:paths.firstObject];
     [folder load];
+    [folder filterInboxFolder];
+    [folder deleteAllFilesInInbox];
     return folder;
+}
+
+- (void)filterInboxFolder
+{
+    self.files = [self.files grt_filter:^(File *file) {
+        return (BOOL)![file.name isEqualToString:@"Inbox"];
+    }];
+}
+
+- (void)deleteAllFilesInInbox
+{
+    NSFileManager *fm = [NSFileManager new];
+    NSString *path = [self.path stringByAppendingPathComponent:@"Inbox"];
+    if ([fm fileExistsAtPath:path]) {
+        NSArray *contents = [fm contentsOfDirectoryAtPath:path error:NULL];
+        for (NSString *p in contents) {
+            [fm removeItemAtPath:[path stringByAppendingPathComponent:p] error:NULL];
+        }
+    }
 }
 
 - (void)load

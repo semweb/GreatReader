@@ -11,4 +11,5 @@
 @interface NSFileManager (GreatReaderAdditions)
 + (NSString *)grt_privateDocumentsPath;
 - (void)grt_createPrivateDocumentsDirectory;
+- (NSURL *)grt_incrementURLIfNecessary:(NSURL *)URL;
 @end

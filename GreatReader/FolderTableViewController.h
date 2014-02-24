@@ -14,4 +14,5 @@
 @interface FolderTableViewController : UITableViewController
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
 @property (nonatomic, strong) FolderTableDataSource *dataSource;
+- (void)openDocumentsAtURL:(NSURL *)URL;
 @end

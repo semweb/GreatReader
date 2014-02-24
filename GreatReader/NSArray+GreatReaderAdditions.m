@@ -22,4 +22,15 @@
     return newArray;
 }
 
+- (NSArray *)grt_filter:(BOOL (^)(id))block
+{
+    NSMutableArray *newArray = [NSMutableArray array];
+    [self enumerateObjectsUsingBlock:^(id item, NSUInteger index, BOOL *stop) {
+        if (block(item)) {
+            [newArray addObject:item];
+        }
+    }];
+    return newArray;
+}
+
 @end

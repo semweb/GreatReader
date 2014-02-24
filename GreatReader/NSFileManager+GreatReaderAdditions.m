@@ -33,4 +33,18 @@ NSString * const kPrivateDocuments = @"PrivateDocuments";
     }
 }
 
+- (NSURL *)grt_incrementURLIfNecessary:(NSURL *)URL
+{
+    NSString *path = [URL path];
+    int inc = 1;
+    NSString *dirPath = [path stringByDeletingLastPathComponent];
+    NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
+    NSString *extension = [path pathExtension];
+    while ([self fileExistsAtPath:path]) {
+        path = [[dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%d", name, inc++]]
+                                 stringByAppendingPathExtension:extension];
+    }
+    return [NSURL fileURLWithPath:path];
+}
+
 @end

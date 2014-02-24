@@ -9,11 +9,13 @@
 #import "AppDelegate.h"
 
 #import "FolderTableViewController.h"
+#import "NSFileManager+GreatReaderAdditions.h"
 #import "PDFRecentDocumentList.h"
 #import "RootFolderTableDataSource.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
+@property (nonatomic, strong) UIViewController *initialViewController;
 @end
 
 @implementation AppDelegate
@@ -29,6 +31,8 @@
                                             initWithDocumentList:self.documentList];
     folderViewController.dataSource = dataSource;
     folderViewController.documentList = self.documentList;
+
+    self.initialViewController = navi;
     
     return YES;
 }
@@ -58,6 +62,54 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSString *fileName = [url lastPathComponent];
+    NSURL *dirURL = [[url URLByDeletingLastPathComponent] URLByDeletingLastPathComponent];
+    NSURL *destURL = [dirURL URLByAppendingPathComponent:fileName];
+
+    NSFileManager *fm = [NSFileManager new];
+    NSError *error = nil;
+    if ([fm moveItemAtURL:url
+                    toURL:[fm grt_incrementURLIfNecessary:destURL]
+                    error:&error]) {
+        
+        [self openURL:destURL];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+#pragma mark - Open Document in GreatReader
+
+- (void)openURL:(NSURL *)URL
+{
+    UINavigationController *root = (UINavigationController *)[[self window] rootViewController];
+    UIViewController *top = [root topViewController];
+    void (^reloadRootFolder)(void) = ^{
+        FolderTableViewController *vc = (FolderTableViewController *)[root topViewController];
+        FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
+                                                initWithDocumentList:self.documentList];
+        vc.dataSource = dataSource;
+        [vc.tableView reloadData];
+        [vc performSelector:@selector(openDocumentsAtURL:)
+                 withObject:URL
+                 afterDelay:0.5];
+    };
+
+    if (top.presentedViewController) {
+        [top dismissViewControllerAnimated:NO
+                                completion:^{
+            [root popToRootViewControllerAnimated:NO];
+            reloadRootFolder();
+        }];
+    } else {
+        [root popToRootViewControllerAnimated:NO];
+        reloadRootFolder();
+    }
 }
 
 @end

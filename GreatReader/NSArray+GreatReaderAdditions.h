@@ -10,4 +10,5 @@
 
 @interface NSArray (GreatReaderAdditions)
 - (NSArray *)grt_map:(id (^)(id))block;
+- (NSArray *)grt_filter:(BOOL (^)(id))block;
 @end

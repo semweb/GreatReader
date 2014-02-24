@@ -103,4 +103,27 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
     }
 }
 
+#pragma mark -
+
+- (void)openDocumentsAtURL:(NSURL *)URL
+{
+    NSUInteger section = self.dataSource.numberOfSections - 1;
+    NSUInteger count = [self.dataSource numberOfFilesInSection:section];
+    for (int i = 0; i < count; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i
+                                                    inSection:section];
+        File *file = [self.dataSource fileAtIndexPath:indexPath];
+        if ([file.path isEqualToString:URL.path]) {
+            [self.tableView selectRowAtIndexPath:indexPath
+                                        animated:YES
+                                  scrollPosition:UITableViewScrollPositionMiddle];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                [self performSegueWithIdentifier:FolderTableViewControllerSeguePDFDocument
+                                          sender:cell];                    
+            });
+        }
+    }
+}
+
 @end
