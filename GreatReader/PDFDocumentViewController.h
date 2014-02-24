@@ -22,6 +22,8 @@
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue;
 - (IBAction)exitHistory:(UIStoryboardSegue *)segue;
 
+- (IBAction)toggleRibbon:(id)sender;
+
 - (void)goAtIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)openDocument:(PDFDocument *)document;
     

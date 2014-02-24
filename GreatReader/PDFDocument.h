@@ -22,5 +22,7 @@
 @property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, assign) NSUInteger currentPage;
 @property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, readonly) BOOL currentPageBookmarked;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
+- (void)toggleRibbon;
 @end

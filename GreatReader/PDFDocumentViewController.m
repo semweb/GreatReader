@@ -32,6 +32,8 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *searchItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *outlineItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *historyItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
 @property (nonatomic, strong) PDFDocumentPageSlider *slider;
 @property (nonatomic, strong) PDFDocumentInfoView *infoView;
 @end
@@ -63,6 +65,32 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self addObserver:self
+           forKeyPath:@"document.currentPage"
+              options:0
+              context:NULL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    [self removeObserver:self forKeyPath:@"document.currentPage"];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"document.currentPage"]) {
+        [self prepareNavigationBar];
+    }
 }
 
 #pragma mark - Open
@@ -159,10 +187,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)prepareNavigationBar
 {
+    UIBarButtonItem *ribbon = self.document.currentPageBookmarked
+            ? self.ribbonOnItem : self.ribbonOffItem;
     self.navigationItem.rightBarButtonItems = @[self.outlineItem,
-                                                self.settingItem,
-                                                self.searchItem,
-                                                self.historyItem];
+                                                self.settingItem,                                                    
+                                                self.historyItem,
+                                                ribbon];
 }
 
 - (void)prepareInfoView
@@ -282,6 +312,13 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (PDFRecentDocumentListViewController *)navi.topViewController;
         vc.documentList = self.documentList;
     }
+}
+
+#pragma mark - Ribbon Action
+
+- (IBAction)toggleRibbon:(id)sender
+{
+    [self.document toggleRibbon];
 }
 
 #pragma mark - Exit

@@ -8,6 +8,7 @@
 
 #import "PDFDocument.h"
 
+#import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
 #import "PDFPage.h"
@@ -19,11 +20,20 @@
 @property (nonatomic, strong, readwrite) UIImage *iconImage;
 @property (nonatomic, strong, readwrite) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readwrite) PDFDocumentCrop *crop;
+@property (nonatomic, strong) PDFDocumentBookmarkList *bookmarkList;
 @property (nonatomic, assign, readwrite) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, copy, readwrite) NSString *title;
 @end
 
 @implementation PDFDocument
+
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
+{
+    if ([key isEqualToString:@"currentPageBookmarked"]) {
+        return [NSSet setWithObject:@"currentPage"];
+    }
+    return [NSSet set];
+}
 
 - (void)dealloc
 {
@@ -56,6 +66,7 @@
     self = [self initWithPath:path];
     if (self) {
         _currentPage = [decoder decodeIntegerForKey:@"currentPage"];
+        _bookmarkList = [decoder decodeObjectForKey:@"bookmarkList"];
     }
     return self;
 }
@@ -64,6 +75,7 @@
 {
     [encoder encodeObject:self.path forKey:@"path"];
     [encoder encodeInteger:self.currentPage forKey:@"currentPage"];
+    [encoder encodeObject:self.bookmarkList forKey:@"bookmarkList"];
 }
 
 #pragma mark -
@@ -109,6 +121,14 @@
         _crop = [[PDFDocumentCrop alloc] initWithPDFDocument:self];
     }
     return _crop;
+}
+
+- (PDFDocumentBookmarkList *)bookmarkList
+{
+    if (!_bookmarkList) {
+        _bookmarkList = [PDFDocumentBookmarkList new];
+    }
+    return _bookmarkList;
 }
 
 #pragma mark -
@@ -186,6 +206,20 @@
     } else {
         return [[super name] stringByDeletingPathExtension];
     }
+}
+
+#pragma mark - Ribbon
+
+- (void)toggleRibbon
+{
+    [self willChangeValueForKey:@"currentPageBookmarked"];
+    [self.bookmarkList toggleBookmarkAtPage:self.currentPage];
+    [self didChangeValueForKey:@"currentPageBookmarked"];    
+}
+
+- (BOOL)currentPageBookmarked
+{
+    return [self.bookmarkList bookmarkedAtPage:self.currentPage];
 }
 
 @end

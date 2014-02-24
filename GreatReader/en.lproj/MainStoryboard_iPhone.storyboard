@@ -247,6 +247,8 @@
                     <connections>
                         <outlet property="historyItem" destination="Y10-Uv-7SO" id="kbd-Jo-Ehr"/>
                         <outlet property="outlineItem" destination="GDD-o5-YVP" id="yMG-gf-iw1"/>
+                        <outlet property="ribbonOffItem" destination="Cdj-cb-q7X" id="mmD-Mc-8KB"/>
+                        <outlet property="ribbonOnItem" destination="9eO-3t-r0w" id="kOu-Qx-J9T"/>
                         <outlet property="searchItem" destination="EmI-qj-eOJ" id="iPO-mP-zQp"/>
                         <outlet property="settingItem" destination="LV2-B1-wGo" id="pSA-jg-WZz"/>
                     </connections>
@@ -267,6 +269,17 @@
                         <segue destination="7Z7-sa-Qx6" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="UDF-Em-Eeo"/>
                     </connections>
                 </barButtonItem>
+                <barButtonItem image="RibbonOn.png" style="plain" id="9eO-3t-r0w">
+                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="toggleRibbon:" destination="2" id="qEJ-eW-NKF"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="RibbonOff.png" style="plain" id="Cdj-cb-q7X">
+                    <connections>
+                        <action selector="toggleRibbon:" destination="2" id="Cl9-W1-hVC"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
@@ -274,6 +287,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="RibbonOff.png" width="22" height="22"/>
+        <image name="RibbonOn.png" width="22" height="22"/>
         <image name="ToolCrop.png" width="22" height="22"/>
         <image name="ToolHistory.png" width="22" height="22"/>
         <image name="ToolOutline.png" width="22" height="22"/>
