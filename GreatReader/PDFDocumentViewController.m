@@ -76,7 +76,7 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     [super viewWillAppear:animated];
     
     [self addObserver:self
-           forKeyPath:@"document.currentPage"
+           forKeyPath:@"document.currentPageBookmarked"
               options:0
               context:NULL];
 }
@@ -85,14 +85,14 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 {
     [super viewWillDisappear:animated];
 
-    [self removeObserver:self forKeyPath:@"document.currentPage"];
+    [self removeObserver:self forKeyPath:@"document.currentPageBookmarked"];
 }
 
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"document.currentPage"]) {
+    if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
         [self prepareNavigationBar];
     }
 }
