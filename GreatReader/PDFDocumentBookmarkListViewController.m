@@ -46,20 +46,30 @@ NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSeg
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.bookmarkList.bookmarkedSectionList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.bookmarkList.bookmarkList.count;
+    NSDictionary *sec = self.bookmarkList.bookmarkedSectionList[section];
+    NSArray *bookmarks = sec[@"bookmarks"];
+    return bookmarks.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSDictionary *sec = self.bookmarkList.bookmarkedSectionList[section];
+    NSString *title = sec[@"section"];
+    return title;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BookmarkCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    NSNumber *bookmark = self.bookmarkList.bookmarkList[indexPath.row];
+
+    NSDictionary *sec = self.bookmarkList.bookmarkedSectionList[indexPath.section];
+    NSNumber *bookmark = sec[@"bookmarks"][indexPath.row];
     cell.textLabel.text = [bookmark description];
     
     return cell;
@@ -79,7 +89,8 @@ NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSeg
     if ([segue.identifier isEqualToString:PDFDocumentBookmarkListSegueExit]) {
         if (sender == self) {
             NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-            NSNumber *bookmark = self.bookmarkList.bookmarkList[indexPath.row];
+            NSDictionary *sec = self.bookmarkList.bookmarkedSectionList[indexPath.section];
+            NSNumber *bookmark = sec[@"bookmarks"][indexPath.row];            
 
             PDFDocumentViewController *vc = segue.destinationViewController;
             [vc goAtIndex:[bookmark integerValue] animated:YES];

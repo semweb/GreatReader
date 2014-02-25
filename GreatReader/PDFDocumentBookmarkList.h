@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class PDFDocument;
+
 @interface PDFDocumentBookmarkList : NSObject
-@property (nonatomic, readonly) NSArray *bookmarkList;
+@property (nonatomic, strong, readonly) NSArray *bookmarkedSectionList;
+@property (nonatomic, weak) PDFDocument *document;
 - (void)bookmarkAtPage:(NSUInteger)page;
 - (void)unbookmarkAtPage:(NSUInteger)page;
 - (BOOL)bookmarkedAtPage:(NSUInteger)page;

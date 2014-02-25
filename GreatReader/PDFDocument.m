@@ -67,6 +67,7 @@
     if (self) {
         _currentPage = [decoder decodeIntegerForKey:@"currentPage"];
         _bookmarkList = [decoder decodeObjectForKey:@"bookmarkList"];
+        _bookmarkList.document = self;
     }
     return self;
 }

@@ -8,8 +8,12 @@
 
 #import "PDFDocumentBookmarkList.h"
 
+#import "PDFDocument.h"
+#import "PDFDocumentOutline.h"
+
 @interface PDFDocumentBookmarkList ()
 @property (nonatomic, strong) NSMutableArray *bookmarks;
+@property (nonatomic, strong, readwrite) NSArray *bookmarkedSectionList;
 @end
 
 @implementation PDFDocumentBookmarkList
@@ -30,6 +34,7 @@
         NSArray *saved = [decoder decodeObjectForKey:@"bookmarks"];
         if (saved) {
             [_bookmarks addObjectsFromArray:saved];
+            [self updateBookmarkedSectionList];
         }
     }
     return self;
@@ -46,6 +51,7 @@
     if (![self.bookmarks containsObject:num]) {
         [self.bookmarks addObject:num];
     }
+    [self updateBookmarkedSectionList];    
 }
 
 - (void)unbookmarkAtPage:(NSUInteger)page
@@ -54,6 +60,7 @@
     if ([self.bookmarks containsObject:num]) {
         [self.bookmarks removeObject:num];
     }
+    [self updateBookmarkedSectionList];    
 }
 
 - (void)toggleBookmarkAtPage:(NSUInteger)page
@@ -71,11 +78,28 @@
     return [self.bookmarks containsObject:num];
 }
 
-#pragma mark -
+#pragma -
 
-- (NSArray *)bookmarkList
+- (void)updateBookmarkedSectionList
 {
-    return [self.bookmarks sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *list = [self.bookmarks sortedArrayUsingSelector:@selector(compare:)];
+    NSString *currentSection = nil;
+    NSMutableArray *currentList = nil;
+    NSMutableArray *sections = [NSMutableArray array];
+    for (NSNumber *bookmark in list) {
+        NSString *section = [self.document.outline sectionTitleAtIndex:[bookmark integerValue]];
+        if ([currentSection isEqualToString:section] || (!currentSection && !section && currentList)) {
+            [currentList addObject:bookmark];
+        } else {
+            currentList = [NSMutableArray arrayWithObject:bookmark];
+            [sections addObject:@{
+                @"section": section ?: @"",
+                @"bookmarks": currentList
+            }];            
+        }
+        currentSection = section;
+    }
+    self.bookmarkedSectionList = sections;
 }
 
 @end
