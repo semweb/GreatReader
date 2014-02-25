@@ -9,6 +9,7 @@
 #import "PDFDocumentInfo.h"
 
 #import "PDFDocument.h"
+#import "PDFDocumentOutline.h"
 
 @interface PDFDocumentInfo ()
 @property (nonatomic, strong) PDFDocument *document;
@@ -38,6 +39,11 @@
     return [NSString stringWithFormat:@"%d/%d",
                      self.document.currentPage,
                      self.document.numberOfPages];
+}
+
+- (NSString *)sectionTitle
+{
+    return [self.document.outline sectionTitleAtIndex:self.document.currentPage];
 }
 
 - (NSString *)title

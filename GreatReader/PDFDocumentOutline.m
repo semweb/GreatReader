@@ -208,6 +208,25 @@
 
 #pragma mark -
 
+- (NSString *)sectionTitleAtIndex:(NSUInteger)index
+{
+    PDFDocumentOutlineItem *current = nil;
+    for (PDFDocumentOutlineItem *item in self.items) {
+        if (item.pageNumber <= index) {
+            current = item;
+            if (item.pageNumber == index) {
+                break;
+            }
+        }
+        else {
+            break;
+        }
+    }
+    return current.title;
+}
+
+#pragma mark -
+
 - (NSString *)description
 {
     return [[self.items grt_map:^(PDFDocumentOutlineItem *item) {

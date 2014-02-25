@@ -12,6 +12,7 @@
 
 @interface PDFDocumentInfoView ()
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *outlineLabel;
 @property (nonatomic, strong) UILabel *pageLabel;
 @end
 
@@ -36,6 +37,12 @@
         _titleLabel.layer.masksToBounds = YES;
         _titleLabel.layer.cornerRadius = 4.0;
         [self addSubview:_titleLabel];
+        _outlineLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _outlineLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+        _outlineLabel.textColor = [UIColor whiteColor];
+        _outlineLabel.layer.masksToBounds = YES;
+        _outlineLabel.layer.cornerRadius = 4.0;
+        [self addSubview:_outlineLabel];        
         _pageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _pageLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
         _pageLabel.textColor = [UIColor whiteColor];
@@ -81,6 +88,17 @@
         f;
     });
     self.pageLabel.frame = pageFrame;
+
+    self.outlineLabel.text = self.info.sectionTitle;
+    [self.outlineLabel sizeToFit];    
+    CGRect outlineFrame = ({
+        CGRect f = self.outlineLabel.frame;
+        f.origin.x = roundf((self.bounds.size.width - f.size.width) / 2.0),
+        f.origin.y = CGRectGetMinY(self.pageLabel.frame) - f.size.height - 10;
+        f;
+    });
+    self.outlineLabel.frame = outlineFrame;
+    self.outlineLabel.hidden = (self.outlineLabel.text == nil);
 }
 
 - (void)show

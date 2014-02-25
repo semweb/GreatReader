@@ -13,5 +13,6 @@
 @interface PDFDocumentInfo : NSObject
 - (instancetype)initWithDocument:(PDFDocument *)document;
 @property (nonatomic, readonly) NSString *pageDescription;
+@property (nonatomic, readonly) NSString *sectionTitle;
 @property (nonatomic, readonly) NSString *title;
 @end

@@ -11,4 +11,5 @@
 @interface PDFDocumentOutline : NSObject
 @property (nonatomic, strong, readonly) NSArray *items;
 - (instancetype)initWithCGPDFDocument:(CGPDFDocumentRef)document;
+- (NSString *)sectionTitleAtIndex:(NSUInteger)index;
 @end
