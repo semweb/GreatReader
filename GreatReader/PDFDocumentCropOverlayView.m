@@ -60,8 +60,7 @@
 
 - (void)awakeFromNib
 {
-    CGFloat width = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone
-            ? 20 : 30;
+    CGFloat width = 28;
     
     self.topKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
     self.leftKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
@@ -144,10 +143,10 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context, x, y - w / 2);
-    CGContextAddLineToPoint(context, x + w / 2, y);
-    CGContextAddLineToPoint(context, x, y + w / 2);
-    CGContextAddLineToPoint(context, x - w / 2, y);
+    CGContextMoveToPoint(context, x, y - w / 4);
+    CGContextAddLineToPoint(context, x + w / 4, y);
+    CGContextAddLineToPoint(context, x, y + w / 4);
+    CGContextAddLineToPoint(context, x - w / 4, y);
     CGContextClosePath(context);
 
     CGContextSetFillColorWithColor(context, UIColor.whiteColor.CGColor);
