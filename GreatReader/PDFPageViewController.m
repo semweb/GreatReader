@@ -15,40 +15,6 @@
 @end
 
 @implementation PDFPageScrollView
-
-// - (void)layoutSubviews 
-// {
-//     [super layoutSubviews];
-    
-//     // Center the image as it becomes smaller than the size of the screen.
-    
-//     CGSize boundsSize = self.bounds.size;
-//     CGRect frameToCenter = self.tiledPDFView.frame;
-    
-//     // Center horizontally.
-    
-//     if (frameToCenter.size.width < boundsSize.width)
-//         frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
-//     else
-//         frameToCenter.origin.x = 0;
-    
-//     // Center vertically.
-    
-//     if (frameToCenter.size.height < boundsSize.height)
-//         frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
-//     else
-//         frameToCenter.origin.y = 0;
-    
-//     self.tiledPDFView.frame = frameToCenter;
-//     self.backgroundImageView.frame = frameToCenter;
-    
-//     /*
-//      To handle the interaction between CATiledLayer and high resolution screens, set the tiling view's contentScaleFactor to 1.0.
-//      If this step were omitted, the content scale factor would be 2.0 on high resolution screens, which would cause the CATiledLayer to ask for tiles of the wrong scale.
-//      */
-//     self.tiledPDFView.contentScaleFactor = 1.0;
-// }
- 
 @end
 
 @interface PDFPageViewController () <UIScrollViewDelegate>
@@ -151,7 +117,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-   
+
     self.contentView.frame = self.contentFrame;
     self.lowResolutionView.frame = self.contentFrame;
 }
