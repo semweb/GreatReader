@@ -32,12 +32,14 @@
         self.opaque = NO;
 
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.numberOfLines = 0;
         _titleLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
         _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.layer.masksToBounds = YES;
         _titleLabel.layer.cornerRadius = 4.0;
         [self addSubview:_titleLabel];
         _outlineLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _outlineLabel.numberOfLines = 0;
         _outlineLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
         _outlineLabel.textColor = [UIColor whiteColor];
         _outlineLabel.layer.masksToBounds = YES;
@@ -67,11 +69,14 @@
 {
     [super layoutSubviews];
 
+    CGSize fitSize = self.bounds.size;
+    fitSize.width -= 40;
+
     const CGFloat top = 100;
-    self.titleLabel.text = self.info.title;
-    [self.titleLabel sizeToFit];
+    self.titleLabel.text = self.info.title;    
     CGRect titleFrame = ({
         CGRect f = self.titleLabel.frame;
+        f.size = [self.titleLabel sizeThatFits:fitSize];
         f.origin.x = roundf((self.bounds.size.width - f.size.width) / 2.0),
         f.origin.y = top;
         f;
@@ -80,19 +85,19 @@
 
     const CGFloat bottom = 100;
     self.pageLabel.text = self.info.pageDescription;
-    [self.pageLabel sizeToFit];    
     CGRect pageFrame = ({
         CGRect f = self.pageLabel.frame;
+        f.size = [self.pageLabel sizeThatFits:fitSize];    
         f.origin.x = roundf((self.bounds.size.width - f.size.width) / 2.0),
         f.origin.y = self.bounds.size.height - bottom - f.size.height;
         f;
     });
     self.pageLabel.frame = pageFrame;
 
-    self.outlineLabel.text = self.info.sectionTitle;
-    [self.outlineLabel sizeToFit];    
+    self.outlineLabel.text = self.info.sectionTitle;    
     CGRect outlineFrame = ({
         CGRect f = self.outlineLabel.frame;
+        f.size = [self.outlineLabel sizeThatFits:fitSize];
         f.origin.x = roundf((self.bounds.size.width - f.size.width) / 2.0),
         f.origin.y = CGRectGetMinY(self.pageLabel.frame) - f.size.height - 10;
         f;
