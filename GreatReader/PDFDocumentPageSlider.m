@@ -64,7 +64,6 @@
 - (void)reloadData
 {
     [self replaceSubviews];
-    [self layoutSubviews];
 }
 
 - (void)replaceSubviews
@@ -87,8 +86,8 @@
     CGFloat width = (thumbnailViewSize.width * numberOfThumbnails) +
             (self.space * (numberOfThumbnails - 1));
 
-    self.startX = roundf((self.bounds.size.width - width - thumbnailViewSize.width) / 2.0);
-    self.endX = self.startX + width - thumbnailViewSize.width;
+    self.startX = roundf((self.bounds.size.width - width + thumbnailViewSize.width) / 2.0);
+    self.endX = self.startX + width - thumbnailViewSize.width / 2.0;
 
     for (int i = 0; i < numberOfThumbnails; i++) {
         int index = (numberOfThumbnails > 1)
@@ -116,6 +115,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+
+    [self reloadData];
 
     CGSize size = self.thumbnailViewSize;
 

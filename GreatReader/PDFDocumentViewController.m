@@ -36,7 +36,8 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkItem;
-@property (nonatomic, strong) PDFDocumentPageSlider *slider;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet PDFDocumentPageSlider *slider;
 @property (nonatomic, strong) PDFDocumentInfoView *infoView;
 @end
 
@@ -57,7 +58,8 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
     [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
+    [self.view insertSubview:self.pageViewController.view
+                belowSubview:self.toolbar];
     self.pageViewController.view.frame = self.view.bounds;
 
     [self openDocument:self.document];
@@ -175,16 +177,9 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)prepareToolbar
 {
-    if (!self.slider) {
-        UIToolbar *toolbar = self.navigationController.toolbar;
-        self.slider = [[PDFDocumentPageSlider alloc] initWithFrame:toolbar.bounds];
-        self.slider.delegate = self;
-        self.slider.dataSource = self;
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.slider];
-        [self setToolbarItems:@[item] animated:NO];
-    } else {
-        [self.slider reloadData];
-    }
+    self.slider.delegate = self;
+    self.slider.dataSource = self;
+    [self.slider reloadData];
 }
 
 - (void)prepareNavigationBar
@@ -239,7 +234,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     [UIView animateWithDuration:0.125
                  animations:^{
         [self setNeedsStatusBarAppearanceUpdate];
-        self.navigationController.toolbar.alpha = alpha;
+        self.toolbar.alpha = alpha;
         self.navigationController.navigationBar.alpha = alpha;
     }];
 

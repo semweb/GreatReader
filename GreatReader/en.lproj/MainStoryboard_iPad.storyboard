@@ -166,8 +166,8 @@
         <!--Navigation Controller-->
         <scene sceneID="5BC-5J-41L">
             <objects>
-                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="rpq-QO-tBZ" sceneMemberID="viewController">
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                <navigationController definesPresentationContext="YES" id="rpq-QO-tBZ" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yn8-OH-m5G">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -186,17 +186,32 @@
         <!--Document View Controller-->
         <scene sceneID="GCV-Qq-Ygq">
             <objects>
-                <viewController id="Mqv-qU-Nyv" customClass="PDFDocumentViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Mqv-qU-Nyv" customClass="PDFDocumentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KtO-hD-GxV"/>
                         <viewControllerLayoutGuide type="bottom" id="mar-XL-T7m"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TBz-iI-rTc">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="604"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MhS-Jv-ZGv" customClass="PDFDocumentPageSlider">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7fJ-Of-cNI"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bookmarkItem" destination="LNd-Qf-h3l" id="k7c-Ie-Cek"/>
                         <outlet property="outlineItem" destination="dyj-Mz-BLh" id="VbX-nr-NBj"/>
@@ -204,6 +219,8 @@
                         <outlet property="ribbonOnItem" destination="MXx-lS-DYj" id="I8O-7K-sH8"/>
                         <outlet property="searchItem" destination="oyp-Kw-XpH" id="uic-1E-hK4"/>
                         <outlet property="settingItem" destination="OAS-SY-0oa" id="FAH-d3-Ekw"/>
+                        <outlet property="slider" destination="MhS-Jv-ZGv" id="vQ0-A9-YHE"/>
+                        <outlet property="toolbar" destination="hir-j8-6Gt" id="osa-Is-rwJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYR-wa-Uaf" sceneMemberID="firstResponder"/>

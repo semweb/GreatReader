@@ -286,8 +286,8 @@
         <!--Navigation Controller-->
         <scene sceneID="jJw-TU-ueZ">
             <objects>
-                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="tSv-Kq-LgP" sceneMemberID="viewController">
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                <navigationController definesPresentationContext="YES" id="tSv-Kq-LgP" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="flk-qE-mXA">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -306,17 +306,44 @@
         <!--Document View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="PDFDocumentViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2" customClass="PDFDocumentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h0O-kV-CAd"/>
                         <viewControllerLayoutGuide type="bottom" id="bWV-8V-RzY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGa-Oe-iG3" customClass="UIToolbar">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YmW-Zf-FjA" customClass="PDFDocumentPageSlider">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="top" id="Hp0-r7-CaG"/>
+                                    <constraint firstAttribute="trailing" secondItem="YmW-Zf-FjA" secondAttribute="trailing" id="e9L-91-UhY"/>
+                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="leading" secondItem="rGa-Oe-iG3" secondAttribute="leading" id="nTv-hJ-nF3"/>
+                                    <constraint firstAttribute="bottom" secondItem="YmW-Zf-FjA" secondAttribute="bottom" id="tB5-Kb-NFb"/>
+                                    <constraint firstAttribute="height" constant="44" id="tcU-oH-jzH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rGa-Oe-iG3" secondAttribute="trailing" id="38U-5i-Vm4"/>
+                            <constraint firstItem="rGa-Oe-iG3" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="59w-IA-zV5"/>
+                            <constraint firstItem="bWV-8V-RzY" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="bottom" id="Rg6-eb-VYM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QXd-EY-aPH"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bookmarkItem" destination="YdC-Xn-u4x" id="VA9-Rs-cOg"/>
                         <outlet property="outlineItem" destination="GDD-o5-YVP" id="yMG-gf-iw1"/>
@@ -324,6 +351,8 @@
                         <outlet property="ribbonOnItem" destination="9eO-3t-r0w" id="kOu-Qx-J9T"/>
                         <outlet property="searchItem" destination="EmI-qj-eOJ" id="iPO-mP-zQp"/>
                         <outlet property="settingItem" destination="LV2-B1-wGo" id="pSA-jg-WZz"/>
+                        <outlet property="slider" destination="YmW-Zf-FjA" id="XEh-yC-ltj"/>
+                        <outlet property="toolbar" destination="rGa-Oe-iG3" id="wU9-2p-Vr4"/>
                     </connections>
                 </viewController>
                 <barButtonItem style="plain" systemItem="search" id="EmI-qj-eOJ"/>
@@ -356,7 +385,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="461" y="-994"/>
+            <point key="canvasLocation" x="433" y="-1010"/>
         </scene>
     </scenes>
     <resources>
