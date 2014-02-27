@@ -327,8 +327,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue {}
 
-- (IBAction)exitHistory:(UIStoryboardSegue *)segue {}
-
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue {}
 
 #pragma mark - PDFDocumentPageSlider Delegate, DataSouce
