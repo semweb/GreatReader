@@ -8,22 +8,45 @@
 
 #import "PDFRecentDocumentCell.h"
 
+#import "PDFDocument.h"
+
+@interface PDFRecentDocumentCell ()
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@end
+
 @implementation PDFRecentDocumentCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (void)dealloc
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    [self removeObserver:self forKeyPath:@"document.name"];              
+    [self removeObserver:self forKeyPath:@"document.iconImage"];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setDocument:(PDFDocument *)document
 {
-    [super setSelected:selected animated:animated];
+    _document = document;
+}
 
-    // Configure the view for the selected state
+- (void)awakeFromNib
+{
+    [self addObserver:self
+           forKeyPath:@"document.name"
+              options:NSKeyValueObservingOptionOld
+              context:NULL];
+    [self addObserver:self
+           forKeyPath:@"document.iconImage"
+              options:NSKeyValueObservingOptionOld
+              context:NULL];    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"document.name"]) {
+        self.titleLabel.text = self.document.name;
+    } else if ([keyPath isEqualToString:@"document.iconImage"]) {
+        self.imageView.image = self.document.iconImage;
+    }
 }
 
 @end

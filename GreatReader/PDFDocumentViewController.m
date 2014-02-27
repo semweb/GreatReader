@@ -24,7 +24,6 @@
 
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
 NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
-NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
 NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewControllerSegueBookmark";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
@@ -34,7 +33,6 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *settingItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *searchItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *outlineItem;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *historyItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkItem;
@@ -195,7 +193,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
             ? self.ribbonOnItem : self.ribbonOffItem;
     self.navigationItem.rightBarButtonItems = @[self.outlineItem,
                                                 self.settingItem,
-                                                self.historyItem,
                                                 self.bookmarkItem,
                                                 ribbon];
 }
@@ -310,12 +307,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         PDFDocumentCropViewController *vc =
                 (PDFDocumentCropViewController *)navi.topViewController;
         vc.crop = self.document.crop;
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueHistory]) {
-        UINavigationController *navi =
-                (UINavigationController *)segue.destinationViewController;
-        PDFRecentDocumentListViewController *vc =
-                (PDFRecentDocumentListViewController *)navi.topViewController;
-        vc.documentList = self.documentList;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBookmark]) {
         UINavigationController *navi =
                 (UINavigationController *)segue.destinationViewController;

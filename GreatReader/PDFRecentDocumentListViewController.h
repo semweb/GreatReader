@@ -10,6 +10,6 @@
 
 @class PDFRecentDocumentList;
 
-@interface PDFRecentDocumentListViewController : UITableViewController
+@interface PDFRecentDocumentListViewController : UICollectionViewController
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PDFRecentDocumentCell : UITableViewCell
+@class PDFDocument;
 
+@interface PDFRecentDocumentCell : UICollectionViewCell
+@property (nonatomic, strong) PDFDocument *document;
 @end

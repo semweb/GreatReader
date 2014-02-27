@@ -12,6 +12,10 @@
 #import "NSFileManager+GreatReaderAdditions.h"
 #import "PDFRecentDocumentList.h"
 #import "RootFolderTableDataSource.h"
+#import "HomeViewController.h"
+#import "FolderTableDataSource.h"
+#import "FolderTableViewController.h"
+#import "PDFRecentDocumentListViewController.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
@@ -25,12 +29,20 @@
     self.documentList = PDFRecentDocumentList.new;
 
     UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];
-    FolderTableViewController *folderViewController = 
-            (FolderTableViewController *)[navi topViewController];
-    FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
-                                            initWithDocumentList:self.documentList];
-    folderViewController.dataSource = dataSource;
-    folderViewController.documentList = self.documentList;
+    // HomeViewController *homeViewController =
+    //         (HomeViewController *)[navi topViewController];
+    // FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
+    //                                         initWithDocumentList:self.documentList];    
+    // homeViewController.folderViewController.dataSource = dataSource;
+    // homeViewController.recentViewController.documentList = self.documentList;
+
+    
+    // FolderTableViewController *folderViewController = 
+    //         (FolderTableViewController *)[navi topViewController];
+    // FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
+    //                                         initWithDocumentList:self.documentList];
+    // folderViewController.dataSource = dataSource;
+    // folderViewController.documentList = self.documentList;
 
     self.initialViewController = navi;
     

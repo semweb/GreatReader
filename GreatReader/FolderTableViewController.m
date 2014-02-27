@@ -34,7 +34,12 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.dataSource.title;    
+    self.title = self.dataSource.title;
+
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIEdgeInsets inset = self.tableView.contentInset;
+    inset.bottom = 44;
+    self.tableView.contentInset = inset;    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,7 +78,8 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.dataSource titleInSection:section];
+    // return [self.dataSource titleInSection:section];
+    return self.dataSource.title;
 }
 
 #pragma mark - TableView Delegate

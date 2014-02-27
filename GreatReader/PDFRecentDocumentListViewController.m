@@ -13,6 +13,7 @@
 #import "PDFRecentDocumentCell.h"
 #import "PDFRecentDocumentList.h"
 
+NSString * const PDFRecentDocumentListViewControllerCellIdentifier = @"PDFRecentDocumentListViewControllerCellIdentifier";
 NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRecentDocumentListViewControllerSeguePDFDocument";
 
 @interface PDFRecentDocumentListViewController ()
@@ -21,10 +22,29 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 
 @implementation PDFRecentDocumentListViewController
 
+- (void)awakeFromNib
+{
+    NSString *nibName = @"PDFRecentDocumentCell";
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        nibName = [nibName stringByAppendingString:@"_iPad"];
+    } else {
+        nibName = [nibName stringByAppendingString:@"_iPhone"];
+    }
+    UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+    [self.collectionView registerNib:nib
+          forCellWithReuseIdentifier:PDFRecentDocumentListViewControllerCellIdentifier];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIEdgeInsets inset = self.collectionView.contentInset;
+    inset.top = 64;
+    inset.bottom = 0;
+    self.collectionView.contentInset = inset;
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,29 +56,37 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
 
 #pragma mark -
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.documentList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"DocumentCell";
-    FileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.file = (File *)[self.documentList documentAtIndex:indexPath.row];
+    PDFRecentDocumentCell *cell =
+            [collectionView dequeueReusableCellWithReuseIdentifier:PDFRecentDocumentListViewControllerCellIdentifier
+                                                      forIndexPath:indexPath];
+
+    PDFDocument *document = [self.documentList documentAtIndex:indexPath.row];
+    cell.document = document;
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:PDFRecentDocumentListViewControllerSeguePDFDocument
+                              sender:[collectionView cellForItemAtIndexPath:indexPath]];
 }
 
 #pragma mark - Segue
@@ -66,11 +94,12 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {   
     if ([segue.identifier isEqualToString:PDFRecentDocumentListViewControllerSeguePDFDocument]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
         PDFDocumentViewController *vc =
                 (PDFDocumentViewController *)segue.destinationViewController;
         PDFDocument *document = [self.documentList documentAtIndex:indexPath.row];
-        [vc openDocument:[self.documentList open:document]];
+        vc.document = [self.documentList open:document];
+        vc.documentList = self.documentList;
     }
 }
 
