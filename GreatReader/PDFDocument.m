@@ -128,6 +128,7 @@
 {
     if (!_bookmarkList) {
         _bookmarkList = [PDFDocumentBookmarkList new];
+        _bookmarkList.document = self;
     }
     return _bookmarkList;
 }
