@@ -17,7 +17,7 @@ NSString * const kPrivateDocuments = @"PrivateDocuments";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
                                                          NSUserDomainMask,
                                                          YES);
-    return [NSString stringWithFormat:@"%@%@", paths[0], kPrivateDocuments];
+    return [paths[0] stringByAppendingPathComponent:kPrivateDocuments];
 }
 
 - (void)grt_createPrivateDocumentsDirectory
