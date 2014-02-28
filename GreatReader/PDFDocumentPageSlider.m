@@ -181,8 +181,6 @@
     NSUInteger index = [self indexAtPoint:point];
     if (self.currentIndex != index) {
         self.currentIndex = index;
-        [self updateKnobView];
-        [self layoutKnobView];
 
         [self.delegate pageSlider:self didSelectAtIndex:self.currentIndex];
     }
@@ -195,6 +193,7 @@
     NSUInteger old = _currentIndex;
     _currentIndex = index;
     if (old != index) {
+        [self updateKnobView];        
         [self layoutKnobView];
     }
 }

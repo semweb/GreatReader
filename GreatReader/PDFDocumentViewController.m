@@ -79,6 +79,10 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
            forKeyPath:@"document.currentPageBookmarked"
               options:0
               context:NULL];
+    [self addObserver:self
+           forKeyPath:@"document.currentPage"
+              options:0
+              context:NULL];    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,6 +90,7 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     [super viewWillDisappear:animated];
 
     [self removeObserver:self forKeyPath:@"document.currentPageBookmarked"];
+    [self removeObserver:self forKeyPath:@"document.currentPage"];    
 }
 
 #pragma mark - KVO
@@ -94,6 +99,9 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 {
     if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
         [self prepareNavigationBar];
+    }
+    else if ([keyPath isEqualToString:@"document.currentPage"]) {
+        self.slider.currentIndex = self.document.currentPage - 1;
     }
 }
 
@@ -179,6 +187,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     self.slider.delegate = self;
     self.slider.dataSource = self;
+    self.slider.currentIndex = self.document.currentPage;    
     [self.slider reloadData];
 }
 
