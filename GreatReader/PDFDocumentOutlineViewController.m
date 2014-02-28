@@ -14,9 +14,11 @@
 #import "PDFDocumentViewController.h"
 
 NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
+NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItemCellIdentifier";
 
 @interface PDFDocumentOutlineViewController ()
 @property (nonatomic, strong) NSArray *outlineItems;
+@property (nonatomic, assign) NSInteger activeIndex;
 @end
 
 @implementation PDFDocumentOutlineViewController
@@ -25,7 +27,6 @@ NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -34,17 +35,52 @@ NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSString *nibName = @"PDFDocumentOutlineItemCell";
+    UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+    [self.tableView registerNib:nib
+         forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];    
+   
+    [self scrollToCurrentPage];    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];   
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Scroll to currentPage
+
+- (void)scrollToCurrentPage
+{
+    self.activeIndex = -1;
+    [self.outlineItems enumerateObjectsUsingBlock:^(NSDictionary *item,
+                                                    NSUInteger idx,
+                                                    BOOL *stop) {
+        NSUInteger from = [item[@"item"] pageNumber];
+        NSDictionary *next = item[@"next"];
+        NSUInteger to = next ? [next[@"item"] pageNumber]
+                             : NSNotFound;
+        if (from <= self.currentPage && self.currentPage < to) {
+            self.activeIndex = idx;
+        }
+        else if (from > self.currentPage) {
+            *stop = YES;
+        }
+    }];
+
+    if (self.activeIndex > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeIndex
+                                                    inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionMiddle
+                                      animated:NO];
+    }
 }
 
 #pragma mark - Flatten Outline Items
@@ -68,6 +104,16 @@ NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
     for (PDFDocumentOutlineItem *item in self.outline.items) {
         [items addObjectsFromArray:subtrees(item, 0)];
     }
+    [[items copy] enumerateObjectsUsingBlock:^(NSDictionary *dic,
+                                        NSUInteger idx,
+                                        BOOL *stop) {
+        NSMutableDictionary *mdic = [dic mutableCopy];
+        if (idx < items.count - 1) {
+            [mdic setObject:items[idx + 1] forKey:@"next"];
+            [items removeObjectAtIndex:idx];
+            [items insertObject:mdic atIndex:idx];
+        }
+    }];
     return items;
 }
 
@@ -93,21 +139,17 @@ NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"OutlineItemCell";
-    PDFDocumentOutlineItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    PDFDocumentOutlineItemCell *cell = [tableView dequeueReusableCellWithIdentifier:PDFDocumentOutlineItemCellIdentifier forIndexPath:indexPath];
     NSDictionary *dic = self.outlineItems[indexPath.row];
     PDFDocumentOutlineItem *item = dic[@"item"];
     NSNumber *level = dic[@"level"];
-    [cell configureWithItem:item level:[level unsignedIntegerValue]];
+    [cell configureWithItem:item
+                      level:[level unsignedIntegerValue]
+                    current:(indexPath.row == self.activeIndex)];
     return cell;
 }
 
 #pragma mark - UITableView Delegate
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

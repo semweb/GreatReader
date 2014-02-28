@@ -32,6 +32,7 @@
 		19D8709A18BD634500FA2B66 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8709918BD634500FA2B66 /* HomeViewController.m */; };
 		19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */; };
 		19D870A318BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */; };
+		19D870A618C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */; };
 		19D99DB71882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */; };
 		19D99DB81882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */; };
 		19D99DBA18827192006FDA6F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
@@ -129,6 +130,7 @@
 		19D8709918BD634500FA2B66 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		19D8709F18BEF12F00FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFRecentDocumentCell_iPad.xib; sourceTree = "<group>"; };
 		19D870A218BEF14900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFRecentDocumentCell_iPhone.xib; sourceTree = "<group>"; };
+		19D870A518C0D59200FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFDocumentOutlineItemCell.xib; sourceTree = "<group>"; };
 		19D99DB51882713A006FDA6F /* PDFPageContentTiledLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageContentTiledLayer.h; sourceTree = "<group>"; };
 		19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageContentTiledLayer.m; sourceTree = "<group>"; };
 		19D99DB918827192006FDA6F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -365,6 +367,7 @@
 				19F7BA7F186052E2009E8916 /* MainStoryboard_iPad.storyboard */,
 				19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */,
 				19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */,
+				19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */,
 				19D8708118BA2DB600FA2B66 /* Images.xcassets */,
 				19F7BA6B186052E2009E8916 /* Supporting Files */,
 			);
@@ -480,6 +483,7 @@
 				19F7BA79186052E2009E8916 /* Default@2x.png in Resources */,
 				19D8707418B63D1900FA2B66 /* ToolHistory@2x.png in Resources */,
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
+				19D870A618C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib in Resources */,
 				19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */,
 				19D8707118B63BE900FA2B66 /* ToolOutline@2x.png in Resources */,
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -661,6 +665,14 @@
 				19D870A218BEF14900FA2B66 /* en */,
 			);
 			name = PDFRecentDocumentCell_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19D870A518C0D59200FA2B66 /* en */,
+			);
+			name = PDFDocumentOutlineItemCell.xib;
 			sourceTree = "<group>";
 		};
 		19D99E00188A7EB7006FDA6F /* Folder@2x.png */ = {

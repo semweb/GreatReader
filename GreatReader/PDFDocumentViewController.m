@@ -304,6 +304,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (UINavigationController *)segue.destinationViewController;
         PDFDocumentOutlineViewController *vc =
                 (PDFDocumentOutlineViewController *)navi.topViewController;
+        vc.currentPage = self.document.currentPage;
         vc.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCrop]) {
         UINavigationController *navi =

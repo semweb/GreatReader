@@ -13,9 +13,11 @@
 @interface PDFDocumentOutlineItemCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *pageNumberLabel;
+@property (nonatomic, strong) IBOutlet UIView *currentLine;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
 + (CGFloat)cellHeightForItem:(PDFDocumentOutlineItem *)item
                        level:(NSUInteger)level;
 - (void)configureWithItem:(PDFDocumentOutlineItem *)item
-                    level:(NSUInteger)level;
+                    level:(NSUInteger)level
+                  current:(BOOL)current;
 @end

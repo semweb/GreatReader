@@ -12,4 +12,5 @@
 
 @interface PDFDocumentOutlineViewController : UITableViewController
 @property (nonatomic, strong) PDFDocumentOutline *outline;
+@property (nonatomic, assign) NSUInteger currentPage;
 @end

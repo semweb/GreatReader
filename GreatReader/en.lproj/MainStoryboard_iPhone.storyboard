@@ -163,47 +163,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OutlineItemCell" id="h5I-0y-lPQ" customClass="PDFDocumentOutlineItemCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="h5I-0y-lPQ" customClass="PDFDocumentOutlineItemCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h5I-0y-lPQ" id="sMX-rI-ILm">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="239" translatesAutoresizingMaskIntoConstraints="NO" id="SJ6-DS-8Ct">
-                                            <rect key="frame" x="15" y="0.0" width="239" height="43"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjb-Of-w61">
-                                            <rect key="frame" x="262" y="11" width="38" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="38" id="2UP-nc-D2q"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="SJ6-DS-8Ct" firstAttribute="top" secondItem="sMX-rI-ILm" secondAttribute="top" id="ApG-5F-Umo"/>
-                                        <constraint firstItem="SJ6-DS-8Ct" firstAttribute="leading" secondItem="sMX-rI-ILm" secondAttribute="leading" constant="15" id="J25-Fj-Kfq"/>
-                                        <constraint firstAttribute="trailing" secondItem="qjb-Of-w61" secondAttribute="trailing" constant="20" id="Ll9-OI-hzb"/>
-                                        <constraint firstItem="qjb-Of-w61" firstAttribute="leading" secondItem="SJ6-DS-8Ct" secondAttribute="trailing" constant="8" id="jni-ct-ZZk"/>
-                                        <constraint firstAttribute="bottom" secondItem="qjb-Of-w61" secondAttribute="bottom" constant="12" id="rFa-wd-0HQ"/>
-                                        <constraint firstItem="qjb-Of-w61" firstAttribute="leading" secondItem="SJ6-DS-8Ct" secondAttribute="trailing" constant="8" id="rk0-lA-7JO"/>
-                                        <constraint firstItem="qjb-Of-w61" firstAttribute="top" secondItem="sMX-rI-ILm" secondAttribute="top" constant="11" id="vOe-Tv-bcJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="SJ6-DS-8Ct" secondAttribute="bottom" id="w20-c4-PcY"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="leftMarginConstraint" destination="J25-Fj-Kfq" id="2fu-0Q-aZu"/>
-                                    <outlet property="pageNumberLabel" destination="qjb-Of-w61" id="Umn-0D-YXo"/>
-                                    <outlet property="titleLabel" destination="SJ6-DS-8Ct" id="dGp-Z8-tMt"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -400,6 +366,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="L0f-1i-Oxt"/>
+        <segue reference="RcB-vJ-nEK"/>
     </inferredMetricsTieBreakers>
 </document>

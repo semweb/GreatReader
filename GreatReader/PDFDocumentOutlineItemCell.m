@@ -36,6 +36,7 @@
 
 - (void)configureWithItem:(PDFDocumentOutlineItem *)item
                     level:(NSUInteger)level
+                  current:(BOOL)current
 {
     self.titleLabel.text = item.title;
     self.titleLabel.numberOfLines = 0;
@@ -48,6 +49,7 @@
     self.separatorInset = UIEdgeInsetsMake(0, 15 * (level + 1),
                                            0, 0);
     self.leftMarginConstraint.constant = 15 * (level + 1);
+    self.currentLine.hidden = !current;
 }
 
 @end
