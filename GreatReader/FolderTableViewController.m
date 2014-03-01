@@ -119,7 +119,7 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i
                                                     inSection:section];
         File *file = [self.dataSource fileAtIndexPath:indexPath];
-        if ([file.path isEqualToString:URL.path]) {
+        if ([file.path.lastPathComponent isEqual:URL.lastPathComponent]) {
             [self.tableView selectRowAtIndexPath:indexPath
                                         animated:YES
                                   scrollPosition:UITableViewScrollPositionMiddle];

@@ -8,14 +8,15 @@
 
 #import "AppDelegate.h"
 
-#import "FolderTableViewController.h"
-#import "NSFileManager+GreatReaderAdditions.h"
-#import "PDFRecentDocumentList.h"
-#import "RootFolderTableDataSource.h"
-#import "HomeViewController.h"
+#import "Folder.h"
 #import "FolderTableDataSource.h"
 #import "FolderTableViewController.h"
+#import "FolderTableViewController.h"
+#import "HomeViewController.h"
+#import "NSFileManager+GreatReaderAdditions.h"
+#import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewController.h"
+#import "RootFolderTableDataSource.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
@@ -29,21 +30,6 @@
     self.documentList = PDFRecentDocumentList.new;
 
     UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];
-    // HomeViewController *homeViewController =
-    //         (HomeViewController *)[navi topViewController];
-    // FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
-    //                                         initWithDocumentList:self.documentList];    
-    // homeViewController.folderViewController.dataSource = dataSource;
-    // homeViewController.recentViewController.documentList = self.documentList;
-
-    
-    // FolderTableViewController *folderViewController = 
-    //         (FolderTableViewController *)[navi topViewController];
-    // FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
-    //                                         initWithDocumentList:self.documentList];
-    // folderViewController.dataSource = dataSource;
-    // folderViewController.documentList = self.documentList;
-
     self.initialViewController = navi;
     
     return YES;
@@ -83,12 +69,13 @@
     NSURL *destURL = [dirURL URLByAppendingPathComponent:fileName];
 
     NSFileManager *fm = [NSFileManager new];
+    NSURL *uniqueDestURL = [fm grt_incrementURLIfNecessary:destURL];
     NSError *error = nil;
     if ([fm moveItemAtURL:url
-                    toURL:[fm grt_incrementURLIfNecessary:destURL]
+                    toURL:uniqueDestURL
                     error:&error]) {
         
-        [self openURL:destURL];
+        [self openURL:uniqueDestURL];
         return YES;
     } else {
         return NO;
@@ -102,14 +89,15 @@
     UINavigationController *root = (UINavigationController *)[[self window] rootViewController];
     UIViewController *top = [root topViewController];
     void (^reloadRootFolder)(void) = ^{
-        FolderTableViewController *vc = (FolderTableViewController *)[root topViewController];
-        FolderTableDataSource *dataSource = [[RootFolderTableDataSource alloc]
-                                                initWithDocumentList:self.documentList];
-        vc.dataSource = dataSource;
-        [vc.tableView reloadData];
-        [vc performSelector:@selector(openDocumentsAtURL:)
-                 withObject:URL
-                 afterDelay:0.5];
+        HomeViewController *vc = (HomeViewController *)[root topViewController];
+        FolderTableViewController *folderViewController = vc.folderViewController;
+        FolderTableDataSource *dataSource = [[FolderTableDataSource alloc] 
+                                                initWithFolder:[Folder rootFolder]];
+        folderViewController.dataSource = dataSource;
+        [folderViewController.tableView reloadData];
+        [folderViewController performSelector:@selector(openDocumentsAtURL:)
+                                   withObject:URL
+                                   afterDelay:0.5];
     };
 
     if (top.presentedViewController) {

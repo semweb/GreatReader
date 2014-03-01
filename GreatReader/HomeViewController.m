@@ -58,9 +58,11 @@ NSString * const HomeViewControllerSegueEmbedRecent = @"HomeViewControllerSegueE
         FolderTableDataSource *dataSource = [[FolderTableDataSource alloc] 
                                                 initWithFolder:[Folder rootFolder]];
         vc.dataSource = dataSource;
+        self.folderViewController = vc;
     } else if ([segue.identifier isEqualToString:HomeViewControllerSegueEmbedRecent]) {
         PDFRecentDocumentListViewController *vc = (PDFRecentDocumentListViewController *)segue.destinationViewController;
         vc.documentList = self.documentList;
+        self.recentViewController = vc;
     }
 }
 
