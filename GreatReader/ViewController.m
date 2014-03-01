@@ -3,7 +3,7 @@
 //  GreatReader
 //
 //  Created by MIYAMOTO Shohei on 2013/12/17.
-//  Copyright (c) 2013年 semwebapp. All rights reserved.
+//  Copyright (c) 2013 MIYAMOTO Shohei. All rights reserved.
 //
 
 #import "ViewController.h"
