@@ -140,11 +140,12 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         PDFPage *page = [self pageAtIndex:1];
-        CGFloat width = 50;
+        CGFloat width = 200;
         CGRect rect = CGRectMake(0, 0, width, width);
+        CGFloat scale = UIScreen.mainScreen.scale;
         UIGraphicsBeginImageContextWithOptions(rect.size,
                                                NO,
-                                               2.0);
+                                               scale);
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSaveGState(context); {
             CGContextTranslateCTM(context, 0.0f, rect.size.height);
@@ -170,7 +171,7 @@
         x += 0.5; y += 0.5;
         w -= 1.0; h -= 1.0;
         [UIColor.blackColor set];
-        CGContextStrokeRectWithWidth(context, CGRectMake(x, y, w, h), 0.5);
+        CGContextStrokeRectWithWidth(context, CGRectMake(x, y, w, h), 1 / scale);
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
