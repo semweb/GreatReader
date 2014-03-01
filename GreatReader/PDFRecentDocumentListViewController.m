@@ -39,12 +39,6 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    UIEdgeInsets inset = self.collectionView.contentInset;
-    inset.top = 64;
-    inset.bottom = 0;
-    self.collectionView.contentInset = inset;
 }
 
 - (void)didReceiveMemoryWarning
