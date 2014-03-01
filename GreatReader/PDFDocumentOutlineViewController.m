@@ -35,6 +35,8 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 {
     [super viewDidLoad];
 
+    self.activeIndex = -1;
+
     NSString *nibName = @"PDFDocumentOutlineItemCell";
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.tableView registerNib:nib
@@ -152,12 +154,11 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // NSDictionary *dic = self.outlineItems[indexPath.row];
-    // PDFDocumentOutlineItem *item = dic[@"item"];
-    // NSNumber *level = dic[@"level"];
-    // return [PDFDocumentOutlineItemCell cellHeightForItem:item
-    //                                                level:[level unsignedIntegerValue]];
-    return 44;
+    NSDictionary *dic = self.outlineItems[indexPath.row];
+    PDFDocumentOutlineItem *item = dic[@"item"];
+    NSNumber *level = dic[@"level"];
+    return [PDFDocumentOutlineItemCell cellHeightForItem:item
+                                                   level:[level unsignedIntegerValue]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

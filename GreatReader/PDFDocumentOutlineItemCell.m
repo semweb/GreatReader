@@ -45,7 +45,11 @@
     } else {
         self.titleLabel.font = [UIFont systemFontOfSize:UIFont.systemFontSize];
     }
+    self.titleLabel.textColor = current ? self.tintColor : UIColor.blackColor;
+    
     self.pageNumberLabel.text = [NSString stringWithFormat:@"%d", item.pageNumber];
+    self.pageNumberLabel.textColor = current ? self.tintColor : UIColor.blackColor;
+    
     self.separatorInset = UIEdgeInsetsMake(0, 15 * (level + 1),
                                            0, 0);
     self.leftMarginConstraint.constant = 15 * (level + 1);
