@@ -319,6 +319,14 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (PDFDocumentBookmarkListViewController *)navi.topViewController;
         vc.bookmarkList = self.document.bookmarkList;
     }
+
+    if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
+        UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *)segue;
+        UIPopoverController *popoverController = popoverSegue.popoverController;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            popoverController.passthroughViews = @[];
+        });
+    }
 }
 
 #pragma mark - Ribbon Action
