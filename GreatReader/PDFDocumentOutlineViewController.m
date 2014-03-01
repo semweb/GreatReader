@@ -38,14 +38,13 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
     NSString *nibName = @"PDFDocumentOutlineItemCell";
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.tableView registerNib:nib
-         forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];    
-   
-    [self scrollToCurrentPage];    
+         forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];      
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];   
+    [super viewDidAppear:animated];
+    [self scrollToCurrentPage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +78,7 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
                                                     inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionMiddle
-                                      animated:NO];
+                                      animated:YES];
     }
 }
 
@@ -153,11 +152,12 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.outlineItems[indexPath.row];
-    PDFDocumentOutlineItem *item = dic[@"item"];
-    NSNumber *level = dic[@"level"];
-    return [PDFDocumentOutlineItemCell cellHeightForItem:item
-                                                   level:[level unsignedIntegerValue]];
+    // NSDictionary *dic = self.outlineItems[indexPath.row];
+    // PDFDocumentOutlineItem *item = dic[@"item"];
+    // NSNumber *level = dic[@"level"];
+    // return [PDFDocumentOutlineItemCell cellHeightForItem:item
+    //                                                level:[level unsignedIntegerValue]];
+    return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
