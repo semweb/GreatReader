@@ -117,8 +117,10 @@
         <scene sceneID="Lae-fd-H20">
             <objects>
                 <navigationController definesPresentationContext="YES" id="kmh-jI-auT" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xep-9F-hOO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xep-9F-hOO">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -266,7 +268,9 @@
         <scene sceneID="Mqz-Sl-ZII">
             <objects>
                 <navigationController definesPresentationContext="YES" id="iNE-PI-BtH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SUr-05-sq4">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SUr-05-sq4">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
