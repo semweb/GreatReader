@@ -206,6 +206,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     PDFDocumentInfo *info = [[PDFDocumentInfo alloc] initWithDocument:self.document];    
     if (!self.infoView) {
         self.infoView = [[PDFDocumentInfoView alloc] initWithFrame:self.view.bounds];
+        self.infoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.infoView];
     }
     self.infoView.info = info;

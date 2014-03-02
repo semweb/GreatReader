@@ -16,23 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pwu-hI-Pjy">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pwu-hI-Pjy">
                                 <rect key="frame" x="0.0" y="86" width="320" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="iWx-Ez-CId"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="jhM-DQ-fl5" kind="embed" identifier="HomeViewControllerSegueEmbedRecent" id="76v-2H-FQl"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGJ-Pw-gnB">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGJ-Pw-gnB">
                                 <rect key="frame" x="0.0" y="246" width="320" height="322"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="322" id="eaz-TV-BPb"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="FuG-cV-52a" kind="embed" identifier="HomeViewControllerSegueEmbedFolder" id="Juf-WV-UqV"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZrS-8B-v5o">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrS-8B-v5o">
                                 <rect key="frame" x="0.0" y="64" width="320" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -45,9 +51,26 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="fJi-N8-w1G"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MGJ-Pw-gnB" secondAttribute="trailing" id="59s-TE-O18"/>
+                            <constraint firstItem="MGJ-Pw-gnB" firstAttribute="top" secondItem="Pwu-hI-Pjy" secondAttribute="bottom" id="BXW-Tm-hoz"/>
+                            <constraint firstItem="Pwu-hI-Pjy" firstAttribute="top" secondItem="ZrS-8B-v5o" secondAttribute="bottom" id="OaZ-WV-kDU"/>
+                            <constraint firstItem="Pwu-hI-Pjy" firstAttribute="leading" secondItem="FVf-hb-mTz" secondAttribute="leading" id="XPw-k2-3tS"/>
+                            <constraint firstItem="ZrS-8B-v5o" firstAttribute="leading" secondItem="FVf-hb-mTz" secondAttribute="leading" id="kA1-3S-vBT"/>
+                            <constraint firstAttribute="trailing" secondItem="ZrS-8B-v5o" secondAttribute="trailing" id="nNO-vK-Bp1"/>
+                            <constraint firstAttribute="trailing" secondItem="Pwu-hI-Pjy" secondAttribute="trailing" id="qaD-Kd-FdT"/>
+                            <constraint firstItem="MGJ-Pw-gnB" firstAttribute="leading" secondItem="FVf-hb-mTz" secondAttribute="leading" id="rff-AV-nOS"/>
+                            <constraint firstItem="gIj-WL-gmK" firstAttribute="top" secondItem="MGJ-Pw-gnB" secondAttribute="bottom" id="tOK-gP-ybm"/>
+                            <constraint firstItem="ZrS-8B-v5o" firstAttribute="top" secondItem="rfE-Hu-Z2e" secondAttribute="bottom" id="wjp-eS-7yG"/>
+                            <constraint firstItem="MGJ-Pw-gnB" firstAttribute="top" secondItem="Pwu-hI-Pjy" secondAttribute="bottom" id="ymf-nR-zLm"/>
+                            <constraint firstItem="Pwu-hI-Pjy" firstAttribute="top" secondItem="ZrS-8B-v5o" secondAttribute="bottom" id="zd9-hN-dDY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gkc-Bo-3hy"/>
                 </viewController>

@@ -239,23 +239,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3S3-RZ-VsP">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3S3-RZ-VsP">
                                 <rect key="frame" x="0.0" y="86" width="768" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="WFf-Hk-w4k"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="G2Y-6L-VUM" kind="embed" identifier="HomeViewControllerSegueEmbedRecent" id="4fX-zH-7cc"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DY7-YP-3IC">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DY7-YP-3IC">
                                 <rect key="frame" x="0.0" y="386" width="768" height="638"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="638" id="Q6E-ok-G66"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="Mv6-VI-MhE" kind="embed" identifier="HomeViewControllerSegueEmbedFolder" id="KD4-PH-why"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5FT-TN-OPa">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FT-TN-OPa">
                                 <rect key="frame" x="0.0" y="64" width="768" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -268,9 +274,26 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="deJ-6q-4KS"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5FT-TN-OPa" firstAttribute="leading" secondItem="RB1-9a-2KV" secondAttribute="leading" id="2nJ-NH-m0D"/>
+                            <constraint firstAttribute="trailing" secondItem="3S3-RZ-VsP" secondAttribute="trailing" id="A3b-wP-VZw"/>
+                            <constraint firstItem="DY7-YP-3IC" firstAttribute="top" secondItem="3S3-RZ-VsP" secondAttribute="bottom" id="EBZ-il-AEt"/>
+                            <constraint firstItem="3S3-RZ-VsP" firstAttribute="top" secondItem="5FT-TN-OPa" secondAttribute="bottom" id="ELN-dD-WIM"/>
+                            <constraint firstItem="DY7-YP-3IC" firstAttribute="leading" secondItem="RB1-9a-2KV" secondAttribute="leading" id="JnM-hk-0gb"/>
+                            <constraint firstItem="3S3-RZ-VsP" firstAttribute="top" secondItem="5FT-TN-OPa" secondAttribute="bottom" id="Jxp-Se-8Ay"/>
+                            <constraint firstItem="3S3-RZ-VsP" firstAttribute="leading" secondItem="RB1-9a-2KV" secondAttribute="leading" id="buC-cF-HvI"/>
+                            <constraint firstItem="DY7-YP-3IC" firstAttribute="top" secondItem="3S3-RZ-VsP" secondAttribute="bottom" id="gbl-4n-qbW"/>
+                            <constraint firstItem="W3b-Z8-KXt" firstAttribute="top" secondItem="DY7-YP-3IC" secondAttribute="bottom" id="iz6-IA-rZF"/>
+                            <constraint firstAttribute="trailing" secondItem="DY7-YP-3IC" secondAttribute="trailing" id="og9-9N-gri"/>
+                            <constraint firstItem="5FT-TN-OPa" firstAttribute="top" secondItem="jBP-uY-d5E" secondAttribute="bottom" id="p1J-PN-39X"/>
+                            <constraint firstAttribute="trailing" secondItem="5FT-TN-OPa" secondAttribute="trailing" id="yMC-M4-0Qr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="I1X-Tz-ZSw"/>
                 </viewController>
@@ -343,7 +366,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3zV-2n-HOG">
-                                <rect key="frame" x="20" y="34" width="180" height="230"/>
+                                <rect key="frame" x="20" y="45" width="180" height="230"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
