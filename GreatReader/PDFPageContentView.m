@@ -52,6 +52,7 @@
         tileFrame.origin.x = 0;
         tileFrame.origin.y = 0;
         _tileView = [[PDFPageContentTileView alloc] initWithFrame:tileFrame];
+        _tileView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:_tileView];
     }
     return self;
