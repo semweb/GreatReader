@@ -18,4 +18,6 @@
 - (File *)fileAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)titleInSection:(NSUInteger)section;
 - (NSString *)title;
+- (BOOL)removeItemAtIndexPath:(NSIndexPath *)indexPath
+                        error:(NSError **)error;
 @end

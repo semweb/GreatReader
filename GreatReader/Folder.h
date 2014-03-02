@@ -13,4 +13,5 @@
 @interface Folder : File
 @property (nonatomic, strong, readonly) NSArray *files;
 + (Folder *)rootFolder;
+- (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
 @end

@@ -73,4 +73,17 @@
     return [UIImage imageNamed:@"Folder.png"];
 }
 
+- (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error
+{
+    NSFileManager *fileManager = [NSFileManager new];
+    File *file = self.files[index];
+    if ([fileManager removeItemAtPath:file.path error:error]) {
+        NSMutableArray *mFiles = self.files.mutableCopy;
+        [mFiles removeObject:file];
+        self.files = mFiles.copy;
+        return YES;
+    }
+    return NO;
+}
+
 @end

@@ -50,4 +50,11 @@
     return self.folder.name;
 }
 
+- (BOOL)removeItemAtIndexPath:(NSIndexPath *)indexPath
+                        error:(NSError **)error
+{
+    return [self.folder removeItemAtIndex:indexPath.row
+                                    error:error];
+}
+
 @end

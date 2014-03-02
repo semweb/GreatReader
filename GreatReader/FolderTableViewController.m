@@ -78,8 +78,25 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    // return [self.dataSource titleInSection:section];
     return self.dataSource.title;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [tableView beginUpdates]; {
+            NSError *error = NULL;
+            if ([self.dataSource removeItemAtIndexPath:indexPath error:&error]) {
+                [tableView deleteRowsAtIndexPaths:@[indexPath]
+                                 withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        } [tableView endUpdates];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 #pragma mark - TableView Delegate
