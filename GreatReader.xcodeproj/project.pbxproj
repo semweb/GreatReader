@@ -11,6 +11,12 @@
 		1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917EB3F18B42940003D272F /* RootFolderTableDataSource.m */; };
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
+		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
+		1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
+		1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
+		1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */; };
+		1997502318CE904C008D514B /* PDFFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997502218CE904C008D514B /* PDFFontDescriptor.m */; };
+		1997502918D08C73008D514B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
 		19BB31D718A344870091F6AB /* PDFRecentDocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */; };
 		19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */; };
 		19BB31DD18A495C90091F6AB /* PDFRecentDocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */; };
@@ -19,6 +25,11 @@
 		19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
 		19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */; };
 		19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */; };
+		19D12BC118C2F06B001C2066 /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
+		19D12BC418C318C5001C2066 /* PDFText.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC318C318C5001C2066 /* PDFText.m */; };
+		19D12BC718C319E5001C2066 /* PDFTextState.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC618C319E5001C2066 /* PDFTextState.m */; };
+		19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCB18C74192001C2066 /* PDFFontCollection.m */; };
+		19D12BCF18C741A4001C2066 /* PDFFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCE18C741A4001C2066 /* PDFFont.m */; };
 		19D8705B18B628B900FA2B66 /* ToolCrop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D8705918B628B900FA2B66 /* ToolCrop@2x.png */; };
 		19D8707118B63BE900FA2B66 /* ToolOutline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D8706F18B63BE900FA2B66 /* ToolOutline@2x.png */; };
 		19D8707418B63D1900FA2B66 /* ToolHistory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D8707218B63D1900FA2B66 /* ToolHistory@2x.png */; };
@@ -98,6 +109,17 @@
 		1917EB3F18B42940003D272F /* RootFolderTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootFolderTableDataSource.m; sourceTree = "<group>"; };
 		1943EB55187FA59E00F0B61D /* PDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocument.h; sourceTree = "<group>"; };
 		1943EB56187FA59E00F0B61D /* PDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocument.m; sourceTree = "<group>"; };
+		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
+		1997501618C8B9C9008D514B /* PDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFUtils.m; sourceTree = "<group>"; };
+		1997501818CAC3E7008D514B /* PDFCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMap.h; sourceTree = "<group>"; };
+		1997501918CAC3E7008D514B /* PDFCMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFCMap.m; sourceTree = "<group>"; };
+		1997501B18CACB9B008D514B /* PDFCMapParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMapParser.h; sourceTree = "<group>"; };
+		1997501C18CACB9B008D514B /* PDFCMapParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFCMapParser.m; sourceTree = "<group>"; };
+		1997501E18CDE3F8008D514B /* PDFRenderingCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderingCharacter.h; sourceTree = "<group>"; };
+		1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRenderingCharacter.m; sourceTree = "<group>"; };
+		1997502118CE904C008D514B /* PDFFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFFontDescriptor.h; sourceTree = "<group>"; };
+		1997502218CE904C008D514B /* PDFFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFFontDescriptor.m; sourceTree = "<group>"; };
+		1997502818D08C73008D514B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentList.h; sourceTree = "<group>"; };
 		19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentList.m; sourceTree = "<group>"; };
 		19BB31D818A494CB0091F6AB /* PDFRecentDocumentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentListViewController.h; sourceTree = "<group>"; };
@@ -114,6 +136,16 @@
 		19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfoView.m; sourceTree = "<group>"; };
 		19CA78AB18B1C41300200362 /* PDFDocumentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentInfo.h; sourceTree = "<group>"; };
 		19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfo.m; sourceTree = "<group>"; };
+		19D12BBF18C2F06B001C2066 /* PDFPageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageScanner.h; sourceTree = "<group>"; };
+		19D12BC018C2F06B001C2066 /* PDFPageScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageScanner.m; sourceTree = "<group>"; };
+		19D12BC218C318C5001C2066 /* PDFText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFText.h; sourceTree = "<group>"; };
+		19D12BC318C318C5001C2066 /* PDFText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFText.m; sourceTree = "<group>"; };
+		19D12BC518C319E5001C2066 /* PDFTextState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFTextState.h; sourceTree = "<group>"; };
+		19D12BC618C319E5001C2066 /* PDFTextState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFTextState.m; sourceTree = "<group>"; };
+		19D12BCA18C74192001C2066 /* PDFFontCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFFontCollection.h; sourceTree = "<group>"; };
+		19D12BCB18C74192001C2066 /* PDFFontCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFFontCollection.m; sourceTree = "<group>"; };
+		19D12BCD18C741A4001C2066 /* PDFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFFont.h; sourceTree = "<group>"; };
+		19D12BCE18C741A4001C2066 /* PDFFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFFont.m; sourceTree = "<group>"; };
 		19D8705A18B628B900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ToolCrop@2x.png"; sourceTree = "<group>"; };
 		19D8707018B63BE900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ToolOutline@2x.png"; sourceTree = "<group>"; };
 		19D8707318B63D1900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ToolHistory@2x.png"; sourceTree = "<group>"; };
@@ -195,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1997502918D08C73008D514B /* CoreText.framework in Frameworks */,
 				19D99DBA18827192006FDA6F /* QuartzCore.framework in Frameworks */,
 				19F7BA65186052E2009E8916 /* UIKit.framework in Frameworks */,
 				19F7BA67186052E2009E8916 /* Foundation.framework in Frameworks */,
@@ -230,6 +263,10 @@
 				19D99E13188FDF79006FDA6F /* PDFDocumentCropOverlayView.m */,
 				19D99E09188E273D006FDA6F /* PDFDocumentCropViewController.h */,
 				19D99E0A188E273D006FDA6F /* PDFDocumentCropViewController.m */,
+				19CA78AB18B1C41300200362 /* PDFDocumentInfo.h */,
+				19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */,
+				19CA78A818B1C40400200362 /* PDFDocumentInfoView.h */,
+				19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */,
 				19D99DBF1884ECF8006FDA6F /* PDFDocumentOutline.h */,
 				19D99DC01884ECF8006FDA6F /* PDFDocumentOutline.m */,
 				19D99DC31884ED06006FDA6F /* PDFDocumentOutlineItem.h */,
@@ -238,16 +275,12 @@
 				19D99E07188D4B14006FDA6F /* PDFDocumentOutlineItemCell.m */,
 				19D99E03188CDC60006FDA6F /* PDFDocumentOutlineViewController.h */,
 				19D99E04188CDC60006FDA6F /* PDFDocumentOutlineViewController.m */,
-				19F7BA82186052E2009E8916 /* PDFDocumentViewController.h */,
-				19F7BA83186052E2009E8916 /* PDFDocumentViewController.m */,
 				19CA78A218AF12E600200362 /* PDFDocumentPageSlider.h */,
 				19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */,
 				19CA78A518AF132F00200362 /* PDFDocumentPageSliderDataSource.h */,
 				19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */,
-				19CA78A818B1C40400200362 /* PDFDocumentInfoView.h */,
-				19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */,
-				19CA78AB18B1C41300200362 /* PDFDocumentInfo.h */,
-				19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */,
+				19F7BA82186052E2009E8916 /* PDFDocumentViewController.h */,
+				19F7BA83186052E2009E8916 /* PDFDocumentViewController.m */,
 				19DB6A5318825AB50023B118 /* PDFPage.h */,
 				19DB6A5418825AB50023B118 /* PDFPage.m */,
 				19D99DB51882713A006FDA6F /* PDFPageContentTiledLayer.h */,
@@ -256,14 +289,34 @@
 				19DB6A581882618B0023B118 /* PDFPageContentView.m */,
 				19D99E0F188E77E3006FDA6F /* PDFPageCropViewController.h */,
 				19D99E10188E77E3006FDA6F /* PDFPageCropViewController.m */,
+				19D12BBF18C2F06B001C2066 /* PDFPageScanner.h */,
+				19D12BC018C2F06B001C2066 /* PDFPageScanner.m */,
 				19DB6A5B188262790023B118 /* PDFPageViewController.h */,
 				19DB6A5C188262790023B118 /* PDFPageViewController.m */,
+				19BB31DB18A495C90091F6AB /* PDFRecentDocumentCell.h */,
+				19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */,
 				19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */,
 				19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */,
 				19BB31D818A494CB0091F6AB /* PDFRecentDocumentListViewController.h */,
-				19BB31DB18A495C90091F6AB /* PDFRecentDocumentCell.h */,
-				19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */,
 				19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */,
+				19D12BC218C318C5001C2066 /* PDFText.h */,
+				19D12BC318C318C5001C2066 /* PDFText.m */,
+				19D12BCA18C74192001C2066 /* PDFFontCollection.h */,
+				19D12BCB18C74192001C2066 /* PDFFontCollection.m */,
+				19D12BCD18C741A4001C2066 /* PDFFont.h */,
+				19D12BCE18C741A4001C2066 /* PDFFont.m */,
+				1997501518C8B9C9008D514B /* PDFUtils.h */,
+				1997501618C8B9C9008D514B /* PDFUtils.m */,
+				1997501818CAC3E7008D514B /* PDFCMap.h */,
+				1997501918CAC3E7008D514B /* PDFCMap.m */,
+				1997501B18CACB9B008D514B /* PDFCMapParser.h */,
+				1997501C18CACB9B008D514B /* PDFCMapParser.m */,
+				1997501E18CDE3F8008D514B /* PDFRenderingCharacter.h */,
+				1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */,
+				1997502118CE904C008D514B /* PDFFontDescriptor.h */,
+				1997502218CE904C008D514B /* PDFFontDescriptor.m */,
+				19D12BC518C319E5001C2066 /* PDFTextState.h */,
+				19D12BC618C319E5001C2066 /* PDFTextState.m */,
 			);
 			name = PDF;
 			sourceTree = "<group>";
@@ -349,6 +402,7 @@
 		19F7BA63186052E2009E8916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1997502818D08C73008D514B /* CoreText.framework */,
 				19D99DB918827192006FDA6F /* QuartzCore.framework */,
 				19F7BA64186052E2009E8916 /* UIKit.framework */,
 				19F7BA66186052E2009E8916 /* Foundation.framework */,
@@ -528,8 +582,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D12BC118C2F06B001C2066 /* PDFPageScanner.m in Sources */,
 				19D99DE7188A7CED006FDA6F /* FileCell.m in Sources */,
+				1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */,
 				19D99DD71888E798006FDA6F /* File.m in Sources */,
+				1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */,
 				19F7BA71186052E2009E8916 /* main.m in Sources */,
 				19D99DD31888E729006FDA6F /* FolderTableViewController.m in Sources */,
 				1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */,
@@ -543,16 +600,23 @@
 				19D99DCA1884F33E006FDA6F /* NSArray+GreatReaderAdditions.m in Sources */,
 				19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */,
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
+				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
 				1917EB3D18B4292F003D272F /* FolderTableDataSource.m in Sources */,
+				19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */,
 				19CA78A418AF12E600200362 /* PDFDocumentPageSlider.m in Sources */,
+				1997502318CE904C008D514B /* PDFFontDescriptor.m in Sources */,
 				19D99E05188CDC60006FDA6F /* PDFDocumentOutlineViewController.m in Sources */,
+				19D12BC418C318C5001C2066 /* PDFText.m in Sources */,
+				19D12BC718C319E5001C2066 /* PDFTextState.m in Sources */,
 				19F7BA84186052E2009E8916 /* PDFDocumentViewController.m in Sources */,
 				19D99E11188E77E3006FDA6F /* PDFPageCropViewController.m in Sources */,
 				19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */,
 				19D99E14188FDF79006FDA6F /* PDFDocumentCropOverlayView.m in Sources */,
 				19DB6A5518825AB50023B118 /* PDFPage.m in Sources */,
 				1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */,
+				19D12BCF18C741A4001C2066 /* PDFFont.m in Sources */,
 				19D99DB71882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */,
+				1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */,
 				19D8709A18BD634500FA2B66 /* HomeViewController.m in Sources */,
 				19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */,
 				19D99DC11884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,

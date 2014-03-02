@@ -10,6 +10,7 @@
 
 #import "PDFPage.h"
 #import "PDFPageContentView.h"
+#import "PDFPageScanner.h"
 
 @interface PDFPageScrollView : UIScrollView
 @end
@@ -21,6 +22,7 @@
 @property (nonatomic, strong, readwrite) PDFPage *page;
 @property (nonatomic, strong) PDFPageContentView *contentView;
 @property (nonatomic, strong) UIImageView *lowResolutionView;
+@property (nonatomic, strong) UIPopoverController *popover;
 @end
 
 @implementation PDFPageViewController
@@ -30,6 +32,9 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _page = page;
+
+        PDFPageScanner *scanner = [[PDFPageScanner alloc] initWithCGPDFPage:page.CGPDFPage];
+        page.characters = [scanner scanStringContents];
     }
     return self;
 }
@@ -64,6 +69,11 @@
                                                     action:@selector(doubleTapped:)];
     tapGestureRecognizer.numberOfTapsRequired = 2;
     [self.contentView addGestureRecognizer:tapGestureRecognizer];
+
+    UILongPressGestureRecognizer *longPressGestureRecognizer =
+            [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                          action:@selector(longPressed:)];
+    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
 
     // CATiledLayerの描画が始まるまで、低画質で描画しておく
     UIImage *lowResolutionImage = [self.page thumbnailImageWithSize:self.contentView.frame.size
@@ -145,6 +155,77 @@
     } else {
         [self.scrollView setZoomScale:1.0 animated:YES];
     }
+}
+
+- (void)longPressed:(UILongPressGestureRecognizer *)recognizer
+{
+    CGPoint point = [recognizer locationInView:self.contentView];
+    CGFloat scale = self.contentView.scale;
+    PDFRenderingCharacter *c = [self.page characterAtPoint:CGPointMake(point.x / scale,
+                                                                       point.y / scale)];
+    if (c) {
+        [self.page selectWordForCharacter:c];
+    }
+
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        [self showSelectionMenuFromRect:self.contentView.selectionFrame
+                                 inView:self.contentView];
+    }
+}
+
+- (void)showSelectionMenuFromRect:(CGRect)rect
+                           inView:(UIView *)view
+{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    NSMutableArray* menuItems = [NSMutableArray array];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Copy"
+                                              action:@selector(copySelectedString:)]];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Define"
+                                              action:@selector(lookupSelectedString:)]];    
+    menuController.menuItems = menuItems;
+    menuController.arrowDirection = UIMenuControllerArrowDefault;
+    [menuController setTargetRect:rect
+                           inView:view];
+    [self becomeFirstResponder];
+    [menuController setMenuVisible:YES animated:YES];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return (action == @selector(lookupSelectedString:)) ||
+            (action == @selector(copySelectedString:));
+}
+
+- (void)lookupSelectedString:(id)sender
+{
+    NSString *term = self.page.selectedString;
+    UIReferenceLibraryViewController *vc = [[UIReferenceLibraryViewController alloc]
+                                               initWithTerm:term];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:vc];
+        [self.popover presentPopoverFromRect:self.contentView.selectionFrame
+                                      inView:self.contentView
+                    permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown
+                                    animated:YES];
+    } else {
+        [self presentViewController:vc
+                           animated:YES
+                         completion:NULL];        
+    }
+}
+
+- (void)copySelectedString:(id)sender
+{
+    NSString *term = self.page.selectedString;    
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    [pb setString:term];
 }
 
 @end

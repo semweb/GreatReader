@@ -12,4 +12,6 @@
 
 @interface PDFPageContentView : UIView
 @property (nonatomic, strong) PDFPage *page;
+@property (nonatomic, readonly) CGFloat scale;
+@property (nonatomic, readonly) CGRect selectionFrame;
 @end
