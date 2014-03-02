@@ -37,7 +37,7 @@
 - (void)loadView
 {
     PDFPageScrollView *scrollView =
-            [[PDFPageScrollView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+            [[PDFPageScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     scrollView.minimumZoomScale = 1.0f;
     scrollView.maximumZoomScale = 4.0f;
     scrollView.delegate = self;
