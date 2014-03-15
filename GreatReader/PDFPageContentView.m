@@ -108,7 +108,10 @@
     for (NSValue *line in lines) {
         CGRect r = line.CGRectValue;
         UIView *v = [[UIView alloc] initWithFrame:r];
-        v.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        v.backgroundColor = [UIColor colorWithRed:10 / 255.0
+                                            green:90 / 255.0
+                                             blue:160 / 255.0
+                                            alpha:0.2];
         [self addSubview:v];
         [self.selectionViews addObject:v];
     }
