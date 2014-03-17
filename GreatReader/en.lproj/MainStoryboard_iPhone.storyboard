@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tSv-Kq-LgP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tSv-Kq-LgP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -358,13 +358,13 @@
                         <outlet property="toolbar" destination="rGa-Oe-iG3" id="wU9-2p-Vr4"/>
                     </connections>
                 </viewController>
-                <barButtonItem style="plain" systemItem="search" id="EmI-qj-eOJ"/>
-                <barButtonItem image="ToolOutline.png" style="plain" id="GDD-o5-YVP">
+                <barButtonItem image="Find.png" style="plain" id="EmI-qj-eOJ"/>
+                <barButtonItem image="Outline.png" style="plain" id="GDD-o5-YVP">
                     <connections>
                         <segue destination="4Lj-s5-ami" kind="modal" identifier="PDFDocumentViewControllerSegueOutline" id="DfE-rq-8DC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="ToolCrop.png" style="plain" id="LV2-B1-wGo">
+                <barButtonItem image="Setting.png" style="plain" id="LV2-B1-wGo">
                     <connections>
                         <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCrop" id="21x-Bs-xCc"/>
                     </connections>
@@ -380,7 +380,7 @@
                         <action selector="toggleRibbon:" destination="2" id="Cl9-W1-hVC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem style="plain" systemItem="bookmarks" id="YdC-Xn-u4x">
+                <barButtonItem image="Find.png" style="plain" id="YdC-Xn-u4x">
                     <connections>
                         <segue destination="cq4-M3-lu3" kind="modal" identifier="PDFDocumentViewControllerSegueBookmark" id="bZh-LW-56E"/>
                     </connections>
@@ -392,10 +392,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="RibbonOff.png" width="22" height="22"/>
-        <image name="RibbonOn.png" width="22" height="22"/>
-        <image name="ToolCrop.png" width="22" height="22"/>
-        <image name="ToolOutline.png" width="22" height="22"/>
+        <image name="Find.png" width="23" height="23"/>
+        <image name="Outline.png" width="23" height="23"/>
+        <image name="RibbonOff.png" width="23" height="23"/>
+        <image name="RibbonOn.png" width="23" height="23"/>
+        <image name="Setting.png" width="23" height="23"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
