@@ -52,6 +52,7 @@
             return nil;
         }
         _currentPage = 1;
+        _brightness = 1.0;
         
         [self loadThumbnailImage];
     }
@@ -67,6 +68,7 @@
     if (self) {
         _currentPage = [decoder decodeIntegerForKey:@"currentPage"];
         _bookmarkList = [decoder decodeObjectForKey:@"bookmarkList"];
+        _brightness = [decoder decodeFloatForKey:@"brightness"];
         _bookmarkList.document = self;
     }
     return self;
@@ -77,6 +79,7 @@
     [encoder encodeObject:self.path forKey:@"path"];
     [encoder encodeInteger:self.currentPage forKey:@"currentPage"];
     [encoder encodeObject:self.bookmarkList forKey:@"bookmarkList"];
+    [encoder encodeFloat:self.brightness forKey:@"brightness"];
 }
 
 #pragma mark -

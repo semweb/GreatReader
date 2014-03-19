@@ -23,6 +23,7 @@
 @property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 @property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, assign) NSUInteger currentPage;
+@property (nonatomic, assign) CGFloat brightness;
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, readonly) BOOL currentPageBookmarked;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;

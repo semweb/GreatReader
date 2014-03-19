@@ -15,6 +15,7 @@
 #import "PDFDocumentCropViewController.h"
 #import "PDFDocumentInfo.h"
 #import "PDFDocumentInfoView.h"
+#import "PDFDocumentSettingViewController.h"
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineViewController.h"
 #import "PDFPage.h"
@@ -23,8 +24,10 @@
 #import "PDFRecentDocumentListViewController.h"
 
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
-NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
+NSString * const PDFDocumentViewControllerSegueCropOdd = @"PDFDocumentViewControllerSegueCropOdd";
+NSString * const PDFDocumentViewControllerSegueCropEven = @"PDFDocumentViewControllerSegueCropEven";
 NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewControllerSegueBookmark";
+NSString * const PDFDocumentViewControllerSegueSetting = @"PDFDocumentViewControllerSegueSetting";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
                               UIPageViewControllerDelegate>
@@ -35,9 +38,9 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *outlineItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkItem;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet PDFDocumentPageSlider *slider;
+@property (nonatomic, strong) IBOutlet UIView *dimView;
 @property (nonatomic, strong) PDFDocumentInfoView *infoView;
 @end
 
@@ -59,10 +62,16 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     self.pageViewController.delegate = self;
     [self addChildViewController:self.pageViewController];
     [self.view insertSubview:self.pageViewController.view
-                belowSubview:self.toolbar];
+                belowSubview:self.dimView];
     self.pageViewController.view.frame = self.view.bounds;
 
     [self openDocument:self.document];
+    self.dimView.alpha = (1 - self.document.brightness);
+    
+    [self addObserver:self
+           forKeyPath:@"document.brightness"
+              options:0
+              context:NULL];    
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,7 +91,7 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     [self addObserver:self
            forKeyPath:@"document.currentPage"
               options:0
-              context:NULL];    
+              context:NULL];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -90,7 +99,7 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
     [super viewWillDisappear:animated];
 
     [self removeObserver:self forKeyPath:@"document.currentPageBookmarked"];
-    [self removeObserver:self forKeyPath:@"document.currentPage"];    
+    [self removeObserver:self forKeyPath:@"document.currentPage"];
 }
 
 #pragma mark - KVO
@@ -99,9 +108,10 @@ NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewContr
 {
     if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
         [self prepareNavigationBar];
-    }
-    else if ([keyPath isEqualToString:@"document.currentPage"]) {
+    } else if ([keyPath isEqualToString:@"document.currentPage"]) {
         self.slider.currentIndex = self.document.currentPage - 1;
+    } else if ([keyPath isEqualToString:@"document.brightness"]) {
+        self.dimView.alpha = (1 - self.document.brightness);
     }
 }
 
@@ -197,7 +207,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
             ? self.ribbonOnItem : self.ribbonOffItem;
     self.navigationItem.rightBarButtonItems = @[self.outlineItem,
                                                 self.settingItem,
-                                                self.bookmarkItem,
                                                 ribbon];
 }
 
@@ -286,8 +295,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)showSetting:(id)sender
 {
-    [self performSegueWithIdentifier:PDFDocumentViewControllerSegueCrop
-                              sender:sender];
+    // [self performSegueWithIdentifier:PDFDocumentViewControllerSegueCrop
+    //                           sender:sender];
 }
 
 - (void)showOutline:(id)sender
@@ -307,18 +316,37 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (PDFDocumentOutlineViewController *)navi.topViewController;
         vc.currentPage = self.document.currentPage;
         vc.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCrop]) {
-        UINavigationController *navi =
-                (UINavigationController *)segue.destinationViewController;
-        PDFDocumentCropViewController *vc =
-                (PDFDocumentCropViewController *)navi.topViewController;
-        vc.crop = self.document.crop;
+    // } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCrop]) {
+    //     UINavigationController *navi =
+    //             (UINavigationController *)segue.destinationViewController;
+    //     PDFDocumentCropViewController *vc =
+    //             (PDFDocumentCropViewController *)navi.topViewController;
+    //     vc.crop = self.document.crop;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBookmark]) {
         UINavigationController *navi =
                 (UINavigationController *)segue.destinationViewController;
         PDFDocumentBookmarkListViewController *vc =
                 (PDFDocumentBookmarkListViewController *)navi.topViewController;
         vc.bookmarkList = self.document.bookmarkList;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueSetting]) {
+        PDFDocumentSettingViewController *vc =
+                (PDFDocumentSettingViewController *)segue.destinationViewController;
+        vc.document = self.document;
+        self.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCropOdd]) {
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
+        PDFDocumentCropViewController *vc =
+                (PDFDocumentCropViewController *)navi.topViewController;
+        vc.crop = self.document.crop;        
+        vc.even = NO;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCropEven]) {
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
+        PDFDocumentCropViewController *vc =
+                (PDFDocumentCropViewController *)navi.topViewController;
+        vc.crop = self.document.crop;        
+        vc.even = YES;
     }
 
     if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
@@ -342,7 +370,15 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (IBAction)exitCrop:(UIStoryboardSegue *)segue
 {
     [self goAtIndex:self.document.currentPage animated:NO];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // なぜかdimissされないので
+        [self dismissViewControllerAnimated:YES
+                                 completion:NULL];
+    }
 }
+
+- (IBAction)exitSetting:(UIStoryboardSegue *)segue {}
 
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue {}
 

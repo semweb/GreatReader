@@ -13,12 +13,16 @@
 @class PDFDocument;
 @class PDFRecentDocumentList;
 
+extern NSString * const PDFDocumentViewControllerSegueCropOdd;
+extern NSString * const PDFDocumentViewControllerSegueCropEven;
+
 @interface PDFDocumentViewController : UIViewController <PDFDocumentPageSliderDelegate,
                                                          PDFDocumentPageSliderDataSource>
 @property (nonatomic, strong) PDFDocument *document;
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
 
 - (IBAction)exitCrop:(UIStoryboardSegue *)segue;
+- (IBAction)exitSetting:(UIStoryboardSegue *)segue;
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue;
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue;
 

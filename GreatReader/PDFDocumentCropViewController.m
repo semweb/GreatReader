@@ -50,7 +50,36 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     [self.view addSubview:self.pageViewController.view];
     self.pageViewController.view.frame = self.view.bounds;
 
-    [self goAtIndex:self.crop.document.currentPage animated:NO];
+    [self goAtIndex:self.targetPageNumber
+           animated:NO];
+}
+
+- (NSUInteger)targetPageNumber
+{
+    NSUInteger number = self.crop.document.currentPage;
+    if (self.even) {
+        if (self.crop.document.currentPage % 2 != 0) {
+            number += 1;
+            if (number > self.crop.document.numberOfPages) {
+                number -= 2;
+                if (number <= 0) {
+                    number += 1;
+                }
+            }
+        }
+    } else {
+        if (self.crop.document.currentPage % 2 == 0) {
+            number -= 1;
+            if (number <= 0) {
+                number += 2;
+                if (number > self.crop.document.numberOfPages) {
+                    number -= 1;
+                }
+            }
+        }
+    }
+
+    return number;
 }
 
 - (void)didReceiveMemoryWarning

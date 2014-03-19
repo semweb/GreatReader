@@ -12,4 +12,5 @@
 
 @interface PDFDocumentCropViewController : UIViewController
 @property (nonatomic, strong) PDFDocumentCrop *crop;
+@property (nonatomic, assign) BOOL even;
 @end
