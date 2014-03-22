@@ -88,6 +88,14 @@
                           -(pdfRect.size.height - CGRectGetMaxY(drawRect)));
 
     CGContextDrawPDFPage(context, self.CGPDFPage);
+
+
+    CGContextSetRGBFillColor(context, 1.0f, 0.0f, 0.0f, 0.1f);
+    for (PDFRenderingCharacter *c in self.characters) {
+        CGRect f = CGRectApplyAffineTransform(c.frame,
+                                              c.state.transform);
+        CGContextFillRect(context, f);
+    }
 }
 
 - (UIImage *)thumbnailImageWithSize:(CGSize)size cropping:(BOOL)cropping
