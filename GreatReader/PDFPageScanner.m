@@ -301,6 +301,7 @@ void ConcatMatrix(CGPDFScannerRef scanner, void *info)
     CGPDFOperatorTableSetCallback(table, "Tm", SetTextMatrix);
     CGPDFOperatorTableSetCallback(table, "\'", MoveToNextLineAndShowText);
     CGPDFOperatorTableSetCallback(table, "\"", SetCharacterSpacingAndMoveToNextLineAndShowText);
+    CGPDFOperatorTableSetCallback(table, "cm", ConcatMatrix);
     CGPDFOperatorTableSetCallback(table, "q", SaveState);
     CGPDFOperatorTableSetCallback(table, "Q", RestoreState);
     return table;
