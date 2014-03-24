@@ -14,10 +14,23 @@ NSString * const kPrivateDocuments = @"PrivateDocuments";
 
 + (NSString *)grt_privateDocumentsPath
 {
+    return [self.grt_libraryPath stringByAppendingPathComponent:kPrivateDocuments];
+}
+
++ (NSString *)grt_libraryPath
+{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
                                                          NSUserDomainMask,
                                                          YES);
-    return [paths[0] stringByAppendingPathComponent:kPrivateDocuments];
+    return paths.firstObject;
+}
+
++ (NSString *)grt_documentsPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask,
+                                                         YES);
+    return paths.firstObject;
 }
 
 - (void)grt_createPrivateDocumentsDirectory

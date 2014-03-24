@@ -8,6 +8,8 @@
 
 #import "PDFDocument.h"
 
+#import "NSFileManager+GreatReaderAdditions.h"
+
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
@@ -63,7 +65,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-    NSString *path = [decoder decodeObjectForKey:@"path"];
+    NSString *path = [PDFDocument absolutePathWithRelativePath:
+                                   [decoder decodeObjectForKey:@"path"]];
     self = [self initWithPath:path];
     if (self) {
         _currentPage = [decoder decodeIntegerForKey:@"currentPage"];
@@ -76,10 +79,25 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.path forKey:@"path"];
+    [encoder encodeObject:[PDFDocument relativePathWithAbsolutePath:self.path]
+                   forKey:@"path"];
     [encoder encodeInteger:self.currentPage forKey:@"currentPage"];
     [encoder encodeObject:self.bookmarkList forKey:@"bookmarkList"];
     [encoder encodeFloat:self.brightness forKey:@"brightness"];
+}
+
+#pragma mark -
+
++ (NSString *)absolutePathWithRelativePath:(NSString *)relativePath
+{
+    return [[NSFileManager grt_documentsPath]
+               stringByAppendingPathComponent:relativePath];
+}
+
++ (NSString *)relativePathWithAbsolutePath:(NSString *)absolutePath
+{
+    NSRange range = [absolutePath rangeOfString:[NSFileManager grt_documentsPath]];
+    return [absolutePath substringFromIndex:range.location + range.length];
 }
 
 #pragma mark -
