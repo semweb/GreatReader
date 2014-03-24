@@ -11,6 +11,6 @@
 @interface File : NSObject
 @property (nonatomic, readonly) NSString *path;
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) UIImage *iconImage;
+@property (nonatomic, strong) UIImage *iconImage;
 - (id)initWithPath:(NSString *)path;
 @end

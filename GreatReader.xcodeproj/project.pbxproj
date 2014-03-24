@@ -17,6 +17,8 @@
 		1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */; };
 		1997502318CE904C008D514B /* PDFFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997502218CE904C008D514B /* PDFFontDescriptor.m */; };
 		1997502918D08C73008D514B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
+		19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
+		19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA68186052E2009E8916 /* CoreGraphics.framework */; };
 		19ABA5BC18D66FF700E123AB /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5B618D66FF700E123AB /* Find@2x.png */; };
 		19ABA5BD18D66FF700E123AB /* Outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5B818D66FF700E123AB /* Outline@2x.png */; };
 		19ABA5BE18D66FF700E123AB /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5BA18D66FF700E123AB /* Setting@2x.png */; };
@@ -251,6 +253,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */,
+				19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */,
 				19F7BA8C186052E2009E8916 /* SenTestingKit.framework in Frameworks */,
 				19F7BA8D186052E2009E8916 /* UIKit.framework in Frameworks */,
 				19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */,
@@ -531,6 +535,7 @@
 		19F7BA59186052E2009E8916 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "MIYAMOTO Shohei";
 			};

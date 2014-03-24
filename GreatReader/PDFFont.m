@@ -321,7 +321,7 @@
             CGPDFInteger to = -1;
             CGPDFObjectGetValue(o, type, &to);            
             CGPDFInteger width = PDFArrayGetInteger(w, ++i);
-            for (int j = from; j <= to; j++) {
+            for (NSInteger j = from; j <= to; j++) {
                 [widths setObject:@(width) forKey:@(j)];
             }            
         } else if (type == kCGPDFObjectTypeArray) {

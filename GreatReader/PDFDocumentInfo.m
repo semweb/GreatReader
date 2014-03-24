@@ -37,8 +37,8 @@
 - (NSString *)pageDescription
 {
     return [NSString stringWithFormat:@"%d/%d",
-                     self.document.currentPage,
-                     self.document.numberOfPages];
+                     (int)self.document.currentPage,
+                     (int)self.document.numberOfPages];
 }
 
 - (NSString *)sectionTitle

@@ -9,7 +9,6 @@
 #import "File.h"
 
 @interface File ()
-@property (nonatomic, strong, readwrite) UIImage *iconImage;
 @end
 
 @implementation File

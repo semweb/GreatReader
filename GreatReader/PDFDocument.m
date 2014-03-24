@@ -17,7 +17,6 @@
 
 @interface PDFDocument ()
 @property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
-@property (nonatomic, strong, readwrite) NSString *path;
 @property (nonatomic, strong, readwrite) UIImage *thumbnailImage;
 @property (nonatomic, strong, readwrite) UIImage *iconImage;
 @property (nonatomic, strong, readwrite) PDFDocumentOutline *outline;

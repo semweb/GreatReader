@@ -47,7 +47,7 @@
     }
     self.titleLabel.textColor = current ? self.tintColor : UIColor.blackColor;
     
-    self.pageNumberLabel.text = [NSString stringWithFormat:@"%d", item.pageNumber];
+    self.pageNumberLabel.text = [NSString stringWithFormat:@"%d", (int)item.pageNumber];
     self.pageNumberLabel.textColor = current ? self.tintColor : UIColor.blackColor;
     
     self.separatorInset = UIEdgeInsetsMake(0, 15 * (level + 1),
