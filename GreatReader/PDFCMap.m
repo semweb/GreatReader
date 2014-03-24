@@ -13,6 +13,8 @@
 @interface PDFCMap () <PDFCMapParserDelegate>
 @property (nonatomic, assign) NSRange codeSpaceRange;
 @property (nonatomic, strong) NSMutableDictionary *characterMapping;
+@property (nonatomic, strong) NSMutableDictionary *unicodeFromCID;
+@property (nonatomic, strong) NSMutableDictionary *CIDFromUnicode;
 @end
 
 @implementation PDFCMap
@@ -21,7 +23,8 @@
 {
     self = [super init];
     if (self) {
-        self.characterMapping = [NSMutableDictionary dictionary];
+        self.unicodeFromCID = [NSMutableDictionary dictionary];
+        self.CIDFromUnicode = [NSMutableDictionary dictionary];
         PDFCMapParser *parser = [[PDFCMapParser alloc] initWithStream:stream];
         parser.delegate = self;
         [parser parse];
@@ -31,13 +34,14 @@
 
 - (unichar)unicodeFromCID:(char)cid
 {
-    NSNumber *num = [self.characterMapping objectForKey:@(cid)];
+    NSNumber *num = [self.unicodeFromCID objectForKey:@(cid)];
     return [num unsignedCharValue];
 }
 
 - (char)CIDFromUnicode:(unichar)unicode
 {
-    return 0;
+    NSNumber *num = [self.CIDFromUnicode objectForKey:@(unicode)];
+    return [num unsignedCharValue];
 }
 
 #pragma mark -
@@ -51,7 +55,9 @@ foundCodeSpaceRange:(NSRange)range
 - (void)parser:(PDFCMapParser *)parser
   foundMapping:(NSDictionary *)mapping
 {
-    [self.characterMapping addEntriesFromDictionary:mapping];
+    [self.unicodeFromCID addEntriesFromDictionary:mapping];
+    [self.CIDFromUnicode setObject:mapping.allKeys.firstObject
+                            forKey:mapping.allValues.firstObject];
 }
 
 @end

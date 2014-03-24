@@ -60,6 +60,12 @@
     else if (!strcmp(subtype, "TrueType")) {
         return TrueTypeFont.class;
     }
+    else if (!strcmp(subtype, "CIDFontType2")) {
+        return CIDType2Font.class;
+    }
+    else if (!strcmp(subtype, "CIDFontType0")) {
+        return CIDType0Font.class;
+    }
     else {
         return PDFFont.class;        
     }
@@ -108,29 +114,7 @@
 
 - (NSDictionary *)widthsWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
 {
-    NSMutableDictionary *widths = [NSMutableDictionary dictionary];
-    
-    CGPDFArrayRef descendantFonts = PDFDictionaryGetArray(fontDictionary, "DescendantFonts");
-    CGPDFDictionaryRef descendantFont = PDFArrayGetDictionary(descendantFonts, 0);
-    CGPDFArrayRef w = PDFDictionaryGetArray(descendantFont, "W");
-    size_t count = CGPDFArrayGetCount(w);
-    if (count == 2) {
-        CGPDFInteger from = PDFArrayGetInteger(w, 0);
-        CGPDFArrayRef wArray = PDFArrayGetArray(w, 1);
-        for (int i = 0; i <= CGPDFArrayGetCount(wArray); i++) {
-            CGPDFInteger width = PDFArrayGetInteger(wArray, i);
-            [widths setObject:@(width) forKey:@(from + i)];
-        }
-    } else if (count == 3) {
-        CGPDFInteger from = PDFArrayGetInteger(w, 0);
-        CGPDFInteger to = PDFArrayGetInteger(w, 1);
-        CGPDFInteger width = PDFArrayGetInteger(w, 2);
-        for (int i = from; i <= to; i++) {
-            [widths setObject:@(width) forKey:@(i)];
-        }
-    }
-
-    return [widths copy];
+    return nil;
 }
 
 - (NSStringEncoding)encodingWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
@@ -207,17 +191,59 @@
 @implementation TrueTypeFont
 @end
 
+
+@interface Type0Font ()
+@property (nonatomic, strong) NSArray *descendantFonts;
+@property (nonatomic, readonly) PDFFont *descendantFont;
+@end
 @implementation Type0Font
 
-- (PDFFontDescriptor *)fontDescriptorWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+- (instancetype)initWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+{
+    self = [super initWithFontDictionary:fontDictionary];
+    if (self) {
+        _descendantFonts = [self descendantFontsWithFontDictionary:fontDictionary];
+    }
+    return self;
+}
+
+- (NSArray *)descendantFontsWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
 {
     CGPDFArrayRef descendantFonts = PDFDictionaryGetArray(fontDictionary, "DescendantFonts");
     CGPDFDictionaryRef descendantFont = PDFArrayGetDictionary(descendantFonts, 0);
-    CGPDFDictionaryRef dic = PDFDictionaryGetDictionary(descendantFont, "FontDescriptor");
-    PDFFontDescriptor *fontDescriptor =
-            [[PDFFontDescriptor alloc] initWithFontDescriptorDictionary:dic];
-    return fontDescriptor;
+    if (descendantFont) {
+        return @[
+            [PDFFont fontWithFontDictionary:descendantFont]
+        ];
+    } else {
+        return nil;
+    }
 }
+
+- (PDFFontDescriptor *)fontDescriptor
+{
+    return super.fontDescriptor ?: self.descendantFont.fontDescriptor;
+}
+
+- (NSDictionary *)widths
+{
+    return super.widths ?: self.descendantFont.widths;
+}
+
+- (PDFFont *)descendantFont
+{
+    return [self.descendantFonts lastObject];
+}
+
+// - (PDFFontDescriptor *)fontDescriptorWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+// {
+//     CGPDFArrayRef descendantFonts = PDFDictionaryGetArray(fontDictionary, "DescendantFonts");
+//     CGPDFDictionaryRef descendantFont = PDFArrayGetDictionary(descendantFonts, 0);
+//     CGPDFDictionaryRef dic = PDFDictionaryGetDictionary(descendantFont, "FontDescriptor");
+//     PDFFontDescriptor *fontDescriptor =
+//             [[PDFFontDescriptor alloc] initWithFontDescriptorDictionary:dic];
+//     return fontDescriptor;
+// }
 
 - (NSString *)stringWithPDFString:(CGPDFStringRef)pdfString
 {
@@ -266,5 +292,54 @@
     }
     return 0;    
 }
+
+@end
+
+
+@implementation CIDType2Font
+
+- (CGFloat)defaultWidthWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+{
+    CGPDFInteger dw = PDFDictionaryGetInteger(fontDictionary, "DW");
+    return (CGFloat)dw;
+}
+
+- (NSDictionary *)widthsWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+{
+    NSMutableDictionary *widths = [NSMutableDictionary dictionary];
+    
+    CGPDFArrayRef w = PDFDictionaryGetArray(fontDictionary, "W");
+    size_t count = CGPDFArrayGetCount(w);
+
+    CGPDFInteger from = 0;
+    for (int i = 0; i < count; i++) {
+        from = PDFArrayGetInteger(w, i);
+
+        CGPDFObjectRef o = PDFArrayGetObject(w, ++i);
+        CGPDFObjectType type = CGPDFObjectGetType(o);
+        if (type == kCGPDFObjectTypeInteger) {
+            CGPDFInteger to = -1;
+            CGPDFObjectGetValue(o, type, &to);            
+            CGPDFInteger width = PDFArrayGetInteger(w, ++i);
+            for (int j = from; j <= to; j++) {
+                [widths setObject:@(width) forKey:@(j)];
+            }            
+        } else if (type == kCGPDFObjectTypeArray) {
+            CGPDFArrayRef wArray = NULL;
+            CGPDFObjectGetValue(o, type, &wArray);
+            for (int j = 0; j < CGPDFArrayGetCount(wArray); j++) {
+                CGPDFInteger width = PDFArrayGetInteger(wArray, j);
+                [widths setObject:@(width) forKey:@(from + j)];
+            }            
+        }
+    }
+
+    return [widths copy];
+}
+
+@end
+
+@implementation CIDType0Font
+
 
 @end

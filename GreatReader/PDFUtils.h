@@ -20,3 +20,4 @@ const char * PDFDictionaryGetName(CGPDFDictionaryRef d, const char *key);
 CGPDFDictionaryRef PDFArrayGetDictionary(CGPDFArrayRef array, size_t index);
 CGPDFArrayRef PDFArrayGetArray(CGPDFArrayRef array, size_t index);
 CGPDFInteger PDFArrayGetInteger(CGPDFArrayRef array, size_t index);
+CGPDFObjectRef PDFArrayGetObject(CGPDFArrayRef array, size_t index);

@@ -18,6 +18,8 @@
 
 - (instancetype)initWithFontDescriptorDictionary:(CGPDFDictionaryRef)dictionary
 {
+    if (!dictionary) return nil;
+
     self = [super init];
     if (self) {
         _dictionary = dictionary;

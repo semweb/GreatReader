@@ -117,3 +117,10 @@ CGPDFInteger PDFArrayGetInteger(CGPDFArrayRef a, size_t index)
     CGPDFArrayGetInteger(a, index, &integer);
     return integer;
 }
+
+CGPDFObjectRef PDFArrayGetObject(CGPDFArrayRef a, size_t index)
+{
+    CGPDFObjectRef object = NULL;
+    CGPDFArrayGetObject(a, index, &object);
+    return object;
+}
