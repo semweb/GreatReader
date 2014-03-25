@@ -270,10 +270,11 @@
     return nil;
 }
 
+static dispatch_once_t onceToken;
+static CGGlyph s_glyphs[65535];
+
 - (unichar)unicodeFromCID:(uint16_t)cid
 {
-    static dispatch_once_t onceToken;
-    static CGGlyph s_glyphs[65535];
     dispatch_once(&onceToken, ^{
         unichar unichars[65535];
         for (int i = 0; i < 65535; i++) {
@@ -293,10 +294,41 @@
     return 0;    
 }
 
+- (uint16_t)CIDFromUnicode:(uint16_t)unicode
+{
+    dispatch_once(&onceToken, ^{
+        unichar unichars[65535];
+        for (int i = 0; i < 65535; i++) {
+            unichars[i] = i;
+        }
+        CTFontRef ctFont = CTFontCreateWithName((CFStringRef)@"HiraKakuProN-W3",
+                                                10.0,
+                                                NULL);
+        CTFontGetGlyphsForCharacters(ctFont, unichars, s_glyphs, 65535);
+    });
+    return s_glyphs[unicode];
+}
+
+- (CGFloat)widthOfCharacter:(unichar)character
+               withFontSize:(CGFloat)fontSize
+{
+    if (self.cmap) {
+        character = [self.cmap CIDFromUnicode:character];
+    } else {
+        character = [self CIDFromUnicode:character];
+    }
+    
+    NSNumber *num = [self.widths objectForKey:@(character)];
+    if (num) {
+        return [num floatValue] * fontSize;
+    } else {
+        return self.defaultWidth * fontSize;
+    }
+}
+
 @end
 
-
-@implementation CIDType2Font
+@implementation CIDFont
 
 - (CGFloat)defaultWidthWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
 {
@@ -336,6 +368,12 @@
 
     return [widths copy];
 }
+
+@end
+
+
+@implementation CIDType2Font
+
 
 @end
 

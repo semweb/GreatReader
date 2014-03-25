@@ -35,13 +35,13 @@
 - (unichar)unicodeFromCID:(char)cid
 {
     NSNumber *num = [self.unicodeFromCID objectForKey:@(cid)];
-    return [num unsignedCharValue];
+    return num ? [num unsignedCharValue] : cid;
 }
 
 - (char)CIDFromUnicode:(unichar)unicode
 {
     NSNumber *num = [self.CIDFromUnicode objectForKey:@(unicode)];
-    return [num unsignedCharValue];
+    return num ? [num unsignedCharValue] : unicode;
 }
 
 #pragma mark -

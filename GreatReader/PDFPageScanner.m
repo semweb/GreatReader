@@ -253,6 +253,8 @@ void ConcatMatrix(CGPDFScannerRef scanner, void *info)
 
 - (void)didFindString:(NSString *)string state:(PDFTextState *)state
 {
+    NSLog(@"%@", string);
+    
     for (int i = 0; i < string.length; i++) {
         unichar c = [string characterAtIndex:i];
         PDFRenderingCharacter *character =

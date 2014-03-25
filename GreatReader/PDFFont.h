@@ -32,8 +32,11 @@
 @interface TrueTypeFont : Type1Font
 @end
 
-@interface CIDType2Font : Type0Font
+@interface CIDFont : Type0Font
 @end
 
-@interface CIDType0Font : Type0Font
+@interface CIDType2Font : CIDFont
+@end
+
+@interface CIDType0Font : CIDFont
 @end
