@@ -20,6 +20,7 @@
 @property (nonatomic, assign) CGFloat defaultWidth;
 @property (nonatomic, strong) PDFCMap *cmap;
 @property (nonatomic, assign) NSStringEncoding encoding;
+@property (nonatomic, strong) NSString *baseFont;
 @end
 
 @implementation PDFFont
@@ -80,10 +81,18 @@
         _widths = [self widthsWithFontDictionary:fontDictionary];
         _defaultWidth = [self defaultWidthWithFontDictionary:fontDictionary];
         _cmap = [self cmapWithFontDictionary:fontDictionary];
+        _baseFont = [self baseFontWithFontDictionary:fontDictionary];        
         _fontDescriptor = [self fontDescriptorWithFontDictionary:fontDictionary];
         _encoding = [self encodingWithFontDictionary:fontDictionary];
     }
     return self;
+}
+
+- (NSString *)baseFontWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+{
+    const char *name = PDFDictionaryGetName(fontDictionary, "BaseFont");
+    return [NSString stringWithCString:name
+                              encoding:NSUTF8StringEncoding];
 }
 
 - (PDFFontDescriptor *)fontDescriptorWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
@@ -181,6 +190,51 @@
     }
 
     return [widthDictionary copy];
+}
+
+- (CGFloat)widthOfCharacter:(unichar)character
+               withFontSize:(CGFloat)fontSize
+{
+    NSNumber *num = [self.widths objectForKey:@(character)];
+    if (num) {
+        return [num floatValue] * fontSize;
+    } else if (self.defaultWidth != -1) {
+        return self.defaultWidth * fontSize;
+    } else {
+        return [self calculateWidthWithCoreText:character] * fontSize;
+    }
+}
+
+- (CGFloat)calculateWidthWithCoreText:(unichar)character
+{
+    CGFontRef cgFont = CGFontCreateWithFontName((CFStringRef)self.baseFont);
+    CTFontRef ctFont = CTFontCreateWithGraphicsFont(cgFont,
+                                                    10,
+                                                    NULL,
+                                                    NULL);
+
+    CGGlyph *glyphs = (CGGlyph *)malloc(sizeof(CGGlyph));
+    CTFontGetGlyphsForCharacters(ctFont,
+                                 &character,
+                                 glyphs,
+                                 1);
+    double w = CTFontGetAdvancesForGlyphs(ctFont,
+                                          kCTFontDefaultOrientation,
+                                          glyphs,
+                                          NULL,
+                                          1);
+    return w * 100;
+}
+
+- (PDFFontDescriptor *)fontDescriptorWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
+{
+    CGPDFDictionaryRef dic = PDFDictionaryGetDictionary(fontDictionary, "FontDescriptor");
+    if (dic) {
+        return [[PDFFontDescriptor alloc] initWithFontDescriptorDictionary:dic];
+    } else {
+        NSString *baseFont = [self baseFontWithFontDictionary:fontDictionary];
+        return [[PDFFontDescriptor alloc] initWithBaseFont:baseFont];
+    }
 }
 
 @end

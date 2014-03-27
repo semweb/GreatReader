@@ -11,7 +11,8 @@
 #import "PDFUtils.h"
 
 @interface PDFFontDescriptor ()
-@property (nonatomic, assign) CGPDFDictionaryRef dictionary;
+@property (nonatomic, assign, readwrite) CGFloat descent;
+@property (nonatomic, assign, readwrite) CGFloat ascent;
 @end
 
 @implementation PDFFontDescriptor
@@ -22,19 +23,23 @@
 
     self = [super init];
     if (self) {
-        _dictionary = dictionary;
+        _ascent = (CGFloat)PDFDictionaryGetInteger(dictionary, "Ascent");
+        _descent = (CGFloat)PDFDictionaryGetInteger(dictionary, "Descent");
     }
     return self;
 }
 
-- (CGFloat)ascent
+- (instancetype)initWithBaseFont:(NSString *)baseFont
 {
-    return (CGFloat)PDFDictionaryGetInteger(self.dictionary, "Ascent");
-}
+    if (!baseFont) return nil;
 
-- (CGFloat)descent
-{
-    return (CGFloat)PDFDictionaryGetInteger(self.dictionary, "Descent");
+    self = [super init];
+    if (self) {
+        UIFont *font = [UIFont fontWithName:baseFont size:10];
+        _ascent = [font ascender] * 100;
+        _descent = [font descender] * 100;
+    }
+    return self;
 }
 
 @end

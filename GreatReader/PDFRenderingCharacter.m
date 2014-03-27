@@ -30,7 +30,7 @@
     CGFloat w = [self.state.font widthOfCharacter:self.c
                                      withFontSize:self.state.fontSize] / 1000.0;
     CGFloat minY = self.state.font.fontDescriptor.descent * self.state.fontSize / 1000.0;
-    CGFloat maxY = self.state.font.fontDescriptor.ascent * self.state.fontSize / 1000.0;    
+    CGFloat maxY = self.state.font.fontDescriptor.ascent * self.state.fontSize / 1000.0;
     return CGRectMake(0, minY, w, maxY - minY);
 }
 

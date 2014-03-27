@@ -10,6 +10,7 @@
 
 @interface PDFFontDescriptor : NSObject
 - (instancetype)initWithFontDescriptorDictionary:(CGPDFDictionaryRef)dictionary;
-@property (nonatomic, assign) CGFloat descent;
-@property (nonatomic, assign) CGFloat ascent;
+- (instancetype)initWithBaseFont:(NSString *)baseFont;
+@property (nonatomic, assign, readonly) CGFloat descent;
+@property (nonatomic, assign, readonly) CGFloat ascent;
 @end
