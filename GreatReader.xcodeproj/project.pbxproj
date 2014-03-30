@@ -19,6 +19,7 @@
 		1997502918D08C73008D514B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
 		19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
 		19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA68186052E2009E8916 /* CoreGraphics.framework */; };
+		19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */; };
 		19ABA5BC18D66FF700E123AB /* Find@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5B618D66FF700E123AB /* Find@2x.png */; };
 		19ABA5BD18D66FF700E123AB /* Outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5B818D66FF700E123AB /* Outline@2x.png */; };
 		19ABA5BE18D66FF700E123AB /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5BA18D66FF700E123AB /* Setting@2x.png */; };
@@ -127,6 +128,8 @@
 		1997502118CE904C008D514B /* PDFFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFFontDescriptor.h; sourceTree = "<group>"; };
 		1997502218CE904C008D514B /* PDFFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFFontDescriptor.m; sourceTree = "<group>"; };
 		1997502818D08C73008D514B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		19A418B918E6D1B4002DDFC9 /* PDFPageLoopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageLoopeView.h; sourceTree = "<group>"; };
+		19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageLoopeView.m; sourceTree = "<group>"; };
 		19ABA5B718D66FF700E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Find@2x.png"; sourceTree = "<group>"; };
 		19ABA5B918D66FF700E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Outline@2x.png"; sourceTree = "<group>"; };
 		19ABA5BB18D66FF700E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Setting@2x.png"; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 			children = (
 				1943EB55187FA59E00F0B61D /* PDFDocument.h */,
 				1943EB56187FA59E00F0B61D /* PDFDocument.m */,
+				19A418B918E6D1B4002DDFC9 /* PDFPageLoopeView.h */,
+				19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */,
 				19D8708C18BABF0500FA2B66 /* PDFDocumentBookmarkList.h */,
 				19D8708D18BABF0500FA2B66 /* PDFDocumentBookmarkList.m */,
 				19D8709218BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.h */,
@@ -624,6 +629,7 @@
 				19D99DD71888E798006FDA6F /* File.m in Sources */,
 				1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */,
 				19F7BA71186052E2009E8916 /* main.m in Sources */,
+				19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */,
 				19D99DD31888E729006FDA6F /* FolderTableViewController.m in Sources */,
 				1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */,
 				19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */,
@@ -906,6 +912,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shohei Miyamoto (2K5485LBNE)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;

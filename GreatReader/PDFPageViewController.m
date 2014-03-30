@@ -170,6 +170,9 @@
     if (recognizer.state == UIGestureRecognizerStateEnded) {
         [self showSelectionMenuFromRect:self.contentView.selectionFrame
                                  inView:self.contentView];
+        [self.contentView hideLoope];
+    } else {
+        [self.contentView showLoopeAtPoint:point];
     }
 }
 

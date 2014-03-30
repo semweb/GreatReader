@@ -12,6 +12,7 @@
 
 #import "PDFPage.h"
 #import "PDFPageContentTiledLayer.h"
+#import "PDFPageLoopeView.h"
 #import "PDFRenderingCharacter.h"
 
 @interface PDFPageContentTileView : UIView
@@ -35,6 +36,7 @@
 @interface PDFPageContentView ()
 @property (nonatomic, strong) PDFPageContentTileView *tileView;
 @property (nonatomic, strong) NSMutableArray *selectionViews;
+@property (nonatomic, strong) PDFPageLoopeView *loopeView;
 @end
 
 @implementation PDFPageContentView
@@ -63,6 +65,8 @@
                forKeyPath:@"page.selectedFrames"
                   options:0
                   context:NULL];
+
+        _loopeView = [[PDFPageLoopeView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     }
     return self;
 }
@@ -136,6 +140,34 @@
         }
         return rect;
     }
+}
+
+- (void)showLoopeAtPoint:(CGPoint)point
+{
+    if (!self.loopeView.superview) {
+        [self.window addSubview:self.loopeView];
+    }
+    point = [self convertPoint:point toView:nil];
+    self.loopeView.center = CGPointMake(roundf(point.x), roundf(point.y));
+    UIGraphicsBeginImageContextWithOptions(self.loopeView.frame.size, NO, 2.0);  {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGPoint p = self.loopeView.frame.origin;
+        p.x -= self.frame.origin.x;
+        p.y -= self.frame.origin.y;        
+        CGContextConcatCTM(context,
+                           CGAffineTransformMakeTranslation(-p.x, -p.y));
+        [self.layer renderInContext:context];
+        self.loopeView.image = UIGraphicsGetImageFromCurrentImageContext();
+    } UIGraphicsEndImageContext();
+
+    self.loopeView.center =
+            CGPointMake(self.loopeView.center.x,
+                        self.loopeView.center.y - 80);
+}
+
+- (void)hideLoope
+{
+    [self.loopeView removeFromSuperview];
 }
 
 @end
