@@ -11,7 +11,7 @@
 		1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917EB3F18B42940003D272F /* RootFolderTableDataSource.m */; };
 		19430E4E18E7B3ED00BB4238 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */; };
 		19430E5118E80A6F00BB4238 /* LibraryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19430E5018E80A6F00BB4238 /* LibraryUtils.m */; };
-		19430E5518E846A500BB4238 /* API_KEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19430E5418E846A500BB4238 /* API_KEY.plist */; };
+		19430E5D18E8DCF100BB4238 /* API_KEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19430E5C18E8DCF100BB4238 /* API_KEY.plist */; };
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
@@ -121,7 +121,7 @@
 		19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Libraries/Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		19430E4F18E80A6F00BB4238 /* LibraryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryUtils.h; sourceTree = "<group>"; };
 		19430E5018E80A6F00BB4238 /* LibraryUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryUtils.m; sourceTree = "<group>"; };
-		19430E5418E846A500BB4238 /* API_KEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API_KEY.plist; sourceTree = SOURCE_ROOT; };
+		19430E5C18E8DCF100BB4238 /* API_KEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API_KEY.plist; sourceTree = SOURCE_ROOT; };
 		1943EB55187FA59E00F0B61D /* PDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocument.h; sourceTree = "<group>"; };
 		1943EB56187FA59E00F0B61D /* PDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocument.m; sourceTree = "<group>"; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 				19430E4A18E7B33E00BB4238 /* Libraries */,
 				19D99DEA188A7E76006FDA6F /* Images */,
 				19D99DE9188A7E60006FDA6F /* Classes */,
-				19430E5418E846A500BB4238 /* API_KEY.plist */,
+				19430E5C18E8DCF100BB4238 /* API_KEY.plist */,
 				19F7BA7C186052E2009E8916 /* MainStoryboard_iPhone.storyboard */,
 				19F7BA7F186052E2009E8916 /* MainStoryboard_iPad.storyboard */,
 				19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */,
@@ -591,7 +591,7 @@
 				19F7BA6F186052E2009E8916 /* InfoPlist.strings in Resources */,
 				19F7BA77186052E2009E8916 /* Default.png in Resources */,
 				19D8708518BA2EB700FA2B66 /* Icon-60@2x.png in Resources */,
-				19430E5518E846A500BB4238 /* API_KEY.plist in Resources */,
+				19430E5D18E8DCF100BB4238 /* API_KEY.plist in Resources */,
 				19F7BA79186052E2009E8916 /* Default@2x.png in Resources */,
 				19D8707418B63D1900FA2B66 /* ToolHistory@2x.png in Resources */,
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
