@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 #import "Folder.h"
 #import "FolderTableDataSource.h"
 #import "FolderTableViewController.h"
 #import "FolderTableViewController.h"
 #import "HomeViewController.h"
+#import "LibraryUtils.h"
 #import "NSFileManager+GreatReaderAdditions.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewController.h"
@@ -27,6 +30,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (CrashlyticsEnabled()) {
+        [Crashlytics startWithAPIKey:GetCrashlyticsAPIKey()];
+    }
+    
     self.documentList = PDFRecentDocumentList.new;
 
     UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];

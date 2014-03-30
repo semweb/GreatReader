@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1917EB3D18B4292F003D272F /* FolderTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917EB3C18B4292F003D272F /* FolderTableDataSource.m */; };
 		1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917EB3F18B42940003D272F /* RootFolderTableDataSource.m */; };
+		19430E4E18E7B3ED00BB4238 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */; };
+		19430E5118E80A6F00BB4238 /* LibraryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19430E5018E80A6F00BB4238 /* LibraryUtils.m */; };
+		19430E5518E846A500BB4238 /* API_KEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19430E5418E846A500BB4238 /* API_KEY.plist */; };
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
@@ -115,6 +118,10 @@
 		1917EB3C18B4292F003D272F /* FolderTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableDataSource.m; sourceTree = "<group>"; };
 		1917EB3E18B42940003D272F /* RootFolderTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootFolderTableDataSource.h; sourceTree = "<group>"; };
 		1917EB3F18B42940003D272F /* RootFolderTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootFolderTableDataSource.m; sourceTree = "<group>"; };
+		19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Libraries/Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		19430E4F18E80A6F00BB4238 /* LibraryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryUtils.h; sourceTree = "<group>"; };
+		19430E5018E80A6F00BB4238 /* LibraryUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryUtils.m; sourceTree = "<group>"; };
+		19430E5418E846A500BB4238 /* API_KEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API_KEY.plist; sourceTree = SOURCE_ROOT; };
 		1943EB55187FA59E00F0B61D /* PDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocument.h; sourceTree = "<group>"; };
 		1943EB56187FA59E00F0B61D /* PDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocument.m; sourceTree = "<group>"; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
@@ -248,6 +255,7 @@
 				19D99DBA18827192006FDA6F /* QuartzCore.framework in Frameworks */,
 				19F7BA65186052E2009E8916 /* UIKit.framework in Frameworks */,
 				19F7BA67186052E2009E8916 /* Foundation.framework in Frameworks */,
+				19430E4E18E7B3ED00BB4238 /* Crashlytics.framework in Frameworks */,
 				19F7BA69186052E2009E8916 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +275,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19430E4A18E7B33E00BB4238 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		1943EB54187FA58F00F0B61D /* PDF */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +410,8 @@
 				19D99DC71884F324006FDA6F /* Category */,
 				1943EB54187FA58F00F0B61D /* PDF */,
 				19D99DCC1888E56C006FDA6F /* Folder */,
+				19430E4F18E80A6F00BB4238 /* LibraryUtils.h */,
+				19430E5018E80A6F00BB4238 /* LibraryUtils.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -451,8 +469,10 @@
 		19F7BA6A186052E2009E8916 /* GreatReader */ = {
 			isa = PBXGroup;
 			children = (
+				19430E4A18E7B33E00BB4238 /* Libraries */,
 				19D99DEA188A7E76006FDA6F /* Images */,
 				19D99DE9188A7E60006FDA6F /* Classes */,
+				19430E5418E846A500BB4238 /* API_KEY.plist */,
 				19F7BA7C186052E2009E8916 /* MainStoryboard_iPhone.storyboard */,
 				19F7BA7F186052E2009E8916 /* MainStoryboard_iPad.storyboard */,
 				19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */,
@@ -505,6 +525,7 @@
 				19F7BA5D186052E2009E8916 /* Sources */,
 				19F7BA5E186052E2009E8916 /* Frameworks */,
 				19F7BA5F186052E2009E8916 /* Resources */,
+				19430E4918E7B2B800BB4238 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -570,6 +591,7 @@
 				19F7BA6F186052E2009E8916 /* InfoPlist.strings in Resources */,
 				19F7BA77186052E2009E8916 /* Default.png in Resources */,
 				19D8708518BA2EB700FA2B66 /* Icon-60@2x.png in Resources */,
+				19430E5518E846A500BB4238 /* API_KEY.plist in Resources */,
 				19F7BA79186052E2009E8916 /* Default@2x.png in Resources */,
 				19D8707418B63D1900FA2B66 /* ToolHistory@2x.png in Resources */,
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
@@ -602,6 +624,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19430E4918E7B2B800BB4238 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "API_KEY1=$(/usr/libexec/PlistBuddy -c \"Print CRASHLYTICS_API_KEY1\" \"API_KEY.plist\")\nAPI_KEY2=$(/usr/libexec/PlistBuddy -c \"Print CRASHLYTICS_API_KEY2\" \"API_KEY.plist\")\nif test $API_KEY1 != \"\"\nthen\n    ./Libraries/Crashlytics.framework/run $API_KEY1 $API_KEY2\nfi";
+		};
 		19F7BA88186052E2009E8916 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -653,6 +688,7 @@
 				19F7BA84186052E2009E8916 /* PDFDocumentViewController.m in Sources */,
 				19D99E11188E77E3006FDA6F /* PDFPageCropViewController.m in Sources */,
 				19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */,
+				19430E5118E80A6F00BB4238 /* LibraryUtils.m in Sources */,
 				19D99E14188FDF79006FDA6F /* PDFDocumentCropOverlayView.m in Sources */,
 				19DB6A5518825AB50023B118 /* PDFPage.m in Sources */,
 				1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */,
@@ -913,6 +949,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shohei Miyamoto (2K5485LBNE)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GreatReader",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -928,6 +969,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GreatReader",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
