@@ -133,13 +133,14 @@ typedef void (^PDFCMapParserHandler)(NSArray *lines);
                 }
             } else if ([destObject isKindOfClass:NSArray.class]) {
                 NSArray *destArray = (NSArray *)destObject;
-                for (int i = src1; i <= src2; i++) {
-                    NSString *destString = destArray[i];
+                [destArray enumerateObjectsUsingBlock:^(NSString *destString,
+                                                        NSUInteger idx,
+                                                        BOOL *stop) {
                     unsigned dest = 0;
                     [[NSScanner scannerWithString:destString] scanHexInt:&dest];
                     [wself.delegate parser:self
-                              foundMapping:@{@(i): @(dest)}];
-                }
+                              foundMapping:@{@(idx + src1): @(dest)}];
+                }];
             } else {
                 NSString *err = [NSString stringWithFormat:@"%@", destObject];
                 NSAssert(0, err);
