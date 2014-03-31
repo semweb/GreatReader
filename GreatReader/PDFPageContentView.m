@@ -66,7 +66,7 @@
                   options:0
                   context:NULL];
         
-        _loopeView = [[PDFPageLoopeView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        _loopeView = [[PDFPageLoopeView alloc] init];
     }
     return self;
 }
@@ -163,7 +163,7 @@
 
     self.loopeView.center =
             CGPointMake(self.loopeView.center.x,
-                        self.loopeView.center.y - self.loopeView.frame.size.height / 2.0);
+                        self.loopeView.center.y - self.loopeView.frame.size.height / 2.0 - 20);
 }
 
 - (void)hideLoope

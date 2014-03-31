@@ -14,6 +14,7 @@
 		19430E5D18E8DCF100BB4238 /* API_KEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19430E5C18E8DCF100BB4238 /* API_KEY.plist */; };
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
+		195B728C18EA352E000C5A8B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728B18EA352E000C5A8B /* Device.m */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
 		1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
 		1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
@@ -124,6 +125,8 @@
 		19430E5C18E8DCF100BB4238 /* API_KEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API_KEY.plist; sourceTree = SOURCE_ROOT; };
 		1943EB55187FA59E00F0B61D /* PDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocument.h; sourceTree = "<group>"; };
 		1943EB56187FA59E00F0B61D /* PDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocument.m; sourceTree = "<group>"; };
+		195B728A18EA352E000C5A8B /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		195B728B18EA352E000C5A8B /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
 		1997501618C8B9C9008D514B /* PDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFUtils.m; sourceTree = "<group>"; };
 		1997501818CAC3E7008D514B /* PDFCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMap.h; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 				19D99DC71884F324006FDA6F /* Category */,
 				1943EB54187FA58F00F0B61D /* PDF */,
 				19D99DCC1888E56C006FDA6F /* Folder */,
+				195B728A18EA352E000C5A8B /* Device.h */,
+				195B728B18EA352E000C5A8B /* Device.m */,
 				19430E4F18E80A6F00BB4238 /* LibraryUtils.h */,
 				19430E5018E80A6F00BB4238 /* LibraryUtils.m */,
 			);
@@ -697,6 +702,7 @@
 				1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */,
 				19D8709A18BD634500FA2B66 /* HomeViewController.m in Sources */,
 				19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */,
+				195B728C18EA352E000C5A8B /* Device.m in Sources */,
 				19D99DC11884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,
 				19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */,
 				19BB31DD18A495C90091F6AB /* PDFRecentDocumentCell.m in Sources */,
