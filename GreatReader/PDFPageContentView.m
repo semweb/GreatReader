@@ -65,7 +65,7 @@
                forKeyPath:@"page.selectedFrames"
                   options:0
                   context:NULL];
-
+        
         _loopeView = [[PDFPageLoopeView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     }
     return self;
@@ -151,18 +151,19 @@
     self.loopeView.center = CGPointMake(roundf(point.x), roundf(point.y));
     UIGraphicsBeginImageContextWithOptions(self.loopeView.frame.size, NO, 2.0);  {
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGPoint p = self.loopeView.frame.origin;
-        p.x -= self.frame.origin.x;
-        p.y -= self.frame.origin.y;        
-        CGContextConcatCTM(context,
-                           CGAffineTransformMakeTranslation(-p.x, -p.y));
+        CGPoint p = [self convertPoint:self.loopeView.frame.origin
+                              fromView:nil];
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        transform = CGAffineTransformTranslate(transform, -p.x, -p.y);
+        transform = CGAffineTransformConcat(transform, self.transform);
+        CGContextConcatCTM(context, transform);
         [self.layer renderInContext:context];
         self.loopeView.image = UIGraphicsGetImageFromCurrentImageContext();
     } UIGraphicsEndImageContext();
 
     self.loopeView.center =
             CGPointMake(self.loopeView.center.x,
-                        self.loopeView.center.y - 80);
+                        self.loopeView.center.y - self.loopeView.frame.size.height / 2.0);
 }
 
 - (void)hideLoope
