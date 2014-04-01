@@ -12,5 +12,6 @@
 @property (nonatomic, readonly) NSString *path;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, strong) UIImage *iconImage;
+@property (nonatomic, assign) BOOL fileNotExist;
 - (id)initWithPath:(NSString *)path;
 @end

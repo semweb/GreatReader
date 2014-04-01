@@ -50,7 +50,8 @@
         if (_CGPDFDocument) {
             _numberOfPages = CGPDFDocumentGetNumberOfPages(_CGPDFDocument);
         } else {
-            return nil;
+            self.fileNotExist = YES;
+            return self;
         }
         _currentPage = 1;
         _brightness = 1.0;

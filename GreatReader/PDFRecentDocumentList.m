@@ -8,7 +8,9 @@
 
 #import "PDFRecentDocumentList.h"
 
+#import "NSArray+GreatReaderAdditions.h"
 #import "NSFileManager+GreatReaderAdditions.h"
+#import "PDFDocument.h"
 
 @interface PDFRecentDocumentList ()
 @property (nonatomic, strong) NSMutableArray *histories;
@@ -50,7 +52,9 @@
 - (NSArray *)load
 {
     NSArray *list = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
-    return list;
+    return [list grt_filter:^(PDFDocument *document) {
+        return (BOOL)!document.fileNotExist;
+    }];
 }
 
 #pragma mark -

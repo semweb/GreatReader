@@ -64,7 +64,7 @@
         } else {
             file = [[PDFDocument alloc] initWithPath:absPath];
         }
-        return file;
+        return file.fileNotExist ? nil : file;
     }];
 }
 
