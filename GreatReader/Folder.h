@@ -10,6 +10,8 @@
 
 #import "File.h"
 
+extern NSString * const FolderFileRemovedNotification;
+
 @interface Folder : File
 @property (nonatomic, strong, readonly) NSArray *files;
 + (Folder *)rootFolder;

@@ -12,6 +12,8 @@
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFDocument.h"
 
+NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification";
+
 @interface Folder ()
 @property (nonatomic, strong, readwrite) NSArray *files;
 @end
@@ -81,6 +83,12 @@
         NSMutableArray *mFiles = self.files.mutableCopy;
         [mFiles removeObject:file];
         self.files = mFiles.copy;
+        [NSNotificationCenter.defaultCenter
+            postNotificationName:FolderFileRemovedNotification
+                          object:self
+                        userInfo:@{
+                                     @"Files": @[file]
+                                  }];
         return YES;
     }
     return NO;

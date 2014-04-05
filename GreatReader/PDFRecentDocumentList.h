@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class GRTArrayController;
 @class PDFDocument;
 
 @interface PDFRecentDocumentList : NSObject
 @property (nonatomic, readonly) NSUInteger count;
+@property (nonatomic, readonly, strong) NSArray *documents;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (PDFDocument *)open:(PDFDocument *)document;
 @end

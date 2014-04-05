@@ -15,6 +15,9 @@
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		195B728C18EA352E000C5A8B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728B18EA352E000C5A8B /* Device.m */; };
+		195B728F18EB870A000C5A8B /* GRTArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728E18EB870A000C5A8B /* GRTArrayController.m */; };
+		195B729218EDAF26000C5A8B /* GRTArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728E18EB870A000C5A8B /* GRTArrayController.m */; };
+		195B729518EDB1E0000C5A8B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195B729318EDB0A7000C5A8B /* XCTest.framework */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
 		1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
 		1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
@@ -39,7 +42,6 @@
 		19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
 		19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */; };
 		19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */; };
-		19D12BC118C2F06B001C2066 /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
 		19D12BC418C318C5001C2066 /* PDFText.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC318C318C5001C2066 /* PDFText.m */; };
 		19D12BC718C319E5001C2066 /* PDFTextState.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC618C319E5001C2066 /* PDFTextState.m */; };
 		19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCB18C74192001C2066 /* PDFFontCollection.m */; };
@@ -86,6 +88,38 @@
 		19DB6A5A1882618B0023B118 /* PDFPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A581882618B0023B118 /* PDFPageContentView.m */; };
 		19DB6A5D188262790023B118 /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A5C188262790023B118 /* PDFPageViewController.m */; };
 		19DB6A5E188262790023B118 /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A5C188262790023B118 /* PDFPageViewController.m */; };
+		19F6FD7B18EE2CF9001E05D5 /* PDFDocumentBookmarkList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8708D18BABF0500FA2B66 /* PDFDocumentBookmarkList.m */; };
+		19F6FD7C18EE2D10001E05D5 /* PDFPageLoopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */; };
+		19F6FD7D18EE2D13001E05D5 /* PDFDocumentCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E0D188E2765006FDA6F /* PDFDocumentCrop.m */; };
+		19F6FD7E18EE2D26001E05D5 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728B18EA352E000C5A8B /* Device.m */; };
+		19F6FD7F18EE2D2C001E05D5 /* LibraryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19430E5018E80A6F00BB4238 /* LibraryUtils.m */; };
+		19F6FD8018EE2D32001E05D5 /* PDFDocumentSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA5C618D6A90E00E123AB /* PDFDocumentSettingViewController.m */; };
+		19F6FD8118EE2D35001E05D5 /* PDFTextState.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC618C319E5001C2066 /* PDFTextState.m */; };
+		19F6FD8218EE2D38001E05D5 /* PDFFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997502218CE904C008D514B /* PDFFontDescriptor.m */; };
+		19F6FD8318EE2D3B001E05D5 /* PDFRenderingCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */; };
+		19F6FD8418EE2D3E001E05D5 /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
+		19F6FD8518EE2D40001E05D5 /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
+		19F6FD8618EE2D43001E05D5 /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
+		19F6FD8718EE2D45001E05D5 /* PDFFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCE18C741A4001C2066 /* PDFFont.m */; };
+		19F6FD8818EE2D48001E05D5 /* PDFFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCB18C74192001C2066 /* PDFFontCollection.m */; };
+		19F6FD8918EE2D4B001E05D5 /* PDFText.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC318C318C5001C2066 /* PDFText.m */; };
+		19F6FD8A18EE2D50001E05D5 /* PDFRecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */; };
+		19F6FD8B18EE2D53001E05D5 /* PDFRecentDocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */; };
+		19F6FD8C18EE2D55001E05D5 /* PDFRecentDocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */; };
+		19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
+		19F6FD8E18EE2D5E001E05D5 /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
+		19F6FD8F18EE2D61001E05D5 /* PDFPageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E10188E77E3006FDA6F /* PDFPageCropViewController.m */; };
+		19F6FD9018EE2D68001E05D5 /* PDFDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F7BA83186052E2009E8916 /* PDFDocumentViewController.m */; };
+		19F6FD9118EE2D6C001E05D5 /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
+		19F6FD9218EE2D70001E05D5 /* PDFDocumentPageSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */; };
+		19F6FD9318EE2D76001E05D5 /* PDFDocumentOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E04188CDC60006FDA6F /* PDFDocumentOutlineViewController.m */; };
+		19F6FD9418EE2D7B001E05D5 /* PDFDocumentOutlineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E07188D4B14006FDA6F /* PDFDocumentOutlineItemCell.m */; };
+		19F6FD9518EE2D80001E05D5 /* PDFDocumentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */; };
+		19F6FD9618EE2D83001E05D5 /* PDFDocumentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */; };
+		19F6FD9718EE2D87001E05D5 /* PDFDocumentCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E0A188E273D006FDA6F /* PDFDocumentCropViewController.m */; };
+		19F6FD9818EE2D8A001E05D5 /* PDFDocumentCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E13188FDF79006FDA6F /* PDFDocumentCropOverlayView.m */; };
+		19F6FD9918EE2D8F001E05D5 /* PDFDocumentBookmarkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8709318BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m */; };
+		19F6FD9A18EE2DC7001E05D5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
 		19F7BA65186052E2009E8916 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA64186052E2009E8916 /* UIKit.framework */; };
 		19F7BA67186052E2009E8916 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA66186052E2009E8916 /* Foundation.framework */; };
 		19F7BA69186052E2009E8916 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA68186052E2009E8916 /* CoreGraphics.framework */; };
@@ -98,7 +132,6 @@
 		19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F7BA7C186052E2009E8916 /* MainStoryboard_iPhone.storyboard */; };
 		19F7BA81186052E2009E8916 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F7BA7F186052E2009E8916 /* MainStoryboard_iPad.storyboard */; };
 		19F7BA84186052E2009E8916 /* PDFDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F7BA83186052E2009E8916 /* PDFDocumentViewController.m */; };
-		19F7BA8C186052E2009E8916 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA8B186052E2009E8916 /* SenTestingKit.framework */; };
 		19F7BA8D186052E2009E8916 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA64186052E2009E8916 /* UIKit.framework */; };
 		19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA66186052E2009E8916 /* Foundation.framework */; };
 		19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F7BA94186052E2009E8916 /* InfoPlist.strings */; };
@@ -127,6 +160,9 @@
 		1943EB56187FA59E00F0B61D /* PDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocument.m; sourceTree = "<group>"; };
 		195B728A18EA352E000C5A8B /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		195B728B18EA352E000C5A8B /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		195B728D18EB870A000C5A8B /* GRTArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTArrayController.h; sourceTree = "<group>"; };
+		195B728E18EB870A000C5A8B /* GRTArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTArrayController.m; sourceTree = "<group>"; };
+		195B729318EDB0A7000C5A8B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
 		1997501618C8B9C9008D514B /* PDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFUtils.m; sourceTree = "<group>"; };
 		1997501818CAC3E7008D514B /* PDFCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMap.h; sourceTree = "<group>"; };
@@ -243,7 +279,7 @@
 		19F7BA80186052E2009E8916 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		19F7BA82186052E2009E8916 /* PDFDocumentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFDocumentViewController.h; sourceTree = "<group>"; };
 		19F7BA83186052E2009E8916 /* PDFDocumentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentViewController.m; sourceTree = "<group>"; };
-		19F7BA8A186052E2009E8916 /* GreatReaderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreatReaderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		19F7BA8A186052E2009E8916 /* GreatReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreatReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F7BA8B186052E2009E8916 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		19F7BA93186052E2009E8916 /* GreatReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GreatReaderTests-Info.plist"; sourceTree = "<group>"; };
 		19F7BA95186052E2009E8916 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -267,9 +303,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F6FD9A18EE2DC7001E05D5 /* CoreText.framework in Frameworks */,
+				195B729518EDB1E0000C5A8B /* XCTest.framework in Frameworks */,
 				19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */,
 				19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */,
-				19F7BA8C186052E2009E8916 /* SenTestingKit.framework in Frameworks */,
 				19F7BA8D186052E2009E8916 /* UIKit.framework in Frameworks */,
 				19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */,
 			);
@@ -415,6 +452,8 @@
 				19D99DCC1888E56C006FDA6F /* Folder */,
 				195B728A18EA352E000C5A8B /* Device.h */,
 				195B728B18EA352E000C5A8B /* Device.m */,
+				195B728D18EB870A000C5A8B /* GRTArrayController.h */,
+				195B728E18EB870A000C5A8B /* GRTArrayController.m */,
 				19430E4F18E80A6F00BB4238 /* LibraryUtils.h */,
 				19430E5018E80A6F00BB4238 /* LibraryUtils.m */,
 			);
@@ -453,7 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				19F7BA61186052E2009E8916 /* GreatReader.app */,
-				19F7BA8A186052E2009E8916 /* GreatReaderTests.octest */,
+				19F7BA8A186052E2009E8916 /* GreatReaderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -461,6 +500,7 @@
 		19F7BA63186052E2009E8916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				195B729318EDB0A7000C5A8B /* XCTest.framework */,
 				1997502818D08C73008D514B /* CoreText.framework */,
 				19D99DB918827192006FDA6F /* QuartzCore.framework */,
 				19F7BA64186052E2009E8916 /* UIKit.framework */,
@@ -557,7 +597,7 @@
 			);
 			name = GreatReaderTests;
 			productName = GreatReaderTests;
-			productReference = 19F7BA8A186052E2009E8916 /* GreatReaderTests.octest */;
+			productReference = 19F7BA8A186052E2009E8916 /* GreatReaderTests.xctest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -662,7 +702,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19D12BC118C2F06B001C2066 /* PDFPageScanner.m in Sources */,
 				19D99DE7188A7CED006FDA6F /* FileCell.m in Sources */,
 				1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */,
 				19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */,
@@ -679,9 +718,11 @@
 				19F7BA75186052E2009E8916 /* AppDelegate.m in Sources */,
 				19D99DDB1888E7A3006FDA6F /* Folder.m in Sources */,
 				19D99E0E188E2765006FDA6F /* PDFDocumentCrop.m in Sources */,
+				195B728F18EB870A000C5A8B /* GRTArrayController.m in Sources */,
 				19D99DCA1884F33E006FDA6F /* NSArray+GreatReaderAdditions.m in Sources */,
 				19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */,
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
+				19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */,
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
 				1917EB3D18B4292F003D272F /* FolderTableDataSource.m in Sources */,
 				19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */,
@@ -718,18 +759,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F6FD8218EE2D38001E05D5 /* PDFFontDescriptor.m in Sources */,
 				19D99DC21884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,
+				19F6FD8418EE2D3E001E05D5 /* PDFCMapParser.m in Sources */,
+				19F6FD8818EE2D48001E05D5 /* PDFFontCollection.m in Sources */,
+				19F6FD9818EE2D8A001E05D5 /* PDFDocumentCropOverlayView.m in Sources */,
 				19DB6A5618825AB50023B118 /* PDFPage.m in Sources */,
+				19F6FD9318EE2D76001E05D5 /* PDFDocumentOutlineViewController.m in Sources */,
+				19F6FD8318EE2D3B001E05D5 /* PDFRenderingCharacter.m in Sources */,
 				19D99DD41888E729006FDA6F /* FolderTableViewController.m in Sources */,
+				19F6FD7E18EE2D26001E05D5 /* Device.m in Sources */,
+				19F6FD7F18EE2D2C001E05D5 /* LibraryUtils.m in Sources */,
+				19F6FD8618EE2D43001E05D5 /* PDFUtils.m in Sources */,
+				19F6FD7B18EE2CF9001E05D5 /* PDFDocumentBookmarkList.m in Sources */,
+				19F6FD9418EE2D7B001E05D5 /* PDFDocumentOutlineItemCell.m in Sources */,
+				19F6FD9018EE2D68001E05D5 /* PDFDocumentViewController.m in Sources */,
+				19F6FD8B18EE2D53001E05D5 /* PDFRecentDocumentList.m in Sources */,
+				19F6FD8C18EE2D55001E05D5 /* PDFRecentDocumentCell.m in Sources */,
+				19F6FD9718EE2D87001E05D5 /* PDFDocumentCropViewController.m in Sources */,
+				19F6FD9518EE2D80001E05D5 /* PDFDocumentInfoView.m in Sources */,
+				19F6FD8718EE2D45001E05D5 /* PDFFont.m in Sources */,
+				19F6FD9618EE2D83001E05D5 /* PDFDocumentInfo.m in Sources */,
 				19D99DC61884ED06006FDA6F /* PDFDocumentOutlineItem.m in Sources */,
 				19D99DB81882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */,
 				19DB6A5A1882618B0023B118 /* PDFPageContentView.m in Sources */,
+				19F6FD7D18EE2D13001E05D5 /* PDFDocumentCrop.m in Sources */,
+				19F6FD8E18EE2D5E001E05D5 /* PDFPageScanner.m in Sources */,
+				19F6FD9218EE2D70001E05D5 /* PDFDocumentPageSlider.m in Sources */,
 				19D99DDC1888E7A3006FDA6F /* Folder.m in Sources */,
 				19DB6A5E188262790023B118 /* PDFPageViewController.m in Sources */,
 				19D99DE8188A7CED006FDA6F /* FileCell.m in Sources */,
+				19F6FD8A18EE2D50001E05D5 /* PDFRecentDocumentListViewController.m in Sources */,
+				19F6FD9118EE2D6C001E05D5 /* PDFDocumentPageSliderDataSource.m in Sources */,
+				19F6FD8518EE2D40001E05D5 /* PDFCMap.m in Sources */,
+				19F6FD8118EE2D35001E05D5 /* PDFTextState.m in Sources */,
 				1943EB58187FA59E00F0B61D /* PDFDocument.m in Sources */,
+				19F6FD9918EE2D8F001E05D5 /* PDFDocumentBookmarkListViewController.m in Sources */,
+				19F6FD8018EE2D32001E05D5 /* PDFDocumentSettingViewController.m in Sources */,
 				19D99DD81888E798006FDA6F /* File.m in Sources */,
+				19F6FD8918EE2D4B001E05D5 /* PDFText.m in Sources */,
+				19F6FD8F18EE2D61001E05D5 /* PDFPageCropViewController.m in Sources */,
 				19D99DCB1884F33E006FDA6F /* NSArray+GreatReaderAdditions.m in Sources */,
+				19F6FD7C18EE2D10001E05D5 /* PDFPageLoopeView.m in Sources */,
+				195B729218EDAF26000C5A8B /* GRTArrayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,34 +1066,30 @@
 		19F7BAA0186052E2009E8916 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GreatReader.app/GreatReader";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				INFOPLIST_FILE = "GreatReaderTests/GreatReaderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		19F7BAA1186052E2009E8916 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GreatReader.app/GreatReader";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				INFOPLIST_FILE = "GreatReaderTests/GreatReaderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};

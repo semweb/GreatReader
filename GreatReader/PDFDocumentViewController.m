@@ -46,6 +46,12 @@ NSString * const PDFDocumentViewControllerSegueSetting = @"PDFDocumentViewContro
 
 @implementation PDFDocumentViewController
 
+- (void)dealloc
+{
+    [self removeObserver:self
+              forKeyPath:@"document.brightness"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,7 +77,7 @@ NSString * const PDFDocumentViewControllerSegueSetting = @"PDFDocumentViewContro
     [self addObserver:self
            forKeyPath:@"document.brightness"
               options:0
-              context:NULL];    
+              context:NULL];
 }
 
 - (void)didReceiveMemoryWarning
@@ -316,12 +322,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (PDFDocumentOutlineViewController *)navi.topViewController;
         vc.currentPage = self.document.currentPage;
         vc.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
-    // } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCrop]) {
-    //     UINavigationController *navi =
-    //             (UINavigationController *)segue.destinationViewController;
-    //     PDFDocumentCropViewController *vc =
-    //             (PDFDocumentCropViewController *)navi.topViewController;
-    //     vc.crop = self.document.crop;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBookmark]) {
         UINavigationController *navi =
                 (UINavigationController *)segue.destinationViewController;

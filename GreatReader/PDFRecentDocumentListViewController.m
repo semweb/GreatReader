@@ -9,6 +9,7 @@
 #import "PDFRecentDocumentListViewController.h"
 
 #import "FileCell.h"
+#import "GRTArrayController.h"
 #import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentCell.h"
 #import "PDFRecentDocumentList.h"
@@ -22,6 +23,11 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 
 @implementation PDFRecentDocumentListViewController
 
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"documentList.documents"];
+}
+
 - (void)awakeFromNib
 {
     NSString *nibName = @"PDFRecentDocumentCell";
@@ -33,6 +39,11 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.collectionView registerNib:nib
           forCellWithReuseIdentifier:PDFRecentDocumentListViewControllerCellIdentifier];
+
+    [self addObserver:self
+           forKeyPath:@"documentList.documents"
+              options:0
+              context:NULL];
 }
 
 - (void)viewDidLoad
@@ -50,6 +61,12 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+#pragma mark -
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     [self.collectionView reloadData];
 }
 
