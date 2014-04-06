@@ -190,6 +190,8 @@
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
                         <outlet property="dimView" destination="fpk-aL-M8y" id="ejk-ZH-tdH"/>
+                        <outlet property="findItem" destination="FO5-sG-z5k" id="bZk-83-yC6"/>
+                        <outlet property="historyItem" destination="xeQ-to-Tsd" id="JfG-4U-Jd8"/>
                         <outlet property="outlineItem" destination="dyj-Mz-BLh" id="VbX-nr-NBj"/>
                         <outlet property="ribbonOffItem" destination="yKb-0q-ZgJ" id="kWA-Iu-Fg7"/>
                         <outlet property="ribbonOnItem" destination="MXx-lS-DYj" id="I8O-7K-sH8"/>
@@ -227,6 +229,8 @@
                         <action selector="toggleRibbon:" destination="Mqv-qU-Nyv" id="gtY-KD-12m"/>
                     </connections>
                 </barButtonItem>
+                <barButtonItem image="History.png" id="xeQ-to-Tsd" userLabel="History"/>
+                <barButtonItem image="Find.png" id="FO5-sG-z5k" userLabel="Find"/>
             </objects>
             <point key="canvasLocation" x="1017" y="-1262"/>
         </scene>
@@ -445,10 +449,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Outline.png" width="23" height="23"/>
-        <image name="RibbonOff.png" width="23" height="23"/>
-        <image name="RibbonOn.png" width="23" height="23"/>
-        <image name="Setting.png" width="23" height="23"/>
+        <image name="Find.png" width="22" height="22"/>
+        <image name="History.png" width="22" height="22"/>
+        <image name="Outline.png" width="22" height="22"/>
+        <image name="RibbonOff.png" width="22" height="22"/>
+        <image name="RibbonOn.png" width="22" height="22"/>
+        <image name="Setting.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -457,6 +463,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="CLy-OH-D8j"/>
-        <segue reference="15E-5R-hsg"/>
+        <segue reference="mio-V5-ipe"/>
     </inferredMetricsTieBreakers>
 </document>

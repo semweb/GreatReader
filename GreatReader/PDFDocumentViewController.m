@@ -38,6 +38,8 @@ NSString * const PDFDocumentViewControllerSegueSetting = @"PDFDocumentViewContro
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *outlineItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOnItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *historyItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *findItem;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet PDFDocumentPageSlider *slider;
 @property (nonatomic, strong) IBOutlet UIView *dimView;
@@ -211,9 +213,32 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     UIBarButtonItem *ribbon = self.document.currentPageBookmarked
             ? self.ribbonOnItem : self.ribbonOffItem;
-    self.navigationItem.rightBarButtonItems = @[self.outlineItem,
-                                                self.settingItem,
-                                                ribbon];
+
+    UIView *base = ({
+        UIToolbar *bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 230, 44)];
+        bar.clipsToBounds = YES;
+        [bar setBackgroundImage:[UIImage new]
+              forToolbarPosition:UIBarPositionAny
+                      barMetrics:UIBarMetricsDefault];
+        [bar setShadowImage:[UIImage new]
+          forToolbarPosition:UIToolbarPositionAny];
+        UIBarButtonItem *s = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                           target:nil
+                                                                           action:nil];
+        [bar setItems:@[self.historyItem, s,
+                        self.outlineItem, s,
+                        self.settingItem, s,
+                        self.findItem, s,
+                        ribbon]
+             animated:NO];
+        bar;
+    });
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                           target:nil
+                                                                           action:nil];
+    space.width = -20;
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:base];
+    self.navigationItem.rightBarButtonItems = @[space, rightItem];
 }
 
 - (void)prepareInfoView

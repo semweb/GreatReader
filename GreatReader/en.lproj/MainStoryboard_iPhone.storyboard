@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tSv-Kq-LgP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tSv-Kq-LgP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -443,8 +443,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="QXd-EY-aPH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="dimView" destination="JhM-1f-b4p" id="mt0-3j-zBb"/>
+                        <outlet property="findItem" destination="oGZ-Ya-lPq" id="jy7-oi-Rgz"/>
+                        <outlet property="historyItem" destination="FWY-Mv-FS9" id="7lU-CU-cHE"/>
                         <outlet property="outlineItem" destination="GDD-o5-YVP" id="yMG-gf-iw1"/>
                         <outlet property="ribbonOffItem" destination="Cdj-cb-q7X" id="mmD-Mc-8KB"/>
                         <outlet property="ribbonOnItem" destination="9eO-3t-r0w" id="kOu-Qx-J9T"/>
@@ -476,6 +479,8 @@
                         <action selector="toggleRibbon:" destination="2" id="Cl9-W1-hVC"/>
                     </connections>
                 </barButtonItem>
+                <barButtonItem image="History.png" id="FWY-Mv-FS9" userLabel="History"/>
+                <barButtonItem image="Find.png" id="oGZ-Ya-lPq" userLabel="Find"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
@@ -483,10 +488,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Outline.png" width="23" height="23"/>
-        <image name="RibbonOff.png" width="23" height="23"/>
-        <image name="RibbonOn.png" width="23" height="23"/>
-        <image name="Setting.png" width="23" height="23"/>
+        <image name="Find.png" width="22" height="22"/>
+        <image name="History.png" width="22" height="22"/>
+        <image name="Outline.png" width="22" height="22"/>
+        <image name="RibbonOff.png" width="22" height="22"/>
+        <image name="RibbonOn.png" width="22" height="22"/>
+        <image name="Setting.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
