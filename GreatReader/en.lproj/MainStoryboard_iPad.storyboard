@@ -35,7 +35,7 @@
         <!--Document Outline View Controller - Outline-->
         <scene sceneID="mgw-NJ-K5b">
             <objects>
-                <tableViewController id="5eq-hl-Cwd" customClass="PDFDocumentOutlineViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PDFDocumentOutlineViewController" id="5eq-hl-Cwd" customClass="PDFDocumentOutlineViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="O8W-9K-bIK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AII-yI-J9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3042" y="-755"/>
+            <point key="canvasLocation" x="3268" y="-906"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="haa-9g-aja">
@@ -126,7 +126,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="5eq-hl-Cwd" kind="relationship" relationship="rootViewController" id="fkf-dR-2Wu"/>
+                        <segue destination="xMz-kk-dVC" kind="relationship" relationship="rootViewController" id="OHC-FS-EMD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kts-hY-EQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,34 +308,17 @@
             </objects>
             <point key="canvasLocation" x="-987" y="-1885"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Mqz-Sl-ZII">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="iNE-PI-BtH" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SUr-05-sq4">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Gp0-VY-DLf" kind="relationship" relationship="rootViewController" id="522-TR-QJ2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vWb-2u-WNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2040" y="-2134"/>
-        </scene>
         <!--Document Bookmark List View Controller - Root View Controller-->
         <scene sceneID="1YO-mY-3JB">
             <objects>
-                <tableViewController id="Gp0-VY-DLf" customClass="PDFDocumentBookmarkListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PDFDocumentBookmarkListViewController" id="Gp0-VY-DLf" customClass="PDFDocumentBookmarkListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="npq-PR-dUr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BookmarkCell" id="uvP-Z8-fak">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uvP-Z8-fak" id="3UZ-FZ-cJp">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -347,7 +330,6 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="ECi-iX-6ap">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="yB7-Yw-wTD"/>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1024"/>
                     <connections>
@@ -446,6 +428,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CL3-Nx-MDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1030" y="-2607"/>
+        </scene>
+        <!--Document Outline Container View Controller-->
+        <scene sceneID="kWO-30-29H">
+            <objects>
+                <viewController id="xMz-kk-dVC" customClass="PDFDocumentOutlineContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FEf-jD-czC"/>
+                        <viewControllerLayoutGuide type="bottom" id="qzX-rb-cpd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2EF-ue-E9a">
+                        <rect key="frame" x="0.0" y="64" width="320" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TVF-DJ-X9n">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="qnC-d4-SPE">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="" image="Outline.png"/>
+                                <segment title="" image="RibbonOff.png"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentChanged:" destination="xMz-kk-dVC" eventType="valueChanged" id="tFW-Jb-7pT"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="EuA-4C-mHX">
+                            <connections>
+                                <segue destination="A5M-y9-xh8" kind="unwind" unwindAction="exitOutline:" id="3vQ-6H-mIH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1024"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="qnC-d4-SPE" id="z20-wi-dnv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwm-lr-zLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2953" y="-768"/>
         </scene>
     </scenes>
     <resources>

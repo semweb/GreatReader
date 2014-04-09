@@ -8,6 +8,7 @@
 
 #import "PDFDocumentBookmarkListViewController.h"
 
+#import "Device.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentViewController.h"
 
@@ -34,6 +35,11 @@ NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSeg
     [super viewDidLoad];
 
     self.title = @"Bookmarks";
+
+    if (IsPhone()) {
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+    }    
 }
 
 - (void)didReceiveMemoryWarning

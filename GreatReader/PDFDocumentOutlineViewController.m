@@ -8,6 +8,7 @@
 
 #import "PDFDocumentOutlineViewController.h"
 
+#import "Device.h"
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineItem.h"
 #import "PDFDocumentOutlineItemCell.h"
@@ -19,6 +20,7 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 @interface PDFDocumentOutlineViewController ()
 @property (nonatomic, strong) NSArray *outlineItems;
 @property (nonatomic, assign) NSInteger activeIndex;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
 @end
 
 @implementation PDFDocumentOutlineViewController
@@ -40,7 +42,12 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
     NSString *nibName = @"PDFDocumentOutlineItemCell";
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.tableView registerNib:nib
-         forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];      
+         forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];
+
+    if (IsPhone()) {
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

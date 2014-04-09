@@ -17,6 +17,7 @@
 #import "PDFDocumentInfoView.h"
 #import "PDFDocumentSettingViewController.h"
 #import "PDFDocumentOutline.h"
+#import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
@@ -343,16 +344,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueOutline]) {
         UINavigationController *navi =
                 (UINavigationController *)segue.destinationViewController;
-        PDFDocumentOutlineViewController *vc =
-                (PDFDocumentOutlineViewController *)navi.topViewController;
-        vc.currentPage = self.document.currentPage;
-        vc.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBookmark]) {
-        UINavigationController *navi =
-                (UINavigationController *)segue.destinationViewController;
-        PDFDocumentBookmarkListViewController *vc =
-                (PDFDocumentBookmarkListViewController *)navi.topViewController;
-        vc.bookmarkList = self.document.bookmarkList;
+        PDFDocumentOutlineContainerViewController *vc =
+                (PDFDocumentOutlineContainerViewController *)navi.topViewController;
+        vc.outlineViewController.currentPage = self.document.currentPage;
+        vc.outlineViewController.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
+        vc.bookmarkListViewController.bookmarkList = self.document.bookmarkList;
+        vc.currentViewController = vc.outlineViewController;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueSetting]) {
         PDFDocumentSettingViewController *vc =
                 (PDFDocumentSettingViewController *)segue.destinationViewController;
