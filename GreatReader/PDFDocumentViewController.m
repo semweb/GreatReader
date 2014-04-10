@@ -282,11 +282,20 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     
     CGFloat alpha = self.fullScreen ? 0.0 : 1.0;
     CGRect barFrame = self.navigationController.navigationBar.frame;
+    barFrame.origin.y = 20;
+    self.navigationController.navigationBar.frame = barFrame;    
+    if (!fullScreen) {
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        self.navigationController.navigationBar.alpha = 0.0;                    
+    }
+    
     [UIView animateWithDuration:0.125
-                 animations:^{
+                     animations:^{
         [self setNeedsStatusBarAppearanceUpdate];
         self.toolbar.alpha = alpha;
         self.navigationController.navigationBar.alpha = alpha;
+    } completion:^(BOOL finished) {
+        [self.navigationController setNavigationBarHidden:fullScreen animated:NO];            
     }];
 
     self.navigationController.navigationBar.frame = CGRectZero;
