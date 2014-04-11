@@ -163,6 +163,11 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     if (!self.fullScreen) {
         self.fullScreen = !self.fullScreen;
     }
+    for (PDFPageViewController *vc in pendingViewControllers) {
+        if (self.currentPageViewController.scale && vc.scale != self.currentPageViewController.scale) {
+            vc.scale = self.currentPageViewController.scale;
+        }
+    }
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController
@@ -173,6 +178,14 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     PDFPageViewController *vc = pageViewController.viewControllers.firstObject;
     self.document.currentPage = vc.page.index;
     self.slider.currentIndex = vc.page.index - 1;
+}
+
+#pragma mark -
+
+- (PDFPageViewController *)currentPageViewController
+{
+    PDFPageViewController *vc = self.pageViewController.viewControllers.firstObject;
+    return vc;
 }
 
 #pragma mark - Init PDFPageViewController

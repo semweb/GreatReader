@@ -239,4 +239,18 @@
     [pb setString:term];
 }
 
+#pragma mark -
+
+- (CGFloat)scale
+{
+    return self.scrollView.zoomScale;
+}
+
+- (void)setScale:(CGFloat)scale
+{
+    self.scrollView.zoomScale = scale;
+    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 10, 10)
+                                animated:NO];
+}
+
 @end
