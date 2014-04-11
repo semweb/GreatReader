@@ -139,6 +139,14 @@
     return self.contentView;
 }
 
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
+{
+    if (self.lowResolutionView) {
+        [self.lowResolutionView removeFromSuperview];
+        self.lowResolutionView = nil;
+    }
+}
+
 #pragma mark - Double Tapped
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
