@@ -19,6 +19,7 @@
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
+#import "PDFDocumentPageSliderDataSource.h"
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
 #import "PDFRecentDocumentList.h"
@@ -218,7 +219,11 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (void)prepareToolbar
 {
     self.slider.delegate = self;
-    self.slider.dataSource = self;
+    PDFDocumentPageSliderDataSource *dataSource =
+            [[PDFDocumentPageSliderDataSource alloc] initWithOutline:self.document.outline
+                                                        bookmarkList:self.document.bookmarkList
+                                                       numberOfPages:self.document.numberOfPages];
+    self.slider.dataSource = dataSource;
     self.slider.currentIndex = self.document.currentPage;    
     [self.slider reloadData];
 }
@@ -432,7 +437,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)pageSlider:(PDFDocumentPageSlider *)slider didSelectAtIndex:(NSUInteger)index
 {
-    [self goAtIndex:index + 1 animated:NO];
+    [self goAtIndex:index animated:NO];
 }
 
 - (void)pageSlider:(PDFDocumentPageSlider *)slider

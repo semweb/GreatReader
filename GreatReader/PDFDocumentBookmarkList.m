@@ -102,4 +102,9 @@
     self.bookmarkedSectionList = sections;
 }
 
+- (NSArray *)bookmarkList
+{
+    return self.bookmarks.copy;
+}
+
 @end

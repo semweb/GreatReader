@@ -170,7 +170,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -181,9 +181,17 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="x5t-6W-Og0"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mar-XL-T7m" firstAttribute="top" secondItem="hir-j8-6Gt" secondAttribute="bottom" id="LL3-gS-zZc"/>
+                            <constraint firstAttribute="trailing" secondItem="hir-j8-6Gt" secondAttribute="trailing" id="O3D-DY-BEu"/>
+                            <constraint firstItem="hir-j8-6Gt" firstAttribute="leading" secondItem="TBz-iI-rTc" secondAttribute="leading" id="kJ5-5M-grs"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7fJ-Of-cNI"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -16,8 +16,7 @@
 extern NSString * const PDFDocumentViewControllerSegueCropOdd;
 extern NSString * const PDFDocumentViewControllerSegueCropEven;
 
-@interface PDFDocumentViewController : UIViewController <PDFDocumentPageSliderDelegate,
-                                                         PDFDocumentPageSliderDataSource>
+@interface PDFDocumentViewController : UIViewController <PDFDocumentPageSliderDelegate>
 @property (nonatomic, strong) PDFDocument *document;
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
 

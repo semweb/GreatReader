@@ -8,12 +8,16 @@
 
 #import "PDFDocumentPageSlider.h"
 
+#import "NSArray+GreatReaderAdditions.h"
+#import "PDFDocumentPageSliderDataSource.h"
+#import "PDFDocumentPageSliderItem.h"
+#import "PDFDocumentPageSliderItemView.h"
+#import "UIColor+GreatReaderAdditions.h"
+
 @interface PDFDocumentPageSlider ()
-@property (nonatomic, strong) UIImageView *knobView;
-@property (nonatomic, strong) NSMutableArray *thumbnailBarViews;
-@property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
-@property (nonatomic, assign) CGFloat startX;
-@property (nonatomic, assign) CGFloat endX;
+@property (nonatomic, strong) UIView *knobView;
+@property (nonatomic, strong) NSArray *itemViews;
+@property (nonatomic, assign) BOOL moved;
 @end
 
 @implementation PDFDocumentPageSlider
@@ -24,15 +28,26 @@
     [self reloadData];
 }
 
-- (void)setDataSource:(id<PDFDocumentPageSliderDataSource>)dataSource
+#pragma mark -
+
+- (void)awakeFromNib
 {
-    _dataSource = dataSource;
-    if (_dataSource && self.superview) {
-        [self reloadData];
-    }
+    self.knobView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    self.knobView.backgroundColor = self.tintColor;    
+    self.knobView.layer.borderWidth = 1.0;
+    self.knobView.layer.borderColor = self.tintColor.CGColor;
+    self.knobView.layer.masksToBounds = YES;
+    self.knobView.layer.cornerRadius = 7;
+    self.knobView.layer.zPosition = 1000;
+    [self addSubview:self.knobView];
 }
 
 #pragma mark -
+
+- (CGFloat)sideMargin
+{
+    return 20;
+}
 
 - (CGFloat)space
 {
@@ -55,7 +70,7 @@
 {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:nil];
     imageView.layer.borderWidth = 0.5;
-    imageView.layer.borderColor = UIColor.grayColor.CGColor;
+    imageView.layer.borderColor = UIColor.grt_defaultTintColor.CGColor;
     return imageView;
 }
 
@@ -64,124 +79,148 @@
 - (void)reloadData
 {
     [self replaceSubviews];
+    [self layoutSubviews];
 }
 
 - (void)replaceSubviews
 {
-    [self.knobView removeFromSuperview];
-    [self.thumbnailBarViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    self.thumbnailBarViews = [NSMutableArray array];
-    
-    const CGFloat minSideMargin = 20;
-    const CGFloat availableWidth = self.bounds.size.width - (minSideMargin * 2);
-    const CGSize thumbnailViewSize = self.thumbnailViewSize;
+    [self.itemViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-    self.numberOfPages = [self.dataSource numberOfPagesInPageSlider:self];
-    NSUInteger maxNumberOfThumbnails = ((availableWidth - thumbnailViewSize.width) /
-                                        (thumbnailViewSize.width + self.space)) + 1;
-    NSUInteger numberOfThumbnails = MIN(self.numberOfPages, maxNumberOfThumbnails);
-    if (numberOfThumbnails == 0) {
-        return;
-    }
-    CGFloat width = (thumbnailViewSize.width * numberOfThumbnails) +
-            (self.space * (numberOfThumbnails - 1));
+    __block BOOL flag = NO;
+    self.itemViews = [self.dataSource.items grt_map:^(PDFDocumentPageSliderItem *item) {
+        PDFDocumentPageSliderItemView *itemView =
+                [[PDFDocumentPageSliderItemView alloc] initWithItem:item];
+        itemView.flag = flag;
+        flag = !flag;
+        return itemView;
+    }];
 
-    self.startX = roundf((self.bounds.size.width - width + thumbnailViewSize.width) / 2.0);
-    self.endX = self.startX + width - thumbnailViewSize.width / 2.0;
-
-    for (int i = 0; i < numberOfThumbnails; i++) {
-        int index = (numberOfThumbnails > 1)
-                ? (self.numberOfPages - 1) * ((CGFloat)i / (numberOfThumbnails - 1))
-                : 0;
-        UIImageView *imageView = [self makeThumbnailView];
-        [self.dataSource pageSlider:self
-               pageThumbnailAtIndex:index
-                           callback:^(UIImage *image, NSUInteger idx) {
-            if (index == idx) {
-                imageView.image = image;
-            }
-        }];       
-        [self.thumbnailBarViews addObject:imageView];
-        [self addSubview:imageView];
-    }
-
-    const CGSize knobSize = self.knobSize;
-    self.knobView = [self makeThumbnailView];
-    self.knobView.frame = CGRectMake(0, 0, knobSize.width, knobSize.height);
-    [self updateKnobView];
-    [self addSubview:self.knobView];
+    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
+        [self addSubview:itemView];
+    }   
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
 
-    [self reloadData];
-
-    CGSize size = self.thumbnailViewSize;
-
-    CGFloat x = self.startX - size.width / 2.0;
-    CGFloat y = roundf((self.bounds.size.height - size.height) / 2.0);
-    for (UIView *v in self.thumbnailBarViews) {
-        CGRect f = CGRectMake(x, y, size.width, size.height);
-        v.frame = f;
-        x = CGRectGetMaxX(f) + self.space;
-    }
-
+    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
+        [self addSubview:itemView];
+        itemView.center = [self positionForProgress:itemView.item.position];
+    }    
     [self layoutKnobView];
 }
 
 - (void)layoutKnobView
 {
-    CGFloat progress = (CGFloat)self.currentIndex / (self.numberOfPages - 1);
-    self.knobView.center = CGPointMake(roundf((self.endX - self.startX) * progress) + self.startX,
-                                       roundf((self.bounds.size.height) / 2.0));
+    CGFloat progress = (CGFloat)self.currentIndex / (self.dataSource.numberOfPages - 1);
+    self.knobView.center = [self positionForProgress:progress];
+}
+
+- (CGPoint)positionForProgress:(CGFloat)progress
+{
+    CGFloat right = CGRectGetWidth(self.frame) - self.sideMargin;
+    CGFloat left = self.sideMargin;    
+    CGFloat x = progress * (right - left) + left;
+    CGFloat y = CGRectGetHeight(self.frame) / 2.0;
+    return CGPointMake(x, y);
 }
 
 #pragma mark - Update Knob
 
 - (void)updateKnobView
 {
-    self.knobView.image = nil;
-    [self.dataSource pageSlider:self
-           pageThumbnailAtIndex:self.currentIndex
-                       callback:^(UIImage *image, NSUInteger idx) {
-        if (idx == self.currentIndex) {
-            self.knobView.image = image;
-        }
-    }];
+    // self.knobView.image = nil;
+    // [self.dataSource pageSlider:self
+    //        pageThumbnailAtIndex:self.currentIndex
+    //                    callback:^(UIImage *image, NSUInteger idx) {
+    //     if (idx == self.currentIndex) {
+    //         self.knobView.image = image;
+    //     }
+    // }];
+}
+
+#pragma mark -
+
+- (void)drawRect:(CGRect)rect
+{
+    [UIColor.grayColor set];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    CGFloat y = 21.75;
+    [path moveToPoint:CGPointMake(self.sideMargin, y)];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.bounds) - self.sideMargin, y)];
+    path.lineWidth = 0.5;
+    [path stroke];
 }
 
 #pragma mark -
 
 - (NSUInteger)indexAtPoint:(CGPoint)point
 {
-    CGFloat progress = (point.x - self.startX) / (self.endX - self.startX);
+    CGFloat right = CGRectGetWidth(self.frame) - self.sideMargin;
+    CGFloat left = self.sideMargin;
+    CGFloat progress = (point.x - left) / (right - left);
     progress = MIN(1.0, MAX(0.0, progress));
-    return roundf(progress * (self.numberOfPages - 1));
+    return roundf(progress * (self.dataSource.numberOfPages - 1));
+}
+
+- (PDFDocumentPageSliderItemView *)nearestItemViewAtPoint:(CGPoint)point
+{
+    PDFDocumentPageSliderItemView *nearest = self.itemViews.firstObject;
+
+    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
+        CGPoint nearestPoint = CGPointMake(nearest.center.x,
+                                           nearest.center.y + (nearest.flag ? 10 : -10));
+        CGPoint p = CGPointMake(itemView.center.x,
+                                itemView.center.y + (itemView.flag ? 10 : -10));
+        CGFloat nearestD = sqrtf(pow(nearestPoint.x - point.x, 2) + pow(nearestPoint.y - point.y, 2));
+        CGFloat pD = sqrtf(pow(p.x - point.x, 2) + pow(p.y - point.y, 2));
+        if (pD < nearestD) {
+            nearest = itemView;
+        }
+    }
+
+    return nearest;
 }
 
 #pragma mark - Touch
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];    
-    [self handleTouch:touch];
+    self.moved = NO;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];    
     [self handleTouch:touch];
+    self.moved = YES;    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (!self.moved) {
+        UITouch *touch = [touches anyObject];
+        CGPoint point = [touch locationInView:self];
+        PDFDocumentPageSliderItemView *itemView =
+                [self nearestItemViewAtPoint:point];
+        [self moveToIndex:itemView.item.pageNumber];
+    }
 }
 
 - (void)handleTouch:(UITouch *)touch
 {
     CGPoint point = [touch locationInView:self];
     NSUInteger index = [self indexAtPoint:point];
+    [self moveToIndex:index];
+}
+
+#pragma mark -
+
+- (void)moveToIndex:(NSUInteger)index
+{
     if (self.currentIndex != index) {
         self.currentIndex = index;
-
         [self.delegate pageSlider:self didSelectAtIndex:self.currentIndex];
     }
 }

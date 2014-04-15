@@ -12,6 +12,7 @@
 
 @interface PDFDocumentBookmarkList : NSObject
 @property (nonatomic, strong, readonly) NSArray *bookmarkedSectionList;
+@property (nonatomic, readonly) NSArray *bookmarkList;
 @property (nonatomic, weak) PDFDocument *document;
 - (void)bookmarkAtPage:(NSUInteger)page;
 - (void)unbookmarkAtPage:(NSUInteger)page;

@@ -444,7 +444,7 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YmW-Zf-FjA" customClass="PDFDocumentPageSlider">
+                                    <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YmW-Zf-FjA" customClass="PDFDocumentPageSlider">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -452,11 +452,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="top" id="Hp0-r7-CaG"/>
-                                    <constraint firstAttribute="trailing" secondItem="YmW-Zf-FjA" secondAttribute="trailing" id="e9L-91-UhY"/>
-                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="leading" secondItem="rGa-Oe-iG3" secondAttribute="leading" id="nTv-hJ-nF3"/>
-                                    <constraint firstAttribute="bottom" secondItem="YmW-Zf-FjA" secondAttribute="bottom" id="tB5-Kb-NFb"/>
+                                    <constraint firstAttribute="trailing" secondItem="YmW-Zf-FjA" secondAttribute="trailing" id="2Rp-8P-reO"/>
+                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="leading" secondItem="rGa-Oe-iG3" secondAttribute="leading" id="Knl-0Z-p0O"/>
+                                    <constraint firstItem="YmW-Zf-FjA" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="top" id="MWc-pR-pEE"/>
                                     <constraint firstAttribute="height" constant="44" id="tcU-oH-jzH"/>
+                                    <constraint firstAttribute="bottom" secondItem="YmW-Zf-FjA" secondAttribute="bottom" id="zbc-3o-Sav"/>
                                 </constraints>
                             </view>
                         </subviews>

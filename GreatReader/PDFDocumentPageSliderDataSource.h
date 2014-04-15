@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PDFDocumentPageSliderDataSource : NSObject
+@class PDFDocumentOutline;
+@class PDFDocumentBookmarkList;
 
+@interface PDFDocumentPageSliderDataSource : NSObject
+- (instancetype)initWithOutline:(PDFDocumentOutline *)outline
+                   bookmarkList:(PDFDocumentBookmarkList *)bookmarkList
+                  numberOfPages:(NSUInteger)numberOfPages;
+@property (nonatomic, strong, readonly) NSArray *items;
+@property (nonatomic, assign, readonly) NSUInteger numberOfPages;
 @end
