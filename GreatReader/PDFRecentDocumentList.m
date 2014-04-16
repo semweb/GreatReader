@@ -15,6 +15,7 @@
 
 @interface PDFRecentDocumentList ()
 @property (nonatomic, readwrite, strong) NSArray *documents;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier bgTask;
 @end
 
 @implementation PDFRecentDocumentList
@@ -33,6 +34,10 @@
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(fileRemoved:)
                                                    name:FolderFileRemovedNotification
+                                                 object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(didEnterBackground:)
+                                                   name:UIApplicationDidEnterBackgroundNotification
                                                  object:nil];
     }
     return self;
@@ -129,6 +134,18 @@
     if (save) {
         [self save];
     }
+}
+
+#pragma mark - Did Enter Background
+
+- (void)didEnterBackground:(NSNotification *)notification
+{
+    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        self.bgTask = UIBackgroundTaskInvalid;
+    }];
+    [self save];
+    [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+    self.bgTask = UIBackgroundTaskInvalid;
 }
 
 @end

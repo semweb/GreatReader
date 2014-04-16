@@ -34,8 +34,6 @@
         [Crashlytics startWithAPIKey:GetCrashlyticsAPIKey()];
     }
     
-    self.documentList = PDFRecentDocumentList.new;
-
     UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];
     self.initialViewController = navi;
     
