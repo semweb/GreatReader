@@ -17,9 +17,13 @@
 
 NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewControllerSegueExit";
 
-@interface PDFDocumentCropViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
+@interface PDFDocumentCropViewController () <UIPageViewControllerDelegate,
+                                             UIPageViewControllerDataSource,
+                                             UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) IBOutlet PDFDocumentCropOverlayView *overlayView;
+@property (nonatomic, assign) BOOL fullScreen;
+@property (nonatomic, strong) UIButton *modeButton;
 @end
 
 @implementation PDFDocumentCropViewController
@@ -39,6 +43,23 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 
     self.view.backgroundColor = [UIColor grayColor];
 
+    self.modeButton = ({
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.titleLabel.font = [UIFont systemFontOfSize:12];
+        button.titleEdgeInsets = UIEdgeInsetsMake(2, 8, 0, 0);
+        button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 0);
+        [button setTitleColor:self.navigationController.navigationBar.tintColor
+                     forState:UIControlStateNormal];
+        [button setTitleColor:[self.navigationController.navigationBar.tintColor colorWithAlphaComponent:0.4]
+                     forState:UIControlStateHighlighted];            
+        button.titleLabel.numberOfLines = 2;
+        [button addTarget:self
+                   action:@selector(changeMode:)
+         forControlEvents:UIControlEventTouchUpInside];        
+        button;
+    });
+    [self updateModeButton];
+
     self.pageViewController =
             [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                             navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -50,36 +71,57 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     [self.view addSubview:self.pageViewController.view];
     self.pageViewController.view.frame = self.view.bounds;
 
-    [self goAtIndex:self.targetPageNumber
+    [self goAtIndex:self.crop.document.currentPage
            animated:NO];
+
+    UITapGestureRecognizer *tapRec =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(singleTapped:)];
+    tapRec.delegate = self;
+    [self.overlayView addGestureRecognizer:tapRec];
 }
 
-- (NSUInteger)targetPageNumber
+- (void)changeMode:(id)sender
 {
-    NSUInteger number = self.crop.document.currentPage;
-    if (self.even) {
-        if (self.crop.document.currentPage % 2 != 0) {
-            number += 1;
-            if (number > self.crop.document.numberOfPages) {
-                number -= 2;
-                if (number <= 0) {
-                    number += 1;
-                }
-            }
-        }
-    } else {
-        if (self.crop.document.currentPage % 2 == 0) {
-            number -= 1;
-            if (number <= 0) {
-                number += 2;
-                if (number > self.crop.document.numberOfPages) {
-                    number -= 1;
-                }
-            }
-        }
+    self.crop.mode += 1;
+    if (self.crop.mode == 3) {
+        self.crop.mode = 0;
     }
+    [self updateModeButton];
+}
 
-    return number;
+- (void)updateModeButton
+{
+    NSString *imageName = nil;
+    NSString *title = nil;
+
+    if (self.crop.mode == PDFDocumentCropModeSame) {
+        imageName = @"CropBoth";
+        title = @"Same Crops\nOdd and Even";
+    } else if (self.crop.mode == PDFDocumentCropModeDifferent) {
+        if (self.isOddPage) {
+            imageName = @"CropOdd";
+        } else {
+            imageName = @"CropEven";
+        }
+        title = @"Different Crops\nOdd and Even";        
+    } else {
+        title = @"No Crops";
+        imageName = @"CropNone";
+    }
+    [self.modeButton setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                     forState:UIControlStateNormal];
+    [self.modeButton setTitle:title forState:UIControlStateNormal];
+    [self.modeButton sizeToFit];
+    self.modeButton.frame = ({
+        CGRect r = self.modeButton.frame;
+        r.size.height = 44;
+        r.size.width += 8.0;
+        r;
+    });
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.modeButton];
+    self.navigationItem.leftBarButtonItem = item;    
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,8 +140,9 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
                                      completion:NULL];
 
     self.overlayView.targetRect = pdfPageViewController.contentFrame;
-    if (!CGRectEqualToRect(self.crop.cropRect, CGRectZero)) {
-        self.overlayView.cropRect = self.crop.cropRect;
+    CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
+    if (!CGRectEqualToRect(cropRect, CGRectZero)) {
+        self.overlayView.cropRect = cropRect;
     }
     [self.view bringSubviewToFront:self.overlayView];
 }
@@ -130,8 +173,63 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 {
     PDFPage *page = [self.crop.document pageAtIndex:index];
     PDFPageViewController *vc =
-            [[PDFPageCropViewController alloc] initWithPage:page];
+            [[PDFPageCropViewController alloc] initWithPage:page];      
     return vc;
+}
+
+#pragma mark -
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    UIView *hit = [self.overlayView hitTest:[touch locationInView:self.overlayView]
+                                  withEvent:nil];
+    return (self.overlayView == hit);
+}
+
+- (void)singleTapped:(UITapGestureRecognizer *)recognizer
+{
+    [self toggleFullScreen];
+}
+
+#pragma mark -
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.fullScreen;
+}
+
+#pragma mark -
+
+- (void)toggleFullScreen
+{
+    self.fullScreen = !self.fullScreen;
+
+    CGFloat alpha = self.fullScreen ? 0.0 : 1.0;
+    CGRect barFrame = self.navigationController.navigationBar.frame;
+    barFrame.origin.y = 20;
+    self.navigationController.navigationBar.frame = barFrame;    
+    if (!self.fullScreen) {
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        self.navigationController.navigationBar.alpha = 0.0;                    
+    }
+    
+    [UIView animateWithDuration:0.125
+                     animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+        self.navigationController.navigationBar.alpha = alpha;
+    } completion:^(BOOL finished) {
+        [self.navigationController setNavigationBarHidden:self.fullScreen animated:NO];            
+    }];
+
+    self.navigationController.navigationBar.frame = CGRectZero;
+    self.navigationController.navigationBar.frame = barFrame;
+}
+
+#pragma mark -
+
+- (BOOL)isOddPage
+{
+    return self.crop.document.currentPage % 2 != 0;
 }
 
 #pragma mark -
@@ -139,8 +237,33 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:PDFDocumentCropViewControllerSegueExit]) {
-        self.crop.cropRect = self.overlayView.cropRect;
+        if (self.crop.mode == PDFDocumentCropModeSame) {
+            self.crop.oddCropRect = self.overlayView.cropRect;
+            self.crop.evenCropRect = self.overlayView.cropRect;
+        } else if (self.crop.mode == PDFDocumentCropModeDifferent) {
+            if (self.isOddPage) {
+                self.crop.oddCropRect = self.overlayView.cropRect;
+            } else {
+                self.crop.evenCropRect = self.overlayView.cropRect;
+            }
+        }
     }
+}
+
+#pragma mark -
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
+interfaceOrientation duration:(NSTimeInterval)duration
+{
+    PDFPageCropViewController *vc = self.pageViewController.viewControllers.firstObject;
+    self.overlayView.targetRect = vc.contentFrame;
+    self.overlayView.hidden = YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.overlayView.hidden = NO;
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "GRTNavigationController.h"
 
-#import "PDFDocumentSettingViewController.h"
+#import "PDFDocumentBrightnessViewController.h"
 
 @interface GRTNavigationController ()
 
@@ -40,8 +40,6 @@
 - (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier
 {
     NSDictionary *map = @{
-        PDFDocumentSettingSegueCropOdd: PDFDocumentCropOddSegue.class,
-        PDFDocumentSettingSegueCropEven: PDFDocumentCropOddSegue.class,
         PDFDocumentSettingSegueExit: PDFDocumentExitSettingSegue.class
     };
     BOOL isPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);

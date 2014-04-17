@@ -92,8 +92,21 @@
 
 - (void)setTargetRect:(CGRect)rect
 {
-    _targetRect = rect;
-    self.knobRect = rect;
+    if (CGRectEqualToRect(_targetRect, CGRectZero)) {
+        _targetRect = rect;
+        self.knobRect = rect;
+    } else {
+        CGFloat x = CGRectGetMinX(_targetRect) - CGRectGetMinX(self.knobRect);
+        CGFloat y = CGRectGetMinY(_targetRect) - CGRectGetMinY(self.knobRect);
+        _targetRect = rect;
+        rect.size = self.knobRect.size;
+        rect.origin.x -= x;
+        rect.origin.y -= y;
+        self.knobRect = rect;
+    }
+
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 
 - (void)layoutSubviews

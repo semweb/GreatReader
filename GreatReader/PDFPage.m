@@ -57,11 +57,16 @@
     return rect;
 }
 
+- (BOOL)isOddPage
+{
+    return self.index % 2 != 0;
+}
+
 - (CGRect)croppedRect
 {
     CGRect rect = self.rect;
-    if (self.crop && !CGRectEqualToRect(self.crop.cropRect, CGRectZero)) {
-        CGRect cropRect = self.crop.cropRect;
+    CGRect cropRect = [self.crop cropRectAtPage:self.index];
+    if (self.crop.enabled && !CGRectEqualToRect(cropRect, CGRectZero)) {
         CGFloat w = rect.size.width;
         rect.origin.x = cropRect.origin.x * w;
         rect.origin.y = cropRect.origin.y * w;

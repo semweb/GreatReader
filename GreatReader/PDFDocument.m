@@ -71,8 +71,10 @@
     if (self) {
         _currentPage = [decoder decodeIntegerForKey:@"currentPage"];
         _bookmarkList = [decoder decodeObjectForKey:@"bookmarkList"];
+        _bookmarkList.document = self;        
         _brightness = [decoder decodeFloatForKey:@"brightness"];
-        _bookmarkList.document = self;
+        _crop = [decoder decodeObjectForKey:@"crop"];
+        _crop.document = self;
     }
     return self;
 }
@@ -84,6 +86,7 @@
     [encoder encodeInteger:self.currentPage forKey:@"currentPage"];
     [encoder encodeObject:self.bookmarkList forKey:@"bookmarkList"];
     [encoder encodeFloat:self.brightness forKey:@"brightness"];
+    [encoder encodeObject:self.crop forKey:@"crop"];
 }
 
 #pragma mark -

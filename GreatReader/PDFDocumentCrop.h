@@ -11,8 +11,18 @@
 @class PDFDocument;
 @class PDFPage;
 
+typedef NS_ENUM(NSUInteger, PDFDocumentCropMode) {
+    PDFDocumentCropModeNone,
+    PDFDocumentCropModeSame,            
+    PDFDocumentCropModeDifferent,
+};
+
 @interface PDFDocumentCrop : NSObject
 - (id)initWithPDFDocument:(PDFDocument *)document;
-@property (nonatomic, assign, readonly) PDFDocument *document;
-@property (nonatomic, assign) CGRect cropRect;
+@property (nonatomic, assign) PDFDocument *document;
+@property (nonatomic, assign) CGRect oddCropRect;
+@property (nonatomic, assign) CGRect evenCropRect;
+@property (nonatomic, assign) PDFDocumentCropMode mode;
+@property (nonatomic, readonly) BOOL enabled;
+- (CGRect)cropRectAtPage:(NSUInteger)page;
 @end

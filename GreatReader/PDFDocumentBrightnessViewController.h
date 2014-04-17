@@ -1,5 +1,5 @@
 //
-//  PDFDocumentSettingViewController.h
+//  PDFDocumentBrightnessViewController.h
 //  GreatReader
 //
 //  Created by MIYAMOTO Shohei on 3/17/14.
@@ -11,10 +11,8 @@
 @class PDFDocument;
 
 extern NSString * const PDFDocumentSettingSegueExit;
-extern NSString * const PDFDocumentSettingSegueCropOdd;
-extern NSString * const PDFDocumentSettingSegueCropEven;
 
-@interface PDFDocumentSettingViewController : UIViewController
+@interface PDFDocumentBrightnessViewController : UIViewController
 @property (nonatomic, strong) PDFDocument *document;
 @end
 
@@ -23,10 +21,4 @@ extern NSString * const PDFDocumentSettingSegueCropEven;
 @end
 
 @interface PDFDocumentExitSettingSegue : UIStoryboardSegue
-@end
-
-@interface PDFDocumentCropOddSegue : PDFDocumentExitSettingSegue
-@end
-
-@interface PDFDocumentCropEvenSegue : PDFDocumentExitSettingSegue
 @end

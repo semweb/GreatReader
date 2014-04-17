@@ -15,7 +15,7 @@
 #import "PDFDocumentCropViewController.h"
 #import "PDFDocumentInfo.h"
 #import "PDFDocumentInfoView.h"
-#import "PDFDocumentSettingViewController.h"
+#import "PDFDocumentBrightnessViewController.h"
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
@@ -26,16 +26,15 @@
 #import "PDFRecentDocumentListViewController.h"
 
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
-NSString * const PDFDocumentViewControllerSegueCropOdd = @"PDFDocumentViewControllerSegueCropOdd";
-NSString * const PDFDocumentViewControllerSegueCropEven = @"PDFDocumentViewControllerSegueCropEven";
-NSString * const PDFDocumentViewControllerSegueBookmark = @"PDFDocumentViewControllerSegueBookmark";
-NSString * const PDFDocumentViewControllerSegueSetting = @"PDFDocumentViewControllerSegueSetting";
+NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
+NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewControllerSegueBrightness";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
-                              UIPageViewControllerDelegate>
+                                         UIPageViewControllerDelegate>
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, assign) BOOL fullScreen;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *settingItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cropItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *brightnessItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *searchItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *outlineItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *ribbonOffItem;
@@ -246,7 +245,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                                                                            action:nil];
         [bar setItems:@[self.historyItem, s,
                         self.outlineItem, s,
-                        self.settingItem, s,
+                        self.cropItem, s,
+                        self.brightnessItem, s,                        
                         self.findItem, s,
                         ribbon]
              animated:NO];
@@ -377,25 +377,17 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         vc.outlineViewController.outline = [[PDFDocumentOutline alloc] initWithCGPDFDocument:self.document.CGPDFDocument];
         vc.bookmarkListViewController.bookmarkList = self.document.bookmarkList;
         vc.currentViewController = vc.outlineViewController;
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueSetting]) {
-        PDFDocumentSettingViewController *vc =
-                (PDFDocumentSettingViewController *)segue.destinationViewController;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCrop]) {
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
+        PDFDocumentCropViewController *vc =
+                (PDFDocumentCropViewController *)navi.topViewController;
+        vc.crop = self.document.crop;        
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBrightness]) {
+        PDFDocumentBrightnessViewController *vc =
+                (PDFDocumentBrightnessViewController *)segue.destinationViewController;
         vc.document = self.document;
         self.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCropOdd]) {
-        UINavigationController *navi =
-                (UINavigationController *)segue.destinationViewController;
-        PDFDocumentCropViewController *vc =
-                (PDFDocumentCropViewController *)navi.topViewController;
-        vc.crop = self.document.crop;        
-        vc.even = NO;
-    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueCropEven]) {
-        UINavigationController *navi =
-                (UINavigationController *)segue.destinationViewController;
-        PDFDocumentCropViewController *vc =
-                (PDFDocumentCropViewController *)navi.topViewController;
-        vc.crop = self.document.crop;        
-        vc.even = YES;
     }
 
     if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
@@ -427,7 +419,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     }
 }
 
-- (IBAction)exitSetting:(UIStoryboardSegue *)segue {}
+- (IBAction)exitBrightness:(UIStoryboardSegue *)segue {}
 
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue {}
 

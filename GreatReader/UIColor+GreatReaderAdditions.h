@@ -10,4 +10,5 @@
 
 @interface UIColor (GreatReaderAdditions)
 + (UIColor *)grt_defaultTintColor;
++ (UIColor *)grt_defaultBlackTintColor;
 @end

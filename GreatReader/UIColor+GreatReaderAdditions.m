@@ -18,4 +18,12 @@
                            alpha:1.0];
 }
 
++ (UIColor *)grt_defaultBlackTintColor
+{
+    return [UIColor colorWithRed:70/255.0
+                           green:170/255.0
+                            blue:220/255.0
+                           alpha:1.0];
+}
+
 @end

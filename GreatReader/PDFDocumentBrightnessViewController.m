@@ -1,38 +1,31 @@
 //
-//  PDFDocumentSettingViewController.m
+//  PDFDocumentBrightnessViewController.m
 //  GreatReader
 //
 //  Created by MIYAMOTO Shohei on 3/17/14.
 //  Copyright (c) 2014 MIYAMOTO Shohei. All rights reserved.
 //
 
-#import "PDFDocumentSettingViewController.h"
+#import "PDFDocumentBrightnessViewController.h"
 
 #import "PDFDocument.h"
 #import "PDFDocumentViewController.h"
 
 NSString * const PDFDocumentSettingSegueExit = @"PDFDocumentSettingSegueExit";
-NSString * const PDFDocumentSettingSegueCropOdd = @"PDFDocumentSettingSegueCropOdd";
-NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCropEven";
 
 
-@interface PDFDocumentSettingViewController () <UITableViewDataSource,
+@interface PDFDocumentBrightnessViewController () <UITableViewDataSource,
                                                 UITableViewDelegate>
 // Common
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UINavigationBar *naviBar;
 @property (nonatomic, strong) UITableViewCell *sliderCell;
-@property (nonatomic, strong) UITableViewCell *cropOddCell;
-@property (nonatomic, strong) UITableViewCell *cropEvenCell;
-@property (nonatomic, strong) UITableViewCell *cropSameCell;
-@property (nonatomic, strong) UITableViewCell *cropEnabledCell;
-@property (nonatomic, strong) NSArray *cropCells;
 // iPhone
 @property (nonatomic, strong) IBOutlet UIView *dimView;
 @property (nonatomic, strong) IBOutlet UIView *sheetView;
 @end
 
-@implementation PDFDocumentSettingViewController
+@implementation PDFDocumentBrightnessViewController
 
 - (void)viewDidLoad
 {
@@ -40,11 +33,11 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Title"];
+        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Brightness"];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                 target:self
                                                                                 action:@selector(done:)];
-        [self.naviBar setItems:@[item] animated:NO];    
+        [self.naviBar setItems:@[item] animated:NO];
     }
 
     self.tableView.scrollEnabled = NO;
@@ -70,44 +63,6 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
         slider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.sliderCell.contentView addSubview:slider];
     }
-
-    self.cropOddCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:nil]; {
-        self.cropOddCell.textLabel.text = @"Edit";
-        self.cropOddCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    self.cropEnabledCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                  reuseIdentifier:nil]; {
-        self.cropEnabledCell.textLabel.text = @"Crop";
-        self.cropEnabledCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UISwitch *s = [[UISwitch alloc] initWithFrame:CGRectZero];
-        [s addTarget:self
-              action:@selector(cropEnabledSwitchChanged:)
-    forControlEvents:UIControlEventValueChanged];
-        s.on = YES;
-        self.cropEnabledCell.accessoryView = s;
-    }
-
-    self.cropSameCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                               reuseIdentifier:nil]; {
-        self.cropSameCell.textLabel.text = @"Same Crop";
-        UISwitch *s = [[UISwitch alloc] initWithFrame:CGRectZero];
-        [s addTarget:self
-              action:@selector(cropSameSwitchChanged:)
-    forControlEvents:UIControlEventValueChanged];
-        s.on = YES;
-        self.cropSameCell.accessoryView = s;           
-    }
-    
-    self.cropCells = self.currentCropCells;
-}
-
-- (NSArray *)currentCropCells
-{
-    return @[
-        self.cropEnabledCell, self.cropSameCell, self.cropOddCell
-    ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,58 +96,32 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
-        UITableViewCell *cell = self.cropCells[indexPath.row];
-        if (cell == self.cropOddCell || cell == self.cropEvenCell) {
-            return 68;
-        }
-    }
-
     return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell == self.cropOddCell) {
-        [self performSegueWithIdentifier:PDFDocumentSettingSegueCropOdd
-                                  sender:self];
-    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    } else if (section == 1) {
-        return self.cropCells.count;
-    }
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return self.sliderCell;
-    } else {
-        return self.cropCells[indexPath.row];
-    }
+    return self.sliderCell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return @"Brightness";
-    } else if (section == 1) {
-        return @"Crop";
-    }
     return nil;
 }
 
@@ -235,24 +164,6 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 }
 */
 
-
-#pragma mark -
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        NSString *identifier = segue.identifier;
-        if ([identifier isEqualToString:PDFDocumentSettingSegueCropOdd]) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{            
-                PDFDocumentSettingViewController *dest = segue.destinationViewController;
-                [dest performSegueWithIdentifier:PDFDocumentViewControllerSegueCropOdd
-                                          sender:dest];
-            });
-        }
-    }
-}
-
-
 @end
 
 
@@ -262,7 +173,7 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 {
     UIViewController *source = self.sourceViewController;
     
-    PDFDocumentSettingViewController *dest = self.destinationViewController;
+    PDFDocumentBrightnessViewController *dest = self.destinationViewController;
     [source presentViewController:dest
                          animated:NO
                        completion:NULL];
@@ -299,7 +210,7 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 
 - (void)perform:(void (^)(void))completion
 {
-    PDFDocumentSettingViewController *source = self.sourceViewController;
+    PDFDocumentBrightnessViewController *source = self.sourceViewController;
     PDFDocumentViewController *dest = self.destinationViewController;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -326,28 +237,3 @@ NSString * const PDFDocumentSettingSegueCropEven = @"PDFDocumentSettingSegueCrop
 
 @end
 
-@implementation PDFDocumentCropOddSegue
-
-- (void)perform
-{
-    PDFDocumentViewController *dest = self.destinationViewController;    
-    [self perform:^{
-        [dest performSegueWithIdentifier:PDFDocumentViewControllerSegueCropOdd
-                                  sender:dest];
-    }];
-}
-
-@end
-
-@implementation PDFDocumentCropEvenSegue
-
-- (void)perform
-{
-    PDFDocumentViewController *dest = self.destinationViewController;    
-    [self perform:^{
-        [dest performSegueWithIdentifier:PDFDocumentViewControllerSegueCropEven
-                                  sender:dest];
-    }];
-}
-
-@end

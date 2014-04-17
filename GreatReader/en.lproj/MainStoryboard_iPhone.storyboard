@@ -168,10 +168,10 @@
             </objects>
             <point key="canvasLocation" x="1536" y="-1484"/>
         </scene>
-        <!--Document Setting View Controller-->
+        <!--Document Brightness View Controller-->
         <scene sceneID="39z-o3-2mo">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0gI-Sb-Wgy" customClass="PDFDocumentSettingViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0gI-Sb-Wgy" customClass="PDFDocumentBrightnessViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6ia-Sa-otC"/>
                         <viewControllerLayoutGuide type="bottom" id="2tq-hO-gja"/>
@@ -192,11 +192,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fw8-VL-P9D">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="d1m-s4-vmr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -221,13 +221,13 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-Ma-2Zo">
-                                        <rect key="frame" x="0.0" y="314" width="320" height="1"/>
+                                        <rect key="frame" x="0.0" y="108" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="315" id="bkG-Th-fqN"/>
+                                    <constraint firstAttribute="height" constant="109" id="bkG-Th-fqN"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -250,9 +250,7 @@
                         <outlet property="naviBar" destination="47l-VC-JFk" id="yx1-zD-4NH"/>
                         <outlet property="sheetView" destination="fw8-VL-P9D" id="gI5-GO-ORu"/>
                         <outlet property="tableView" destination="d1m-s4-vmr" id="bR5-Vr-qRL"/>
-                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSettingSegueExit" unwindAction="exitSetting:" id="uZq-Qk-m4s"/>
-                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSettingSegueCropOdd" unwindAction="exitSetting:" id="Dj0-wt-Alk"/>
-                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSettingSegueCropEven" unwindAction="exitSetting:" id="S4h-JE-0Oa"/>
+                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSettingSegueExit" unwindAction="exitBrightness:" id="BNT-Ry-M8f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ih1-7b-frr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -343,8 +341,9 @@
         <scene sceneID="l5C-HC-3nx">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Vcl-pE-Usv" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p1p-mU-Uub">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="p1p-mU-Uub">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.27450980392156865" green="0.66666666666666663" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="jEo-Tm-PWf" kind="relationship" relationship="rootViewController" id="TWi-Vi-eX8"/>
@@ -366,12 +365,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKu-jy-ufj" customClass="PDFDocumentCropOverlayView">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKu-jy-ufj" customClass="PDFDocumentCropOverlayView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EKu-jy-ufj" firstAttribute="top" secondItem="2Iy-QM-GZd" secondAttribute="top" id="3Nj-F8-hxX"/>
+                            <constraint firstItem="oid-hE-AjD" firstAttribute="top" secondItem="EKu-jy-ufj" secondAttribute="bottom" id="8ja-AD-tt0"/>
+                            <constraint firstAttribute="trailing" secondItem="EKu-jy-ufj" secondAttribute="trailing" id="tGZ-PI-NXG"/>
+                            <constraint firstItem="EKu-jy-ufj" firstAttribute="leading" secondItem="2Iy-QM-GZd" secondAttribute="leading" id="yMY-B5-ICj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bZm-bZ-dk4">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="bqK-ic-QGF">
@@ -471,17 +476,16 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="brightnessItem" destination="LVN-8W-5N1" id="xBj-GH-adc"/>
+                        <outlet property="cropItem" destination="JbB-X1-dI2" id="L7H-o0-nUb"/>
                         <outlet property="dimView" destination="JhM-1f-b4p" id="mt0-3j-zBb"/>
                         <outlet property="findItem" destination="oGZ-Ya-lPq" id="jy7-oi-Rgz"/>
                         <outlet property="historyItem" destination="FWY-Mv-FS9" id="7lU-CU-cHE"/>
                         <outlet property="outlineItem" destination="GDD-o5-YVP" id="yMG-gf-iw1"/>
                         <outlet property="ribbonOffItem" destination="Cdj-cb-q7X" id="mmD-Mc-8KB"/>
                         <outlet property="ribbonOnItem" destination="9eO-3t-r0w" id="kOu-Qx-J9T"/>
-                        <outlet property="settingItem" destination="JbB-X1-dI2" id="STQ-WL-33p"/>
                         <outlet property="slider" destination="YmW-Zf-FjA" id="XEh-yC-ltj"/>
                         <outlet property="toolbar" destination="rGa-Oe-iG3" id="wU9-2p-Vr4"/>
-                        <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCropOdd" id="t0X-Lo-XSf"/>
-                        <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCropEven" id="cug-Yy-nKm"/>
                     </connections>
                 </viewController>
                 <barButtonItem image="Outline.png" style="plain" id="GDD-o5-YVP" userLabel="Outline">
@@ -489,9 +493,14 @@
                         <segue destination="4Lj-s5-ami" kind="modal" identifier="PDFDocumentViewControllerSegueOutline" id="DfE-rq-8DC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="Setting.png" style="plain" id="JbB-X1-dI2" userLabel="Setting">
+                <barButtonItem image="Crop.png" style="plain" id="JbB-X1-dI2" userLabel="Crop">
                     <connections>
-                        <segue destination="0gI-Sb-Wgy" kind="custom" identifier="PDFDocumentViewControllerSegueSetting" customClass="PDFDocumentSettingSegue" id="pnp-Gb-hFU"/>
+                        <segue destination="Vcl-pE-Usv" kind="modal" identifier="PDFDocumentViewControllerSegueCrop" modalTransitionStyle="crossDissolve" id="Wm1-yA-idb"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="Brightness.png" style="plain" id="LVN-8W-5N1" userLabel="Brightness">
+                    <connections>
+                        <segue destination="0gI-Sb-Wgy" kind="custom" identifier="PDFDocumentViewControllerSegueBrightness" customClass="PDFDocumentSettingSegue" id="p1g-BR-8gv"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem image="RibbonOn.png" style="plain" id="9eO-3t-r0w" userLabel="Ribbon On">
@@ -514,12 +523,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Brightness.png" width="22" height="22"/>
+        <image name="Crop.png" width="22" height="22"/>
         <image name="Find.png" width="22" height="22"/>
         <image name="History.png" width="22" height="22"/>
         <image name="Outline.png" width="22" height="22"/>
         <image name="RibbonOff.png" width="22" height="22"/>
         <image name="RibbonOn.png" width="22" height="22"/>
-        <image name="Setting.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -528,6 +538,5 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="L0f-1i-Oxt"/>
-        <segue reference="t0X-Lo-XSf"/>
     </inferredMetricsTieBreakers>
 </document>
