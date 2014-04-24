@@ -113,7 +113,7 @@
 
 - (void)layoutKnobView
 {
-    CGFloat progress = (CGFloat)self.currentIndex / (self.dataSource.numberOfPages - 1);
+    CGFloat progress = (CGFloat)(self.currentIndex - 1) / (self.dataSource.numberOfPages - 1);
     self.knobView.center = [self positionForProgress:progress];
 }
 
@@ -124,20 +124,6 @@
     CGFloat x = progress * (right - left) + left;
     CGFloat y = CGRectGetHeight(self.frame) / 2.0;
     return CGPointMake(x, y);
-}
-
-#pragma mark - Update Knob
-
-- (void)updateKnobView
-{
-    // self.knobView.image = nil;
-    // [self.dataSource pageSlider:self
-    //        pageThumbnailAtIndex:self.currentIndex
-    //                    callback:^(UIImage *image, NSUInteger idx) {
-    //     if (idx == self.currentIndex) {
-    //         self.knobView.image = image;
-    //     }
-    // }];
 }
 
 #pragma mark -
@@ -161,7 +147,7 @@
     CGFloat left = self.sideMargin;
     CGFloat progress = (point.x - left) / (right - left);
     progress = MIN(1.0, MAX(0.0, progress));
-    return roundf(progress * (self.dataSource.numberOfPages - 1));
+    return roundf(progress * (self.dataSource.numberOfPages - 1)) + 1;
 }
 
 - (PDFDocumentPageSliderItemView *)nearestItemViewAtPoint:(CGPoint)point
@@ -232,7 +218,6 @@
     NSUInteger old = _currentIndex;
     _currentIndex = index;
     if (old != index) {
-        [self updateKnobView];        
         [self layoutKnobView];
     }
 }

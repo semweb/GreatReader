@@ -118,7 +118,7 @@ NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewCon
     if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
         [self prepareNavigationBar];
     } else if ([keyPath isEqualToString:@"document.currentPage"]) {
-        self.slider.currentIndex = self.document.currentPage - 1;
+        self.slider.currentIndex = self.document.currentPage;
     } else if ([keyPath isEqualToString:@"document.brightness"]) {
         self.dimView.alpha = (1 - self.document.brightness);
     }
@@ -177,7 +177,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     PDFPageViewController *vc = pageViewController.viewControllers.firstObject;
     self.document.currentPage = vc.page.index;
-    self.slider.currentIndex = vc.page.index - 1;
+    self.slider.currentIndex = vc.page.index;
 }
 
 #pragma mark -

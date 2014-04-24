@@ -27,15 +27,15 @@
     self = [super init];
     if (self) {
         _numberOfPages = numberOfPages;
-        NSArray *outlineItems = [self itemsForOutline:outline
-                                            numberOfPages:numberOfPages];
+        // NSArray *outlineItems = [self itemsForOutline:outline
+        //                                     numberOfPages:numberOfPages];
         NSArray *bookmarkItems = [self itemsForBookmarkList:bookmarkList
                                                   numberOfPages:numberOfPages];
-        NSArray *startAndEnd = [self itemsForStartAndEnd:numberOfPages];
+        // NSArray *startAndEnd = [self itemsForStartAndEnd:numberOfPages];
         NSMutableArray *items = [NSMutableArray array];
-        [items addObjectsFromArray:outlineItems];
+        // [items addObjectsFromArray:outlineItems];
         [items addObjectsFromArray:bookmarkItems];
-        [items addObjectsFromArray:startAndEnd];
+        // [items addObjectsFromArray:startAndEnd];
         NSSortDescriptor *descriptor =
                 [NSSortDescriptor sortDescriptorWithKey:@"position"
                                               ascending:YES];
