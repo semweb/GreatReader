@@ -181,14 +181,18 @@
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MhS-Jv-ZGv" customClass="PDFDocumentPageSlider">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhS-Jv-ZGv" customClass="PDFDocumentPageSlider">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="MhS-Jv-ZGv" secondAttribute="bottom" id="5AW-0X-3fa"/>
+                                    <constraint firstAttribute="trailing" secondItem="MhS-Jv-ZGv" secondAttribute="trailing" id="A2P-Sr-qnK"/>
+                                    <constraint firstItem="MhS-Jv-ZGv" firstAttribute="top" secondItem="hir-j8-6Gt" secondAttribute="top" id="DJ8-oo-WCV"/>
+                                    <constraint firstItem="MhS-Jv-ZGv" firstAttribute="leading" secondItem="hir-j8-6Gt" secondAttribute="leading" id="XYk-Ud-OKE"/>
                                     <constraint firstAttribute="height" constant="44" id="x5t-6W-Og0"/>
                                 </constraints>
                             </view>
