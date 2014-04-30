@@ -14,3 +14,6 @@
 @property (nonatomic, strong) PDFDocumentCrop *crop;
 @property (nonatomic, assign) BOOL even;
 @end
+
+@interface PDFDocumentCropLayoutView : UIView
+@end

@@ -13,8 +13,9 @@
 
 @interface PDFPageViewController : UIViewController
 - (instancetype)initWithPage:(PDFPage *)page;
-- (CGRect)frameThatFits;
-@property (nonatomic, assign) CGRect contentFrame;
+@property (nonatomic, readonly) CGRect contentFrame;
+@property (nonatomic, strong, readonly) PDFPageContentView *contentView;
+@property (nonatomic, readonly) CGRect frameThatFits;
 @property (nonatomic, strong, readonly) PDFPage *page;
 @property (nonatomic, assign) CGFloat scale;
 @end

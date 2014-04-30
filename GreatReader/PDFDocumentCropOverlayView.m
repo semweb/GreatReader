@@ -8,6 +8,8 @@
 
 #import "PDFDocumentCropOverlayView.h"
 
+#import "UIColor+GreatReaderAdditions.h"
+
 @class PDFDocumentCropOverlayKnob;
 @protocol PDFDocumentCropOverlayKnobDelegate <NSObject>
 - (void)knob:(PDFDocumentCropOverlayKnob *)knob moveTo:(CGPoint)point;
@@ -23,9 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // self.backgroundColor = [UIColor whiteColor];
-        // self.layer.borderWidth = 1.0;
-        // self.layer.borderColor = UIColor.redColor.CGColor;
+        self.backgroundColor = [UIColor clearColor];
+        self.alpha = 0.8;
     }
     return self;
 }
@@ -40,6 +41,18 @@
     to.x += (location.x - previousLocation.x);
     to.y += (location.y - previousLocation.y);
     [self.delegate knob:self moveTo:to];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGFloat drawWidth = 10;
+    CGRect r = CGRectMake(roundf(rect.size.width - drawWidth) / 2.0,
+                          roundf(rect.size.height - drawWidth) / 2.0,
+                          drawWidth, drawWidth);
+    // [[UIColor grt_defaultTintColor] set];
+    // [[UIBezierPath bezierPathWithOvalInRect:r] fill];
+    [[UIColor redColor] set];    
+    [[UIBezierPath bezierPathWithOvalInRect:r] fill];    
 }
 
 @end
@@ -58,55 +71,44 @@
 
 @implementation PDFDocumentCropOverlayView
 
-- (void)awakeFromNib
+- (id)initWithFrame:(CGRect)frame
 {
-    CGFloat width = 28;
-    
-    self.topKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.leftKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.bottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.rightKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.leftTopKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.leftBottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.rightBottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.rightTopKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+    self = [super initWithFrame:frame];
+    if (self) {
+        CGFloat width = 28;
         
-    [self addSubview:self.topKnob];
-    [self addSubview:self.leftKnob];
-    [self addSubview:self.bottomKnob];
-    [self addSubview:self.rightKnob];
-    [self addSubview:self.leftTopKnob];
-    [self addSubview:self.leftBottomKnob];
-    [self addSubview:self.rightBottomKnob];
-    [self addSubview:self.rightTopKnob];
+        _topKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _leftKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _bottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _rightKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _leftTopKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _leftBottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _rightBottomKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _rightTopKnob = [[PDFDocumentCropOverlayKnob alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+            
+        [self addSubview:_topKnob];
+        [self addSubview:_leftKnob];
+        [self addSubview:_bottomKnob];
+        [self addSubview:_rightKnob];
+        [self addSubview:_leftTopKnob];
+        [self addSubview:_leftBottomKnob];
+        [self addSubview:_rightBottomKnob];
+        [self addSubview:_rightTopKnob];
+     
+        _topKnob.delegate = self;
+        _leftKnob.delegate = self;
+        _bottomKnob.delegate = self;
+        _rightKnob.delegate = self;
+        _leftTopKnob.delegate = self;
+        _leftBottomKnob.delegate = self;
+        _rightBottomKnob.delegate = self;
+        _rightTopKnob.delegate = self;
 
-    self.topKnob.delegate = self;
-    self.leftKnob.delegate = self;
-    self.bottomKnob.delegate = self;
-    self.rightKnob.delegate = self;
-    self.leftTopKnob.delegate = self;
-    self.leftBottomKnob.delegate = self;
-    self.rightBottomKnob.delegate = self;
-    self.rightTopKnob.delegate = self;
-}
-
-- (void)setTargetRect:(CGRect)rect
-{
-    if (CGRectEqualToRect(_targetRect, CGRectZero)) {
-        _targetRect = rect;
-        self.knobRect = rect;
-    } else {
-        CGFloat x = CGRectGetMinX(_targetRect) - CGRectGetMinX(self.knobRect);
-        CGFloat y = CGRectGetMinY(_targetRect) - CGRectGetMinY(self.knobRect);
-        _targetRect = rect;
-        rect.size = self.knobRect.size;
-        rect.origin.x -= x;
-        rect.origin.y -= y;
-        self.knobRect = rect;
+        self.backgroundColor = [UIColor clearColor];
+        self.clipsToBounds = NO;
     }
 
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+    return self;
 }
 
 - (void)layoutSubviews
@@ -138,14 +140,8 @@
     [super drawRect:rect];
 
     [[UIColor.blackColor colorWithAlphaComponent:0.2] set];
-    UIRectFill(self.targetRect);
+    UIRectFill(self.bounds);
     CGContextClearRect(UIGraphicsGetCurrentContext(), self.knobRect);
-
-    for (PDFDocumentCropOverlayKnob *knob in @[self.leftTopKnob, self.topKnob, self.rightTopKnob,
-                                               self.leftKnob, self.rightKnob,
-                                               self.leftBottomKnob, self.bottomKnob, self.rightBottomKnob]) {
-        [self drawKnob:knob];
-    }
 }
 
 - (void)drawKnob:(PDFDocumentCropOverlayKnob *)knob
@@ -178,6 +174,13 @@
 
 #pragma mark -
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return YES;
+}
+
+#pragma mark -
+
 - (void)knob:(PDFDocumentCropOverlayKnob *)knob moveTo:(CGPoint)point
 {
     CGFloat x = point.x;
@@ -198,8 +201,8 @@
         if (minX > self.rightKnob.center.x - w - w) {
             minX = self.rightKnob.center.x - w - w;
         }
-        if (minX < CGRectGetMinX(self.targetRect)) {
-            minX = CGRectGetMinX(self.targetRect);
+        if (minX < CGRectGetMinX(self.bounds)) {
+            minX = CGRectGetMinX(self.bounds);
         }
     }
     if (knob == self.leftTopKnob ||
@@ -210,8 +213,8 @@
         if (minY > self.bottomKnob.center.y - w - w) {
             minY = self.bottomKnob.center.y - w - w;
         }
-        if (minY < CGRectGetMinY(self.targetRect)) {
-            minY = CGRectGetMinY(self.targetRect);
+        if (minY < CGRectGetMinY(self.bounds)) {
+            minY = CGRectGetMinY(self.bounds);
         }
     }
     if (knob == self.rightTopKnob ||
@@ -222,8 +225,8 @@
         if (maxX < self.leftKnob.center.x + w + w) {
             maxX = self.leftKnob.center.x + w + w;
         }
-        if (maxX > CGRectGetMaxX(self.targetRect)) {
-            maxX = CGRectGetMaxX(self.targetRect);
+        if (maxX > CGRectGetMaxX(self.bounds)) {
+            maxX = CGRectGetMaxX(self.bounds);
         }
     }
     if (knob == self.leftBottomKnob ||
@@ -234,8 +237,8 @@
         if (maxY < self.topKnob.center.y + w + w) {
             maxY = self.topKnob.center.y + w + w;
         }
-        if (maxY > CGRectGetMaxY(self.targetRect)) {
-            maxY = CGRectGetMaxY(self.targetRect);
+        if (maxY > CGRectGetMaxY(self.bounds)) {
+            maxY = CGRectGetMaxY(self.bounds);
         }
     }    
 
@@ -250,10 +253,10 @@
 - (CGRect)cropRect
 {
     CGRect rect = self.knobRect;
-    rect.origin.x -= CGRectGetMinX(self.targetRect);
-    rect.origin.y -= CGRectGetMinY(self.targetRect);
+    rect.origin.x -= CGRectGetMinX(self.bounds);
+    rect.origin.y -= CGRectGetMinY(self.bounds);
 
-    CGFloat width = CGRectGetWidth(self.targetRect);
+    CGFloat width = CGRectGetWidth(self.bounds);
             
     CGFloat x = rect.origin.x / width;
     CGFloat y = rect.origin.y / width;
@@ -265,16 +268,25 @@
 
 - (void)setCropRect:(CGRect)cropRect
 {
-    CGFloat width = CGRectGetWidth(self.targetRect);
+    CGFloat width = CGRectGetWidth(self.bounds);
 
-    CGFloat x = cropRect.origin.x * width + CGRectGetMinX(self.targetRect);
-    CGFloat y = cropRect.origin.y * width + CGRectGetMinY(self.targetRect);
+    CGFloat x = cropRect.origin.x * width + CGRectGetMinX(self.bounds);
+    CGFloat y = cropRect.origin.y * width + CGRectGetMinY(self.bounds);
     CGFloat w = cropRect.size.width * width;
     CGFloat h = cropRect.size.height * width;
 
     self.knobRect = CGRectMake(x, y, w, h);
     [self setNeedsLayout];
     [self setNeedsDisplay];
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    CGRect cropRect = self.cropRect;
+
+    [super setFrame:frame];
+    self.knobRect = self.bounds;
+    self.cropRect = cropRect;
 }
 
 @end

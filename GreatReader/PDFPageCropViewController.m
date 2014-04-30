@@ -8,28 +8,68 @@
 
 #import "PDFPageCropViewController.h"
 
+#import "Device.h"
+#import "PDFDocument.h"
+#import "PDFDocumentCrop.h"
+#import "PDFDocumentCropOverlayView.h"
+#import "PDFPage.h"
+#import "PDFPageContentView.h"
+
+@interface PDFPageCropView : UIScrollView
+@end
+
+@implementation PDFPageCropView
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return YES;
+}
+
+@end
+
 @interface PDFPageCropViewController ()
+@property (nonatomic, strong) PDFDocumentCropOverlayView *overlayView;
 @end
 
 @implementation PDFPageCropViewController
 
-- (CGRect)frameThatFits
-{
-    CGRect f = [super frameThatFits];
-    CGFloat ratio = (f.size.width - 80) / f.size.width;
-    f.size.width = roundf(f.size.width * ratio);
-    f.size.height = roundf(f.size.height * ratio);
-    return f;
-}
-
 - (void)loadView
 {
-    [super loadView];
+    PDFPageCropView *scrollView =
+            [[PDFPageCropView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.minimumZoomScale = 0.1;
-    scrollView.maximumZoomScale = 0.1;
-    [scrollView setZoomScale:0.1 animated:NO];
+    scrollView.canCancelContentTouches = NO;
+    scrollView.clipsToBounds = NO;
+    scrollView.minimumZoomScale = 1.0;
+    scrollView.maximumZoomScale = 1.0;
+    [scrollView setZoomScale:1.0 animated:NO];
+
+    self.view = scrollView;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.overlayView = [[PDFDocumentCropOverlayView alloc] initWithFrame:self.contentView.bounds];
+    [self.view addSubview:self.overlayView];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.overlayView.frame = self.contentView.frame;
+    CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
+    if (!CGRectEqualToRect(cropRect, CGRectZero) &&
+        CGRectEqualToRect(self.overlayView.cropRect, CGRectZero)) {
+
+        self.overlayView.cropRect = cropRect;
+    }
+}
+
+- (CGRect)cropRect
+{
+    return self.overlayView.cropRect;
 }
 
 @end

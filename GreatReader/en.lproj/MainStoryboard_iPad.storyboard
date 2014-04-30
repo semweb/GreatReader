@@ -93,17 +93,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-hO-Qch" customClass="PDFDocumentCropOverlayView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AY7-Fr-hPj" customClass="PDFDocumentCropLayoutView">
+                                <rect key="frame" x="40" y="40" width="688" height="944"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Wf5-hO-Qch" firstAttribute="leading" secondItem="Cal-8r-0iw" secondAttribute="leading" id="0lb-je-DFX"/>
-                            <constraint firstItem="f0J-bN-eY4" firstAttribute="top" secondItem="Wf5-hO-Qch" secondAttribute="bottom" id="Ana-HE-dxP"/>
-                            <constraint firstItem="Wf5-hO-Qch" firstAttribute="top" secondItem="Cal-8r-0iw" secondAttribute="top" id="Dyr-EH-lrr"/>
-                            <constraint firstAttribute="trailing" secondItem="Wf5-hO-Qch" secondAttribute="trailing" id="fQk-Zx-vdd"/>
+                            <constraint firstAttribute="trailing" secondItem="AY7-Fr-hPj" secondAttribute="trailing" constant="40" id="FJc-VU-MkM"/>
+                            <constraint firstItem="f0J-bN-eY4" firstAttribute="top" secondItem="AY7-Fr-hPj" secondAttribute="bottom" constant="40" id="b0j-ln-GMH"/>
+                            <constraint firstItem="AY7-Fr-hPj" firstAttribute="top" secondItem="Cal-8r-0iw" secondAttribute="top" constant="40" id="k64-ac-Rmh"/>
+                            <constraint firstItem="AY7-Fr-hPj" firstAttribute="leading" secondItem="Cal-8r-0iw" secondAttribute="leading" constant="40" id="oOa-1i-5Ia"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="avv-n9-wpB">
@@ -114,7 +115,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="overlayView" destination="Wf5-hO-Qch" id="b5n-gR-2fy"/>
+                        <outlet property="layoutView" destination="AY7-Fr-hPj" id="Bn8-mm-Bmh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jQ3-P1-2jd" userLabel="First Responder" sceneMemberID="firstResponder"/>

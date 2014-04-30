@@ -20,7 +20,7 @@
 
 @interface PDFPageViewController () <UIScrollViewDelegate>
 @property (nonatomic, strong, readwrite) PDFPage *page;
-@property (nonatomic, strong) PDFPageContentView *contentView;
+@property (nonatomic, strong, readwrite) PDFPageContentView *contentView;
 @property (nonatomic, strong) UIImageView *lowResolutionView;
 @property (nonatomic, strong) UIPopoverController *popover;
 @end
@@ -46,6 +46,7 @@
     scrollView.minimumZoomScale = 1.0f;
     scrollView.maximumZoomScale = 4.0f;
     scrollView.delegate = self;
+    scrollView.clipsToBounds = NO;
     self.view = scrollView;
 }
 
@@ -59,7 +60,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    self.contentView = [[PDFPageContentView alloc] initWithFrame:[self frameThatFits]];
+    self.contentView = [[PDFPageContentView alloc] initWithFrame:self.frameThatFits];
     self.contentView.page = self.page;
     [self.view addSubview:self.contentView];
     [self.scrollView setContentSize:self.contentView.frame.size];
@@ -102,20 +103,50 @@
 - (CGRect)contentFrame
 {
     CGSize boundsSize = self.view.bounds.size;
-    CGRect frameToCenter = self.contentView.frame;
-    
-    if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
-    } else {
-        frameToCenter.origin.x = 0;
-    }
-    
-    if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
-    } else {
-        frameToCenter.origin.y = 0;
-    }
-    return frameToCenter;
+    CGRect frame = self.contentView.frame;
+
+    CGRect pageRect = self.page.croppedRect;
+    CGFloat pageRatio = pageRect.size.height / pageRect.size.width;
+    CGFloat viewRatio = boundsSize.height / boundsSize.width;
+
+    frame.size = ({
+        CGSize size = frame.size;
+        if (CGAffineTransformEqualToTransform(self.contentView.transform,
+                                              CGAffineTransformIdentity)) {
+                
+            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+                if (pageRatio > viewRatio) {
+                    size.height = boundsSize.height;
+                    size.width = size.height / pageRatio;        
+                } else {
+                    size.width = boundsSize.width;
+                    size.height = size.width * pageRatio;
+                }        
+            } else {
+                size.width = boundsSize.width;
+                size.height = size.width * pageRatio;
+            }
+        }
+        size;
+    });
+
+    frame.origin = ({
+        CGPoint origin = frame.origin;
+        if (frame.size.width <= boundsSize.width) {
+            origin.x = (boundsSize.width - frame.size.width) / 2;
+        } else {
+            origin.x = 0;
+        }
+        
+        if (frame.size.height < boundsSize.height) {
+            origin.y = (boundsSize.height - frame.size.height) / 2;
+        } else {
+            origin.y = 0;
+        }
+        origin;
+    });
+
+    return frame;
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,6 +161,7 @@
 
     self.contentView.frame = self.contentFrame;
     self.lowResolutionView.frame = self.contentFrame;
+    self.scrollView.contentSize = self.contentView.frame.size;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -154,8 +186,8 @@
     if (self.scrollView.zoomScale == 1.0) {
         const CGFloat zoom = 2.0;
         CGPoint point = [recognizer locationInView:self.contentView];
-        CGFloat width = CGRectGetWidth(self.contentView.frame) / zoom;
-        CGFloat height = width * (CGRectGetHeight(self.contentView.frame) / CGRectGetWidth(self.contentView.frame));
+        CGFloat width = CGRectGetWidth(self.view.frame) / zoom;
+        CGFloat height = width * (CGRectGetHeight(self.view.frame) / CGRectGetWidth(self.view.frame));
         CGFloat x = MAX(1.0, point.x - width / 2.0);
         CGFloat y = MAX(1.0, point.y - height / 2.0);
         [self.scrollView zoomToRect:CGRectMake(x, y, width, height)

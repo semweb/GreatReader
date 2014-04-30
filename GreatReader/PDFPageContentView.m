@@ -17,6 +17,7 @@
 
 @interface PDFPageContentTileView : UIView
 @property (nonatomic, strong) PDFPage *page;
+@property (nonatomic, assign) CGRect rect;
 @end
 
 @implementation PDFPageContentTileView
@@ -28,7 +29,10 @@
 
 - (void)drawLayer:(CALayer*)layer inContext:(CGContextRef)context
 {
-    [self.page drawInRect:self.bounds inContext:context cropping:YES];
+    if (CGRectEqualToRect(self.rect, CGRectZero)) {
+        self.rect = self.bounds;
+    }
+    [self.page drawInRect:self.rect inContext:context cropping:YES];
 }
 
 @end

@@ -10,20 +10,18 @@
 
 #import "PDFDocument.h"
 #import "PDFDocumentCrop.h"
-#import "PDFDocumentCropOverlayView.h"
 #import "PDFPage.h"
+#import "PDFPageContentView.h"
 #import "PDFPageCropViewController.h"
 #import "PDFPageViewController.h"
 
 NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewControllerSegueExit";
 
-@interface PDFDocumentCropViewController () <UIPageViewControllerDelegate,
-                                             UIPageViewControllerDataSource,
-                                             UIGestureRecognizerDelegate>
-@property (nonatomic, strong) UIPageViewController *pageViewController;
-@property (nonatomic, strong) IBOutlet PDFDocumentCropOverlayView *overlayView;
+@interface PDFDocumentCropViewController () <UIGestureRecognizerDelegate>
+@property (nonatomic, strong) PDFPageCropViewController *pdfPageViewController;
 @property (nonatomic, assign) BOOL fullScreen;
 @property (nonatomic, strong) UIButton *modeButton;
+@property (nonatomic, strong) IBOutlet PDFDocumentCropLayoutView *layoutView;
 @end
 
 @implementation PDFDocumentCropViewController
@@ -60,25 +58,20 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     });
     [self updateModeButton];
 
-    self.pageViewController =
-            [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                            navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                          options:@{UIPageViewControllerOptionInterPageSpacingKey:
-                                                                    @(24)}];
-    self.pageViewController.dataSource = self;
-    self.pageViewController.delegate = self;
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
-    self.pageViewController.view.frame = self.view.bounds;
-
-    [self goAtIndex:self.crop.document.currentPage
-           animated:NO];
+    PDFPage *page = [self.crop.document pageAtIndex:self.crop.document.currentPage];
+    self.pdfPageViewController =
+            [[PDFPageCropViewController alloc] initWithPage:page];
+    self.pdfPageViewController.crop = self.crop;    
+    [self.layoutView addSubview:self.pdfPageViewController.view];
+    self.pdfPageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth |
+            UIViewAutoresizingFlexibleHeight;
+    self.pdfPageViewController.view.frame = self.layoutView.bounds;
 
     UITapGestureRecognizer *tapRec =
             [[UITapGestureRecognizer alloc] initWithTarget:self
                                                     action:@selector(singleTapped:)];
     tapRec.delegate = self;
-    [self.overlayView addGestureRecognizer:tapRec];
+    [self.pdfPageViewController.view addGestureRecognizer:tapRec];
 }
 
 - (void)changeMode:(id)sender
@@ -130,61 +123,7 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     // Dispose of any resources that can be recreated.
 }
 
-- (void)goAtIndex:(NSUInteger)index animated:(BOOL)animated
-{
-    UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionForward;
-    PDFPageViewController *pdfPageViewController = [self pageViewControllerAtIndex:index];
-    [self.pageViewController setViewControllers:@[pdfPageViewController]
-                                      direction:direction
-                                       animated:animated
-                                     completion:NULL];
-
-    self.overlayView.targetRect = pdfPageViewController.contentFrame;
-    CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
-    if (!CGRectEqualToRect(cropRect, CGRectZero)) {
-        self.overlayView.cropRect = cropRect;
-    }
-    [self.view bringSubviewToFront:self.overlayView];
-}
-
 #pragma mark -
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-      viewControllerBeforeViewController:(UIViewController *)viewController
-{
-    PDFPageViewController *current = (PDFPageViewController *)viewController;
-    if (current.page.index == 1) {
-        return nil;
-    }
-
-    return [self pageViewControllerAtIndex:current.page.index - 1];
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-       viewControllerAfterViewController:(UIViewController *)viewController
-{
-    PDFPageViewController *current = (PDFPageViewController *)viewController;
-    return [self pageViewControllerAtIndex:current.page.index + 1];
-}
-
-#pragma mark - Init PDFPageViewController
-
-- (PDFPageViewController *)pageViewControllerAtIndex:(NSUInteger)index
-{
-    PDFPage *page = [self.crop.document pageAtIndex:index];
-    PDFPageViewController *vc =
-            [[PDFPageCropViewController alloc] initWithPage:page];      
-    return vc;
-}
-
-#pragma mark -
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    UIView *hit = [self.overlayView hitTest:[touch locationInView:self.overlayView]
-                                  withEvent:nil];
-    return (self.overlayView == hit);
-}
 
 - (void)singleTapped:(UITapGestureRecognizer *)recognizer
 {
@@ -238,32 +177,26 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 {
     if ([segue.identifier isEqualToString:PDFDocumentCropViewControllerSegueExit]) {
         if (self.crop.mode == PDFDocumentCropModeSame) {
-            self.crop.oddCropRect = self.overlayView.cropRect;
-            self.crop.evenCropRect = self.overlayView.cropRect;
+            self.crop.oddCropRect = self.pdfPageViewController.cropRect;
+            self.crop.evenCropRect = self.pdfPageViewController.cropRect;
         } else if (self.crop.mode == PDFDocumentCropModeDifferent) {
             if (self.isOddPage) {
-                self.crop.oddCropRect = self.overlayView.cropRect;
+                self.crop.oddCropRect = self.pdfPageViewController.cropRect;
             } else {
-                self.crop.evenCropRect = self.overlayView.cropRect;
+                self.crop.evenCropRect = self.pdfPageViewController.cropRect;
             }
         }
     }
 }
 
-#pragma mark -
+@end
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
-interfaceOrientation duration:(NSTimeInterval)duration
-{
-    PDFPageCropViewController *vc = self.pageViewController.viewControllers.firstObject;
-    self.overlayView.targetRect = vc.contentFrame;
-    self.overlayView.hidden = YES;
-}
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+@implementation PDFDocumentCropLayoutView : UIView
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    self.overlayView.hidden = NO;
+    return YES;
 }
 
 @end

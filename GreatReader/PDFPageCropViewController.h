@@ -8,6 +8,9 @@
 
 #import "PDFPageViewController.h"
 
-@interface PDFPageCropViewController : PDFPageViewController
+@class PDFDocumentCrop;
 
+@interface PDFPageCropViewController : PDFPageViewController
+@property (nonatomic, strong) PDFDocumentCrop *crop;
+@property (nonatomic, readonly) CGRect cropRect;
 @end

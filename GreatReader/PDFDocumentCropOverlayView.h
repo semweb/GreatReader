@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PDFDocumentCropOverlayView : UIView
-@property (nonatomic, assign) CGRect targetRect;
 @property (nonatomic, assign) CGRect cropRect;
 @end
