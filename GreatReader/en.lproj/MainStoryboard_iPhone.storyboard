@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="160" id="iWx-Ez-CId"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="jhM-DQ-fl5" kind="embed" identifier="HomeViewControllerSegueEmbedRecent" id="76v-2H-FQl"/>
+                                    <segue destination="tfv-aM-ddj" kind="embed" identifier="HomeViewControllerSegueEmbedRecent" id="KEN-4D-JfO"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGJ-Pw-gnB">
@@ -77,44 +77,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6X-mo-2MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-723" y="-1098"/>
-        </scene>
-        <!--Recent Document List View Controller-->
-        <scene sceneID="smv-af-D6t">
-            <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="jhM-DQ-fl5" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Vjn-xE-OQd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="fkK-KS-iR7">
-                            <size key="itemSize" width="100" height="140"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vTM-Eh-aY4">
-                                <rect key="frame" x="10" y="10" width="100" height="140"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="jhM-DQ-fl5" id="el4-8M-l6w"/>
-                            <outlet property="delegate" destination="jhM-DQ-fl5" id="oGQ-EA-SBb"/>
-                        </connections>
-                    </collectionView>
-                    <connections>
-                        <segue destination="2" kind="push" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" id="L0f-1i-Oxt"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eQ7-xy-0A1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-139" y="-1426"/>
         </scene>
         <!--Folder Table View Controller - Root View Controller-->
         <scene sceneID="QcF-6Z-wCi">
@@ -177,80 +139,59 @@
                         <viewControllerLayoutGuide type="bottom" id="2tq-hO-gja"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VGq-2P-a1h">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTh-qR-L9R">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="done:" destination="0gI-Sb-Wgy" eventType="touchUpInside" id="16R-93-k2w"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fw8-VL-P9D">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="d1m-s4-vmr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" id="GZu-kJ-Pwd">
-                                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GZu-kJ-Pwd" id="jU7-6b-PBa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <sections/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="0gI-Sb-Wgy" id="Vwf-r4-0Nf"/>
-                                            <outlet property="delegate" destination="0gI-Sb-Wgy" id="DVd-Oe-fvh"/>
-                                        </connections>
-                                    </tableView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47l-VC-JFk" customClass="UINavigationBar">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-Ma-2Zo">
-                                        <rect key="frame" x="0.0" y="108" width="320" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                </subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="d1m-s4-vmr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="109" id="bkG-Th-fqN"/>
+                                    <constraint firstAttribute="height" constant="108" id="Kgi-gD-Me0"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" id="GZu-kJ-Pwd">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GZu-kJ-Pwd" id="jU7-6b-PBa">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0gI-Sb-Wgy" id="Vwf-r4-0Nf"/>
+                                    <outlet property="delegate" destination="0gI-Sb-Wgy" id="DVd-Oe-fvh"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47l-VC-JFk" customClass="UINavigationBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="an9-EB-h4F"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fw8-VL-P9D" secondAttribute="trailing" id="L7I-3A-4Oq"/>
-                            <constraint firstAttribute="trailing" secondItem="TTh-qR-L9R" secondAttribute="trailing" id="LJS-y7-cfL"/>
-                            <constraint firstItem="fw8-VL-P9D" firstAttribute="leading" secondItem="VGq-2P-a1h" secondAttribute="leading" id="cqF-P8-9vz"/>
-                            <constraint firstItem="TTh-qR-L9R" firstAttribute="leading" secondItem="VGq-2P-a1h" secondAttribute="leading" id="fQP-B8-hPU"/>
-                            <constraint firstItem="TTh-qR-L9R" firstAttribute="top" secondItem="VGq-2P-a1h" secondAttribute="top" id="n59-XZ-yif"/>
-                            <constraint firstAttribute="bottom" secondItem="TTh-qR-L9R" secondAttribute="bottom" id="pYG-Aj-FfU"/>
-                            <constraint firstItem="fw8-VL-P9D" firstAttribute="top" secondItem="VGq-2P-a1h" secondAttribute="top" id="rab-N7-Jke"/>
+                            <constraint firstItem="d1m-s4-vmr" firstAttribute="top" secondItem="VGq-2P-a1h" secondAttribute="top" id="XCE-rj-fqs"/>
+                            <constraint firstItem="47l-VC-JFk" firstAttribute="leading" secondItem="VGq-2P-a1h" secondAttribute="leading" id="Y8B-tq-4DN"/>
+                            <constraint firstAttribute="trailing" secondItem="47l-VC-JFk" secondAttribute="trailing" id="Z5K-co-m0V"/>
+                            <constraint firstItem="d1m-s4-vmr" firstAttribute="leading" secondItem="VGq-2P-a1h" secondAttribute="leading" id="a53-Dx-3EM"/>
+                            <constraint firstItem="47l-VC-JFk" firstAttribute="top" secondItem="VGq-2P-a1h" secondAttribute="top" id="gPE-pV-e9x"/>
+                            <constraint firstAttribute="trailing" secondItem="d1m-s4-vmr" secondAttribute="trailing" id="gZE-YB-gGC"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="108"/>
                     <connections>
-                        <outlet property="dimView" destination="TTh-qR-L9R" id="cSq-UG-cix"/>
                         <outlet property="naviBar" destination="47l-VC-JFk" id="yx1-zD-4NH"/>
-                        <outlet property="sheetView" destination="fw8-VL-P9D" id="gI5-GO-ORu"/>
                         <outlet property="tableView" destination="d1m-s4-vmr" id="bR5-Vr-qRL"/>
-                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSettingSegueExit" unwindAction="exitBrightness:" id="BNT-Ry-M8f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ih1-7b-frr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -501,7 +442,7 @@
                 </barButtonItem>
                 <barButtonItem image="Brightness.png" style="plain" id="LVN-8W-5N1" userLabel="Brightness">
                     <connections>
-                        <segue destination="0gI-Sb-Wgy" kind="custom" identifier="PDFDocumentViewControllerSegueBrightness" customClass="PDFDocumentSettingSegue" id="p1g-BR-8gv"/>
+                        <segue destination="0gI-Sb-Wgy" kind="modal" identifier="PDFDocumentViewControllerSegueBrightness" id="p1g-BR-8gv"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem image="RibbonOn.png" style="plain" id="9eO-3t-r0w" userLabel="Ribbon On">
@@ -515,12 +456,146 @@
                         <action selector="toggleRibbon:" destination="2" id="Cl9-W1-hVC"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="History.png" id="FWY-Mv-FS9" userLabel="History"/>
+                <barButtonItem image="History.png" id="FWY-Mv-FS9" userLabel="History">
+                    <connections>
+                        <segue destination="f5f-aF-dRJ" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="sKJ-j2-2GX"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem image="Find.png" id="oGZ-Ya-lPq" userLabel="Find"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="433" y="-1010"/>
+        </scene>
+        <!--Recent Document List View Controller-->
+        <scene sceneID="7j0-Vc-1tt">
+            <objects>
+                <viewController id="f5f-aF-dRJ" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0gm-3x-f4x"/>
+                        <viewControllerLayoutGuide type="bottom" id="NpX-bQ-Be5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O5J-hx-xhi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2a-DY-9Vo" customClass="UIToolbar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="Mm0-go-pLG"/>
+                                </constraints>
+                            </view>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-p9-S1x">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="rPQ-L7-v7T"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="IN9-JQ-VBg">
+                                    <size key="itemSize" width="100" height="140"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="30" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jEe-l0-5VW">
+                                        <rect key="frame" x="10" y="30" width="100" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="f5f-aF-dRJ" id="Gr2-PN-W4I"/>
+                                    <outlet property="delegate" destination="f5f-aF-dRJ" id="alR-yw-pXb"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R2a-DY-9Vo" firstAttribute="leading" secondItem="O5J-hx-xhi" secondAttribute="leading" id="DMR-fC-baV"/>
+                            <constraint firstAttribute="trailing" secondItem="dBQ-p9-S1x" secondAttribute="trailing" id="O2d-VO-zdP"/>
+                            <constraint firstItem="dBQ-p9-S1x" firstAttribute="leading" secondItem="O5J-hx-xhi" secondAttribute="leading" id="P7Y-Nn-7HM"/>
+                            <constraint firstItem="dBQ-p9-S1x" firstAttribute="top" secondItem="O5J-hx-xhi" secondAttribute="top" id="SaW-2h-zzi"/>
+                            <constraint firstItem="R2a-DY-9Vo" firstAttribute="top" secondItem="O5J-hx-xhi" secondAttribute="top" id="mSX-FM-fgh"/>
+                            <constraint firstAttribute="trailing" secondItem="R2a-DY-9Vo" secondAttribute="trailing" id="zlS-cR-MaU"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="180"/>
+                    <connections>
+                        <outlet property="collectionView" destination="dBQ-p9-S1x" id="6zp-L4-GWT"/>
+                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" unwindAction="exitHistory:" id="LCB-el-pnN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CGI-rw-pXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="-1586"/>
+        </scene>
+        <!--Recent Document List View Controller-->
+        <scene sceneID="iup-sO-I6Y">
+            <objects>
+                <viewController id="tfv-aM-ddj" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9s3-hM-z5L"/>
+                        <viewControllerLayoutGuide type="bottom" id="5VX-ul-i6x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="F8Z-DB-Muo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QTP-Mg-Jgo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="RZR-JM-TZy"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="wqk-Ya-FcC">
+                                    <size key="itemSize" width="100" height="140"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jgi-AD-uzF" customClass="PDFRecentDocumentCell">
+                                        <rect key="frame" x="10" y="10" width="100" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="tfv-aM-ddj" id="QyB-Oi-DCI"/>
+                                    <outlet property="delegate" destination="tfv-aM-ddj" id="CQx-rr-gf4"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QTP-Mg-Jgo" firstAttribute="leading" secondItem="F8Z-DB-Muo" secondAttribute="leading" id="GSa-3X-g15"/>
+                            <constraint firstAttribute="trailing" secondItem="QTP-Mg-Jgo" secondAttribute="trailing" id="VrQ-3G-P30"/>
+                            <constraint firstItem="QTP-Mg-Jgo" firstAttribute="top" secondItem="F8Z-DB-Muo" secondAttribute="top" id="sJ9-0z-hm8"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="320" height="165"/>
+                    <connections>
+                        <outlet property="collectionView" destination="QTP-Mg-Jgo" id="aKk-nK-zIe"/>
+                        <segue destination="2" kind="push" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" id="Pu0-UL-kh7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Xh-Qq-3fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="-1686"/>
         </scene>
     </scenes>
     <resources>
@@ -538,6 +613,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="L0f-1i-Oxt"/>
+        <segue reference="Pu0-UL-kh7"/>
     </inferredMetricsTieBreakers>
 </document>

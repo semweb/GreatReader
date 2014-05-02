@@ -10,15 +10,13 @@
 
 @class PDFDocument;
 
-extern NSString * const PDFDocumentSettingSegueExit;
-
 @interface PDFDocumentBrightnessViewController : UIViewController
 @property (nonatomic, strong) PDFDocument *document;
 @end
 
 
-@interface PDFDocumentSettingSegue : UIStoryboardSegue
-@end
+// @interface PDFDocumentSettingSegue : UIStoryboardSegue
+// @end
 
-@interface PDFDocumentExitSettingSegue : UIStoryboardSegue
-@end
+// @interface PDFDocumentExitSettingSegue : UIStoryboardSegue
+// @end

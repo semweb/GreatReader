@@ -21,6 +21,7 @@
 - (IBAction)exitBrightness:(UIStoryboardSegue *)segue;
 - (IBAction)exitOutline:(UIStoryboardSegue *)segue;
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue;
+- (IBAction)exitHistory:(UIStoryboardSegue *)segue;
 
 - (IBAction)toggleRibbon:(id)sender;
 

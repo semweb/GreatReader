@@ -8,6 +8,7 @@
 
 #import "PDFDocumentViewController.h"
 
+#import "GRTModalTransitionAnimator.h"
 #import "PDFDocument.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentBookmarkListViewController.h"
@@ -23,14 +24,17 @@
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
 #import "PDFRecentDocumentList.h"
+#import "PDFRecentDocumentListViewModel.h"
 #import "PDFRecentDocumentListViewController.h"
 
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
 NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
 NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewControllerSegueBrightness";
+NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
-                                         UIPageViewControllerDelegate>
+                                         UIPageViewControllerDelegate,
+                                         UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, assign) BOOL fullScreen;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cropItem;
@@ -387,7 +391,16 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         PDFDocumentBrightnessViewController *vc =
                 (PDFDocumentBrightnessViewController *)segue.destinationViewController;
         vc.document = self.document;
-        self.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        vc.modalPresentationStyle = UIModalPresentationCustom;
+        vc.transitioningDelegate = self;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueHistory]) {
+        PDFRecentDocumentListViewController *vc = (PDFRecentDocumentListViewController *)segue.destinationViewController;
+        PDFRecentDocumentListViewModel *model = [[PDFRecentDocumentListViewModel alloc]
+                                                    initWithDocumentList:self.documentList
+                                                           withoutActive:YES];
+        vc.model = model;
+        vc.modalPresentationStyle = UIModalPresentationCustom;
+        vc.transitioningDelegate = self;
     }
 
     if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
@@ -425,6 +438,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue {}
 
+- (IBAction)exitHistory:(UIStoryboardSegue *)segue {}
+
 #pragma mark - PDFDocumentPageSlider Delegate, DataSouce
 
 - (void)pageSlider:(PDFDocumentPageSlider *)slider didSelectAtIndex:(NSUInteger)index
@@ -449,5 +464,40 @@ pageThumbnailAtIndex:(NSUInteger)index
 {
     return self.document.numberOfPages;
 }
+
+#pragma mark -
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    GRTModalTransitionAnimator *animator = [GRTModalTransitionAnimator new];
+    animator.presentedContentHeight = [self heightForViewController:presented];
+    animator.presenting = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    GRTModalTransitionAnimator *animator = [GRTModalTransitionAnimator new];
+    animator.presentedContentHeight = [self heightForViewController:dismissed];
+    return animator;
+}
+
+#pragma mark -
+
+- (CGFloat)heightForViewController:(UIViewController *)viewController
+{
+    if ([viewController isKindOfClass:PDFDocumentBrightnessViewController.class]) {
+        return 108;
+    } else if ([viewController isKindOfClass:PDFRecentDocumentListViewController.class]) {
+        return 180;
+    } else {
+        return 0;
+    }
+}
+
 
 @end

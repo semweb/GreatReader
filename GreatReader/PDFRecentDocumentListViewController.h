@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PDFRecentDocumentList;
+@class PDFRecentDocumentListViewModel;
 
-@interface PDFRecentDocumentListViewController : UICollectionViewController
-@property (nonatomic, strong) PDFRecentDocumentList *documentList;
+@interface PDFRecentDocumentListViewController : UIViewController {
+    UICollectionView *collectionView_;
+}
+@property (nonatomic, strong) PDFRecentDocumentListViewModel *model;
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @end

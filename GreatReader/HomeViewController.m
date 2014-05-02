@@ -12,6 +12,7 @@
 #import "FolderTableDataSource.h"
 #import "FolderTableViewController.h"
 #import "PDFRecentDocumentList.h"
+#import "PDFRecentDocumentListViewModel.h"
 #import "PDFRecentDocumentListViewController.h"
 
 NSString * const HomeViewControllerSegueEmbedFolder = @"HomeViewControllerSegueEmbedFolder";
@@ -61,7 +62,10 @@ NSString * const HomeViewControllerSegueEmbedRecent = @"HomeViewControllerSegueE
         self.folderViewController = vc;
     } else if ([segue.identifier isEqualToString:HomeViewControllerSegueEmbedRecent]) {
         PDFRecentDocumentListViewController *vc = (PDFRecentDocumentListViewController *)segue.destinationViewController;
-        vc.documentList = self.documentList;
+        PDFRecentDocumentListViewModel *model = [[PDFRecentDocumentListViewModel alloc]
+                                                    initWithDocumentList:self.documentList
+                                                           withoutActive:NO];
+        vc.model = model;
         self.recentViewController = vc;
     }
 }

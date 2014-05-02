@@ -11,8 +11,6 @@
 #import "PDFDocument.h"
 #import "PDFDocumentViewController.h"
 
-NSString * const PDFDocumentSettingSegueExit = @"PDFDocumentSettingSegueExit";
-
 
 @interface PDFDocumentBrightnessViewController () <UITableViewDataSource,
                                                 UITableViewDelegate>
@@ -73,8 +71,8 @@ NSString * const PDFDocumentSettingSegueExit = @"PDFDocumentSettingSegueExit";
 
 - (IBAction)done:(id)sender
 {
-    [self performSegueWithIdentifier:PDFDocumentSettingSegueExit
-                              sender:sender];
+    [self dismissViewControllerAnimated:YES
+                             completion:NULL];
 }
 
 - (void)sliderChanged:(UISlider *)slider
@@ -125,6 +123,22 @@ NSString * const PDFDocumentSettingSegueExit = @"PDFDocumentSettingSegueExit";
     return nil;
 }
 
+#pragma mark -
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:interfaceOrientation
+                                            duration:duration];
+    NSLog(@"%@", self);
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    NSLog(@"%@", self);
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,74 +180,4 @@ NSString * const PDFDocumentSettingSegueExit = @"PDFDocumentSettingSegueExit";
 
 @end
 
-
-@implementation PDFDocumentSettingSegue
-
-- (void)perform
-{
-    UIViewController *source = self.sourceViewController;
-    
-    PDFDocumentBrightnessViewController *dest = self.destinationViewController;
-    [source presentViewController:dest
-                         animated:NO
-                       completion:NULL];
-    dest.dimView.alpha = 0.0;
-    CGRect endFrame = dest.sheetView.frame;
-    dest.sheetView.frame = ({
-        CGRect f = endFrame;
-        f.origin.y = -CGRectGetHeight(f);
-        f;
-    });
-
-    endFrame.origin.y = 300;
-    
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-        dest.dimView.alpha = 0.1;
-        dest.sheetView.frame = endFrame;
-    } completion:^(BOOL finished) {
-        source.navigationController.modalPresentationStyle = 0;
-    }];
-}
-
-@end
-
-
-@implementation PDFDocumentExitSettingSegue : UIStoryboardSegue
-
-- (void)perform
-{
-    [self perform:NULL];
-}
-
-- (void)perform:(void (^)(void))completion
-{
-    PDFDocumentBrightnessViewController *source = self.sourceViewController;
-    PDFDocumentViewController *dest = self.destinationViewController;
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [UIView animateWithDuration:0.25
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-            source.dimView.alpha = 0.0;
-            source.sheetView.frame = ({
-                CGRect f = source.sheetView.frame;
-                f.origin.y = -CGRectGetHeight(f);
-                f;
-            });
-        } completion:^(BOOL finished) {
-            [dest dismissViewControllerAnimated:NO
-                                     completion:completion];
-        }];
-    } else {
-        if (completion) {
-            completion();
-        }
-    }
-}
-
-@end
 

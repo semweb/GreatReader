@@ -10,6 +10,20 @@
 
 #import "PDFDocumentBrightnessViewController.h"
 
+@interface DismissUnwindSegue : UIStoryboardSegue
+@end
+
+@implementation DismissUnwindSegue
+
+- (void)perform
+{
+    [[self destinationViewController] dismissViewControllerAnimated:YES
+                                                         completion:NULL];
+}
+
+@end
+
+
 @interface GRTNavigationController ()
 
 @end
@@ -39,15 +53,12 @@
 
 - (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier
 {
-    NSDictionary *map = @{
-        PDFDocumentSettingSegueExit: PDFDocumentExitSettingSegue.class
-    };
     BOOL isPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
-    if (isPhone && [map.allKeys containsObject:identifier]) {
-        Class cls = [map objectForKey:identifier];
-        return [[cls alloc] initWithIdentifier:identifier
-                                        source:fromViewController
-                                   destination:toViewController];
+    if (isPhone) {
+        return [[DismissUnwindSegue alloc]
+                   initWithIdentifier:identifier
+                               source:fromViewController
+                          destination:toViewController];
     }
     return [super segueForUnwindingToViewController:toViewController
                                  fromViewController:fromViewController
