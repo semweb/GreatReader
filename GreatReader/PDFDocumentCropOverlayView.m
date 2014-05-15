@@ -268,14 +268,17 @@
 
 - (void)setCropRect:(CGRect)cropRect
 {
-    CGFloat width = CGRectGetWidth(self.bounds);
+    if (CGRectEqualToRect(cropRect, CGRectZero)) {
+        self.knobRect = self.bounds;
+    } else {
+        CGFloat width = CGRectGetWidth(self.bounds);
+        CGFloat x = cropRect.origin.x * width + CGRectGetMinX(self.bounds);
+        CGFloat y = cropRect.origin.y * width + CGRectGetMinY(self.bounds);
+        CGFloat w = cropRect.size.width * width;
+        CGFloat h = cropRect.size.height * width;
+        self.knobRect = CGRectMake(x, y, w, h);
+    }
 
-    CGFloat x = cropRect.origin.x * width + CGRectGetMinX(self.bounds);
-    CGFloat y = cropRect.origin.y * width + CGRectGetMinY(self.bounds);
-    CGFloat w = cropRect.size.width * width;
-    CGFloat h = cropRect.size.height * width;
-
-    self.knobRect = CGRectMake(x, y, w, h);
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }

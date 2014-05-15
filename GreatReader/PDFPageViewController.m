@@ -212,7 +212,8 @@
                                  inView:self.contentView];
         [self.contentView hideLoope];
     } else {
-        [self.contentView showLoopeAtPoint:point];
+        [self.contentView showLoopeAtPoint:point
+                                    inView:self.navigationController.view];
     }
 }
 
@@ -233,6 +234,16 @@
                            inView:view];
     [self becomeFirstResponder];
     [menuController setMenuVisible:YES animated:YES];
+
+    
+    __block __weak id observer = [NSNotificationCenter.defaultCenter
+                             addObserverForName:UIMenuControllerDidHideMenuNotification
+                                         object:menuController
+                                          queue:NSOperationQueue.mainQueue
+                                     usingBlock:^(NSNotification *notification) {
+        [NSNotificationCenter.defaultCenter removeObserver:observer];
+        [self.page unselectCharacters];
+    }];
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -283,6 +294,20 @@
     self.scrollView.zoomScale = scale;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 10, 10)
                                 animated:NO];
+}
+
+#pragma mark -
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.page unselectCharacters];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.contentView redraw];
 }
 
 @end

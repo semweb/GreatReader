@@ -124,13 +124,18 @@
 
     CGRect drawRect = self.croppedRect;
     CGFloat scale = pdfRect.size.width / drawRect.size.width;
-    transform = CGAffineTransformScale(transform, scale, scale);
-    transform = CGAffineTransformTranslate(transform,
-                               -drawRect.origin.x,
-                               -(pdfRect.size.height - CGRectGetMaxY(drawRect)));
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
+    CGAffineTransform translationTransform =
+            CGAffineTransformMakeTranslation(-drawRect.origin.x,
+                                             -drawRect.origin.y);
+                                             // 0);
 
     self.characterFrames = [self.characters grt_map:^(PDFRenderingCharacter *character) {
-        CGAffineTransform t = CGAffineTransformConcat(character.state.transform, transform);
+        CGAffineTransform t = CGAffineTransformIdentity;
+        t = CGAffineTransformConcat(t, character.state.transform);        
+        t = CGAffineTransformConcat(t, transform);
+        t = CGAffineTransformConcat(t, translationTransform);
+        t = CGAffineTransformConcat(t, scaleTransform);
         return [NSValue valueWithCGRect:CGRectApplyAffineTransform(character.frame, t)];
     }];
 }

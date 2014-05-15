@@ -91,15 +91,11 @@
     [self.selectionViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.selectionViews removeAllObjects];
 
-    CGFloat scale = self.scale;
     CGRect rect = CGRectZero;
     NSMutableArray *lines = NSMutableArray.array;
     for (NSValue *v in self.page.selectedFrames) {
         CGRect r = v.CGRectValue;
-        CGRect scaleFrame = CGRectMake(CGRectGetMinX(r) * scale,
-                                       CGRectGetMinY(r) * scale,
-                                       CGRectGetWidth(r) * scale,
-                                       CGRectGetHeight(r) * scale);
+        CGRect scaleFrame = CGRectApplyAffineTransform(r, self.selectionTransform);
         if (CGRectEqualToRect(rect, CGRectZero)) {
             rect = scaleFrame;
             [lines addObject:[NSValue valueWithCGRect:rect]];            
@@ -125,6 +121,19 @@
     }
 }
 
+- (CGAffineTransform)selectionTransform
+{
+    CGAffineTransform invertTransform = CGAffineTransformInvert(self.transform);
+    CGRect f = CGRectApplyAffineTransform(self.frame, invertTransform);    
+    CGFloat scale = CGRectGetWidth(f) / CGRectGetWidth(self.page.rect);
+
+    CGAffineTransform scaleT = CGAffineTransformMakeScale(scale, scale);
+    CGAffineTransform translateT =
+            CGAffineTransformMakeTranslation(0, 0);
+                                             // (f.size.height - CGRectGetMaxY(self.page.rect)));
+    return CGAffineTransformConcat(scaleT, translateT);
+}
+
 - (CGFloat)scale
 {
     CGAffineTransform invertTransform = CGAffineTransformInvert(self.transform);
@@ -147,19 +156,20 @@
 }
 
 - (void)showLoopeAtPoint:(CGPoint)point
+                  inView:(UIView *)containerView
 {
     if (!self.loopeView.superview) {
-        [self.window addSubview:self.loopeView];
+        [containerView addSubview:self.loopeView];
     }
-    point = [self convertPoint:point toView:nil];
+    point = [self convertPoint:point toView:containerView];
     self.loopeView.center = CGPointMake(roundf(point.x), roundf(point.y));
-    UIGraphicsBeginImageContextWithOptions(self.loopeView.frame.size, NO, 2.0);  {
+    UIGraphicsBeginImageContextWithOptions(self.loopeView.frame.size, NO, 4.0);  {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGPoint p = [self convertPoint:self.loopeView.frame.origin
-                              fromView:nil];
+                              fromView:containerView];
         CGAffineTransform transform = CGAffineTransformIdentity;
-        transform = CGAffineTransformTranslate(transform, -p.x, -p.y);
         transform = CGAffineTransformConcat(transform, self.transform);
+        transform = CGAffineTransformTranslate(transform, -p.x, -p.y);        
         CGContextConcatCTM(context, transform);
         [self.layer renderInContext:context];
         self.loopeView.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -173,6 +183,13 @@
 - (void)hideLoope
 {
     [self.loopeView removeFromSuperview];
+}
+
+- (void)redraw
+{
+    self.tileView.layer.contents = nil;
+    self.tileView.rect = CGRectZero;
+    [self.tileView setNeedsDisplay];
 }
 
 @end

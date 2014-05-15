@@ -29,6 +29,7 @@
 
 @interface PDFPageCropViewController ()
 @property (nonatomic, strong) PDFDocumentCropOverlayView *overlayView;
+@property (nonatomic, assign) BOOL first;
 @end
 
 @implementation PDFPageCropViewController
@@ -53,16 +54,17 @@
 
     self.overlayView = [[PDFDocumentCropOverlayView alloc] initWithFrame:self.contentView.bounds];
     [self.view addSubview:self.overlayView];
+
+    self.first = YES;
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     self.overlayView.frame = self.contentView.frame;
-    CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
-    if (!CGRectEqualToRect(cropRect, CGRectZero) &&
-        CGRectEqualToRect(self.overlayView.cropRect, CGRectZero)) {
-
+    if (self.first) {
+        self.first = NO;
+        CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
         self.overlayView.cropRect = cropRect;
     }
 }

@@ -113,7 +113,7 @@
 
 - (void)layoutKnobView
 {
-    CGFloat progress = (CGFloat)(self.currentIndex - 1) / (self.dataSource.numberOfPages - 1);
+    CGFloat progress = (CGFloat)(self.currentIndex - 1) / MAX(1, (self.dataSource.numberOfPages - 1));
     self.knobView.center = [self positionForProgress:progress];
 }
 

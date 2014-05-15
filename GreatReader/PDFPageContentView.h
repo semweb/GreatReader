@@ -14,6 +14,8 @@
 @property (nonatomic, strong) PDFPage *page;
 @property (nonatomic, readonly) CGFloat scale;
 @property (nonatomic, readonly) CGRect selectionFrame;
-- (void)showLoopeAtPoint:(CGPoint)point;
+- (void)showLoopeAtPoint:(CGPoint)point
+                  inView:(UIView *)containerView;
 - (void)hideLoope;
+- (void)redraw;
 @end

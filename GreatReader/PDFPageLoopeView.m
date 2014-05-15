@@ -78,10 +78,15 @@
     
     [[UIColor colorWithWhite:128/255.0 alpha:1.0] set];
     UIRectFill(rect);
+    // [self.image drawInRect:CGRectMake(0,
+    //                                   - CGRectGetHeight([[self class] arrowRect]) / 2.0,
+    //                                   CGRectGetWidth(rect),
+    //                                   CGRectGetHeight(rect))];
     [self.image drawInRect:CGRectMake(-CGRectGetWidth(rect) / 2.0,
                                       -CGRectGetHeight(rect) / 2.0 - CGRectGetHeight([[self class] arrowRect]) / 2.0,
                                       CGRectGetWidth(rect) * 2.0,
                                       CGRectGetHeight(rect) * 2.0)];
+    
     [UIColor.blackColor set];
     [bezierPath stroke];
 }

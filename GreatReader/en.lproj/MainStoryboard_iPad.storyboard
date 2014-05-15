@@ -430,7 +430,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qzX-rb-cpd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2EF-ue-E9a">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
