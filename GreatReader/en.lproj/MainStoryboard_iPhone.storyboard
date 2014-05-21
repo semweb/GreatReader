@@ -7,7 +7,7 @@
         <!--Home View Controller-->
         <scene sceneID="Y3M-c4-Z6s">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cPd-wP-kvQ" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cPd-wP-kvQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rfE-Hu-Z2e"/>
                         <viewControllerLayoutGuide type="bottom" id="gIj-WL-gmK"/>
@@ -81,7 +81,7 @@
         <!--Folder Table View Controller - Root View Controller-->
         <scene sceneID="QcF-6Z-wCi">
             <objects>
-                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="FuG-cV-52a" customClass="FolderTableViewController" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="HomeFolderTable" automaticallyAdjustsScrollViewInsets="NO" id="FuG-cV-52a" customClass="FolderTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="LV0-ta-pV7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="322"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,7 +353,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jJw-TU-ueZ">
             <objects>
-                <navigationController definesPresentationContext="YES" id="tSv-Kq-LgP" customClass="GRTNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GRTNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tSv-Kq-LgP" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="flk-qE-mXA">
                         <autoresizingMask key="autoresizingMask"/>
@@ -373,7 +373,7 @@
         <!--Document View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2" customClass="PDFDocumentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PDFDocumentViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2" customClass="PDFDocumentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h0O-kV-CAd"/>
                         <viewControllerLayoutGuide type="bottom" id="bWV-8V-RzY"/>
@@ -541,7 +541,7 @@
         <!--Recent Document List View Controller-->
         <scene sceneID="iup-sO-I6Y">
             <objects>
-                <viewController id="tfv-aM-ddj" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HomeRecentDocumentList" id="tfv-aM-ddj" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9s3-hM-z5L"/>
                         <viewControllerLayoutGuide type="bottom" id="5VX-ul-i6x"/>
@@ -613,6 +613,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Pu0-UL-kh7"/>
+        <segue reference="RcB-vJ-nEK"/>
     </inferredMetricsTieBreakers>
 </document>

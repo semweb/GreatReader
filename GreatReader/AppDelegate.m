@@ -17,29 +17,61 @@
 #import "HomeViewController.h"
 #import "LibraryUtils.h"
 #import "NSFileManager+GreatReaderAdditions.h"
+#import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewController.h"
 #import "RootFolderTableDataSource.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
-@property (nonatomic, strong) UIViewController *initialViewController;
 @end
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     if (CrashlyticsEnabled()) {
         [Crashlytics startWithAPIKey:GetCrashlyticsAPIKey()];
     }
+
+    self.documentList = [PDFRecentDocumentList new];
     
     UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];
-    self.initialViewController = navi;
+    UIViewController *top = [navi topViewController];
+    if ([top isKindOfClass:HomeViewController.class]) {
+        [(HomeViewController *)top setDocumentList:self.documentList];
+    }
     
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (UIViewController *)application:(UIApplication *)application
+viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
+                            coder:(NSCoder *)coder
+{
+    NSString *identifier = [identifierComponents lastObject];
+    if ([identifier isEqual:@"PDFDocumentViewController"]) {
+        UIStoryboard *storyboard = [self.window.rootViewController storyboard];
+        PDFDocumentViewController *vc =
+                [storyboard instantiateViewControllerWithIdentifier:identifier];
+        vc.document = [self.documentList open:[self.documentList.documents firstObject]];
+        vc.documentList = self.documentList;
+        return vc;
+    } else {
+        return nil;
+    }
+}
+						
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

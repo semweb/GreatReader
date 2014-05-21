@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class FolderTableViewController;
+@class PDFRecentDocumentList;
 @class PDFRecentDocumentListViewController;
 
 @interface HomeViewController : UIViewController
 @property (nonatomic, strong) FolderTableViewController *folderViewController;
 @property (nonatomic, strong) PDFRecentDocumentListViewController *recentViewController;
+@property (nonatomic, strong) PDFRecentDocumentList *documentList;
 @end

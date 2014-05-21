@@ -138,7 +138,7 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 
     [self prepareToolbar];    
     [self prepareInfoView];
-    [self goAtIndex:self.document.currentPage animated:NO];    
+    [self goAtIndex:self.document.currentPage animated:NO];
 }
 
 #pragma mark -

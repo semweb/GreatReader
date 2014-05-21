@@ -144,7 +144,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5BC-5J-41L">
             <objects>
-                <navigationController definesPresentationContext="YES" id="rpq-QO-tBZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UINavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rpq-QO-tBZ" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yn8-OH-m5G">
                         <autoresizingMask key="autoresizingMask"/>
@@ -164,7 +164,7 @@
         <!--Document View Controller-->
         <scene sceneID="GCV-Qq-Ygq">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Mqv-qU-Nyv" customClass="PDFDocumentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PDFDocumentViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mqv-qU-Nyv" customClass="PDFDocumentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KtO-hD-GxV"/>
                         <viewControllerLayoutGuide type="bottom" id="mar-XL-T7m"/>
@@ -267,7 +267,7 @@
         <!--Home View Controller-->
         <scene sceneID="D3e-yC-qWM">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="m6W-az-sFU" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m6W-az-sFU" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jBP-uY-d5E"/>
                         <viewControllerLayoutGuide type="bottom" id="W3b-Z8-KXt"/>

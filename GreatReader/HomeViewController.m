@@ -19,7 +19,6 @@ NSString * const HomeViewControllerSegueEmbedFolder = @"HomeViewControllerSegueE
 NSString * const HomeViewControllerSegueEmbedRecent = @"HomeViewControllerSegueEmbedRecent";
 
 @interface HomeViewController ()
-@property (nonatomic, strong) PDFRecentDocumentList *documentList;
 @end
 
 @implementation HomeViewController
@@ -36,7 +35,6 @@ NSString * const HomeViewControllerSegueEmbedRecent = @"HomeViewControllerSegueE
 - (void)awakeFromNib
 {
     self.title = @"GreatReader";
-    self.documentList = [PDFRecentDocumentList new];
 }
 
 - (void)viewDidLoad
