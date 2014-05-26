@@ -10,7 +10,9 @@
 
 #import <Crashlytics/Crashlytics.h>
 
+#import "DocumentListViewController.h"
 #import "Folder.h"
+#import "FolderDocumentListViewModel.h"
 #import "FolderTableDataSource.h"
 #import "FolderTableViewController.h"
 #import "FolderTableViewController.h"
@@ -20,9 +22,19 @@
 #import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewController.h"
+#import "RecentDocumentListViewModel.h"
 #import "RootFolderTableDataSource.h"
 
-@interface AppDelegate ()
+NSString * const RestorationDocumentListTabBar = @"RestorationDocumentListTabBar";
+NSString * const RestorationDocumentListRecentNavi = @"RestorationDocumentListRecentNavi";
+NSString * const RestorationDocumentListRecent = @"RestorationDocumentListRecent";
+NSString * const RestorationDocumentListFolderNavi = @"RestorationDocumentListFolderNavi";
+NSString * const RestorationDocumentListFolder = @"RestorationDocumentListFolder";
+NSString * const RestorationPDFDocument = @"RestorationPDFDocument";
+NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
+
+
+@interface AppDelegate () <UITabBarControllerDelegate>
 @property (nonatomic, strong) PDFRecentDocumentList *documentList;
 @end
 
@@ -36,11 +48,22 @@
 
     self.documentList = [PDFRecentDocumentList new];
     
-    UINavigationController *navi = (UINavigationController *)[[self window] rootViewController];
-    UIViewController *top = [navi topViewController];
-    if ([top isKindOfClass:HomeViewController.class]) {
-        [(HomeViewController *)top setDocumentList:self.documentList];
-    }
+    UITabBarController *tabBar = (UITabBarController *)[[self window] rootViewController];
+    tabBar.delegate = self;
+
+    DocumentListViewController *folder = (DocumentListViewController *)[tabBar.viewControllers[0] topViewController];
+    FolderDocumentListViewModel *folderModel =
+            [[FolderDocumentListViewModel alloc] initWithDocumentList:self.documentList];
+    folderModel.folder = [Folder rootFolder];
+    folder.viewModel = folderModel;
+    [folder view];
+    
+    DocumentListViewController *recent = (DocumentListViewController *)[tabBar.viewControllers[1] topViewController];
+    RecentDocumentListViewModel *recentModel =
+            [[RecentDocumentListViewModel alloc] initWithDocumentList:self.documentList];
+    recent.viewModel = recentModel;
+
+    tabBar.title = folder.title;
     
     return YES;
 }
@@ -60,10 +83,11 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
                             coder:(NSCoder *)coder
 {
     NSString *identifier = [identifierComponents lastObject];
-    if ([identifier isEqual:@"PDFDocumentViewController"]) {
+    if ([identifier isEqual:RestorationPDFDocument]) {
         UIStoryboard *storyboard = [self.window.rootViewController storyboard];
         PDFDocumentViewController *vc =
-                [storyboard instantiateViewControllerWithIdentifier:identifier];
+                [storyboard instantiateViewControllerWithIdentifier:StoryboardPDFDocument];
+        vc.hidesBottomBarWhenPushed = YES;
         vc.document = [self.documentList open:[self.documentList.documents firstObject]];
         vc.documentList = self.documentList;
         return vc;
@@ -147,6 +171,13 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
         [root popToRootViewControllerAnimated:NO];
         reloadRootFolder();
     }
+}
+
+#pragma mark -
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    tabBarController.title = viewController.title;
 }
 
 @end

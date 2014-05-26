@@ -26,6 +26,10 @@
 		1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501F18CDE3F8008D514B /* PDFRenderingCharacter.m */; };
 		1997502318CE904C008D514B /* PDFFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997502218CE904C008D514B /* PDFFontDescriptor.m */; };
 		1997502918D08C73008D514B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
+		199AB73A192E350500C697BB /* DocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB739192E350500C697BB /* DocumentListViewController.m */; };
+		199AB73D192EC34800C697BB /* DocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73C192EC34800C697BB /* DocumentListViewModel.m */; };
+		199AB740192EC36B00C697BB /* RecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */; };
+		199AB743192EC38100C697BB /* FolderDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */; };
 		19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
 		19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA68186052E2009E8916 /* CoreGraphics.framework */; };
 		19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */; };
@@ -188,6 +192,14 @@
 		1997502118CE904C008D514B /* PDFFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFFontDescriptor.h; sourceTree = "<group>"; };
 		1997502218CE904C008D514B /* PDFFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFFontDescriptor.m; sourceTree = "<group>"; };
 		1997502818D08C73008D514B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		199AB738192E350500C697BB /* DocumentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListViewController.h; sourceTree = "<group>"; };
+		199AB739192E350500C697BB /* DocumentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListViewController.m; sourceTree = "<group>"; };
+		199AB73B192EC34800C697BB /* DocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListViewModel.h; sourceTree = "<group>"; };
+		199AB73C192EC34800C697BB /* DocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListViewModel.m; sourceTree = "<group>"; };
+		199AB73E192EC36B00C697BB /* RecentDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDocumentListViewModel.h; sourceTree = "<group>"; };
+		199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDocumentListViewModel.m; sourceTree = "<group>"; };
+		199AB741192EC38100C697BB /* FolderDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderDocumentListViewModel.h; sourceTree = "<group>"; };
+		199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDocumentListViewModel.m; sourceTree = "<group>"; };
 		19A418B918E6D1B4002DDFC9 /* PDFPageLoopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageLoopeView.h; sourceTree = "<group>"; };
 		19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageLoopeView.m; sourceTree = "<group>"; };
 		19ABA5B718D66FF700E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Find@2x.png"; sourceTree = "<group>"; };
@@ -489,6 +501,14 @@
 				1943EB54187FA58F00F0B61D /* PDF */,
 				19D99DCC1888E56C006FDA6F /* Folder */,
 				195B728A18EA352E000C5A8B /* Device.h */,
+				199AB738192E350500C697BB /* DocumentListViewController.h */,
+				199AB739192E350500C697BB /* DocumentListViewController.m */,
+				199AB73B192EC34800C697BB /* DocumentListViewModel.h */,
+				199AB73C192EC34800C697BB /* DocumentListViewModel.m */,
+				199AB73E192EC36B00C697BB /* RecentDocumentListViewModel.h */,
+				199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */,
+				199AB741192EC38100C697BB /* FolderDocumentListViewModel.h */,
+				199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */,
 				195B728B18EA352E000C5A8B /* Device.m */,
 				195B728D18EB870A000C5A8B /* GRTArrayController.h */,
 				195B728E18EB870A000C5A8B /* GRTArrayController.m */,
@@ -761,16 +781,19 @@
 				1917EB4018B42940003D272F /* RootFolderTableDataSource.m in Sources */,
 				19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */,
 				19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */,
+				199AB73D192EC34800C697BB /* DocumentListViewModel.m in Sources */,
 				19BB31D718A344870091F6AB /* PDFRecentDocumentList.m in Sources */,
 				19D99DC51884ED06006FDA6F /* PDFDocumentOutlineItem.m in Sources */,
 				19F7BA75186052E2009E8916 /* AppDelegate.m in Sources */,
 				19D99DDB1888E7A3006FDA6F /* Folder.m in Sources */,
 				19D99E0E188E2765006FDA6F /* PDFDocumentCrop.m in Sources */,
+				199AB743192EC38100C697BB /* FolderDocumentListViewModel.m in Sources */,
 				195B728F18EB870A000C5A8B /* GRTArrayController.m in Sources */,
 				19D99DCA1884F33E006FDA6F /* NSArray+GreatReaderAdditions.m in Sources */,
 				19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */,
 				19090471191329B10014CC95 /* PDFRecentDocumentListViewModel.m in Sources */,
 				19C9615918FB5A4E00D1857C /* PDFDocumentPageSliderItem.m in Sources */,
+				199AB73A192E350500C697BB /* DocumentListViewController.m in Sources */,
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
 				19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */,
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
@@ -803,6 +826,7 @@
 				19DB6A5D188262790023B118 /* PDFPageViewController.m in Sources */,
 				19D99E0B188E273D006FDA6F /* PDFDocumentCropViewController.m in Sources */,
 				19D99E08188D4B14006FDA6F /* PDFDocumentOutlineItemCell.m in Sources */,
+				199AB740192EC36B00C697BB /* RecentDocumentListViewModel.m in Sources */,
 				19D8708E18BABF0500FA2B66 /* PDFDocumentBookmarkList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

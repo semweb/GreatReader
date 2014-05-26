@@ -30,6 +30,8 @@
 
 - (void)awakeFromNib
 {
+    self.backgroundColor = [UIColor whiteColor];
+
     [self addObserver:self
            forKeyPath:@"document.name"
               options:NSKeyValueObservingOptionOld
