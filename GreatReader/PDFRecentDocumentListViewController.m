@@ -10,6 +10,8 @@
 
 #import "FileCell.h"
 #import "GRTArrayController.h"
+#import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 #import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentCell.h"
 #import "PDFRecentDocumentList.h"
@@ -111,12 +113,8 @@ NSString * const PDFRecentDocumentListViewControllerSeguePDFDocument = @"PDFRece
         PDFDocumentViewController *vc =
                 (PDFDocumentViewController *)segue.destinationViewController;
         PDFDocument *document = self.model.documents[indexPath.row];
-        if (vc.document) {
-            [vc openDocument:[self.model.documentList open:document]];
-        } else {
-            vc.document = [self.model.documentList open:document];
-            vc.documentList = self.model.documentList;
-        }
+        [vc openDocument:document];
+        [document.store addHistory:document];
     }
 }
 

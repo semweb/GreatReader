@@ -11,44 +11,24 @@
 #import "File.h"
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 
 NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification";
 
 @interface Folder ()
-@property (nonatomic, strong, readwrite) NSArray *files;
+@property (nonatomic, weak) PDFDocumentStore *store;
 @end
 
 @implementation Folder
 
-+ (Folder *)rootFolder
+- (instancetype)initWithPath:(NSString *)path
+                       store:(PDFDocumentStore *)store
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask,
-                                                         YES);
-    Folder *folder = [[Folder alloc] initWithPath:paths.firstObject];
-    [folder load];
-    [folder filterInboxFolder];
-    [folder deleteAllFilesInInbox];
-    return folder;
-}
-
-- (void)filterInboxFolder
-{
-    self.files = [self.files grt_filter:^(File *file) {
-        return (BOOL)![file.name isEqualToString:@"Inbox"];
-    }];
-}
-
-- (void)deleteAllFilesInInbox
-{
-    NSFileManager *fm = [NSFileManager new];
-    NSString *path = [self.path stringByAppendingPathComponent:@"Inbox"];
-    if ([fm fileExistsAtPath:path]) {
-        NSArray *contents = [fm contentsOfDirectoryAtPath:path error:NULL];
-        for (NSString *p in contents) {
-            [fm removeItemAtPath:[path stringByAppendingPathComponent:p] error:NULL];
-        }
+    self = [super initWithPath:path];
+    if (self) {
+        _store = store;
     }
+    return self;
 }
 
 - (void)load
@@ -64,7 +44,7 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
         if (isDirectory) {
             file = [[Folder alloc] initWithPath:absPath];
         } else {
-            file = [[PDFDocument alloc] initWithPath:absPath];
+            file = [self.store documentAtPath:absPath];
         }
         return file.fileNotExist ? nil : file;
     }];

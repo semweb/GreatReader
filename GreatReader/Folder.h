@@ -10,10 +10,14 @@
 
 #import "File.h"
 
+@class PDFDocumentStore;
+
 extern NSString * const FolderFileRemovedNotification;
 
 @interface Folder : File
-@property (nonatomic, strong, readonly) NSArray *files;
-+ (Folder *)rootFolder;
+@property (nonatomic, strong) NSArray *files;
+- (instancetype)initWithPath:(NSString *)path
+                       store:(PDFDocumentStore *)store;
+- (void)load;
 - (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
 @end

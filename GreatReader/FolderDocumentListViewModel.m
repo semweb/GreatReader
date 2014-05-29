@@ -13,9 +13,19 @@
 #import "PDFRecentDocumentList.h"
 
 @interface FolderDocumentListViewModel ()
+@property (nonatomic, strong, readwrite) Folder *folder;
 @end
 
 @implementation FolderDocumentListViewModel
+
+- (instancetype)initWithFolder:(Folder *)folder
+{
+    self = [super init];
+    if (self) {
+        _folder = folder;
+    }
+    return self;
+}
 
 - (NSString *)title
 {

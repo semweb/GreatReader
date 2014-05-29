@@ -13,6 +13,7 @@
 @class PDFDocumentBookmarkList;
 @class PDFDocumentCrop;
 @class PDFDocumentOutline;
+@class PDFDocumentStore;
 @class PDFPage;
 
 @interface PDFDocument : File <NSCoding>
@@ -26,6 +27,7 @@
 @property (nonatomic, assign) CGFloat brightness;
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, readonly) BOOL currentPageBookmarked;
+@property (nonatomic, weak) PDFDocumentStore *store;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
 @end

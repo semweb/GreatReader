@@ -66,7 +66,8 @@
 
 - (NSArray *)load
 {
-    NSArray *list = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+    NSArray *list = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path]
+            ?: @[];
     return [list grt_filter:^(PDFDocument *document) {
         return (BOOL)!document.fileNotExist;
     }];
@@ -81,26 +82,19 @@
 
 #pragma mark -
 
-- (PDFDocument *)open:(PDFDocument *)document
+- (void)addHistory:(PDFDocument *)document
 {
-    PDFDocument *doc = [self findDocumentInHistory:document];
-    if (doc) {
-        [self.documentsProxy removeObject:doc];
-    } else {
-        doc = document;
-    }
-    [self.documentsProxy insertObject:doc
-                                   atIndex:0];
+    [self.documentsProxy removeObject:document];
+    [self.documentsProxy insertObject:document atIndex:0];
     [self save];
-    
-    return doc;
 }
 
-- (PDFDocument *)findDocumentInHistory:(PDFDocument *)document
+- (PDFDocument *)findDocumentAtPath:(NSString *)path
 {
-    if ([self.documentsProxy containsObject:document]) {
-        NSUInteger index = [self.documentsProxy indexOfObject:document];
-        return [self.documentsProxy objectAtIndex:index];
+    for (PDFDocument *doc in self.documents) {
+        if ([doc.path isEqual:path]) {
+            return doc;
+        }
     }
     return nil;
 }

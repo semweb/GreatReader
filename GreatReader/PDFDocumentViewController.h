@@ -15,7 +15,6 @@
 
 @interface PDFDocumentViewController : UIViewController <PDFDocumentPageSliderDelegate>
 @property (nonatomic, strong) PDFDocument *document;
-@property (nonatomic, strong) PDFRecentDocumentList *documentList;
 
 - (IBAction)exitCrop:(UIStoryboardSegue *)segue;
 - (IBAction)exitBrightness:(UIStoryboardSegue *)segue;

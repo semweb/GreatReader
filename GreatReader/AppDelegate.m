@@ -14,16 +14,15 @@
 #import "Folder.h"
 #import "FolderDocumentListViewModel.h"
 #import "FolderTableDataSource.h"
-#import "FolderTableViewController.h"
-#import "FolderTableViewController.h"
-#import "HomeViewController.h"
 #import "LibraryUtils.h"
 #import "NSFileManager+GreatReaderAdditions.h"
+#import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 #import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewController.h"
 #import "RecentDocumentListViewModel.h"
-#import "RootFolderTableDataSource.h"
+#import "RootFolder.h"
 
 NSString * const RestorationDocumentListTabBar = @"RestorationDocumentListTabBar";
 NSString * const RestorationDocumentListRecentNavi = @"RestorationDocumentListRecentNavi";
@@ -35,7 +34,7 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
 
 
 @interface AppDelegate () <UITabBarControllerDelegate>
-@property (nonatomic, strong) PDFRecentDocumentList *documentList;
+@property (nonatomic, strong) PDFDocumentStore *documentStore;
 @end
 
 @implementation AppDelegate
@@ -46,21 +45,21 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
         [Crashlytics startWithAPIKey:GetCrashlyticsAPIKey()];
     }
 
-    self.documentList = [PDFRecentDocumentList new];
-    
+    self.documentStore = PDFDocumentStore.new;
+    [self.documentStore.rootFolder load];
+
     UITabBarController *tabBar = (UITabBarController *)[[self window] rootViewController];
     tabBar.delegate = self;
 
     DocumentListViewController *folder = (DocumentListViewController *)[tabBar.viewControllers[0] topViewController];
     FolderDocumentListViewModel *folderModel =
-            [[FolderDocumentListViewModel alloc] initWithDocumentList:self.documentList];
-    folderModel.folder = [Folder rootFolder];
+            [[FolderDocumentListViewModel alloc] initWithFolder:self.documentStore.rootFolder];
     folder.viewModel = folderModel;
     [folder view];
     
     DocumentListViewController *recent = (DocumentListViewController *)[tabBar.viewControllers[1] topViewController];
     RecentDocumentListViewModel *recentModel =
-            [[RecentDocumentListViewModel alloc] initWithDocumentList:self.documentList];
+            [[RecentDocumentListViewModel alloc] initWithDocumentList:self.documentStore.documentList];
     recent.viewModel = recentModel;
 
     tabBar.title = folder.title;
@@ -88,8 +87,9 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
         PDFDocumentViewController *vc =
                 [storyboard instantiateViewControllerWithIdentifier:StoryboardPDFDocument];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.document = [self.documentList open:[self.documentList.documents firstObject]];
-        vc.documentList = self.documentList;
+        PDFRecentDocumentList *documentList = self.documentStore.documentList;
+        vc.document = [documentList.documents firstObject];
+        [vc.document.store addHistory:vc.document];
         return vc;
     } else {
         return nil;
@@ -147,30 +147,30 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
 
 - (void)openURL:(NSURL *)URL
 {
-    UINavigationController *root = (UINavigationController *)[[self window] rootViewController];
-    UIViewController *top = [root topViewController];
-    void (^reloadRootFolder)(void) = ^{
-        HomeViewController *vc = (HomeViewController *)[root topViewController];
-        FolderTableViewController *folderViewController = vc.folderViewController;
-        FolderTableDataSource *dataSource = [[FolderTableDataSource alloc] 
-                                                initWithFolder:[Folder rootFolder]];
-        folderViewController.dataSource = dataSource;
-        [folderViewController.tableView reloadData];
-        [folderViewController performSelector:@selector(openDocumentsAtURL:)
-                                   withObject:URL
-                                   afterDelay:0.5];
-    };
+    // UINavigationController *root = (UINavigationController *)[[self window] rootViewController];
+    // UIViewController *top = [root topViewController];
+    // void (^reloadRootFolder)(void) = ^{
+    //     HomeViewController *vc = (HomeViewController *)[root topViewController];
+    //     FolderTableViewController *folderViewController = vc.folderViewController;
+    //     FolderTableDataSource *dataSource = [[FolderTableDataSource alloc] 
+    //                                             initWithFolder:[Folder rootFolder]];
+    //     folderViewController.dataSource = dataSource;
+    //     [folderViewController.tableView reloadData];
+    //     [folderViewController performSelector:@selector(openDocumentsAtURL:)
+    //                                withObject:URL
+    //                                afterDelay:0.5];
+    // };
 
-    if (top.presentedViewController) {
-        [top dismissViewControllerAnimated:NO
-                                completion:^{
-            [root popToRootViewControllerAnimated:NO];
-            reloadRootFolder();
-        }];
-    } else {
-        [root popToRootViewControllerAnimated:NO];
-        reloadRootFolder();
-    }
+    // if (top.presentedViewController) {
+    //     [top dismissViewControllerAnimated:NO
+    //                             completion:^{
+    //         [root popToRootViewControllerAnimated:NO];
+    //         reloadRootFolder();
+    //     }];
+    // } else {
+    //     [root popToRootViewControllerAnimated:NO];
+    //     reloadRootFolder();
+    // }
 }
 
 #pragma mark -

@@ -11,5 +11,6 @@
 @class Folder;
 
 @interface FolderDocumentListViewModel : DocumentListViewModel
-@property (nonatomic, strong) Folder *folder;
+- (instancetype)initWithFolder:(Folder *)folder;
+@property (nonatomic, strong, readonly) Folder *folder;
 @end

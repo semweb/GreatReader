@@ -12,6 +12,7 @@
 #import "DocumentListViewModel.h"
 #import "PDFRecentDocumentCell.h"
 #import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFDocumentViewController.h"
 
@@ -52,6 +53,13 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
           forCellWithReuseIdentifier:DocumentListViewControllerCellIdentifier];    
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self.collectionView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -70,8 +78,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
                 (PDFDocumentViewController *)segue.destinationViewController;
         vc.hidesBottomBarWhenPushed = YES;
         PDFDocument *document = (PDFDocument *)[self.viewModel documentAtIndex:indexPath.row];
-        vc.document = [self.viewModel.documentList open:document];
-        vc.documentList = self.viewModel.documentList;
+        vc.document = document;
+        [document.store addHistory:document];
     }
 }
 

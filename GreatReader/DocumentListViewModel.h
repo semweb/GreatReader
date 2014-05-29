@@ -12,8 +12,6 @@
 @class PDFRecentDocumentList;
 
 @interface DocumentListViewModel : NSObject
-@property (nonatomic, strong) PDFRecentDocumentList *documentList;
-- (instancetype)initWithDocumentList:(PDFRecentDocumentList *)documentList;
 - (NSString *)title;
 - (NSUInteger)count;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;

@@ -21,6 +21,7 @@
 #import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
 #import "PDFDocumentPageSliderDataSource.h"
+#import "PDFDocumentStore.h"
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
 #import "PDFRecentDocumentList.h"
@@ -396,7 +397,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueHistory]) {
         PDFRecentDocumentListViewController *vc = (PDFRecentDocumentListViewController *)segue.destinationViewController;
         PDFRecentDocumentListViewModel *model = [[PDFRecentDocumentListViewModel alloc]
-                                                    initWithDocumentList:self.documentList
+                                                    initWithDocumentList:self.document.store.documentList
                                                            withoutActive:YES];
         vc.model = model;
         vc.modalPresentationStyle = UIModalPresentationCustom;

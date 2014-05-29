@@ -121,7 +121,7 @@ NSString * const FolderTableViewControllerSeguePDFDocument = @"FolderTableViewCo
         PDFDocumentViewController *vc =
                 (PDFDocumentViewController *)segue.destinationViewController;
         PDFDocument *document = (PDFDocument *)[self.dataSource fileAtIndexPath:indexPath];
-        vc.document = [self.documentList open:document];
+        vc.document = [self.documentList addHistory:document];
         vc.documentList = self.documentList;
     }
 }

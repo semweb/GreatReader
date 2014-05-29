@@ -8,6 +8,8 @@
 
 #import "DocumentListViewModel.h"
 
-@interface RecentDocumentListViewModel : DocumentListViewModel
+@class PDFRecentDocumentList;
 
+@interface RecentDocumentListViewModel : DocumentListViewModel
+- (instancetype)initWithDocumentList:(PDFRecentDocumentList *)documentList;
 @end

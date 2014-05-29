@@ -13,15 +13,6 @@
 
 @implementation DocumentListViewModel
 
-- (instancetype)initWithDocumentList:(PDFRecentDocumentList *)documentList
-{
-    self = [super init];
-    if (self) {
-        _documentList = documentList;
-    }
-    return self;
-}
-
 - (NSString *)title { return nil; }
 - (NSUInteger)count { return 0; }
 - (PDFDocument *)documentAtIndex:(NSUInteger)index { return nil; }

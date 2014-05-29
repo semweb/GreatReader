@@ -11,7 +11,20 @@
 #import "PDFDocument.h"
 #import "PDFRecentDocumentList.h"
 
+@interface RecentDocumentListViewModel ()
+@property (nonatomic, strong) PDFRecentDocumentList *documentList;
+@end
+
 @implementation RecentDocumentListViewModel
+
+- (instancetype)initWithDocumentList:(PDFRecentDocumentList *)documentList
+{
+    self = [super init];
+    if (self) {
+        _documentList = documentList;
+    }
+    return self;
+}
 
 - (NSString *)title
 {

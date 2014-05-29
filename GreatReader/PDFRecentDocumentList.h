@@ -15,5 +15,6 @@
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly, strong) NSArray *documents;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
-- (PDFDocument *)open:(PDFDocument *)document;
+- (void)addHistory:(PDFDocument *)document;
+- (PDFDocument *)findDocumentAtPath:(NSString *)path;
 @end
