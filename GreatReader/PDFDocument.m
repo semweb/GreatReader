@@ -171,6 +171,21 @@
                                                NO,
                                                scale);
         CGContextRef context = UIGraphicsGetCurrentContext();
+
+        CGRect pageRect = page.rect;
+        CGFloat ratio = pageRect.size.height / pageRect.size.width;
+        CGFloat x, y, w, h;
+        if (pageRect.size.width > pageRect.size.height) {
+            w = width; h = width * ratio;
+            x = 0; y = (width - h) / 2.0;
+        } else {
+            w = width / ratio; h = width;
+            x = (width - w) / 2.0; y = 0;
+        }
+
+        [UIColor.whiteColor set];        
+        UIRectFill(CGRectMake(x, y, w, h));
+               
         CGContextSaveGState(context); {
             CGContextTranslateCTM(context, 0.0f, rect.size.height);
             CGContextScaleCTM(context, 1.0f, -1.0f);
@@ -182,18 +197,9 @@
                                                             YES));
             CGContextDrawPDFPage(context, page.CGPDFPage);
         } CGContextRestoreGState(context);
-        CGRect pageRect = page.rect;
-        CGFloat ratio = pageRect.size.height / pageRect.size.width;
-        CGFloat x, y, w, h;
-        if (pageRect.size.width > pageRect.size.height) {
-            w = width; h = width * ratio;
-            x = 0; y = (width - h) / 2.0;
-        } else {
-            w = width / ratio; h = width;
-            x = (width - w) / 2.0; y = 0;
-        }
+
         x += 0.5; y += 0.5;
-        w -= 1.0; h -= 1.0;
+        w -= 1.0; h -= 1.0;        
         [UIColor.blackColor set];
         CGContextStrokeRectWithWidth(context, CGRectMake(x, y, w, h), 1 / scale);
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
