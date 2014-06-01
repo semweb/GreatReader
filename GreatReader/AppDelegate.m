@@ -35,6 +35,8 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 @property (nonatomic, strong) PDFDocumentStore *documentStore;
+@property (nonatomic, strong) DocumentListViewController *documentsViewController;
+@property (nonatomic, strong) DocumentListViewController *recentViewController;
 @end
 
 @implementation AppDelegate
@@ -51,19 +53,17 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
     UITabBarController *tabBar = (UITabBarController *)[[self window] rootViewController];
     tabBar.delegate = self;
 
-    DocumentListViewController *folder = (DocumentListViewController *)[tabBar.viewControllers[0] topViewController];
+    self.documentsViewController = (DocumentListViewController *)[tabBar.viewControllers[0] topViewController];
     FolderDocumentListViewModel *folderModel =
             [[FolderDocumentListViewModel alloc] initWithFolder:self.documentStore.rootFolder];
-    folder.viewModel = folderModel;
-    [folder view];
+    self.documentsViewController.viewModel = folderModel;
+    [self.documentsViewController view];
     
-    DocumentListViewController *recent = (DocumentListViewController *)[tabBar.viewControllers[1] topViewController];
+    self.recentViewController = (DocumentListViewController *)[tabBar.viewControllers[1] topViewController];
     RecentDocumentListViewModel *recentModel =
             [[RecentDocumentListViewModel alloc] initWithDocumentList:self.documentStore.documentList];
-    recent.viewModel = recentModel;
+    self.recentViewController.viewModel = recentModel;
 
-    tabBar.title = folder.title;
-    
     return YES;
 }
 
@@ -135,7 +135,11 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
     if ([fm moveItemAtURL:url
                     toURL:uniqueDestURL
                     error:&error]) {
-        
+        NSString *path = [[[uniqueDestURL absoluteString]
+                             substringFromIndex:[@"file://" length]]
+                             stringByRemovingPercentEncoding];
+        PDFDocument *document = [self.documentStore documentAtPath:path];
+        [self.documentStore addHistory:document];
         [self openURL:uniqueDestURL];
         return YES;
     } else {
@@ -147,30 +151,29 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
 
 - (void)openURL:(NSURL *)URL
 {
-    // UINavigationController *root = (UINavigationController *)[[self window] rootViewController];
-    // UIViewController *top = [root topViewController];
-    // void (^reloadRootFolder)(void) = ^{
-    //     HomeViewController *vc = (HomeViewController *)[root topViewController];
-    //     FolderTableViewController *folderViewController = vc.folderViewController;
-    //     FolderTableDataSource *dataSource = [[FolderTableDataSource alloc] 
-    //                                             initWithFolder:[Folder rootFolder]];
-    //     folderViewController.dataSource = dataSource;
-    //     [folderViewController.tableView reloadData];
-    //     [folderViewController performSelector:@selector(openDocumentsAtURL:)
-    //                                withObject:URL
-    //                                afterDelay:0.5];
-    // };
+    [self.documentsViewController reload];
+    [self.recentViewController reload];
 
-    // if (top.presentedViewController) {
-    //     [top dismissViewControllerAnimated:NO
-    //                             completion:^{
-    //         [root popToRootViewControllerAnimated:NO];
-    //         reloadRootFolder();
-    //     }];
-    // } else {
-    //     [root popToRootViewControllerAnimated:NO];
-    //     reloadRootFolder();
-    // }
+    UITabBarController *tab = (UITabBarController *)[[self window] rootViewController];
+    UINavigationController *selected = (UINavigationController *)tab.selectedViewController;
+    UIViewController *top = selected.topViewController == self.documentsViewController
+            ? self.documentsViewController
+            : self.recentViewController;
+
+    if (top.presentedViewController) {
+        [top dismissViewControllerAnimated:NO
+                                completion:^{
+            [top.navigationController popToRootViewControllerAnimated:NO];
+            [top performSelector:@selector(openDocumentsAtURL:)
+                      withObject:URL
+                      afterDelay:0.5];
+        }];
+    } else {
+        [top.navigationController popToRootViewControllerAnimated:NO];
+        [top performSelector:@selector(openDocumentsAtURL:)
+                  withObject:URL
+                  afterDelay:0.5];
+    }
 }
 
 #pragma mark -

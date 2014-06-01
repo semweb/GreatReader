@@ -12,4 +12,5 @@
 
 @interface DocumentListViewController : UICollectionViewController
 @property (nonatomic, strong) DocumentListViewModel *viewModel;
+- (void)reload;
 @end

@@ -15,4 +15,5 @@
 - (NSString *)title;
 - (NSUInteger)count;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
+- (void)reload;
 @end

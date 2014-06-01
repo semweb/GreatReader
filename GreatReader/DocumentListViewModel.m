@@ -16,5 +16,6 @@
 - (NSString *)title { return nil; }
 - (NSUInteger)count { return 0; }
 - (PDFDocument *)documentAtIndex:(NSUInteger)index { return nil; }
+- (void)reload {}
 
 @end

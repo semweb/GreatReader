@@ -42,4 +42,9 @@
     return self.folder.files[index];
 }
 
+- (void)reload
+{
+    [self.folder load];
+}
+
 @end

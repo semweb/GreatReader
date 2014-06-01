@@ -145,4 +145,32 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return IsPad() ? UIEdgeInsetsMake(40, 20, 40, 20) : UIEdgeInsetsMake(20, 10, 20, 10);
 }
 
+#pragma mark -
+
+- (void)openDocumentsAtURL:(NSURL *)URL
+{
+    for (int i = 0; i < self.viewModel.count; i++) {
+        PDFDocument *document = [self.viewModel documentAtIndex:i];
+        if ([document.path.lastPathComponent isEqual:URL.lastPathComponent]) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            [self.collectionView selectItemAtIndexPath:indexPath
+                                              animated:YES
+                                        scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+                [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
+                                          sender:cell];                                        
+            });
+        }
+    }
+}
+
+#pragma mark -
+
+- (void)reload
+{
+    [self.viewModel reload];
+    [self.collectionView reloadData];
+}
+
 @end
