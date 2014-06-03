@@ -16,12 +16,30 @@
 
 @implementation RootFolder
 
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
+- (instancetype)initWithPath:(NSString *)path
+                       store:(PDFDocumentStore *)store
+{
+    self = [super initWithPath:path
+                         store:store];
+    if (self) {
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(didEnterBackground:)
+                                                   name:UIApplicationDidEnterBackgroundNotification
+                                                 object:nil];
+    }
+    return self;
+}
+
 - (void)load
 {
     [super load];
 
     [self filterInboxFolder];
-    [self deleteAllFilesInInbox];
 }
 
 - (void)filterInboxFolder
@@ -41,6 +59,13 @@
             [fm removeItemAtPath:[path stringByAppendingPathComponent:p] error:NULL];
         }
     }
+}
+
+#pragma mark -
+
+- (void)didEnterBackground:(NSNotification *)notification
+{
+    [self deleteAllFilesInInbox];
 }
 
 @end

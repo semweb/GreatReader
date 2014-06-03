@@ -56,8 +56,10 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 
 - (void)dealloc
 {
-    [self removeObserver:self
-              forKeyPath:@"document.brightness"];
+    if (self.isViewLoaded) {
+        [self removeObserver:self
+                  forKeyPath:@"document.brightness"];
+    }
 }
 
 - (void)viewDidLoad

@@ -37,6 +37,7 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
 @property (nonatomic, strong) PDFDocumentStore *documentStore;
 @property (nonatomic, strong) DocumentListViewController *documentsViewController;
 @property (nonatomic, strong) DocumentListViewController *recentViewController;
+@property (nonatomic, assign) BOOL launchingWithURL;
 @end
 
 @implementation AppDelegate
@@ -64,12 +65,17 @@ NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
             [[RecentDocumentListViewModel alloc] initWithDocumentList:self.documentStore.documentList];
     self.recentViewController.viewModel = recentModel;
 
+    NSURL *URL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    if (URL) {
+        self.launchingWithURL = YES;
+    }    
+
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
-    return YES;
+    return !self.launchingWithURL;
 }
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
@@ -123,7 +129,7 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
 {
     NSString *fileName = [url lastPathComponent];
     NSURL *dirURL = [[url URLByDeletingLastPathComponent] URLByDeletingLastPathComponent];
@@ -135,9 +141,7 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
     if ([fm moveItemAtURL:url
                     toURL:uniqueDestURL
                     error:&error]) {
-        NSString *path = [[[uniqueDestURL absoluteString]
-                             substringFromIndex:[@"file://" length]]
-                             stringByRemovingPercentEncoding];
+        NSString *path = [[uniqueDestURL path] stringByRemovingPercentEncoding];
         PDFDocument *document = [self.documentStore documentAtPath:path];
         [self.documentStore addHistory:document];
         [self openURL:uniqueDestURL];
@@ -154,25 +158,28 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
     [self.documentsViewController reload];
     [self.recentViewController reload];
 
+    [self.documentsViewController.navigationController
+        popToRootViewControllerAnimated:NO];
+    [self.recentViewController.navigationController
+        popToRootViewControllerAnimated:NO];
+
     UITabBarController *tab = (UITabBarController *)[[self window] rootViewController];
     UINavigationController *selected = (UINavigationController *)tab.selectedViewController;
     UIViewController *top = selected.topViewController == self.documentsViewController
             ? self.documentsViewController
             : self.recentViewController;
 
-    if (top.presentedViewController) {
-        [top dismissViewControllerAnimated:NO
-                                completion:^{
-            [top.navigationController popToRootViewControllerAnimated:NO];
-            [top performSelector:@selector(openDocumentsAtURL:)
-                      withObject:URL
-                      afterDelay:0.5];
-        }];
-    } else {
-        [top.navigationController popToRootViewControllerAnimated:NO];
+    void (^open)(void) = ^{
         [top performSelector:@selector(openDocumentsAtURL:)
                   withObject:URL
-                  afterDelay:0.5];
+                  afterDelay:0];
+    };
+
+    if (top.presentedViewController) {
+        [top dismissViewControllerAnimated:NO
+                                completion:open];
+    } else {
+        open();
     }
 }
 
