@@ -8,8 +8,8 @@
 
 #import "PDFDocument.h"
 
+#import "Device.h"
 #import "NSFileManager+GreatReaderAdditions.h"
-
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
@@ -164,7 +164,7 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         PDFPage *page = [self pageAtIndex:1];
-        CGFloat width = 200;
+        CGFloat width = IsPad() ? 180 : 100;
         CGRect rect = CGRectMake(0, 0, width, width);
         CGFloat scale = UIScreen.mainScreen.scale;
         UIGraphicsBeginImageContextWithOptions(rect.size,
@@ -195,6 +195,7 @@
                                                             rect,
                                                             0,
                                                             YES));
+            CGContextSetInterpolationQuality(context ,kCGInterpolationHigh);
             CGContextDrawPDFPage(context, page.CGPDFPage);
         } CGContextRestoreGState(context);
 
