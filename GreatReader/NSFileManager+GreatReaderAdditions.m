@@ -33,6 +33,14 @@ NSString * const kPrivateDocuments = @"PrivateDocuments";
     return paths.firstObject;
 }
 
++ (NSString *)grt_cachePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
+                                                         NSUserDomainMask,
+                                                         YES);
+    return paths.firstObject;    
+}
+
 - (void)grt_createPrivateDocumentsDirectory
 {
     NSString *path = [[self class] grt_privateDocumentsPath];

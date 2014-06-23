@@ -10,6 +10,7 @@
 
 #import "Device.h"
 #import "NSFileManager+GreatReaderAdditions.h"
+#import "NSString+GreatReaderAdditions.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
@@ -56,7 +57,7 @@
         _currentPage = 1;
         _brightness = 1.0;
         
-        [self loadThumbnailImage];
+        [self loadThumbnailImageAsync];
     }
     return self;
 }
@@ -159,53 +160,86 @@
 
 #pragma mark -
 
-- (void)loadThumbnailImage
+- (NSString *)imagePath
+{
+    NSString *dirPath = [NSFileManager grt_cachePath];
+    NSString *path = [PDFDocument relativePathWithAbsolutePath:self.path];
+    return [dirPath stringByAppendingPathComponent:[path grt_md5]];
+}
+
+- (UIImage *)loadThumbnailImage
+{
+    NSFileManager *fm = [NSFileManager new];
+    NSString *path = self.imagePath;
+    if ([fm fileExistsAtPath:path]) {
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        CGFloat scale = UIScreen.mainScreen.scale;        
+        return [UIImage imageWithData:data scale:scale];
+    }
+    return nil;
+}
+
+- (UIImage *)makeThumbnailImage
+{
+    PDFPage *page = [self pageAtIndex:1];
+    CGFloat width = IsPad() ? 180 : 100;
+
+    CGRect pageRect = page.rect;
+    CGFloat ratio = pageRect.size.height / pageRect.size.width;
+    CGFloat x, y, w, h;
+    if (pageRect.size.width > pageRect.size.height) {
+        w = width; h = width * ratio;
+        x = 0; y = (width - h) / 2.0;
+    } else {
+        w = width / ratio; h = width;
+        x = (width - w) / 2.0; y = 0;
+    }
+    
+    CGRect rect = CGRectMake(0, 0, w, h);
+    CGFloat scale = UIScreen.mainScreen.scale;
+    UIGraphicsBeginImageContextWithOptions(rect.size,
+                                           NO,
+                                           scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    [UIColor.whiteColor set];        
+    UIRectFill(CGRectMake(0, 0, w, h));
+               
+    CGContextSaveGState(context); {
+        CGContextTranslateCTM(context, 0.0f, rect.size.height);
+        CGContextScaleCTM(context, 1.0f, -1.0f);
+        CGContextConcatCTM(context,
+                           CGPDFPageGetDrawingTransform(page.CGPDFPage,
+                                                        kCGPDFMediaBox,
+                                                        CGRectMake(0, 0, w, h),
+                                                        0,
+                                                        YES));
+        CGContextSetInterpolationQuality(context ,kCGInterpolationHigh);
+        CGContextDrawPDFPage(context, page.CGPDFPage);
+    } CGContextRestoreGState(context);
+
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self writeThumbnailImageAsync:image];
+        
+    return image;    
+}
+
+- (void)writeThumbnailImageAsync:(UIImage *)image
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{    
+        [UIImagePNGRepresentation(image) writeToFile:self.imagePath
+                                          atomically:YES];
+    });
+}
+
+- (void)loadThumbnailImageAsync
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        PDFPage *page = [self pageAtIndex:1];
-        CGFloat width = IsPad() ? 180 : 100;
-        CGRect rect = CGRectMake(0, 0, width, width);
-        CGFloat scale = UIScreen.mainScreen.scale;
-        UIGraphicsBeginImageContextWithOptions(rect.size,
-                                               NO,
-                                               scale);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-
-        CGRect pageRect = page.rect;
-        CGFloat ratio = pageRect.size.height / pageRect.size.width;
-        CGFloat x, y, w, h;
-        if (pageRect.size.width > pageRect.size.height) {
-            w = width; h = width * ratio;
-            x = 0; y = (width - h) / 2.0;
-        } else {
-            w = width / ratio; h = width;
-            x = (width - w) / 2.0; y = 0;
-        }
-
-        [UIColor.whiteColor set];        
-        UIRectFill(CGRectMake(x, y, w, h));
-               
-        CGContextSaveGState(context); {
-            CGContextTranslateCTM(context, 0.0f, rect.size.height);
-            CGContextScaleCTM(context, 1.0f, -1.0f);
-            CGContextConcatCTM(context,
-                               CGPDFPageGetDrawingTransform(page.CGPDFPage,
-                                                            kCGPDFMediaBox,
-                                                            rect,
-                                                            0,
-                                                            YES));
-            CGContextSetInterpolationQuality(context ,kCGInterpolationHigh);
-            CGContextDrawPDFPage(context, page.CGPDFPage);
-        } CGContextRestoreGState(context);
-
-        x += 0.5; y += 0.5;
-        w -= 1.0; h -= 1.0;        
-        [UIColor.blackColor set];
-        CGContextStrokeRectWithWidth(context, CGRectMake(x, y, w, h), 1 / scale);
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
+        UIImage *image = [self loadThumbnailImage] ?: [self makeThumbnailImage];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.thumbnailImage = image;
             self.iconImage = image;
