@@ -265,6 +265,11 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     space.width = -20;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:base];
     self.navigationItem.rightBarButtonItems = @[space, rightItem];
+
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                              target:self
+                                                                              action:@selector(done:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
 }
 
 - (void)prepareInfoView
@@ -353,6 +358,11 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 }
 
 #pragma mark - UIBarButtonItem Action
+
+- (void)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (void)showSearch:(id)sender
 {

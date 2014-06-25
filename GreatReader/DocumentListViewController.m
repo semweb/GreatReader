@@ -74,8 +74,10 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     if ([segue.identifier isEqual:DocumentListViewControllerSeguePDFDocument]) {
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
         PDFDocumentViewController *vc =
-                (PDFDocumentViewController *)segue.destinationViewController;
+                (PDFDocumentViewController *)navi.topViewController;
         vc.hidesBottomBarWhenPushed = YES;
         PDFDocument *document = (PDFDocument *)[self.viewModel documentAtIndex:indexPath.row];
         vc.document = document;

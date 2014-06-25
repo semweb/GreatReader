@@ -410,7 +410,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rn-tI-pFp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1941" y="-1161"/>
+            <point key="canvasLocation" x="-3165" y="-937"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="WqK-0j-y7z">
@@ -426,7 +426,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zM-Eq-8Me" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-861" y="-1605"/>
+            <point key="canvasLocation" x="-2085" y="-1381"/>
         </scene>
         <!--Document List View Controller - Item-->
         <scene sceneID="KRY-75-IHo">
@@ -461,12 +461,12 @@
                     <tabBarItem key="tabBarItem" title="Item" id="WXr-IS-73l"/>
                     <navigationItem key="navigationItem" id="txv-tf-hTl"/>
                     <connections>
-                        <segue destination="Mqv-qU-Nyv" kind="push" identifier="DocumentListViewControllerSeguePDFDocument" id="l7R-yq-1FH"/>
+                        <segue destination="A9b-E0-hWw" kind="modal" identifier="DocumentListViewControllerSeguePDFDocument" id="HjI-s8-8kx"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtr-1h-f7C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31" y="-1605"/>
+            <point key="canvasLocation" x="-1193" y="-1381"/>
         </scene>
         <!--Document List View Controller - 最近読んだPDF-->
         <scene sceneID="dPc-kq-47z">
@@ -501,12 +501,12 @@
                     <tabBarItem key="tabBarItem" title="最近読んだPDF" image="History.png" id="Gvb-c3-fGJ"/>
                     <navigationItem key="navigationItem" id="OwW-FG-Egv"/>
                     <connections>
-                        <segue destination="Mqv-qU-Nyv" kind="push" identifier="DocumentListViewControllerSeguePDFDocument" id="pIj-0c-34b"/>
+                        <segue destination="A9b-E0-hWw" kind="modal" identifier="DocumentListViewControllerSeguePDFDocument" id="MMh-lQ-nT1"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c86-hs-4cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47" y="-319"/>
+            <point key="canvasLocation" x="-1177" y="-95"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="Ozj-gD-FY1">
@@ -522,7 +522,22 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jF-Lt-6Jh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-861" y="-319"/>
+            <point key="canvasLocation" x="-2085" y="-95"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cfT-N4-mXE">
+            <objects>
+                <navigationController restorationIdentifier="RestorationDocumentNavi" definesPresentationContext="YES" id="A9b-E0-hWw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NQG-eS-Z0P">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Mqv-qU-Nyv" kind="relationship" relationship="rootViewController" id="IHg-sr-wyi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KR5-b5-G2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="-794"/>
         </scene>
     </scenes>
     <resources>
@@ -540,6 +555,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="l7R-yq-1FH"/>
+        <segue reference="MMh-lQ-nT1"/>
     </inferredMetricsTieBreakers>
 </document>

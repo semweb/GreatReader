@@ -15,4 +15,5 @@
 
 
 @interface GRTModalDismissButton : UIButton
+@property (nonatomic, copy) void (^tapped)(void);
 @end

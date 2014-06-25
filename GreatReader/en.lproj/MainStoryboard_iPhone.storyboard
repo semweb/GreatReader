@@ -73,7 +73,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="2tK-fP-fac"/>
                     <navigationItem key="navigationItem" id="pKa-Bx-tGo"/>
                     <connections>
-                        <segue destination="2" kind="push" identifier="DocumentListViewControllerSeguePDFDocument" id="0dh-ru-JFg"/>
+                        <segue destination="Ace-JB-LMp" kind="modal" identifier="DocumentListViewControllerSeguePDFDocument" id="NbQ-3S-mQj"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aer-iN-5WU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,7 +113,7 @@
                     <tabBarItem key="tabBarItem" title="最近読んだPDF" image="History.png" id="hiW-KG-clA"/>
                     <navigationItem key="navigationItem" id="MQR-VF-nvk"/>
                     <connections>
-                        <segue destination="2" kind="push" identifier="DocumentListViewControllerSeguePDFDocument" id="dBU-b1-Zer"/>
+                        <segue destination="Ace-JB-LMp" kind="modal" identifier="DocumentListViewControllerSeguePDFDocument" id="ST2-Hi-GAN"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9d-1X-c3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -364,6 +364,21 @@
             </objects>
             <point key="canvasLocation" x="1008" y="-683"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ctw-FR-EjO">
+            <objects>
+                <navigationController restorationIdentifier="RestorationDocumentNavi" definesPresentationContext="YES" id="Ace-JB-LMp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ndl-c5-7op">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="K1K-dj-rdb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivT-7R-h4W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3" y="-1010"/>
+        </scene>
         <!--Document View Controller-->
         <scene sceneID="5">
             <objects>
@@ -381,7 +396,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGa-Oe-iG3" customClass="UIToolbar">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGa-Oe-iG3" customClass="UIToolbar">
                                 <rect key="frame" x="0.0" y="475" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -565,6 +580,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0dh-ru-JFg"/>
+        <segue reference="ST2-Hi-GAN"/>
     </inferredMetricsTieBreakers>
 </document>

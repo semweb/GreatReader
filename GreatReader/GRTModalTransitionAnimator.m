@@ -15,10 +15,10 @@
     return 0.25f;
 }
 
-- (UIButton *)dimButton
+- (GRTModalDismissButton *)dimButton
 {
     static dispatch_once_t onceToken;
-    static UIButton *button = nil;
+    static GRTModalDismissButton *button = nil;
     dispatch_once(&onceToken, ^{
         button = [GRTModalDismissButton buttonWithType:UIButtonTypeCustom];
     });
@@ -30,7 +30,11 @@
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
-    UIButton *button = self.dimButton;
+    GRTModalDismissButton *button = self.dimButton;
+    button.tapped = ^{
+        [fromViewController dismissViewControllerAnimated:YES
+                                               completion:NULL];
+    };
     button.frame = fromViewController.view.frame;
 
     if (self.presenting) {
@@ -123,16 +127,17 @@
     if (self) {
         self.backgroundColor = [UIColor blackColor];
         [self addTarget:self
-                 action:@selector(dismiss:)
+                 action:@selector(perform:)
        forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
 
-- (void)dismiss:(id)sender
+- (void)perform:(id)sender
 {
-    [self.window.rootViewController dismissViewControllerAnimated:YES
-                                                       completion:NULL];
+    if (self.tapped) {
+        self.tapped();
+    }
 }
 
 @end
