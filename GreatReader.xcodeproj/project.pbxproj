@@ -82,6 +82,8 @@
 		1994B074194F255C0021B08C /* Test.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1994B072194F255C0021B08C /* Test.pdf */; };
 		1994B077194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1994B076194FF4DA0021B08C /* NSString+GreatReaderAdditions.m */; };
 		1994B078194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1994B076194FF4DA0021B08C /* NSString+GreatReaderAdditions.m */; };
+		1994B07B195C366D0021B08C /* Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1994B079195C366D0021B08C /* Home@2x.png */; };
+		1994B07E195C44220021B08C /* Documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1994B07C195C44220021B08C /* Documents@2x.png */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
 		1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
 		1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
@@ -206,6 +208,8 @@
 		1994B073194F255C0021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/Test.pdf; sourceTree = "<group>"; };
 		1994B075194FF4DA0021B08C /* NSString+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+GreatReaderAdditions.h"; sourceTree = "<group>"; };
 		1994B076194FF4DA0021B08C /* NSString+GreatReaderAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+GreatReaderAdditions.m"; sourceTree = "<group>"; };
+		1994B07A195C366D0021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Home@2x.png"; sourceTree = "<group>"; };
+		1994B07D195C44220021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Documents@2x.png"; sourceTree = "<group>"; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
 		1997501618C8B9C9008D514B /* PDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFUtils.m; sourceTree = "<group>"; };
 		1997501818CAC3E7008D514B /* PDFCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMap.h; sourceTree = "<group>"; };
@@ -542,6 +546,8 @@
 		19D99DEA188A7E76006FDA6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1994B07C195C44220021B08C /* Documents@2x.png */,
+				1994B079195C366D0021B08C /* Home@2x.png */,
 				19ABA5B618D66FF700E123AB /* Find@2x.png */,
 				19C9616319033FD000D1857C /* CropOdd@2x.png */,
 				19C961661905E6E400D1857C /* CropBoth@2x.png */,
@@ -721,11 +727,13 @@
 				19F7BA6F186052E2009E8916 /* InfoPlist.strings in Resources */,
 				19F6FDA918F0000E001E05D5 /* History@2x.png in Resources */,
 				19F7BA77186052E2009E8916 /* Default.png in Resources */,
+				1994B07E195C44220021B08C /* Documents@2x.png in Resources */,
 				19C961621900A4DE00D1857C /* Brightness@2x.png in Resources */,
 				19D8708518BA2EB700FA2B66 /* Icon-60@2x.png in Resources */,
 				19430E5D18E8DCF100BB4238 /* API_KEY.plist in Resources */,
 				19F7BA79186052E2009E8916 /* Default@2x.png in Resources */,
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
+				1994B07B195C366D0021B08C /* Home@2x.png in Resources */,
 				19ABA5C418D6701200E123AB /* RibbonOn@2x.png in Resources */,
 				19ABA5BC18D66FF700E123AB /* Find@2x.png in Resources */,
 				19C9616519033FD000D1857C /* CropOdd@2x.png in Resources */,
@@ -940,6 +948,22 @@
 				1994B073194F255C0021B08C /* en */,
 			);
 			name = Test.pdf;
+			sourceTree = "<group>";
+		};
+		1994B079195C366D0021B08C /* Home@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1994B07A195C366D0021B08C /* en */,
+			);
+			name = "Home@2x.png";
+			sourceTree = "<group>";
+		};
+		1994B07C195C44220021B08C /* Documents@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1994B07D195C44220021B08C /* en */,
+			);
+			name = "Documents@2x.png";
 			sourceTree = "<group>";
 		};
 		19ABA5B618D66FF700E123AB /* Find@2x.png */ = {

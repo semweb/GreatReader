@@ -70,7 +70,7 @@
                             <outlet property="delegate" destination="MsA-7E-ROw" id="fqN-4Z-peW"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Item" id="2tK-fP-fac"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Documents.png" id="2tK-fP-fac"/>
                     <navigationItem key="navigationItem" id="pKa-Bx-tGo"/>
                     <connections>
                         <segue destination="Ace-JB-LMp" kind="modal" identifier="DocumentListViewControllerSeguePDFDocument" id="NbQ-3S-mQj"/>
@@ -568,6 +568,7 @@
     <resources>
         <image name="Brightness.png" width="22" height="22"/>
         <image name="Crop.png" width="22" height="22"/>
+        <image name="Documents.png" width="20" height="20"/>
         <image name="Find.png" width="22" height="22"/>
         <image name="History.png" width="22" height="22"/>
         <image name="Outline.png" width="22" height="22"/>
@@ -580,6 +581,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ST2-Hi-GAN"/>
+        <segue reference="NbQ-3S-mQj"/>
     </inferredMetricsTieBreakers>
 </document>

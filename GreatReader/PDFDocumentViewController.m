@@ -266,9 +266,10 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:base];
     self.navigationItem.rightBarButtonItems = @[space, rightItem];
 
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                              target:self
-                                                                              action:@selector(done:)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Home.png"]
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(done:)];
     self.navigationItem.leftBarButtonItem = leftItem;
 }
 

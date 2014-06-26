@@ -130,7 +130,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
                                 <rect key="frame" x="0.0" y="931" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -416,7 +416,7 @@
         <scene sceneID="WqK-0j-y7z">
             <objects>
                 <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="H5N-lw-U82"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Documents.png" id="H5N-lw-U82"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="krL-CF-hEr">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -512,7 +512,7 @@
         <scene sceneID="Ozj-gD-FY1">
             <objects>
                 <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="akT-1K-BKR"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="History.png" id="akT-1K-BKR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5PW-wp-4f6">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -543,6 +543,7 @@
     <resources>
         <image name="Brightness.png" width="22" height="22"/>
         <image name="Crop.png" width="22" height="22"/>
+        <image name="Documents.png" width="20" height="20"/>
         <image name="Find.png" width="22" height="22"/>
         <image name="History.png" width="22" height="22"/>
         <image name="Outline.png" width="22" height="22"/>
