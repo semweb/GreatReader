@@ -543,7 +543,7 @@
     <resources>
         <image name="Brightness.png" width="22" height="22"/>
         <image name="Crop.png" width="22" height="22"/>
-        <image name="Documents.png" width="20" height="20"/>
+        <image name="Documents.png" width="30" height="30"/>
         <image name="Find.png" width="22" height="22"/>
         <image name="History.png" width="22" height="22"/>
         <image name="Outline.png" width="22" height="22"/>
