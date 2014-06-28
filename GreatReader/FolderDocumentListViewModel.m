@@ -10,6 +10,7 @@
 
 #import "Folder.h"
 #import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 
 @interface FolderDocumentListViewModel ()
@@ -45,6 +46,11 @@
 - (void)reload
 {
     [self.folder load];
+}
+
+- (void)deleteDocuments:(NSArray *)documents
+{
+    [self.folder.store deleteDocuments:documents];
 }
 
 @end

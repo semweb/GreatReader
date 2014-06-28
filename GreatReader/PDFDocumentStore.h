@@ -12,9 +12,13 @@
 @class PDFRecentDocumentList;
 @class RootFolder;
 
+extern NSString * const PDFDocumentDeletedNotification;
+
 @interface PDFDocumentStore : NSObject
 @property (nonatomic, strong, readonly) PDFRecentDocumentList *documentList;
 @property (nonatomic, strong, readonly) RootFolder *rootFolder;
 - (PDFDocument *)documentAtPath:(NSString *)path;
 - (void)addHistory:(PDFDocument *)document;
+- (void)deleteDocuments:(NSArray *)documents;
+- (void)deleteDocument:(PDFDocument *)document;
 @end

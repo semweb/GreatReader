@@ -9,6 +9,7 @@
 #import "RecentDocumentListViewModel.h"
 
 #import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 
 @interface RecentDocumentListViewModel ()
@@ -39,6 +40,11 @@
 - (PDFDocument *)documentAtIndex:(NSUInteger)index
 {
     return [self.documentList documentAtIndex:index];
+}
+
+- (void)deleteDocuments:(NSArray *)documents
+{
+    [self.documentList.store deleteDocuments:documents];
 }
 
 @end

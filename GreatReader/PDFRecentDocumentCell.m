@@ -40,6 +40,17 @@
               context:NULL];
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    [self setNeedsDisplay];
+}
+
+- (void)setHighlighted:(BOOL)highlighted
+{
+    [super setHighlighted:highlighted];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"document.name"]) {
@@ -54,13 +65,22 @@
     if (self.document.iconImage) {
         CGFloat w = rect.size.width;
         CGPoint center = CGPointMake(w / 2.0, w / 2.0);
-        CGRect r = CGRectMake(center.x - self.document.iconImage.size.width / 2.0,
-                              center.y - self.document.iconImage.size.height / 2.0,
-                              self.document.iconImage.size.width,
-                              self.document.iconImage.size.height);
+        CGRect r = CGRectMake(roundf(center.x - self.document.iconImage.size.width / 2.0),
+                              roundf(center.y - self.document.iconImage.size.height / 2.0),
+                              roundf(self.document.iconImage.size.width),
+                              roundf(self.document.iconImage.size.height));
         [self.document.iconImage drawInRect:r];
         CGFloat lineWidth = 1.0 / [UIScreen mainScreen].scale;
-        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectInset(r, lineWidth / 2.0, lineWidth / 2.0)];
+        CGRect bezierPathRect;
+        if (self.selected) {
+            [self.tintColor set];
+            lineWidth = 2;
+            bezierPathRect = r;
+        } else {
+            [[UIColor blackColor] set];
+            bezierPathRect = CGRectInset(r, lineWidth / 2.0, lineWidth / 2.0);
+        }
+        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:bezierPathRect];
         bezierPath.lineWidth = lineWidth;
         [bezierPath stroke];
     }

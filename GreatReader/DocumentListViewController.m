@@ -10,6 +10,7 @@
 
 #import "Device.h"
 #import "DocumentListViewModel.h"
+#import "NSArray+GreatReaderAdditions.h"
 #import "PDFRecentDocumentCell.h"
 #import "PDFDocument.h"
 #import "PDFDocumentStore.h"
@@ -19,8 +20,10 @@
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
 
-@interface DocumentListViewController ()
-
+@interface DocumentListViewController () <UIActionSheetDelegate>
+@property (nonatomic, strong) UIBarButtonItem *actionItem;
+@property (nonatomic, strong) UIBarButtonItem *deleteItem;
+@property (nonatomic, strong) UIDocumentInteractionController *interactionController;
 @end
 
 @implementation DocumentListViewController
@@ -38,10 +41,13 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     [super viewDidLoad];
 
+    self.collectionView.allowsMultipleSelection = YES;
+
     self.navigationItem.title = self.viewModel.title;
     self.title = self.viewModel.title;
 
-    // Do any additional setup after loading the view.
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
     NSString *nibName = @"PDFRecentDocumentCell";
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         nibName = [nibName stringByAppendingString:@"_iPad"];
@@ -66,6 +72,84 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    if (editing) {
+        self.deleteItem =
+                [[UIBarButtonItem alloc] initWithTitle:@"Delete"
+                                                 style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(delete:)];
+        self.deleteItem.enabled = NO;
+        self.actionItem =
+                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                              target:self
+                                                              action:@selector(performAction:)];
+        self.actionItem.enabled = NO;
+        [self.navigationItem setLeftBarButtonItems:@[self.deleteItem, self.actionItem]
+                                          animated:animated];
+    } else {
+        self.deleteItem = nil;
+        self.actionItem = nil;
+        [self.navigationItem setLeftBarButtonItems:@[] animated:animated];
+        [[self.collectionView indexPathsForSelectedItems]
+                enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger idx, BOOL *stop) {
+            [self.collectionView deselectItemAtIndexPath:indexPath
+                                                 animated:animated];
+        }];
+    }
+}
+
+#pragma mark - Edit Action
+
+- (void)delete:(id)sender
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:@"Delete"
+                                              otherButtonTitles:nil];
+    if (IsPad()) {
+        [sheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [sheet showInView:self.view];
+    }
+}
+
+- (void)performAction:(id)sender
+{
+    NSIndexPath *indexPath = [self.collectionView.indexPathsForSelectedItems firstObject];
+    PDFDocument *doc = [self.viewModel documentAtIndex:indexPath.item];
+    NSURL *URL = [NSURL fileURLWithPath:doc.path];
+    self.interactionController =
+            [UIDocumentInteractionController interactionControllerWithURL:URL];
+    [self.interactionController presentOpenInMenuFromBarButtonItem:sender animated:YES];
+}
+
+- (void)updateButtonsEnabled
+{
+    self.deleteItem.enabled = self.collectionView.indexPathsForSelectedItems.count > 0;
+    self.actionItem.enabled = self.collectionView.indexPathsForSelectedItems.count == 1;
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.destructiveButtonIndex == buttonIndex) {
+        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+        NSArray *documents = [indexPaths grt_map:^(NSIndexPath *indexPath) {
+            return [self.viewModel documentAtIndex:indexPath.item];
+        }];
+        [self.viewModel deleteDocuments:documents];
+        [self.collectionView deleteItemsAtIndexPaths:indexPaths];
+        [self updateButtonsEnabled];
+    }
+}
 
 #pragma mark - Navigation
 
@@ -79,7 +163,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
         PDFDocumentViewController *vc =
                 (PDFDocumentViewController *)navi.topViewController;
         vc.hidesBottomBarWhenPushed = YES;
-        PDFDocument *document = (PDFDocument *)[self.viewModel documentAtIndex:indexPath.row];
+        PDFDocument *document = (PDFDocument *)[self.viewModel documentAtIndex:indexPath.item];
         vc.document = document;
         [document.store addHistory:document];
     }
@@ -87,10 +171,31 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
 #pragma mark -
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.editing) {
+        [self updateButtonsEnabled];
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
-                              sender:[collectionView cellForItemAtIndexPath:indexPath]];
+    if (self.editing) {
+        [self updateButtonsEnabled];
+    } else {
+        [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
+                                  sender:[collectionView cellForItemAtIndexPath:indexPath]];
+        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.editing) {
+        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+        cell.highlighted = NO;
+    }
 }
 
 #pragma mark -
@@ -101,7 +206,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
             [collectionView dequeueReusableCellWithReuseIdentifier:DocumentListViewControllerCellIdentifier
                                                       forIndexPath:indexPath];
 
-    PDFDocument *document = [self.viewModel documentAtIndex:indexPath.row];
+    PDFDocument *document = [self.viewModel documentAtIndex:indexPath.item];
     cell.document = document;
     
     return cell;    

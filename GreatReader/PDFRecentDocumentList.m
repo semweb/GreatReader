@@ -12,10 +12,12 @@
 #import "NSArray+GreatReaderAdditions.h"
 #import "NSFileManager+GreatReaderAdditions.h"
 #import "PDFDocument.h"
+#import "PDFDocumentStore.h"
 
 @interface PDFRecentDocumentList ()
 @property (nonatomic, readwrite, strong) NSArray *documents;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier bgTask;
+@property (nonatomic, readwrite, weak) PDFDocumentStore *store;
 @end
 
 @implementation PDFRecentDocumentList
@@ -25,15 +27,16 @@
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-- (instancetype)init
+- (instancetype)initWithStore:(PDFDocumentStore *)store
 {
     self = [super init];
     if (self) {
+        self.store = store;
         NSArray *list = [self load];
         self.documents = list;
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(fileRemoved:)
-                                                   name:FolderFileRemovedNotification
+                                               selector:@selector(documentDeleted:)
+                                                   name:PDFDocumentDeletedNotification
                                                  object:nil];
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(didEnterBackground:)
@@ -62,6 +65,14 @@
     }
     [NSKeyedArchiver archiveRootObject:self.documents
                                 toFile:self.path];
+}
+
+- (void)saveLater
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(save)
+                                               object:nil];
+    [self performSelector:@selector(save) withObject:nil afterDelay:0.0];
 }
 
 - (NSArray *)load
@@ -111,23 +122,16 @@
 
 #pragma mark - Notifications
 
-- (void)fileRemoved:(NSNotification *)notification
+- (void)documentDeleted:(NSNotification *)notification
 {
-    BOOL save = NO;
-    
-    NSArray *files = notification.userInfo[@"Files"];
-    for (PDFDocument *document in [self.documents copy]) {
-        for (File *file in files) {
-            if ([document isEqual:file]) {
-                [self.documentsProxy removeObject:document];
-                save = YES;
-            }
-        }        
-    }
+    PDFDocument *deletedDocument = notification.userInfo[@"document"];
+    for (PDFDocument *doc in [self.documents copy]) {
+        if (deletedDocument == doc) {
+            [self.documentsProxy removeObject:doc];
+        }
+    }    
 
-    if (save) {
-        [self save];
-    }
+    [self saveLater];
 }
 
 #pragma mark - Did Enter Background

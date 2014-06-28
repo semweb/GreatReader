@@ -16,10 +16,15 @@
 NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification";
 
 @interface Folder ()
-@property (nonatomic, weak) PDFDocumentStore *store;
+@property (nonatomic, readwrite, weak) PDFDocumentStore *store;
 @end
 
 @implementation Folder
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (instancetype)initWithPath:(NSString *)path
                        store:(PDFDocumentStore *)store
@@ -27,6 +32,11 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
     self = [super initWithPath:path];
     if (self) {
         _store = store;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(documentDeleted:)
+                                                     name:PDFDocumentDeletedNotification
+                                                   object:store];
     }
     return self;
 }
@@ -72,6 +82,20 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
         return YES;
     }
     return NO;
+}
+
+#pragma mark - PDFDocumentDeletedNotification
+
+- (void)documentDeleted:(NSNotification *)notification
+{
+    PDFDocument *deletedDocument = notification.userInfo[@"document"];
+    for (PDFDocument *doc in [self.files copy]) {
+        if (deletedDocument == doc) {
+            NSMutableArray *mFiles = self.files.mutableCopy;
+            [mFiles removeObject:doc];
+            self.files = mFiles.copy;
+        }
+    }
 }
 
 @end

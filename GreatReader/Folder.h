@@ -16,6 +16,7 @@ extern NSString * const FolderFileRemovedNotification;
 
 @interface Folder : File
 @property (nonatomic, strong) NSArray *files;
+@property (nonatomic, readonly, weak) PDFDocumentStore *store;
 - (instancetype)initWithPath:(NSString *)path
                        store:(PDFDocumentStore *)store;
 - (void)load;

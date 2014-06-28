@@ -30,7 +30,7 @@
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(didEnterBackground:)
                                                    name:UIApplicationDidEnterBackgroundNotification
-                                                 object:nil];
+                                                 object:nil];      
     }
     return self;
 }

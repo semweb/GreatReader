@@ -16,4 +16,5 @@
 - (NSUInteger)count;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (void)reload;
+- (void)deleteDocuments:(NSArray *)documents;
 @end
