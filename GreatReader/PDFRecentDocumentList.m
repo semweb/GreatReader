@@ -124,7 +124,7 @@
 
 - (void)documentDeleted:(NSNotification *)notification
 {
-    PDFDocument *deletedDocument = notification.userInfo[@"document"];
+    PDFDocument *deletedDocument = notification.object;
     for (PDFDocument *doc in [self.documents copy]) {
         if (deletedDocument == doc) {
             [self.documentsProxy removeObject:doc];

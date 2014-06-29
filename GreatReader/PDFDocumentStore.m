@@ -12,8 +12,6 @@
 #import "PDFDocument.h"
 #import "PDFRecentDocumentList.h"
 
-NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
-
 @interface PDFDocumentStore ()
 @property (nonatomic, strong, readwrite) PDFRecentDocumentList *documentList;
 @property (nonatomic, strong, readwrite) RootFolder *rootFolder;
@@ -68,13 +66,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 
 - (void)deleteDocument:(PDFDocument *)document
 {
-    NSFileManager *fileManager = [NSFileManager new];
-    [fileManager removeItemAtPath:document.path error:NULL];
-
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:PDFDocumentDeletedNotification
-                      object:self
-                    userInfo:@{ @"document": document }];
+    [document delete];
 }
 
 @end

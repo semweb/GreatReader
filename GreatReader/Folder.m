@@ -36,7 +36,7 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(documentDeleted:)
                                                      name:PDFDocumentDeletedNotification
-                                                   object:store];
+                                                   object:nil];
     }
     return self;
 }
@@ -88,7 +88,7 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
 
 - (void)documentDeleted:(NSNotification *)notification
 {
-    PDFDocument *deletedDocument = notification.userInfo[@"document"];
+    PDFDocument *deletedDocument = notification.object;
     for (PDFDocument *doc in [self.files copy]) {
         if (deletedDocument == doc) {
             NSMutableArray *mFiles = self.files.mutableCopy;

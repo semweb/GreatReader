@@ -16,6 +16,8 @@
 @class PDFDocumentStore;
 @class PDFPage;
 
+extern NSString * const PDFDocumentDeletedNotification;
+
 @interface PDFDocument : File <NSCoding>
 @property (nonatomic, assign, readonly) NSUInteger numberOfPages;
 @property (nonatomic, strong, readonly) PDFDocumentOutline *outline;
@@ -30,4 +32,5 @@
 @property (nonatomic, weak) PDFDocumentStore *store;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
+- (void)delete;
 @end

@@ -16,6 +16,8 @@
 #import "PDFDocumentOutline.h"
 #import "PDFPage.h"
 
+NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
+
 @interface PDFDocument ()
 @property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
 @property (nonatomic, strong, readwrite) UIImage *thumbnailImage;
@@ -288,6 +290,19 @@
 - (BOOL)currentPageBookmarked
 {
     return [self.bookmarkList bookmarkedAtPage:self.currentPage];
+}
+
+#pragma mark -
+
+- (void)delete
+{
+    NSFileManager *fileManager = [NSFileManager new];
+    [fileManager removeItemAtPath:self.path error:NULL];
+    [fileManager removeItemAtPath:self.imagePath error:NULL];
+
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:PDFDocumentDeletedNotification
+                      object:self];
 }
 
 @end
