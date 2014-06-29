@@ -130,8 +130,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
-                                <rect key="frame" x="0.0" y="931" width="768" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhS-Jv-ZGv" customClass="PDFDocumentPageSlider">
@@ -290,9 +290,6 @@
                     <size key="freeformSize" width="320" height="44"/>
                     <connections>
                         <outlet property="tableView" destination="jay-3B-iNT" id="TTW-b2-cX1"/>
-                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFDocumentSettingSegueExit" unwindAction="exitSetting:" id="wRK-qt-rx4"/>
-                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFDocumentSettingSegueCropOdd" unwindAction="exitSetting:" id="IfF-G0-Sa7"/>
-                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFDocumentSettingSegueCropEven" unwindAction="exitSetting:" id="3gq-j0-1KF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CL3-Nx-MDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -386,6 +383,7 @@
                     <size key="freeformSize" width="1024" height="300"/>
                     <connections>
                         <outlet property="collectionView" destination="2gI-1s-zPt" id="meI-F0-W0k"/>
+                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" unwindAction="exitHistory:" id="z2O-Ed-vfW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kr-vH-1Tx" userLabel="First Responder" sceneMemberID="firstResponder"/>
