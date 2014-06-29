@@ -8,6 +8,7 @@
 
 #import "PDFDocumentViewController.h"
 
+#import "Device.h"
 #import "GRTModalTransitionAnimator.h"
 #import "PDFDocument.h"
 #import "PDFDocumentBookmarkList.h"
@@ -452,7 +453,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue {}
 
-- (IBAction)exitHistory:(UIStoryboardSegue *)segue {}
+- (IBAction)exitHistory:(UIStoryboardSegue *)segue
+{
+    if (IsPhone()) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
 
 #pragma mark - PDFDocumentPageSlider Delegate, DataSouce
 
