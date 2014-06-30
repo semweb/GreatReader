@@ -139,6 +139,9 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <connections>
+                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentBookmarkListSegueExit" unwindAction="exitBookmark:" id="tpt-4U-SEX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYN-qD-K6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
