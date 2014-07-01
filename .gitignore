@@ -5,4 +5,7 @@
 *.xcworkspace
 xcuserdata
 
+Podfile.lock
+Pods/*
+
 /API_KEY.plist
