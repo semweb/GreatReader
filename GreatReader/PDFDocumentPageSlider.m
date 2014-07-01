@@ -165,7 +165,6 @@
             nearest = itemView;
         }
     }
-
     return nearest;
 }
 
@@ -190,7 +189,11 @@
         CGPoint point = [touch locationInView:self];
         PDFDocumentPageSliderItemView *itemView =
                 [self nearestItemViewAtPoint:point];
-        [self moveToIndex:itemView.item.pageNumber];
+        if (itemView) {
+            [self moveToIndex:itemView.item.pageNumber];
+        } else {
+            [self handleTouch:touch];
+        }
     }
 }
 
