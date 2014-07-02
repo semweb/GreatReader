@@ -11,6 +11,7 @@
 #import "PDFPage.h"
 #import "PDFPageContentView.h"
 #import "PDFPageScanner.h"
+#import "PDFPageSelectionKnob.h"
 
 @interface PDFPageScrollView : UIScrollView
 @end
@@ -18,7 +19,8 @@
 @implementation PDFPageScrollView
 @end
 
-@interface PDFPageViewController () <UIScrollViewDelegate>
+@interface PDFPageViewController () <UIScrollViewDelegate,
+                                     PDFPageContentViewDelegate>
 @property (nonatomic, strong, readwrite) PDFPage *page;
 @property (nonatomic, strong, readwrite) PDFPageContentView *contentView;
 @property (nonatomic, strong) UIImageView *lowResolutionView;
@@ -61,6 +63,7 @@
 	// Do any additional setup after loading the view.
 
     self.contentView = [[PDFPageContentView alloc] initWithFrame:self.frameThatFits];
+    self.contentView.delegate = self;
     self.contentView.page = self.page;
     [self.view addSubview:self.contentView];
     [self.scrollView setContentSize:self.contentView.frame.size];
@@ -70,11 +73,6 @@
                                                     action:@selector(doubleTapped:)];
     tapGestureRecognizer.numberOfTapsRequired = 2;
     [self.contentView addGestureRecognizer:tapGestureRecognizer];
-
-    UILongPressGestureRecognizer *longPressGestureRecognizer =
-            [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                          action:@selector(longPressed:)];
-    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
 
     // CATiledLayerの描画が始まるまで、低画質で描画しておく
     UIImage *lowResolutionImage = [self.page thumbnailImageWithSize:self.contentView.frame.size
@@ -177,6 +175,12 @@
         [self.lowResolutionView removeFromSuperview];
         self.lowResolutionView = nil;
     }
+    [self.contentView zoomStarted];
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    [self.contentView zoomFinished];
 }
 
 #pragma mark - Double Tapped
@@ -195,91 +199,6 @@
     } else {
         [self.scrollView setZoomScale:1.0 animated:YES];
     }
-}
-
-- (void)longPressed:(UILongPressGestureRecognizer *)recognizer
-{
-    CGPoint point = [recognizer locationInView:self.contentView];
-    CGFloat scale = self.contentView.scale;
-    PDFRenderingCharacter *c = [self.page characterAtPoint:CGPointMake(point.x / scale,
-                                                                       point.y / scale)];
-    if (c) {
-        [self.page selectWordForCharacter:c];
-    }
-
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [self showSelectionMenuFromRect:self.contentView.selectionFrame
-                                 inView:self.contentView];
-        [self.contentView hideLoope];
-    } else {
-        [self.contentView showLoopeAtPoint:point
-                                    inView:self.navigationController.view];
-    }
-}
-
-- (void)showSelectionMenuFromRect:(CGRect)rect
-                           inView:(UIView *)view
-{
-    UIMenuController *menuController = [UIMenuController sharedMenuController];
-    NSMutableArray* menuItems = [NSMutableArray array];
-    [menuItems addObject:
-                   [[UIMenuItem alloc] initWithTitle:@"Copy"
-                                              action:@selector(copySelectedString:)]];
-    [menuItems addObject:
-                   [[UIMenuItem alloc] initWithTitle:@"Define"
-                                              action:@selector(lookupSelectedString:)]];    
-    menuController.menuItems = menuItems;
-    menuController.arrowDirection = UIMenuControllerArrowDefault;
-    [menuController setTargetRect:rect
-                           inView:view];
-    [self becomeFirstResponder];
-    [menuController setMenuVisible:YES animated:YES];
-
-    
-    __block __weak id observer = [NSNotificationCenter.defaultCenter
-                             addObserverForName:UIMenuControllerDidHideMenuNotification
-                                         object:menuController
-                                          queue:NSOperationQueue.mainQueue
-                                     usingBlock:^(NSNotification *notification) {
-        [NSNotificationCenter.defaultCenter removeObserver:observer];
-        [self.page unselectCharacters];
-    }];
-}
-
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
-{
-    return (action == @selector(lookupSelectedString:)) ||
-            (action == @selector(copySelectedString:));
-}
-
-- (void)lookupSelectedString:(id)sender
-{
-    NSString *term = self.page.selectedString;
-    UIReferenceLibraryViewController *vc = [[UIReferenceLibraryViewController alloc]
-                                               initWithTerm:term];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:vc];
-        [self.popover presentPopoverFromRect:self.contentView.selectionFrame
-                                      inView:self.contentView
-                    permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown
-                                    animated:YES];
-    } else {
-        [self presentViewController:vc
-                           animated:YES
-                         completion:NULL];        
-    }
-}
-
-- (void)copySelectedString:(id)sender
-{
-    NSString *term = self.page.selectedString;    
-    UIPasteboard *pb = [UIPasteboard generalPasteboard];
-    [pb setString:term];
 }
 
 #pragma mark -
@@ -308,6 +227,59 @@
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self.contentView redraw];
+}
+
+#pragma mark - UIGestureRecognizer Delegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![touch.view isKindOfClass:UIControl.class];
+}
+
+#pragma mark -
+
+- (UIMenuController *)selectionMenuForContentView:(PDFPageContentView *)contentView
+{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    NSMutableArray* menuItems = [NSMutableArray array];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Copy"
+                                              action:@selector(copySelectedString:)]];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Define"
+                                              action:@selector(lookupSelectedString:)]];    
+    menuController.menuItems = menuItems;
+    return menuController;
+}
+
+- (void)contentView:(PDFPageContentView *)contentView
+   copyMenuSelected:(NSString *)selectedString
+{
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    [pb setString:selectedString];
+}
+
+- (void)contentView:(PDFPageContentView *)contentView
+ lookupMenuSelected:(NSString *)selectedString
+{
+    UIReferenceLibraryViewController *vc = [[UIReferenceLibraryViewController alloc]
+                                               initWithTerm:selectedString];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:vc];
+        [self.popover presentPopoverFromRect:contentView.selectionFrame
+                                      inView:contentView
+                    permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown
+                                    animated:YES];
+    } else {
+        [self presentViewController:vc
+                           animated:YES
+                         completion:NULL];        
+    }
+}
+
+- (UIView *)loopeContainerViewForContentView:(PDFPageContentView *)contentView
+{
+    return self.navigationController.view;
 }
 
 @end

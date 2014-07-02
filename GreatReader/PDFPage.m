@@ -15,7 +15,7 @@
 #import "PDFTextState.h"
 
 @interface PDFPage ()
-@property (nonatomic, strong) NSArray *characterFrames;
+@property (nonatomic, strong, readwrite) NSArray *characterFrames;
 @property (nonatomic, assign) NSRange selectedRange;
 @end
 
@@ -155,6 +155,48 @@
     return c;
 }
 
+- (PDFRenderingCharacter *)nearestCharacterAtPoint:(CGPoint)point
+{
+    __block PDFRenderingCharacter *c = nil;
+
+    __block CGFloat nearest = 100;
+
+    float (^distance)(CGRect) = ^(CGRect r) {
+        CGFloat xd;
+        CGFloat yd;
+        CGFloat minX = CGRectGetMinX(r);
+        CGFloat maxX = CGRectGetMaxX(r);
+        CGFloat minY = CGRectGetMinY(r);
+        CGFloat maxY = CGRectGetMaxY(r);
+        if (minX <= point.x && point.x <= maxX) {
+            xd = 0;
+        } else {
+            xd = MIN(fabs(minX - point.x), fabs(maxX - point.x));
+        }
+        if (minY <= point.y && point.y <= maxY) {
+            yd = 0;
+        } else {
+            yd = MIN(fabs(minY - point.y), fabs(maxY - point.y));
+        }
+        return sqrtf(pow(xd, 2) + pow(yd, 2));
+    };
+    
+    [self.characterFrames enumerateObjectsUsingBlock:^(NSValue *v, NSUInteger idx, BOOL *stop) {
+        CGRect r = [v CGRectValue];
+        if (CGRectContainsPoint(r, point)) {
+            c = self.characters[idx];
+            *stop = YES;
+        }
+        CGFloat d = distance(r);
+        if (d < nearest) {
+            c = self.characters[idx];
+            nearest = d;
+        }
+    }];
+
+    return c;    
+}
+
 - (void)selectWordForCharacter:(PDFRenderingCharacter *)character
 {
     NSUInteger index = [self.characters indexOfObject:character];
@@ -183,8 +225,21 @@
 - (void)selectCharactersFrom:(PDFRenderingCharacter *)fromCharacter
                           to:(PDFRenderingCharacter *)toCharacter
 {
-    NSUInteger fromIndex = [self.characters indexOfObject:fromCharacter];
-    NSUInteger toIndex = [self.characters indexOfObject:toCharacter];
+    NSAssert(fromCharacter ||
+             self.selectedRange.length > 0, @"");
+    NSAssert(toCharacter ||
+             self.selectedRange.length > 0, @"");    
+    
+    NSUInteger fromIndex = fromCharacter
+        ? [self.characters indexOfObject:fromCharacter]
+        : self.selectedRange.location;
+    NSUInteger toIndex = toCharacter
+        ? [self.characters indexOfObject:toCharacter]
+        : self.selectedRange.location + self.selectedRange.length - 1;
+
+    if (fromIndex > toIndex) {
+        return;
+    }
     self.selectedRange = NSMakeRange(fromIndex, toIndex - fromIndex + 1);
 }
 

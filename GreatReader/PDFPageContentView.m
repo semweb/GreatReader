@@ -13,6 +13,7 @@
 #import "PDFPage.h"
 #import "PDFPageContentTiledLayer.h"
 #import "PDFPageLoopeView.h"
+#import "PDFPageSelectionKnob.h"
 #import "PDFRenderingCharacter.h"
 
 @interface PDFPageContentTileView : UIView
@@ -37,9 +38,11 @@
 
 @end
 
-@interface PDFPageContentView ()
+@interface PDFPageContentView () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) PDFPageContentTileView *tileView;
 @property (nonatomic, strong) NSMutableArray *selectionViews;
+@property (nonatomic, strong) PDFPageSelectionKnob *selectionStartKnob;
+@property (nonatomic, strong) PDFPageSelectionKnob *selectionEndKnob;
 @property (nonatomic, strong) PDFPageLoopeView *loopeView;
 @end
 
@@ -71,6 +74,12 @@
                   context:NULL];
         
         _loopeView = [[PDFPageLoopeView alloc] init];
+
+        UILongPressGestureRecognizer *longPressGestureRecognizer =
+                [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                              action:@selector(longPressed:)];
+        longPressGestureRecognizer.delegate = self;
+        [self addGestureRecognizer:longPressGestureRecognizer];
     }
     return self;
 }
@@ -83,7 +92,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self updateSelectionViews];   
+    [self updateSelectionViews];
+    [self updateSelectionKnobs];
 }
 
 - (void)updateSelectionViews
@@ -118,6 +128,66 @@
                                             alpha:0.2];
         [self addSubview:v];
         [self.selectionViews addObject:v];
+    }
+}
+
+- (void)updateSelectionKnobs
+{
+    if (!self.selectionStartKnob) {
+        self.selectionStartKnob = [[PDFPageSelectionKnob alloc] initWithFrame:CGRectZero];
+        self.selectionStartKnob.start = YES;
+        [self.selectionStartKnob addTarget:self
+                                    action:@selector(knobChanged:)
+                          forControlEvents:UIControlEventValueChanged];
+        [self.selectionStartKnob addTarget:self
+                                    action:@selector(knobEnded:)
+                          forControlEvents:UIControlEventTouchCancel |
+                                           UIControlEventTouchUpInside |
+                                           UIControlEventTouchUpOutside];
+        [self.selectionStartKnob addTarget:self
+                                    action:@selector(knobBegan:)
+                          forControlEvents:UIControlEventTouchDown];
+    }
+    if (!self.selectionEndKnob) {
+        self.selectionEndKnob = [[PDFPageSelectionKnob alloc] initWithFrame:CGRectZero];
+        self.selectionEndKnob.start = NO;        
+        [self.selectionEndKnob addTarget:self
+                                  action:@selector(knobChanged:)
+                        forControlEvents:UIControlEventValueChanged];
+        [self.selectionEndKnob addTarget:self
+                                  action:@selector(knobEnded:)
+                        forControlEvents:UIControlEventTouchCancel |
+                                         UIControlEventTouchUpInside |
+                                         UIControlEventTouchUpOutside];
+        [self.selectionEndKnob addTarget:self
+                                  action:@selector(knobBegan:)
+                        forControlEvents:UIControlEventTouchDown];        
+    }
+
+    if (self.selectionViews.count > 0) {
+        UIView *firstSelection = self.selectionViews.firstObject;
+        UIView *lastSelection = self.selectionViews.lastObject;
+        const CGFloat w = 9;
+        self.selectionStartKnob.frame = ({
+            CGRect f = [self convertRect:firstSelection.frame toView:self.superview];
+            f.origin.x = floorf(f.origin.x - (w / 2.0) - 0.5);
+            f.origin.y = floorf(f.origin.y - w);
+            f.size.width = w;
+            f.size.height = ceilf(f.size.height + w);
+            f;
+        });
+        self.selectionEndKnob.frame = ({
+            CGRect f = [self convertRect:lastSelection.frame toView:self.superview];
+            f.origin.x = ceilf(CGRectGetMaxX(f) - (w / 2.0) + 0.5);
+            f.size.width = w;
+            f.size.height = ceilf(f.size.height + w);
+            f;
+        });
+        [self.superview addSubview:self.selectionStartKnob];
+        [self.superview addSubview:self.selectionEndKnob];        
+    } else {
+        [self.selectionStartKnob removeFromSuperview];
+        [self.selectionEndKnob removeFromSuperview];
     }
 }
 
@@ -178,6 +248,8 @@
     self.loopeView.center =
             CGPointMake(self.loopeView.center.x,
                         self.loopeView.center.y - self.loopeView.frame.size.height / 2.0 - 20);
+
+    [self hideMenuControllerIfNeeded];
 }
 
 - (void)hideLoope
@@ -190,6 +262,167 @@
     self.tileView.layer.contents = nil;
     self.tileView.rect = CGRectZero;
     [self.tileView setNeedsDisplay];
+}
+
+#pragma mark - Knob Changed
+
+- (void)knobChanged:(PDFPageSelectionKnob *)knob
+{
+    CGFloat scale = self.scale;
+    PDFRenderingCharacter *start = ({
+        CGPoint point = [self convertPoint:self.selectionStartKnob.point
+                                  fromView:self.selectionStartKnob.superview];
+        [self.page nearestCharacterAtPoint:CGPointMake(point.x / scale,
+                                                       point.y / scale)];
+    });
+    PDFRenderingCharacter *end = ({
+        CGPoint point = [self convertPoint:self.selectionEndKnob.point
+                                  fromView:self.selectionEndKnob.superview];
+        [self.page nearestCharacterAtPoint:CGPointMake(point.x / scale,
+                                                       point.y / scale)];
+    });
+    [self.page selectCharactersFrom:start
+                                 to:end];
+
+    [self showLoopeAtPoint:[self convertPoint:knob.point fromView:knob.superview]
+                    inView:[self.delegate loopeContainerViewForContentView:self]];    
+}
+
+- (void)knobEnded:(PDFPageSelectionKnob *)knob
+{
+    [self showSelectionMenuFromRect:self.selectionFrame
+                             inView:self];
+    [self hideLoope];
+}
+
+- (void)knobBegan:(PDFPageSelectionKnob *)knob
+{
+    CGPoint point = [self convertPoint:knob.point
+                              fromView:knob.superview];
+    [self showLoopeAtPoint:point
+                    inView:[self.delegate loopeContainerViewForContentView:self]];
+}
+
+#pragma mark -
+
+- (void)zoomStarted
+{
+    [self.selectionStartKnob removeFromSuperview];
+    [self.selectionEndKnob removeFromSuperview];
+}
+
+- (void)zoomFinished
+{
+    [self updateSelectionKnobs];
+}
+
+#pragma mark -
+
+- (void)longPressed:(UILongPressGestureRecognizer *)recognizer
+{
+    CGPoint point = [recognizer locationInView:self];
+    CGFloat scale = self.scale;
+    PDFRenderingCharacter *c = [self.page characterAtPoint:CGPointMake(point.x / scale,
+                                                                       point.y / scale)];
+    if (c) {
+        [self.page selectWordForCharacter:c];
+    }
+
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        [self showSelectionMenuFromRect:self.selectionFrame
+                                 inView:self];
+        [self hideLoope];
+    } else {
+        [self showLoopeAtPoint:point
+                        inView:[self.delegate loopeContainerViewForContentView:self]];
+    }
+}
+
+#pragma mark -
+
+- (void)showSelectionMenuFromRect:(CGRect)rect
+                           inView:(UIView *)view
+{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    NSMutableArray* menuItems = [NSMutableArray array];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Copy"
+                                              action:@selector(copySelectedString:)]];
+    [menuItems addObject:
+                   [[UIMenuItem alloc] initWithTitle:@"Define"
+                                              action:@selector(lookupSelectedString:)]];    
+    menuController.menuItems = menuItems;
+    menuController.arrowDirection = UIMenuControllerArrowDefault;
+    [menuController setTargetRect:rect
+                           inView:view];
+    [self becomeFirstResponder];
+    [menuController setMenuVisible:YES animated:YES];
+
+    __block __weak id observer =
+        [NSNotificationCenter.defaultCenter
+            addObserverForName:UIMenuControllerDidHideMenuNotification
+                        object:menuController
+                         queue:NSOperationQueue.mainQueue
+                    usingBlock:^(NSNotification *notification) {
+            [NSNotificationCenter.defaultCenter removeObserver:observer];
+            if (self.loopeView.isHidden || self.loopeView.superview == nil) {
+                [self.page unselectCharacters];
+            }
+        }];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(lookupSelectedString:) &&
+        [self.delegate respondsToSelector:@selector(contentView:lookupMenuSelected:)]) {
+        return YES;
+    } else if (action == @selector(copySelectedString:) &&
+        [self.delegate respondsToSelector:@selector(contentView:copyMenuSelected:)]) {
+        return YES;
+    }
+    return NO;
+}
+
+
+- (void)lookupSelectedString:(id)sender
+{
+    [self.delegate contentView:self
+            lookupMenuSelected:self.page.selectedString];
+    [self.page unselectCharacters];
+}
+
+- (void)copySelectedString:(id)sender
+{
+    [self.delegate contentView:self
+              copyMenuSelected:self.page.selectedString];
+    [self.page unselectCharacters];
+}
+
+#pragma mark - UIGestureRecognizer Delegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![touch.view isKindOfClass:UIControl.class];
+}
+
+#pragma mark -
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self hideMenuControllerIfNeeded];
+}
+
+- (void)hideMenuControllerIfNeeded
+{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    if (menuController.menuVisible) {
+        [menuController setMenuVisible:NO animated:YES];
+    }
 }
 
 @end

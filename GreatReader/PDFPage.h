@@ -21,10 +21,12 @@
 @property (nonatomic, readonly) NSArray *selectedFrames;
 @property (nonatomic, readonly) NSArray *selectedCharacters;
 @property (nonatomic, readonly) NSString *selectedString;
+@property (nonatomic, strong, readonly) NSArray *characterFrames;
 - (instancetype)initWithCGPDFPage:(CGPDFPageRef)CGPDFPage;
 - (UIImage *)thumbnailImageWithSize:(CGSize)size cropping:(BOOL)cropping;
 - (void)drawInRect:(CGRect)rect inContext:(CGContextRef)context cropping:(BOOL)cropping;
 - (PDFRenderingCharacter *)characterAtPoint:(CGPoint)point;
+- (PDFRenderingCharacter *)nearestCharacterAtPoint:(CGPoint)point;
 - (void)selectWordForCharacter:(PDFRenderingCharacter *)character;
 - (void)selectCharactersFrom:(PDFRenderingCharacter *)fromCharacter
                           to:(PDFRenderingCharacter *)toCharacter;
