@@ -683,6 +683,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19F7BA9C186052E2009E8916 /* Build configuration list for PBXNativeTarget "GreatReader" */;
 			buildPhases = (
+				191B7D2B19681379004B35CA /* ShellScript */,
 				160B4BBCB56841368BCB3E20 /* Check Pods Manifest.lock */,
 				19F7BA5D186052E2009E8916 /* Sources */,
 				19F7BA5E186052E2009E8916 /* Frameworks */,
@@ -814,6 +815,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		191B7D2B19681379004B35CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -e API_KEY.plst ] ; then\ncp API_KEY_BASE.plist API_KEY.plist\nfi";
 		};
 		19430E4918E7B2B800BB4238 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
