@@ -242,7 +242,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
     UIView *base = ({
         UIToolbar *bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 230, 44)];
-        bar.backgroundColor = UIColor.redColor;
         bar.clipsToBounds = YES;
         [bar setBackgroundImage:[UIImage new]
               forToolbarPosition:UIBarPositionAny
@@ -518,6 +517,14 @@ pageThumbnailAtIndex:(NSUInteger)index
     } else {
         return 0;
     }
+}
+
+#pragma mark -
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:duration];
+    [self prepareNavigationBar];
 }
 
 
