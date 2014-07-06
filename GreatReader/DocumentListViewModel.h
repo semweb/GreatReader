@@ -17,4 +17,5 @@
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (void)reload;
 - (void)deleteDocuments:(NSArray *)documents;
+- (void)removeDocumentHistories:(NSArray *)documents;
 @end

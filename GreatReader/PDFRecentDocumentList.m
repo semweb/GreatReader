@@ -100,6 +100,12 @@
     [self save];
 }
 
+- (void)removeHistories:(NSArray *)histories
+{
+    [self.documentsProxy removeObjectsInArray:histories];
+    [self save];
+}
+
 - (PDFDocument *)findDocumentAtPath:(NSString *)path
 {
     for (PDFDocument *doc in self.documents) {

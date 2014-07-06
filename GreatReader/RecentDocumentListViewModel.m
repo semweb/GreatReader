@@ -47,4 +47,9 @@
     [self.documentList.store deleteDocuments:documents];
 }
 
+- (void)removeDocumentHistories:(NSArray *)documents
+{
+    [self.documentList removeHistories:documents];
+}
+
 @end

@@ -20,7 +20,7 @@
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
 
-@interface DocumentListViewController () <UIActionSheetDelegate>
+@interface DocumentListViewController ()
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
 @property (nonatomic, strong) UIBarButtonItem *deleteItem;
 @property (nonatomic, strong) UIDocumentInteractionController *interactionController;

@@ -20,4 +20,5 @@
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (void)addHistory:(PDFDocument *)document;
 - (PDFDocument *)findDocumentAtPath:(NSString *)path;
+- (void)removeHistories:(NSArray *)histories;
 @end

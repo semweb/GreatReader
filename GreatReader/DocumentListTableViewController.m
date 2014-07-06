@@ -62,6 +62,35 @@
 }
 */
 
+#pragma mark -
+
+- (void)delete:(id)sender
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:@"Delete"
+                                              otherButtonTitles:@"Remove History", nil];
+    if (IsPad()) {
+        [sheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [sheet showInView:self.view];
+    }
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.firstOtherButtonIndex == buttonIndex) {
+        [self.viewModel removeDocumentHistories:self.selectedDocuments];
+        [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
+        [self updateButtonsEnabled];
+    } else {
+        [super actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

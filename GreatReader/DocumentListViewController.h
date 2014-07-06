@@ -13,7 +13,7 @@
 extern NSString * const DocumentListViewControllerCellIdentifier;
 extern NSString * const DocumentListViewControllerSeguePDFDocument;
 
-@interface DocumentListViewController : UIViewController
+@interface DocumentListViewController : UIViewController <UIActionSheetDelegate>
 @property (nonatomic, strong) DocumentListViewModel *viewModel;
 - (void)reload;
 - (void)updateButtonsEnabled;
