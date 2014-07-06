@@ -130,14 +130,23 @@
                                              -drawRect.origin.y);
                                              // 0);
 
-    self.characterFrames = [self.characters grt_map:^(PDFRenderingCharacter *character) {
-        CGAffineTransform t = CGAffineTransformIdentity;
-        t = CGAffineTransformConcat(t, character.state.transform);        
-        t = CGAffineTransformConcat(t, transform);
-        t = CGAffineTransformConcat(t, translationTransform);
-        t = CGAffineTransformConcat(t, scaleTransform);
-        return [NSValue valueWithCGRect:CGRectApplyAffineTransform(character.frame, t)];
-    }];
+    NSArray *characters = [self.characters copy];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSArray *frames = [characters grt_map:^(PDFRenderingCharacter *character) {
+            CGAffineTransform t = CGAffineTransformIdentity;
+            t = CGAffineTransformConcat(t, character.state.transform);        
+            t = CGAffineTransformConcat(t, transform);
+            t = CGAffineTransformConcat(t, translationTransform);
+            t = CGAffineTransformConcat(t, scaleTransform);
+            return [NSValue valueWithCGRect:CGRectApplyAffineTransform(character.frame, t)];
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([characters isEqual:self.characters]) {
+                self.characterFrames = frames;
+            }
+        });
+    });
 }
 
 - (PDFRenderingCharacter *)characterAtPoint:(CGPoint)point
