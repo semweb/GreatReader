@@ -14,6 +14,20 @@
 		191B7D241967AD27004B35CA /* PDFPageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D231967AD27004B35CA /* PDFPageTests.m */; };
 		191B7D271967B2D8004B35CA /* PDFPageSelectionKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */; };
 		191B7D2A1967E5E2004B35CA /* TabHistory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D281967E5E2004B35CA /* TabHistory@2x.png */; };
+		191B7D3219682BB4004B35CA /* DocumentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3119682BB4004B35CA /* DocumentListTableViewController.m */; };
+		191B7D3319682BB4004B35CA /* DocumentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3119682BB4004B35CA /* DocumentListTableViewController.m */; };
+		191B7D3619684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */; };
+		191B7D3719684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */; };
+		191B7D3A19684F44004B35CA /* DocumentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3919684F44004B35CA /* DocumentTableViewCell.m */; };
+		191B7D3B19684F44004B35CA /* DocumentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3919684F44004B35CA /* DocumentTableViewCell.m */; };
+		191B7D3E19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3D19684F5B004B35CA /* DocumentCollectionViewCell.m */; };
+		191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D3D19684F5B004B35CA /* DocumentCollectionViewCell.m */; };
+		191B7D46196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D44196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib */; };
+		191B7D47196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D44196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib */; };
+		191B7D4A196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D48196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib */; };
+		191B7D4B196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D48196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib */; };
+		191B7D56196957A2004B35CA /* DocumentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D54196957A2004B35CA /* DocumentTableViewCell.xib */; };
+		191B7D57196957A2004B35CA /* DocumentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D54196957A2004B35CA /* DocumentTableViewCell.xib */; };
 		194112381936B0A3008AD461 /* PDFDocumentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 194112371936B0A3008AD461 /* PDFDocumentStore.m */; };
 		1941123B1936EA24008AD461 /* RootFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1941123A1936EA24008AD461 /* RootFolder.m */; };
 		19430E4E18E7B3ED00BB4238 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */; };
@@ -202,6 +216,17 @@
 		191B7D231967AD27004B35CA /* PDFPageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageTests.m; sourceTree = "<group>"; };
 		191B7D251967AF11004B35CA /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		191B7D291967E5E2004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/TabHistory@2x.png"; sourceTree = "<group>"; };
+		191B7D3019682BB4004B35CA /* DocumentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListTableViewController.h; sourceTree = "<group>"; };
+		191B7D3119682BB4004B35CA /* DocumentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListTableViewController.m; sourceTree = "<group>"; };
+		191B7D3419684E2A004B35CA /* DocumentListCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListCollectionViewController.h; sourceTree = "<group>"; };
+		191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListCollectionViewController.m; sourceTree = "<group>"; };
+		191B7D3819684F44004B35CA /* DocumentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentTableViewCell.h; sourceTree = "<group>"; };
+		191B7D3919684F44004B35CA /* DocumentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentTableViewCell.m; sourceTree = "<group>"; };
+		191B7D3C19684F5B004B35CA /* DocumentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCollectionViewCell.h; sourceTree = "<group>"; };
+		191B7D3D19684F5B004B35CA /* DocumentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentCollectionViewCell.m; sourceTree = "<group>"; };
+		191B7D45196925DB004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DocumentCollectionViewCell_iPhone.xib; sourceTree = "<group>"; };
+		191B7D49196925ED004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DocumentCollectionViewCell_iPad.xib; sourceTree = "<group>"; };
+		191B7D55196957A2004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DocumentTableViewCell.xib; sourceTree = "<group>"; };
 		194112361936B0A3008AD461 /* PDFDocumentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentStore.h; sourceTree = "<group>"; };
 		194112371936B0A3008AD461 /* PDFDocumentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentStore.m; sourceTree = "<group>"; };
 		194112391936EA24008AD461 /* RootFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootFolder.h; sourceTree = "<group>"; };
@@ -545,8 +570,16 @@
 				195B728A18EA352E000C5A8B /* Device.h */,
 				191B7D181963830B004B35CA /* PDFPageSelectionKnob.h */,
 				191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */,
+				191B7D3019682BB4004B35CA /* DocumentListTableViewController.h */,
+				191B7D3119682BB4004B35CA /* DocumentListTableViewController.m */,
+				191B7D3419684E2A004B35CA /* DocumentListCollectionViewController.h */,
+				191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */,
 				199AB738192E350500C697BB /* DocumentListViewController.h */,
 				199AB739192E350500C697BB /* DocumentListViewController.m */,
+				191B7D3819684F44004B35CA /* DocumentTableViewCell.h */,
+				191B7D3919684F44004B35CA /* DocumentTableViewCell.m */,
+				191B7D3C19684F5B004B35CA /* DocumentCollectionViewCell.h */,
+				191B7D3D19684F5B004B35CA /* DocumentCollectionViewCell.m */,
 				199AB73B192EC34800C697BB /* DocumentListViewModel.h */,
 				199AB73C192EC34800C697BB /* DocumentListViewModel.m */,
 				199AB73E192EC36B00C697BB /* RecentDocumentListViewModel.h */,
@@ -633,6 +666,9 @@
 				19430E5C18E8DCF100BB4238 /* API_KEY.plist */,
 				19F7BA7C186052E2009E8916 /* MainStoryboard_iPhone.storyboard */,
 				19F7BA7F186052E2009E8916 /* MainStoryboard_iPad.storyboard */,
+				191B7D44196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib */,
+				191B7D48196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib */,
+				191B7D54196957A2004B35CA /* DocumentTableViewCell.xib */,
 				19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */,
 				19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */,
 				19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */,
@@ -769,7 +805,10 @@
 				19C9616519033FD000D1857C /* CropOdd@2x.png in Resources */,
 				1994B0831960113B0021B08C /* Icon-76.png in Resources */,
 				19D870A618C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib in Resources */,
+				191B7D4A196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */,
+				191B7D46196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib in Resources */,
 				19ABA5C318D6701200E123AB /* RibbonOff@2x.png in Resources */,
+				191B7D56196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
 				19C9616A1905E6E400D1857C /* CropBoth@2x.png in Resources */,
 				19C9616B1905E6E400D1857C /* CropEven@2x.png in Resources */,
 				19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */,
@@ -791,8 +830,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191B7D47196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib in Resources */,
 				1994B074194F255C0021B08C /* Test.pdf in Resources */,
 				1994B06F194CA1EC0021B08C /* MainStoryboard_iPhone.storyboard in Resources */,
+				191B7D4B196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */,
+				191B7D57196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
 				1994B06E194CA1E90021B08C /* MainStoryboard_iPad.storyboard in Resources */,
 				19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */,
 			);
@@ -912,9 +954,11 @@
 				1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */,
 				1994B077194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
 				19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */,
+				191B7D3E19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
 				19D99DD71888E798006FDA6F /* File.m in Sources */,
 				1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */,
 				19F7BA71186052E2009E8916 /* main.m in Sources */,
+				191B7D3219682BB4004B35CA /* DocumentListTableViewController.m in Sources */,
 				19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */,
 				19090477191398D60014CC95 /* GRTModalTransitionAnimator.m in Sources */,
 				19F6FDAC18F25F01001E05D5 /* PDFDocumentOutlineContainerViewController.m in Sources */,
@@ -933,6 +977,7 @@
 				19090471191329B10014CC95 /* PDFRecentDocumentListViewModel.m in Sources */,
 				19C9615918FB5A4E00D1857C /* PDFDocumentPageSliderItem.m in Sources */,
 				199AB73A192E350500C697BB /* DocumentListViewController.m in Sources */,
+				191B7D3619684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
 				19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */,
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
@@ -957,6 +1002,7 @@
 				1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */,
 				19C9615618FB5A3B00D1857C /* PDFDocumentPageSliderItemView.m in Sources */,
 				19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */,
+				191B7D3A19684F44004B35CA /* DocumentTableViewCell.m in Sources */,
 				195B728C18EA352E000C5A8B /* Device.m in Sources */,
 				19D99DC11884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,
 				19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */,
@@ -980,9 +1026,11 @@
 				1994AFEE194CA1770021B08C /* GRTNavigationController.m in Sources */,
 				1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */,
 				1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */,
+				191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
 				1994B078194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
 				1994AFF4194CA1780021B08C /* NSArray+GreatReaderAdditions.m in Sources */,
 				1994B071194F23AA0021B08C /* PDFDocumentTests.m in Sources */,
+				191B7D3319682BB4004B35CA /* DocumentListTableViewController.m in Sources */,
 				1994AFF6194CA1780021B08C /* PDFDocument.m in Sources */,
 				1994AFF8194CA1780021B08C /* PDFPageLoopeView.m in Sources */,
 				1994AFFA194CA1780021B08C /* PDFDocumentBookmarkList.m in Sources */,
@@ -1001,6 +1049,7 @@
 				1994B012194CA1780021B08C /* PDFDocumentPageSlider.m in Sources */,
 				1994B014194CA1780021B08C /* PDFDocumentPageSliderDataSource.m in Sources */,
 				1994B017194CA1780021B08C /* PDFDocumentPageSliderItem.m in Sources */,
+				191B7D3719684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
 				1994B018194CA1780021B08C /* PDFDocumentPageSliderItemView.m in Sources */,
 				1994B01A194CA1780021B08C /* PDFDocumentStore.m in Sources */,
 				1994B01C194CA1780021B08C /* PDFDocumentViewController.m in Sources */,
@@ -1025,6 +1074,7 @@
 				1994B042194CA1780021B08C /* PDFTextState.m in Sources */,
 				1994B044194CA1780021B08C /* PDFDocumentBrightnessViewController.m in Sources */,
 				1994B046194CA1780021B08C /* File.m in Sources */,
+				191B7D3B19684F44004B35CA /* DocumentTableViewCell.m in Sources */,
 				1994B048194CA1780021B08C /* FileCell.m in Sources */,
 				1994B04A194CA1780021B08C /* Folder.m in Sources */,
 				1994B04C194CA1780021B08C /* RootFolder.m in Sources */,
@@ -1056,6 +1106,30 @@
 				191B7D291967E5E2004B35CA /* en */,
 			);
 			name = "TabHistory@2x.png";
+			sourceTree = "<group>";
+		};
+		191B7D44196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				191B7D45196925DB004B35CA /* en */,
+			);
+			name = DocumentCollectionViewCell_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		191B7D48196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				191B7D49196925ED004B35CA /* en */,
+			);
+			name = DocumentCollectionViewCell_iPad.xib;
+			sourceTree = "<group>";
+		};
+		191B7D54196957A2004B35CA /* DocumentTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				191B7D55196957A2004B35CA /* en */,
+			);
+			name = DocumentTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		1994B072194F255C0021B08C /* Test.pdf */ = {
