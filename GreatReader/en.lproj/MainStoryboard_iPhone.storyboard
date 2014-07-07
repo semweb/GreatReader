@@ -231,6 +231,53 @@
             </objects>
             <point key="canvasLocation" x="1008" y="123"/>
         </scene>
+        <!--Document Search View Controller - Root View Controller-->
+        <scene sceneID="2uf-bx-7IA">
+            <objects>
+                <tableViewController id="uk8-2A-py0" customClass="PDFDocumentSearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Zbx-HQ-oE8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PDFDocumentSearchViewControllerCellIdentifier" id="KXb-bb-y0F">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KXb-bb-y0F" id="Gq4-bD-HUW">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uk8-2A-py0" id="Anf-tm-emc"/>
+                            <outlet property="delegate" destination="uk8-2A-py0" id="bzR-P3-IOg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="G5N-ZB-zE4"/>
+                    <connections>
+                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFDocumentSearchViewControllerSegueExit" unwindAction="exitSearch:" id="yO1-fT-Uah"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfs-KB-efd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1536" y="1372"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uLD-Wl-aOy">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="RKt-EM-fVY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8pq-Bk-LPd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uk8-2A-py0" kind="relationship" relationship="rootViewController" id="8OM-Z1-ZMD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1oA-st-i8w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1002" y="1372"/>
+        </scene>
         <!--Document Crop View Controller-->
         <scene sceneID="SSK-AU-xRO">
             <objects>
@@ -393,7 +440,11 @@
                         <segue destination="f5f-aF-dRJ" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="sKJ-j2-2GX"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="Find.png" id="oGZ-Ya-lPq" userLabel="Find"/>
+                <barButtonItem image="Find.png" id="oGZ-Ya-lPq" userLabel="Find">
+                    <connections>
+                        <segue destination="RKt-EM-fVY" kind="modal" identifier="PDFDocumentViewControllerSegueSearch" id="Abm-Wu-II0"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>

@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 #import "PDFPage.h"
 #import "PDFRenderingCharacter.h"

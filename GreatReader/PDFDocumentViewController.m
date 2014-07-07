@@ -22,6 +22,9 @@
 #import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
 #import "PDFDocumentPageSliderDataSource.h"
+#import "PDFDocumentSearch.h"
+#import "PDFDocumentSearchViewModel.h"
+#import "PDFDocumentSearchViewController.h"
 #import "PDFDocumentStore.h"
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
@@ -33,6 +36,7 @@ NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewContro
 NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
 NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewControllerSegueBrightness";
 NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
+NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentViewControllerSegueSearch";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
                                          UIPageViewControllerDelegate,
@@ -428,6 +432,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         vc.model = model;
         vc.modalPresentationStyle = UIModalPresentationCustom;
         vc.transitioningDelegate = self;
+    } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueSearch]) {
+        UINavigationController *navi =
+                (UINavigationController *)segue.destinationViewController;
+        PDFDocumentSearchViewController *vc =
+                (PDFDocumentSearchViewController *)navi.topViewController;
+        vc.viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:self.document.search];
     }
 
     if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
@@ -471,6 +481,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
+
+- (IBAction)exitSearch:(UIStoryboardSegue *)segue {}
 
 #pragma mark - PDFDocumentPageSlider Delegate, DataSouce
 

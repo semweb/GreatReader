@@ -265,6 +265,11 @@ void ConcatMatrix(CGPDFScannerRef scanner, void *info)
     }
 }
 
+- (void)didFindNewLine
+{
+    
+}
+
 - (void)didFindFontName:(NSString *)fontName state:(PDFTextState *)state
 {
     PDFFont *font = [self.fontCollection fontForName:fontName];

@@ -13,6 +13,7 @@
 @class PDFDocumentBookmarkList;
 @class PDFDocumentCrop;
 @class PDFDocumentOutline;
+@class PDFDocumentSearch;
 @class PDFDocumentStore;
 @class PDFPage;
 
@@ -23,6 +24,7 @@ extern NSString * const PDFDocumentDeletedNotification;
 @property (nonatomic, strong, readonly) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readonly) PDFDocumentCrop *crop;
 @property (nonatomic, strong, readonly) PDFDocumentBookmarkList *bookmarkList;
+@property (nonatomic, strong, readonly) PDFDocumentSearch *search;
 @property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 @property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, assign) NSUInteger currentPage;

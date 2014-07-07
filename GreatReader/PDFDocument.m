@@ -14,6 +14,7 @@
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
+#import "PDFDocumentSearch.h"
 #import "PDFPage.h"
 
 NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
@@ -26,6 +27,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 @property (nonatomic, strong, readwrite) PDFDocumentCrop *crop;
 @property (nonatomic, strong, readwrite) PDFDocumentBookmarkList *bookmarkList;
 @property (nonatomic, assign, readwrite) CGPDFDocumentRef CGPDFDocument;
+@property (nonatomic, strong, readwrite) PDFDocumentSearch *search;
 @property (nonatomic, copy, readwrite) NSString *title;
 @end
 
@@ -84,8 +86,9 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:[PDFDocument relativePathWithAbsolutePath:self.path]
-                   forKey:@"path"];
+    NSString *path = [PDFDocument relativePathWithAbsolutePath:self.path];
+    NSAssert(path, @"");
+    [encoder encodeObject:path forKey:@"path"];
     [encoder encodeInteger:self.currentPage forKey:@"currentPage"];
     [encoder encodeObject:self.bookmarkList forKey:@"bookmarkList"];
     [encoder encodeFloat:self.brightness forKey:@"brightness"];
@@ -103,7 +106,11 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 + (NSString *)relativePathWithAbsolutePath:(NSString *)absolutePath
 {
     NSRange range = [absolutePath rangeOfString:[NSFileManager grt_documentsPath]];
-    return [absolutePath substringFromIndex:range.location + range.length];
+    if (range.location == NSNotFound) {
+        return nil;
+    } else {
+        return [absolutePath substringFromIndex:range.location + range.length];
+    }
 }
 
 #pragma mark -
@@ -158,6 +165,14 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
         _bookmarkList.document = self;
     }
     return _bookmarkList;
+}
+
+- (PDFDocumentSearch *)search
+{
+    if (!_search) {
+        _search = [[PDFDocumentSearch alloc] initWithCGPDFDocument:self.CGPDFDocument];
+    }
+    return _search;
 }
 
 #pragma mark -
