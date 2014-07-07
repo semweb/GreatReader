@@ -48,6 +48,7 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *historyItem;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *findItem;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet UIToolbar *rightBarButtonToolbar;
 @property (nonatomic, strong) IBOutlet PDFDocumentPageSlider *slider;
 @property (nonatomic, strong) IBOutlet UIView *dimView;
 @property (nonatomic, strong) PDFDocumentInfoView *infoView;
@@ -124,7 +125,7 @@ NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewContro
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
-        [self prepareNavigationBar];
+        [self toggleRibbonItemIfNeeded];
     } else if ([keyPath isEqualToString:@"document.currentPage"]) {
         self.slider.currentIndex = self.document.currentPage;
     } else if ([keyPath isEqualToString:@"document.brightness"]) {
@@ -240,7 +241,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     UIBarButtonItem *ribbon = self.document.currentPageBookmarked
             ? self.ribbonOnItem : self.ribbonOffItem;
 
-    UIView *base = ({
+    self.rightBarButtonToolbar = ({
         UIToolbar *bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 230, 44)];
         bar.clipsToBounds = YES;
         [bar setBackgroundImage:[UIImage new]
@@ -260,11 +261,12 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
              animated:NO];
         bar;
     });
+
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                                                            target:nil
                                                                            action:nil];
     space.width = -20;
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:base];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarButtonToolbar];
     self.navigationItem.rightBarButtonItems = @[space, rightItem];
 
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Home.png"]
@@ -272,6 +274,16 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                                                                 target:self
                                                                 action:@selector(done:)];
     self.navigationItem.leftBarButtonItem = leftItem;
+}
+
+- (void)toggleRibbonItemIfNeeded
+{
+    UIBarButtonItem *ribbon = self.rightBarButtonToolbar.items.lastObject;
+    if ((self.document.currentPageBookmarked && ribbon == self.ribbonOffItem) ||
+        (!self.document.currentPageBookmarked && ribbon == self.ribbonOnItem)) {
+
+        [self prepareNavigationBar];
+    }
 }
 
 - (void)prepareInfoView
