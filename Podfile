@@ -1,3 +1,5 @@
 platform :ios, "7.0"
-pod 'OCMock', '~> 3.0'
-link_with 'GreatReader', 'GreatReaderTests'
+
+target :GreatReaderTests do
+    pod 'OCMock', '~> 3.0'
+end
