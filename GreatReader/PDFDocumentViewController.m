@@ -21,7 +21,7 @@
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineContainerViewController.h"
 #import "PDFDocumentOutlineViewController.h"
-#import "PDFDocumentPageSliderDataSource.h"
+#import "PDFDocumentPageSliderModel.h"
 #import "PDFDocumentSearch.h"
 #import "PDFDocumentSearchViewModel.h"
 #import "PDFDocumentSearchViewController.h"
@@ -130,8 +130,6 @@ NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentViewControl
 {
     if ([keyPath isEqualToString:@"document.currentPageBookmarked"]) {
         [self toggleRibbonItemIfNeeded];
-    } else if ([keyPath isEqualToString:@"document.currentPage"]) {
-        self.slider.currentIndex = self.document.currentPage;
     } else if ([keyPath isEqualToString:@"document.brightness"]) {
         self.dimView.alpha = (1 - self.document.brightness);
     }
@@ -147,7 +145,7 @@ NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentViewControl
 
     [self prepareToolbar];    
     [self prepareInfoView];
-    [self goAtIndex:self.document.currentPage animated:NO];
+    [self goAtIndex:self.document.currentPage addHistory:NO animated:NO];
 }
 
 #pragma mark -
@@ -189,8 +187,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
        transitionCompleted:(BOOL)completed
 {
     PDFPageViewController *vc = pageViewController.viewControllers.firstObject;
-    self.document.currentPage = vc.page.index;
-    self.slider.currentIndex = vc.page.index;
+    [self.document goTo:vc.page.index addHistory:YES];
 }
 
 #pragma mark -
@@ -231,13 +228,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (void)prepareToolbar
 {
     self.slider.delegate = self;
-    PDFDocumentPageSliderDataSource *dataSource =
-            [[PDFDocumentPageSliderDataSource alloc] initWithOutline:self.document.outline
-                                                        bookmarkList:self.document.bookmarkList
-                                                       numberOfPages:self.document.numberOfPages];
-    self.slider.dataSource = dataSource;
-    self.slider.currentIndex = self.document.currentPage;    
-    [self.slider reloadData];
+    self.slider.model = [[PDFDocumentPageSliderModel alloc] initWithDocument:self.document];
 }
 
 - (void)prepareNavigationBar
@@ -303,23 +294,20 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 #pragma mark -
 
-- (void)goAtIndex:(NSUInteger)index animated:(BOOL)animated
+- (void)goAtIndex:(NSUInteger)index addHistory:(BOOL)addHistory animated:(BOOL)animated
 {
     UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionForward;
     [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
                                       direction:direction
                                        animated:animated
                                      completion:NULL];
-    self.document.currentPage = index;
+    [self.document goTo:index addHistory:addHistory];
     [self.infoView show];
 }
 
-#pragma mark -
-
-- (void)sliderChanged:(UISlider *)slider
+- (void)goAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
-    NSUInteger index = (NSUInteger)(slider.value * self.document.numberOfPages);
-    [self goAtIndex:index animated:NO];
+    [self goAtIndex:index addHistory:YES animated:animated];
 }
 
 #pragma mark - Set FullScreen
@@ -488,28 +476,39 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)pageSlider:(PDFDocumentPageSlider *)slider didSelectAtIndex:(NSUInteger)index
 {
-    [self goAtIndex:index animated:NO];
+    [self goAtIndex:index addHistory:NO animated:NO];
 }
 
-- (void)pageSlider:(PDFDocumentPageSlider *)slider
-pageThumbnailAtIndex:(NSUInteger)index
-          callback:(void (^)(UIImage *, NSUInteger))callback
+- (void)pageSlider:(PDFDocumentPageSlider *)slider didStartAtIndex:(NSUInteger)index
 {
-    PDFPage *page = [self.document pageAtIndex:index + 1];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [page thumbnailImageWithSize:CGSizeMake(30, 40) cropping:NO];            
-        dispatch_async(dispatch_get_main_queue(), ^{
-            callback(image, index);
-        });
-    });
+    [self goAtIndex:index addHistory:YES animated:NO];
 }
 
-- (NSUInteger)numberOfPagesInPageSlider:(PDFDocumentPageSlider *)slider
+- (void)pageSliderBackClicked:(PDFDocumentPageSlider *)slider
 {
-    return self.document.numberOfPages;
+    [self.document goBack];
+    NSUInteger index = self.document.currentPage;
+    
+    UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionReverse;
+    [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
+                                      direction:direction
+                                       animated:YES
+                                     completion:NULL];
+    [self.infoView show]; 
 }
 
-#pragma mark -
+- (void)pageSliderForwardClicked:(PDFDocumentPageSlider *)slider
+{
+    [self.document goForward];
+    NSUInteger index = self.document.currentPage;
+    
+    UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionForward;
+    [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
+                                      direction:direction
+                                       animated:YES
+                                     completion:NULL];
+    [self.infoView show]; 
+}
 
 #pragma mark - UIViewControllerTransitioningDelegate Methods
 

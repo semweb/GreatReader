@@ -10,6 +10,7 @@
 
 #import "File.h"
 
+@class PDFDocumentBackForwardList;
 @class PDFDocumentBookmarkList;
 @class PDFDocumentCrop;
 @class PDFDocumentOutline;
@@ -27,12 +28,17 @@ extern NSString * const PDFDocumentDeletedNotification;
 @property (nonatomic, strong, readonly) PDFDocumentSearch *search;
 @property (nonatomic, strong, readonly) UIImage *thumbnailImage;
 @property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
-@property (nonatomic, assign) NSUInteger currentPage;
+@property (nonatomic, assign, readonly) NSUInteger currentPage;
 @property (nonatomic, assign) CGFloat brightness;
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, readonly) BOOL currentPageBookmarked;
 @property (nonatomic, weak) PDFDocumentStore *store;
+@property (nonatomic, strong, readonly) PDFDocumentBackForwardList *backForwardList;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
 - (void)delete;
+- (void)goBack;
+- (void)goForward;
+- (void)goTo:(NSUInteger)page
+  addHistory:(BOOL)addHistory;
 @end

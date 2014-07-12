@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class PDFDocumentPageSlider;
-@class PDFDocumentPageSliderDataSource;
+@class PDFDocumentPageSliderModel;
 
 @protocol PDFDocumentPageSliderDelegate <NSObject>
 @optional
+- (void)pageSlider:(PDFDocumentPageSlider *)slider didStartAtIndex:(NSUInteger)index;
 - (void)pageSlider:(PDFDocumentPageSlider *)slider didSelectAtIndex:(NSUInteger)index;
+- (void)pageSliderBackClicked:(PDFDocumentPageSlider *)slider;
+- (void)pageSliderForwardClicked:(PDFDocumentPageSlider *)slider;
 @end
 
 @interface PDFDocumentPageSlider : UIView
 @property (nonatomic, weak) id<PDFDocumentPageSliderDelegate> delegate;
-@property (nonatomic, strong) PDFDocumentPageSliderDataSource *dataSource;
-@property (nonatomic, assign) NSUInteger currentIndex;
-@property (nonatomic, assign, readonly) NSUInteger numberOfPages;
-- (void)reloadData;
+@property (nonatomic, strong) PDFDocumentPageSliderModel *model;
 @end

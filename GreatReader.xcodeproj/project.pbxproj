@@ -17,6 +17,10 @@
 		190FFBC9196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBC8196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m */; };
 		190FFBCA196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBC8196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m */; };
 		190FFBCD196E97A6004BEA59 /* PDFDocumentSearchTests5.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 190FFBCB196E97A6004BEA59 /* PDFDocumentSearchTests5.pdf */; };
+		190FFBD0196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBCF196F9D22004BEA59 /* PDFDocumentBackForwardList.m */; };
+		190FFBD1196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBCF196F9D22004BEA59 /* PDFDocumentBackForwardList.m */; };
+		190FFBD41970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBD31970A1D1004BEA59 /* PDFDocumentPageSliderModel.m */; };
+		190FFBD51970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBD31970A1D1004BEA59 /* PDFDocumentPageSliderModel.m */; };
 		1917EB3D18B4292F003D272F /* FolderTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917EB3C18B4292F003D272F /* FolderTableDataSource.m */; };
 		191B7D1A1963830B004B35CA /* PDFPageSelectionKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */; };
 		191B7D241967AD27004B35CA /* PDFPageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 191B7D231967AD27004B35CA /* PDFPageTests.m */; };
@@ -134,6 +138,9 @@
 		199AB73D192EC34800C697BB /* DocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73C192EC34800C697BB /* DocumentListViewModel.m */; };
 		199AB740192EC36B00C697BB /* RecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */; };
 		199AB743192EC38100C697BB /* FolderDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */; };
+		199FED5E19710601003A75AA /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5A19710601003A75AA /* Back@2x.png */; };
+		199FED5F19710601003A75AA /* Forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5C19710601003A75AA /* Forward@2x.png */; };
+		199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */; };
 		19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
 		19A418B618E0DB7F002DDFC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA68186052E2009E8916 /* CoreGraphics.framework */; };
 		19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */; };
@@ -210,8 +217,8 @@
 		19F7BA8D186052E2009E8916 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA64186052E2009E8916 /* UIKit.framework */; };
 		19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA66186052E2009E8916 /* Foundation.framework */; };
 		19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F7BA94186052E2009E8916 /* InfoPlist.strings */; };
-		A9F196547964430F96328FD9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
 		B9BA68E216644211A0D47024 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
+		C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +245,10 @@
 		190FFBC7196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PDFDocumentSearch+TestAdditions.h"; sourceTree = "<group>"; };
 		190FFBC8196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PDFDocumentSearch+TestAdditions.m"; sourceTree = "<group>"; };
 		190FFBCC196E97A6004BEA59 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/PDFDocumentSearchTests5.pdf; sourceTree = "<group>"; };
+		190FFBCE196F9D22004BEA59 /* PDFDocumentBackForwardList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentBackForwardList.h; sourceTree = "<group>"; };
+		190FFBCF196F9D22004BEA59 /* PDFDocumentBackForwardList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardList.m; sourceTree = "<group>"; };
+		190FFBD21970A1D1004BEA59 /* PDFDocumentPageSliderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentPageSliderModel.h; sourceTree = "<group>"; };
+		190FFBD31970A1D1004BEA59 /* PDFDocumentPageSliderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentPageSliderModel.m; sourceTree = "<group>"; };
 		1917EB3B18B4292F003D272F /* FolderTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableDataSource.h; sourceTree = "<group>"; };
 		1917EB3C18B4292F003D272F /* FolderTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableDataSource.m; sourceTree = "<group>"; };
 		191B7D181963830B004B35CA /* PDFPageSelectionKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageSelectionKnob.h; sourceTree = "<group>"; };
@@ -310,6 +321,9 @@
 		199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDocumentListViewModel.m; sourceTree = "<group>"; };
 		199AB741192EC38100C697BB /* FolderDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderDocumentListViewModel.h; sourceTree = "<group>"; };
 		199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDocumentListViewModel.m; sourceTree = "<group>"; };
+		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
+		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
+		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
 		19A418B918E6D1B4002DDFC9 /* PDFPageLoopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageLoopeView.h; sourceTree = "<group>"; };
 		19A418BA18E6D1B4002DDFC9 /* PDFPageLoopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageLoopeView.m; sourceTree = "<group>"; };
 		19ABA5B718D66FF700E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Find@2x.png"; sourceTree = "<group>"; };
@@ -427,6 +441,8 @@
 		19F7BA8B186052E2009E8916 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		19F7BA93186052E2009E8916 /* GreatReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GreatReaderTests-Info.plist"; sourceTree = "<group>"; };
 		19F7BA95186052E2009E8916 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatReaderTests.xcconfig"; path = "Pods/Pods-GreatReaderTests.xcconfig"; sourceTree = "<group>"; };
+		8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatReaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AE020033EA4C089CF48093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -455,7 +471,7 @@
 				19A418B518E0DB5B002DDFC9 /* QuartzCore.framework in Frameworks */,
 				19F7BA8D186052E2009E8916 /* UIKit.framework in Frameworks */,
 				19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */,
-				A9F196547964430F96328FD9 /* libPods.a in Frameworks */,
+				C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,10 +642,14 @@
 				19D99DC71884F324006FDA6F /* Category */,
 				1943EB54187FA58F00F0B61D /* PDF */,
 				19D99DCC1888E56C006FDA6F /* Folder */,
+				190FFBBC196D7F64004BEA59 /* Search */,
 				195B728A18EA352E000C5A8B /* Device.h */,
 				191B7D181963830B004B35CA /* PDFPageSelectionKnob.h */,
-				190FFBBC196D7F64004BEA59 /* Search */,
 				191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */,
+				190FFBD21970A1D1004BEA59 /* PDFDocumentPageSliderModel.h */,
+				190FFBD31970A1D1004BEA59 /* PDFDocumentPageSliderModel.m */,
+				190FFBCE196F9D22004BEA59 /* PDFDocumentBackForwardList.h */,
+				190FFBCF196F9D22004BEA59 /* PDFDocumentBackForwardList.m */,
 				191B7D3019682BB4004B35CA /* DocumentListTableViewController.h */,
 				191B7D3119682BB4004B35CA /* DocumentListTableViewController.m */,
 				191B7D3419684E2A004B35CA /* DocumentListCollectionViewController.h */,
@@ -659,6 +679,8 @@
 			isa = PBXGroup;
 			children = (
 				191B7D281967E5E2004B35CA /* TabHistory@2x.png */,
+				199FED5A19710601003A75AA /* Back@2x.png */,
+				199FED5C19710601003A75AA /* Forward@2x.png */,
 				1994B07C195C44220021B08C /* Documents@2x.png */,
 				1994B079195C366D0021B08C /* Home@2x.png */,
 				19ABA5B618D66FF700E123AB /* Find@2x.png */,
@@ -689,6 +711,7 @@
 				19F7BA63186052E2009E8916 /* Frameworks */,
 				19F7BA62186052E2009E8916 /* Products */,
 				1203664657EB4C89B3EAC3F1 /* Pods.xcconfig */,
+				460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -713,6 +736,7 @@
 				19F7BA68186052E2009E8916 /* CoreGraphics.framework */,
 				19F7BA8B186052E2009E8916 /* SenTestingKit.framework */,
 				D7AE020033EA4C089CF48093 /* libPods.a */,
+				8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -769,6 +793,7 @@
 				190FFBC5196E0C88004BEA59 /* PDFDocumentSearchViewModelTests.m */,
 				190FFBC7196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.h */,
 				190FFBC8196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m */,
+				199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */,
 				191B7D231967AD27004B35CA /* PDFPageTests.m */,
 			);
 			path = GreatReaderTests;
@@ -874,6 +899,7 @@
 				19ABA5C418D6701200E123AB /* RibbonOn@2x.png in Resources */,
 				19ABA5BC18D66FF700E123AB /* Find@2x.png in Resources */,
 				19C9616519033FD000D1857C /* CropOdd@2x.png in Resources */,
+				199FED5E19710601003A75AA /* Back@2x.png in Resources */,
 				1994B0831960113B0021B08C /* Icon-76.png in Resources */,
 				19D870A618C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib in Resources */,
 				191B7D4A196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */,
@@ -894,6 +920,7 @@
 				19F7BA81186052E2009E8916 /* MainStoryboard_iPad.storyboard in Resources */,
 				19C9616E19069E2D00D1857C /* CropNone@2x.png in Resources */,
 				19D8708018BA2D8700FA2B66 /* Icon-76@2x.png in Resources */,
+				199FED5F19710601003A75AA /* Forward@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +1013,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-GreatReaderTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9FD0BD52968548A6A0F0E562 /* Check Pods Manifest.lock */ = {
@@ -1060,6 +1087,7 @@
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
 				190FFBC3196D8780004BEA59 /* PDFDocumentSearchViewModel.m in Sources */,
 				190FFBC9196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */,
+				190FFBD0196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
 				1917EB3D18B4292F003D272F /* FolderTableDataSource.m in Sources */,
 				19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */,
 				19CA78A418AF12E600200362 /* PDFDocumentPageSlider.m in Sources */,
@@ -1072,6 +1100,7 @@
 				19F7BA84186052E2009E8916 /* PDFDocumentViewController.m in Sources */,
 				1941123B1936EA24008AD461 /* RootFolder.m in Sources */,
 				19D99E11188E77E3006FDA6F /* PDFPageCropViewController.m in Sources */,
+				190FFBD41970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */,
 				19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */,
 				19430E5118E80A6F00BB4238 /* LibraryUtils.m in Sources */,
 				19D99E14188FDF79006FDA6F /* PDFDocumentCropOverlayView.m in Sources */,
@@ -1105,6 +1134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191B7D271967B2D8004B35CA /* PDFPageSelectionKnob.m in Sources */,
+				190FFBD1196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
 				1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */,
 				1994AFEE194CA1770021B08C /* GRTNavigationController.m in Sources */,
 				1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */,
@@ -1112,6 +1142,7 @@
 				191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
 				1994B078194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
 				1994AFF4194CA1780021B08C /* NSArray+GreatReaderAdditions.m in Sources */,
+				190FFBD51970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */,
 				1994B071194F23AA0021B08C /* PDFDocumentTests.m in Sources */,
 				191B7D3319682BB4004B35CA /* DocumentListTableViewController.m in Sources */,
 				1994AFF6194CA1780021B08C /* PDFDocument.m in Sources */,
@@ -1165,6 +1196,7 @@
 				1994B044194CA1780021B08C /* PDFDocumentBrightnessViewController.m in Sources */,
 				1994B046194CA1780021B08C /* File.m in Sources */,
 				191B7D3B19684F44004B35CA /* DocumentTableViewCell.m in Sources */,
+				199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */,
 				1994B048194CA1780021B08C /* FileCell.m in Sources */,
 				1994B04A194CA1780021B08C /* Folder.m in Sources */,
 				191B7D63196AE292004B35CA /* PDFDocumentSearchResult.m in Sources */,
@@ -1302,6 +1334,22 @@
 				1994B0821960113B0021B08C /* en */,
 			);
 			name = "Icon-76.png";
+			sourceTree = "<group>";
+		};
+		199FED5A19710601003A75AA /* Back@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				199FED5B19710601003A75AA /* en */,
+			);
+			name = "Back@2x.png";
+			sourceTree = "<group>";
+		};
+		199FED5C19710601003A75AA /* Forward@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				199FED5D19710601003A75AA /* en */,
+			);
+			name = "Forward@2x.png";
 			sourceTree = "<group>";
 		};
 		19ABA5B618D66FF700E123AB /* Find@2x.png */ = {
@@ -1589,7 +1637,7 @@
 		};
 		19F7BAA0186052E2009E8916 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1203664657EB4C89B3EAC3F1 /* Pods.xcconfig */;
+			baseConfigurationReference = 460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -1609,7 +1657,7 @@
 		};
 		19F7BAA1186052E2009E8916 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1203664657EB4C89B3EAC3F1 /* Pods.xcconfig */;
+			baseConfigurationReference = 460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",

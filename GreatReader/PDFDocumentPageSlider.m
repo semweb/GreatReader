@@ -8,27 +8,22 @@
 
 #import "PDFDocumentPageSlider.h"
 
+#import <KVOController/FBKVOController.h>
+
 #import "NSArray+GreatReaderAdditions.h"
-#import "PDFDocumentPageSliderDataSource.h"
-#import "PDFDocumentPageSliderItem.h"
-#import "PDFDocumentPageSliderItemView.h"
+#import "PDFDocumentPageSliderModel.h"
 #import "UIColor+GreatReaderAdditions.h"
 
 @interface PDFDocumentPageSlider ()
 @property (nonatomic, strong) UIView *knobView;
 @property (nonatomic, strong) NSArray *itemViews;
 @property (nonatomic, assign) BOOL moved;
+@property (nonatomic, strong) FBKVOController *kvoController;
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *forwardButton;
 @end
 
 @implementation PDFDocumentPageSlider
-
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
-    [self reloadData];
-}
-
-#pragma mark -
 
 - (void)awakeFromNib
 {
@@ -40,13 +35,72 @@
     self.knobView.layer.cornerRadius = 7;
     self.knobView.layer.zPosition = 1000;
     [self addSubview:self.knobView];
+
+    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.backButton setImage:[UIImage imageNamed:@"Back.png"]
+                     forState:UIControlStateNormal];
+    [self.backButton addTarget:self
+                        action:@selector(goBack:)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.backButton sizeToFit];
+    [self addSubview:self.backButton];
+
+    self.forwardButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.forwardButton setImage:[UIImage imageNamed:@"Forward.png"]
+                     forState:UIControlStateNormal];
+    [self.forwardButton addTarget:self
+                        action:@selector(goForward:)
+              forControlEvents:UIControlEventTouchUpInside];    
+    [self.forwardButton sizeToFit];
+    [self addSubview:self.forwardButton];
+}
+
+#pragma mark -
+
+- (void)goBack:(id)sender
+{
+    [self.delegate pageSliderBackClicked:self];
+}
+
+- (void)goForward:(id)sender
+{
+    [self.delegate pageSliderForwardClicked:self];
+}
+    
+#pragma mark -
+
+- (void)setModel:(PDFDocumentPageSliderModel *)model
+{
+    _model = model;
+
+    self.kvoController = [FBKVOController controllerWithObserver:self];    
+    [self.kvoController observe:self.model
+                        keyPath:@"currentPage"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(PDFDocumentPageSlider *slider, id obj, NSDictionary *change) {
+        [slider layoutKnobView];
+    }];
+    UIButton *back = self.backButton;
+    [self.kvoController observe:self.model
+                        keyPath:@"canGoBack"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(PDFDocumentPageSlider *slider, PDFDocumentPageSliderModel *model, NSDictionary *change) {
+        back.enabled = model.canGoBack;
+    }];
+    UIButton *forward = self.forwardButton;
+    [self.kvoController observe:self.model
+                        keyPath:@"canGoForward"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(PDFDocumentPageSlider *slider, PDFDocumentPageSliderModel *model, NSDictionary *change) {
+        forward.enabled = model.canGoForward;
+    }];
 }
 
 #pragma mark -
 
 - (CGFloat)sideMargin
 {
-    return 20;
+    return 50;
 }
 
 - (CGFloat)space
@@ -59,61 +113,37 @@
     return CGSizeMake(24, 32);
 }
 
-- (CGSize)thumbnailViewSize
-{
-    return CGSizeMake(18, 24);
-}
-
 #pragma mark -
-
-- (UIImageView *)makeThumbnailView
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:nil];
-    imageView.layer.borderWidth = 0.5;
-    imageView.layer.borderColor = UIColor.grt_defaultTintColor.CGColor;
-    return imageView;
-}
-
-#pragma mark -
-
-- (void)reloadData
-{
-    [self replaceSubviews];
-    [self layoutSubviews];
-}
-
-- (void)replaceSubviews
-{
-    [self.itemViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
-    __block BOOL flag = NO;
-    self.itemViews = [self.dataSource.items grt_map:^(PDFDocumentPageSliderItem *item) {
-        PDFDocumentPageSliderItemView *itemView =
-                [[PDFDocumentPageSliderItemView alloc] initWithItem:item];
-        itemView.flag = flag;
-        flag = !flag;
-        return itemView;
-    }];
-
-    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
-        [self addSubview:itemView];
-    }   
-}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
-    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
-        [self addSubview:itemView];
-        itemView.center = [self positionForProgress:itemView.item.position];
-    }    
     [self layoutKnobView];
+    [self layoutButtons];
+}
+
+- (void)layoutButtons
+{
+    const CGFloat margin = 10;
+    
+    self.backButton.frame = ({
+        CGRect f = self.backButton.frame;
+        f.origin.x = margin;
+        f.origin.y = (CGRectGetHeight(self.frame) - CGRectGetHeight(f)) / 2.0;
+        f;
+    });
+
+    self.forwardButton.frame = ({
+        CGRect f = self.forwardButton.frame;
+        f.origin.x = CGRectGetWidth(self.frame) - CGRectGetWidth(f) - margin;
+        f.origin.y = (CGRectGetHeight(self.frame) - CGRectGetHeight(f)) / 2.0;
+        f;
+    });
 }
 
 - (void)layoutKnobView
 {
-    CGFloat progress = (CGFloat)(self.currentIndex - 1) / MAX(1, (self.dataSource.numberOfPages - 1));
+    CGFloat progress = (CGFloat)(self.model.currentPage - 1) / MAX(1, (self.model.numberOfPages - 1));
     self.knobView.center = [self positionForProgress:progress];
 }
 
@@ -146,82 +176,32 @@
     CGFloat right = CGRectGetWidth(self.frame) - self.sideMargin;
     CGFloat left = self.sideMargin;
     CGFloat progress = (point.x - left) / (right - left);
-    progress = MIN(1.0, MAX(0.0, progress));
-    return roundf(progress * (self.dataSource.numberOfPages - 1)) + 1;
-}
-
-- (PDFDocumentPageSliderItemView *)nearestItemViewAtPoint:(CGPoint)point
-{
-    PDFDocumentPageSliderItemView *nearest = self.itemViews.firstObject;
-
-    for (PDFDocumentPageSliderItemView *itemView in self.itemViews) {
-        CGPoint nearestPoint = CGPointMake(nearest.center.x,
-                                           nearest.center.y + (nearest.flag ? 10 : -10));
-        CGPoint p = CGPointMake(itemView.center.x,
-                                itemView.center.y + (itemView.flag ? 10 : -10));
-        CGFloat nearestD = sqrtf(pow(nearestPoint.x - point.x, 2) + pow(nearestPoint.y - point.y, 2));
-        CGFloat pD = sqrtf(pow(p.x - point.x, 2) + pow(p.y - point.y, 2));
-        if (pD < nearestD) {
-            nearest = itemView;
-        }
+    if (progress < -0.1 || progress > 1.1) {
+        return NSNotFound;
     }
-    return nearest;
+    progress = MIN(1.0, MAX(0.0, progress));
+    return roundf(progress * (self.model.numberOfPages - 1)) + 1;
 }
 
 #pragma mark - Touch
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.moved = NO;
+    UITouch *touch = [touches anyObject];    
+    CGPoint point = [touch locationInView:self];
+    NSUInteger index = [self indexAtPoint:point];
+    if (index != NSNotFound) {
+        [self.delegate pageSlider:self didStartAtIndex:index];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];    
-    [self handleTouch:touch];
-    self.moved = YES;    
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    if (!self.moved) {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        PDFDocumentPageSliderItemView *itemView =
-                [self nearestItemViewAtPoint:point];
-        if (itemView) {
-            [self moveToIndex:itemView.item.pageNumber];
-        } else {
-            [self handleTouch:touch];
-        }
-    }
-}
-
-- (void)handleTouch:(UITouch *)touch
-{
     CGPoint point = [touch locationInView:self];
     NSUInteger index = [self indexAtPoint:point];
-    [self moveToIndex:index];
-}
-
-#pragma mark -
-
-- (void)moveToIndex:(NSUInteger)index
-{
-    if (self.currentIndex != index) {
-        self.currentIndex = index;
-        [self.delegate pageSlider:self didSelectAtIndex:self.currentIndex];
-    }
-}
-
-#pragma mark -
-
-- (void)setCurrentIndex:(NSUInteger)index
-{
-    NSUInteger old = _currentIndex;
-    _currentIndex = index;
-    if (old != index) {
-        [self layoutKnobView];
+    if (index != NSNotFound && self.model.currentPage != index) {
+        [self.delegate pageSlider:self didSelectAtIndex:index];
     }
 }
 

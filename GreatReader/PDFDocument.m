@@ -9,8 +9,10 @@
 #import "PDFDocument.h"
 
 #import "Device.h"
+#import "FBKVOController.h"
 #import "NSFileManager+GreatReaderAdditions.h"
 #import "NSString+GreatReaderAdditions.h"
+#import "PDFDocumentBackForwardList.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
 #import "PDFDocumentOutline.h"
@@ -29,6 +31,9 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 @property (nonatomic, assign, readwrite) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, strong, readwrite) PDFDocumentSearch *search;
 @property (nonatomic, copy, readwrite) NSString *title;
+@property (nonatomic, assign, readwrite) NSUInteger currentPage;
+@property (nonatomic, strong, readwrite) PDFDocumentBackForwardList *backForwardList;
+@property (nonatomic, strong) FBKVOController *kvoController;
 @end
 
 @implementation PDFDocument
@@ -49,7 +54,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 - (instancetype)initWithPath:(NSString *)path
 {
     self = [super initWithPath:path];
-    if (self) {
+    if (self) {       
         NSURL *URL = [NSURL fileURLWithPath:path];
         _CGPDFDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)URL);
         if (_CGPDFDocument) {
@@ -62,6 +67,8 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
         _brightness = 1.0;
         
         [self loadThumbnailImageAsync];
+
+        _kvoController = [FBKVOController controllerWithObserver:self];        
     }
     return self;
 }
@@ -173,6 +180,20 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
         _search = [[PDFDocumentSearch alloc] initWithCGPDFDocument:self.CGPDFDocument];
     }
     return _search;
+}
+
+- (PDFDocumentBackForwardList *)backForwardList
+{
+    if (!_backForwardList) {
+        _backForwardList = [[PDFDocumentBackForwardList alloc] initWithCurrentPage:self.currentPage];
+        [self.kvoController observe:_backForwardList
+                            keyPath:@"currentPage"
+                            options:0
+                              block:^(PDFDocument *document, PDFDocumentBackForwardList *list, NSDictionary *change) {
+            document.currentPage = list.currentPage;
+        }];
+    }
+    return _backForwardList;
 }
 
 #pragma mark -
@@ -318,6 +339,24 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
     [[NSNotificationCenter defaultCenter]
         postNotificationName:PDFDocumentDeletedNotification
                       object:self];
+}
+
+#pragma mark -
+
+- (void)goBack
+{
+    [self.backForwardList goBack];
+}
+
+- (void)goForward
+{
+    [self.backForwardList goForward];
+}
+
+- (void)goTo:(NSUInteger)page
+  addHistory:(BOOL)addHistory
+{
+    [self.backForwardList goTo:page addHistory:addHistory];
 }
 
 @end
