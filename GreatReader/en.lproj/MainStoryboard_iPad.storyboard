@@ -212,7 +212,13 @@
                         </segue>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="Find.png" id="FO5-sG-z5k" userLabel="Find"/>
+                <barButtonItem image="Find.png" id="FO5-sG-z5k" userLabel="Find">
+                    <connections>
+                        <segue destination="1mF-zY-8xE" kind="popover" identifier="PDFDocumentViewControllerSegueSearch" popoverAnchorBarButtonItem="FO5-sG-z5k" id="TtJ-Dc-ef3">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1017" y="-1262"/>
         </scene>
@@ -555,6 +561,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KR5-b5-G2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-71" y="-794"/>
+        </scene>
+        <!--Document Search View Controller - Root View Controller-->
+        <scene sceneID="EOq-qQ-GXz">
+            <objects>
+                <tableViewController id="Osw-UP-MBc" customClass="PDFDocumentSearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0jw-8G-mP6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PDFDocumentSearchViewControllerCellIdentifier" id="KMz-Mk-2aR">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KMz-Mk-2aR" id="Pnx-eq-EF1">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Osw-UP-MBc" id="H64-T4-9aR"/>
+                            <outlet property="delegate" destination="Osw-UP-MBc" id="57M-cM-c5f"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="JwT-ig-to7"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1024"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbg-MU-sBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3104" y="2128"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gcm-dk-BQw">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="1mF-zY-8xE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v9Z-EZ-6G4">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Osw-UP-MBc" kind="relationship" relationship="rootViewController" id="srW-cE-pmz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="22o-Tk-0QO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2040" y="2128"/>
         </scene>
     </scenes>
     <resources>
