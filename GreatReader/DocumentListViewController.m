@@ -107,7 +107,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     UIColor *barTintColor = editing ? [UIColor grt_defaultTintColor] : nil;
     UIColor *tintColor = editing ? [UIColor whiteColor] : [UIColor grt_defaultTintColor];
-    UIColor *titleColor = tintColor;
+    UIColor *titleColor = editing ? [UIColor whiteColor] : [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = barTintColor;
     self.navigationController.navigationBar.tintColor = tintColor;
     [self.navigationController.navigationBar setTitleTextAttributes:
