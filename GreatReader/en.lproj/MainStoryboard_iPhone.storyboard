@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1281" y="-1029"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Document List Navigation Controller - Item-->
         <scene sceneID="i8m-H8-hjV">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="sql-Sx-Fo6" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="sql-Sx-Fo6" customClass="DocumentListNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="skx-G5-eih"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fmB-KD-vgr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -524,10 +524,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="-1586"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Document List Navigation Controller - Item-->
         <scene sceneID="qcv-XT-txJ">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="0Uu-9z-4wD" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="0Uu-9z-4wD" customClass="DocumentListNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="BGz-FG-rIX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P6q-Pn-GdS">
                         <autoresizingMask key="autoresizingMask"/>

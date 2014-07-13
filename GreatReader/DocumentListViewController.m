@@ -16,6 +16,7 @@
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFDocumentViewController.h"
+#import "UIColor+GreatReaderAdditions.h"
 
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
@@ -77,6 +78,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     [super setEditing:editing animated:animated];
 
+    [self setBarEditing:editing];
+
     if (editing) {
         self.deleteItem =
                 [[UIBarButtonItem alloc] initWithTitle:@"Delete"
@@ -98,6 +101,25 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
         [self deselectAll:animated];
     }
+}
+
+- (void)setBarEditing:(BOOL)editing
+{
+    UIColor *barTintColor = editing ? [UIColor grt_defaultTintColor] : nil;
+    UIColor *tintColor = editing ? [UIColor whiteColor] : [UIColor grt_defaultTintColor];
+    UIColor *titleColor = tintColor;
+    self.navigationController.navigationBar.barTintColor = barTintColor;
+    self.navigationController.navigationBar.tintColor = tintColor;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+                                   @{ NSForegroundColorAttributeName: titleColor }];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+#pragma mark -
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return self.editing ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
 #pragma mark - Edit Action
@@ -184,3 +206,14 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {}
 
 @end
+
+
+@implementation DocumentListNavigationController : UINavigationController
+
+- (UIViewController *)childViewControllerForStatusBarStyle
+{
+    return self.visibleViewController;
+}
+
+@end
+

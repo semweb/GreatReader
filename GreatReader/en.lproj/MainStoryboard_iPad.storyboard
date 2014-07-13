@@ -416,10 +416,10 @@
             </objects>
             <point key="canvasLocation" x="-3165" y="-937"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Document List Navigation Controller - Item-->
         <scene sceneID="WqK-0j-y7z">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" customClass="DocumentListNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="Documents.png" id="H5N-lw-U82"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="krL-CF-hEr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -531,10 +531,10 @@
             </objects>
             <point key="canvasLocation" x="-1182" y="-1381"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Document List Navigation Controller - Item-->
         <scene sceneID="Ozj-gD-FY1">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" customClass="DocumentListNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="TabHistory.png" id="akT-1K-BKR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5PW-wp-4f6">
                         <autoresizingMask key="autoresizingMask"/>

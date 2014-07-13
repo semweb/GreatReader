@@ -26,3 +26,8 @@ extern NSString * const DocumentListViewControllerSeguePDFDocument;
 - (void)openDocumentsAtURL:(NSURL *)URL;
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths;
 @end
+
+
+@interface DocumentListNavigationController : UINavigationController
+@end
+
