@@ -56,6 +56,15 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     [self reloadView];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    if (self.editing) {
+        [self setEditing:NO animated:NO];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
