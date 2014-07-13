@@ -34,8 +34,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.collectionView.allowsMultipleSelection = YES;    
+    self.collectionView.allowsMultipleSelection = YES;
+
+    UILongPressGestureRecognizer *rec =
+            [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                          action:@selector(longPressed:)];
+    [self.collectionView addGestureRecognizer:rec];
 }
+
+#pragma mark -
+
+- (void)longPressed:(UILongPressGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateBegan && !self.editing) {
+        CGPoint point = [recognizer locationInView:self.collectionView];
+        NSIndexPath *indexPath =
+                [self.collectionView indexPathForItemAtPoint:point];
+        UICollectionViewCell *cell =
+                [self.collectionView cellForItemAtIndexPath:indexPath];
+        if (cell) {
+            [self setEditing:YES animated:YES];
+            [self.collectionView selectItemAtIndexPath:indexPath
+                                              animated:YES
+                                        scrollPosition:UICollectionViewScrollPositionNone];
+            [self updateButtonsEnabled];
+        }
+    }
+}
+
+#pragma mark -
 
 - (void)deselectAll:(BOOL)animated
 {
