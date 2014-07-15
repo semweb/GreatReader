@@ -657,13 +657,13 @@
     <resources>
         <image name="Brightness.png" width="22" height="22"/>
         <image name="Crop.png" width="22" height="22"/>
-        <image name="Documents.png" width="30" height="30"/>
+        <image name="Documents.png" width="25" height="25"/>
         <image name="Find.png" width="22" height="22"/>
         <image name="History.png" width="22" height="22"/>
         <image name="Outline.png" width="22" height="22"/>
         <image name="RibbonOff.png" width="22" height="22"/>
         <image name="RibbonOn.png" width="22" height="22"/>
-        <image name="TabHistory.png" width="30" height="30"/>
+        <image name="TabHistory.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
