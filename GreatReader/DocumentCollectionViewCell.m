@@ -8,6 +8,7 @@
 
 #import "DocumentCollectionViewCell.h"
 
+#import "Device.h"
 #import "PDFDocument.h"
 
 @interface DocumentCollectionViewCell ()
@@ -63,26 +64,32 @@
 - (void)drawRect:(CGRect)rect
 {
     if (self.document.iconImage) {
-        CGFloat w = rect.size.width;
-        CGPoint center = CGPointMake(w / 2.0, w / 2.0);
-        CGRect r = CGRectMake(roundf(center.x - self.document.iconImage.size.width / 2.0),
-                              roundf(center.y - self.document.iconImage.size.height / 2.0),
-                              roundf(self.document.iconImage.size.width),
-                              roundf(self.document.iconImage.size.height));
+        // draw image
+        CGSize imageSize = self.document.iconImage.size;
+        CGRect r = CGRectMake(roundf(rect.size.width / 2.0 - imageSize.width / 2.0),
+                              roundf(rect.size.width - imageSize.height),
+                              roundf(imageSize.width),
+                              roundf(imageSize.height));
         [self.document.iconImage drawInRect:r];
-        CGFloat lineWidth = 1.0 / [UIScreen mainScreen].scale;
-        CGRect bezierPathRect;
+        // draw selected white overlay
         if (self.selected) {
-            [self.tintColor set];
-            lineWidth = 2;
-            bezierPathRect = r;
-        } else {
-            [[UIColor blackColor] set];
-            bezierPathRect = CGRectInset(r, lineWidth / 2.0, lineWidth / 2.0);
-        }
+            [[[UIColor whiteColor] colorWithAlphaComponent:0.4] set];
+            [[UIBezierPath bezierPathWithRect:r] fill];
+        }        
+        // draw border
+        CGFloat lineWidth = 1.0 / [UIScreen mainScreen].scale;
+        CGRect bezierPathRect = CGRectInset(r, lineWidth / 2.0, lineWidth / 2.0);
+        [[UIColor blackColor] set];
         UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:bezierPathRect];
         bezierPath.lineWidth = lineWidth;
         [bezierPath stroke];
+        // draw selected check mark
+        if (self.selected) {
+            UIImage *checkImage = [UIImage imageNamed:@"Check"];
+            const CGFloat margin = IsPad() ? 6 : 4;
+            [checkImage drawAtPoint:CGPointMake(CGRectGetMaxX(r) - checkImage.size.width - margin,
+                                                CGRectGetMaxY(r) - checkImage.size.height - margin)];
+        }
     }
 }
 

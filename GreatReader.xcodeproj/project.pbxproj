@@ -138,6 +138,7 @@
 		199AB73D192EC34800C697BB /* DocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73C192EC34800C697BB /* DocumentListViewModel.m */; };
 		199AB740192EC36B00C697BB /* RecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */; };
 		199AB743192EC38100C697BB /* FolderDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */; };
+		199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199ABC1B19754E5F00FAC2C1 /* Check@2x.png */; };
 		199FED5E19710601003A75AA /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5A19710601003A75AA /* Back@2x.png */; };
 		199FED5F19710601003A75AA /* Forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5C19710601003A75AA /* Forward@2x.png */; };
 		199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */; };
@@ -321,6 +322,7 @@
 		199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDocumentListViewModel.m; sourceTree = "<group>"; };
 		199AB741192EC38100C697BB /* FolderDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderDocumentListViewModel.h; sourceTree = "<group>"; };
 		199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDocumentListViewModel.m; sourceTree = "<group>"; };
+		199ABC1C19754E5F00FAC2C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Check@2x.png"; sourceTree = "<group>"; };
 		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
 		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
 		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 			isa = PBXGroup;
 			children = (
 				191B7D281967E5E2004B35CA /* TabHistory@2x.png */,
+				199ABC1B19754E5F00FAC2C1 /* Check@2x.png */,
 				199FED5A19710601003A75AA /* Back@2x.png */,
 				199FED5C19710601003A75AA /* Forward@2x.png */,
 				1994B07C195C44220021B08C /* Documents@2x.png */,
@@ -909,6 +912,7 @@
 				19C9616A1905E6E400D1857C /* CropBoth@2x.png in Resources */,
 				19C9616B1905E6E400D1857C /* CropEven@2x.png in Resources */,
 				19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */,
+				199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */,
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
 				19D99E02188A7EB7006FDA6F /* Folder@2x.png in Resources */,
 				19D870A318BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib in Resources */,
@@ -1334,6 +1338,14 @@
 				1994B0821960113B0021B08C /* en */,
 			);
 			name = "Icon-76.png";
+			sourceTree = "<group>";
+		};
+		199ABC1B19754E5F00FAC2C1 /* Check@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				199ABC1C19754E5F00FAC2C1 /* en */,
+			);
+			name = "Check@2x.png";
 			sourceTree = "<group>";
 		};
 		199FED5A19710601003A75AA /* Back@2x.png */ = {
