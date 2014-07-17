@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class PDFDocument;
 @class PDFDocumentSearch;
 @class PDFDocumentSearchResult;
 
@@ -17,8 +18,8 @@
 @end
 
 @interface PDFDocumentSearch : NSObject
-- (instancetype)initWithCGPDFDocument:(CGPDFDocumentRef)CGPDFDocument;
-@property (nonatomic, assign, readonly) CGPDFDocumentRef CGPDFDocument;
+- (instancetype)initWithDocument:(PDFDocument *)document;
+@property (nonatomic, weak, readonly) PDFDocument *document;
 @property (nonatomic, weak) id<PDFDocumentSearchDelegate> delegate;
 - (void)searchWithString:(NSString *)keyword;
 - (void)cancelSearch;

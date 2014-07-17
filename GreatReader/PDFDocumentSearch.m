@@ -10,29 +10,23 @@
 #import "PDFDocumentSearch.h"
 
 #import "NSArray+GreatReaderAdditions.h"
+#import "PDFDocument.h"
 #import "PDFPageScanner.h"
 #import "PDFRenderingCharacter.h"
 #import "PDFDocumentSearchResult.h"
 
 @interface PDFDocumentSearch ()
-@property (nonatomic, assign, readwrite) CGPDFDocumentRef CGPDFDocument;
 @property (nonatomic, assign) BOOL searching;
 @property (nonatomic, assign) BOOL cancel;
 @end
 
 @implementation PDFDocumentSearch
 
-- (void)dealloc
-{
-    CGPDFDocumentRelease(_CGPDFDocument);
-}
-
-- (instancetype)initWithCGPDFDocument:(CGPDFDocumentRef)CGPDFDocument
+- (instancetype)initWithDocument:(PDFDocument *)document
 {
     self = [super init];
     if (self) {
-        _CGPDFDocument = CGPDFDocument;
-        CGPDFDocumentRetain(_CGPDFDocument);
+        _document = document;
     }
     return self;
 }
@@ -52,7 +46,7 @@
         [self cancelSearch];
     }
     self.searching = YES;
-    size_t numberOfPages = CGPDFDocumentGetNumberOfPages(self.CGPDFDocument);
+    size_t numberOfPages = CGPDFDocumentGetNumberOfPages(self.document.CGPDFDocument);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (int i = 1; i <= numberOfPages; i++) {
             if (self.cancel) {
@@ -70,7 +64,7 @@
 - (void)searchWithString:(NSString *)keyword
                   atPage:(NSUInteger)index
 {
-    CGPDFPageRef page = CGPDFDocumentGetPage(self.CGPDFDocument, index);
+    CGPDFPageRef page = CGPDFDocumentGetPage(self.document.CGPDFDocument, index);
     PDFPageScanner *scanner = [[PDFPageScanner alloc] initWithCGPDFPage:page];
     NSArray *contents = [scanner scanStringContents];
     NSString *text = [[contents grt_map:^(PDFRenderingCharacter *character) {

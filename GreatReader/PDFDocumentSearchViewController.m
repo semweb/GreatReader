@@ -24,7 +24,7 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 - (void)dealloc
 {
-    [self.viewModel removeObserver:self forKeyPath:@"results"];
+    [self.viewModel removeObserver:self forKeyPath:@"sections"];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -48,9 +48,15 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
     self.navigationItem.titleView = self.searchBar;
 
     [self.viewModel addObserver:self
-                     forKeyPath:@"results"
+                     forKeyPath:@"sections"
                         options:NSKeyValueObservingOptionOld
                         context:NULL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.viewModel stopSearch];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,20 +82,27 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.viewModel.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.viewModel.results.count;
+    PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];
+    return viewSection.results.count;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];    
+    return viewSection.title;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    PDFDocumentSearchResult *result = [self.viewModel resultAtIndexPath:indexPath];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PDFDocumentSearchViewControllerCellIdentifier
                                                             forIndexPath:indexPath];
-    PDFDocumentSearchResult *result = self.viewModel.results[indexPath.row];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.text = [NSString stringWithFormat:@"page: %d\n%@",
@@ -106,7 +119,7 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
         if (sender == self) {
             NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
             if (indexPath) {
-                PDFDocumentSearchResult *result = self.viewModel.results[indexPath.row];
+                PDFDocumentSearchResult *result = [self.viewModel resultAtIndexPath:indexPath];
      
                 PDFDocumentViewController *vc = segue.destinationViewController;
                 [vc goAtIndex:result.page animated:YES];
@@ -134,15 +147,13 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     NSIndexSet *indexes = [change objectForKey:NSKeyValueChangeIndexesKey];
-    NSMutableArray *indexPaths = [NSMutableArray array];
     NSKeyValueChange kind = [[change objectForKey:NSKeyValueChangeKindKey] unsignedIntegerValue];
     if (kind == NSKeyValueChangeInsertion) {
-        [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            [indexPaths addObject:[NSIndexPath indexPathForRow:idx
-                                                     inSection:0]];
-        }];
-        [self.tableView insertRowsAtIndexPaths:indexPaths
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView insertSections:indexes
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (kind == NSKeyValueChangeReplacement) {
+        [self.tableView reloadSections:indexes
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
     } else {
         [self.tableView reloadData];
     }

@@ -177,7 +177,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 - (PDFDocumentSearch *)search
 {
     if (!_search) {
-        _search = [[PDFDocumentSearch alloc] initWithCGPDFDocument:self.CGPDFDocument];
+        _search = [[PDFDocumentSearch alloc] initWithDocument:self];
     }
     return _search;
 }

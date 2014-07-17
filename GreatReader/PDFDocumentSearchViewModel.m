@@ -8,41 +8,91 @@
 
 #import "PDFDocumentSearchViewModel.h"
 
+#import "PDFDocumentOutline.h"
 #import "PDFDocumentSearch.h"
+#import "PDFDocumentSearchResult.h"
+
+
+@interface PDFDocumentSearchViewSection ()
+@property (nonatomic, copy, readwrite) NSString *title;
+@property (nonatomic, strong, readwrite) NSArray *results;
+@end
+
+@implementation PDFDocumentSearchViewSection
+@end
+
 
 @interface PDFDocumentSearchViewModel () <PDFDocumentSearchDelegate>
 @property (nonatomic, strong) PDFDocumentSearch *search;
-@property (nonatomic, strong, readwrite) NSArray *results;
+@property (nonatomic, strong) PDFDocumentOutline *outline;
+@property (nonatomic, strong, readwrite) NSArray *sections;
 @end
 
 @implementation PDFDocumentSearchViewModel
 
 - (instancetype)initWithSearch:(PDFDocumentSearch *)search
+                       outline:(PDFDocumentOutline *)outline
 {
     self = [super init];
     if (self) {
-        self.search = search;
-        self.search.delegate = self;
-        self.results = @[];
+        _search = search;
+        _search.delegate = self;
+        _outline = outline;
+        _sections = @[];
     }
     return self;
 }
 
-- (NSMutableArray *)resultsProxy
+- (NSMutableArray *)sectionsProxy
 {
-    return [self mutableArrayValueForKey:@"results"];
+    return [self mutableArrayValueForKey:@"sections"];
 }
 
 - (void)startSearchWithKeyword:(NSString *)keyword
 {
-    [self.resultsProxy removeAllObjects];
+    [self.sectionsProxy removeAllObjects];
     [self.search searchWithString:keyword];
+}
+
+- (void)stopSearch
+{
+    [self.search cancelSearch];
 }
 
 - (void)search:(PDFDocumentSearch *)search
  didFindString:(PDFDocumentSearchResult *)result
 {
-    [self.resultsProxy addObject:result];
+    PDFDocumentSearchViewSection *lastSection = [self.sections lastObject];
+    NSString *lastSectionTitle = lastSection.title ?: @"";
+    NSMutableArray *results = [lastSection.results mutableCopy];
+    NSString *sectionTitle = [self.outline sectionTitleAtIndex:result.page] ?: @"";
+    PDFDocumentSearchViewSection *section = PDFDocumentSearchViewSection.new;
+    section.title = sectionTitle;
+    if ([lastSectionTitle isEqual:sectionTitle] && self.sections.count > 0) {
+        [results addObject:result];
+        section.results = [results copy];
+        [self.sectionsProxy replaceObjectAtIndex:self.sections.count - 1
+                                      withObject:section];
+    } else {
+        section.results = @[result];
+        [self.sectionsProxy addObject:section];
+    }
+}
+
+- (BOOL)searching
+{
+    return NO;
+}
+
+- (NSString *)progressDescription
+{
+    return @"";
+}
+
+- (PDFDocumentSearchResult *)resultAtIndexPath:(NSIndexPath *)indexPath
+{
+    PDFDocumentSearchViewSection *section = self.sections[indexPath.section];
+    return section.results[indexPath.row];
 }
 
 @end

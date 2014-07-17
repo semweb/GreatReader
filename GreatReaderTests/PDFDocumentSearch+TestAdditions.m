@@ -18,7 +18,7 @@
                                  pathForResource:name
                                           ofType:@"pdf"];
     PDFDocument *document = [[PDFDocument alloc] initWithPath:resourcePath];
-    PDFDocumentSearch *search = [[PDFDocumentSearch alloc] initWithCGPDFDocument:document.CGPDFDocument];
+    PDFDocumentSearch *search = [[PDFDocumentSearch alloc] initWithDocument:document];
     return search;
 }
 

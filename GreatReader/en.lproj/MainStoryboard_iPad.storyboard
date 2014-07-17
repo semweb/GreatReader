@@ -592,6 +592,9 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="JwT-ig-to7"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1024"/>
+                    <connections>
+                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFDocumentSearchViewControllerSegueExit" unwindAction="exitSearch:" id="6GT-F1-nm6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbg-MU-sBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

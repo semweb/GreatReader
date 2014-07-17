@@ -8,12 +8,13 @@
 
 #import <XCTest/XCTest.h>
 
+#import "FBKVOController.h"
+#import "PDFDocument.h"
 #import "PDFDocumentSearch+TestAdditions.h"
 #import "PDFDocumentSearch.h"
 #import "PDFDocumentSearchViewModel.h"
 
 @interface PDFDocumentSearchViewModelTests : XCTestCase
-@property (nonatomic, assign) NSUInteger observationCount;
 @end
 
 @implementation PDFDocumentSearchViewModelTests
@@ -33,47 +34,51 @@
 - (void)testStartSearchWithKeyword
 {
     PDFDocumentSearch *search = [PDFDocumentSearch test_searchWithPDFName:@"PDFDocumentSearchTests3"];
-    PDFDocumentSearchViewModel *viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:search];
-    XCTAssertTrue(viewModel.results.count == 0, @"");
+    PDFDocumentSearchViewModel *viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:search
+                                                                                       outline:[[search document] outline]];
+    XCTAssertTrue(viewModel.sections.count == 0, @"");
 
     [viewModel startSearchWithKeyword:@"xxx"];
     CGFloat timeout = 0;
-    while (viewModel.results.count != 2) {
+    PDFDocumentSearchViewSection *section = nil;
+    while (section.results.count != 2) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         timeout += 0.1;
         XCTAssertTrue(timeout < 2, @"");
+        if (timeout >= 2) break;        
+        section = [viewModel.sections firstObject];        
     }
 }
 
 - (void)testObservation
 {
     PDFDocumentSearch *search = [PDFDocumentSearch test_searchWithPDFName:@"PDFDocumentSearchTests3"];
-    PDFDocumentSearchViewModel *viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:search];
-    XCTAssertTrue(viewModel.results.count == 0, @"");
+    PDFDocumentSearchViewModel *viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:search
+                                                                                       outline:[[search document] outline]];
+    XCTAssertTrue(viewModel.sections.count == 0, @"");
 
-    [viewModel addObserver:self
-                forKeyPath:@"results"
+    FBKVOController *kvoController = [FBKVOController controllerWithObserver:self];
+    __block int count = 0;
+    [kvoController observe:viewModel
+                   keyPath:@"sections"
                    options:0
-                   context:NULL];
+                     block:^(id tests, PDFDocumentSearchViewModel *vm, NSDictionary *change) {
+        count++;
+    }];
 
     [viewModel startSearchWithKeyword:@"xxx"];
 
-    self.observationCount = 0;
     CGFloat timeout = 0;
-    while (viewModel.results.count != 2) {
+    PDFDocumentSearchViewSection *section = nil;
+    while (section.results.count != 2) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         timeout += 0.1;
         XCTAssertTrue(timeout < 2, @"");
+        if (timeout >= 2) break;
+        section = [viewModel.sections firstObject];
     }
 
-    XCTAssertTrue(self.observationCount == 2, @"");
-
-    [viewModel removeObserver:self forKeyPath:@"results"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    self.observationCount++;
+    XCTAssertTrue(count == 2, @"");
 }
 
 @end

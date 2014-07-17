@@ -8,10 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class PDFDocumentOutline;
 @class PDFDocumentSearch;
+@class PDFDocumentSearchResult;
 
 @interface PDFDocumentSearchViewModel : NSObject
-- (instancetype)initWithSearch:(PDFDocumentSearch *)search;
+- (instancetype)initWithSearch:(PDFDocumentSearch *)search
+                       outline:(PDFDocumentOutline *)outline;
 - (void)startSearchWithKeyword:(NSString *)keyword;
+- (void)stopSearch;
+- (PDFDocumentSearchResult *)resultAtIndexPath:(NSIndexPath *)indexPath;
+@property (nonatomic, strong, readonly) NSArray *sections;
+@property (nonatomic, readonly) BOOL searching;
+@property (nonatomic, readonly) NSString *progressDescription;
+@end
+
+@interface PDFDocumentSearchViewSection : NSObject
+@property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, strong, readonly) NSArray *results;
 @end

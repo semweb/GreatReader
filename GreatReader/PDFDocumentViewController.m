@@ -425,7 +425,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (UINavigationController *)segue.destinationViewController;
         PDFDocumentSearchViewController *vc =
                 (PDFDocumentSearchViewController *)navi.topViewController;
-        vc.viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:self.document.search];
+        vc.viewModel = [[PDFDocumentSearchViewModel alloc] initWithSearch:self.document.search
+                                                                  outline:self.document.outline];
     }
 
     if ([segue isKindOfClass:UIStoryboardPopoverSegue.class]) {
