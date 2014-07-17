@@ -105,9 +105,7 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
                                                             forIndexPath:indexPath];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.textLabel.text = [NSString stringWithFormat:@"page: %d\n%@",
-                                    (int)result.page,
-                                    result.surroundingText];
+    cell.textLabel.attributedText = result.attributedDescription;
     return cell;
 }
 

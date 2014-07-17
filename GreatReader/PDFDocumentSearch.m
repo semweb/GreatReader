@@ -96,28 +96,30 @@
 {
     const NSUInteger maxLength = 30;
     NSUInteger left = (maxLength - range.length) / 2;
-    if ((int)(range.location - left) < 0) {
-        range.location = 0;
-        range.length = MIN(maxLength, characters.count);
+    NSRange surroundingRange = range;
+    if ((int)(surroundingRange.location - left) < 0) {
+        surroundingRange.location = 0;
+        surroundingRange.length = MIN(maxLength, characters.count);
     } else {
-        range.location = range.location - left;
-        range.length = MIN(maxLength, characters.count - range.location);
-        if (range.length < maxLength) {
-            NSInteger location = range.location - (maxLength - range.length);
+        surroundingRange.location = surroundingRange.location - left;
+        surroundingRange.length = MIN(maxLength, characters.count - surroundingRange.location);
+        if (surroundingRange.length < maxLength) {
+            NSInteger location = surroundingRange.location - (maxLength - surroundingRange.length);
             if (location < 0) {
                 location = 0;
             }
-            range.location = location;
-            range.length = characters.count - range.location;
+            surroundingRange.location = location;
+            surroundingRange.length = characters.count - surroundingRange.location;
         }
     }
     
-    NSString *text = [[[characters subarrayWithRange:range] grt_map:^(PDFRenderingCharacter *character) {
+    NSString *text = [[[characters subarrayWithRange:surroundingRange] grt_map:^(PDFRenderingCharacter *character) {
         return character.stringDescription;
     }] componentsJoinedByString:@""];
 
     PDFDocumentSearchResult *result =
             [PDFDocumentSearchResult resultWithSurroundingText:text
+                                                         range:NSMakeRange(range.location - surroundingRange.location, range.length)
                                                         atPage:page];
     return result;
 }
