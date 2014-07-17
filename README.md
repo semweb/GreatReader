@@ -1,12 +1,14 @@
 GreatReader
 ===========
 
+![](https://travis-ci.org/semweb/GreatReader.svg?branch=master)
+
 ## Introduction
 
 ![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/en.lproj/Icon-60@2x.png)
 　![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/en.lproj/Icon-76@2x.png)
 
-This is a great PDF reader for iOS.
+This is a "great" PDF reader for iOS.
 
 ## Features
 
