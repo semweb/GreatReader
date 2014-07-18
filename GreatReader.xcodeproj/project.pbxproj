@@ -139,6 +139,8 @@
 		199AB740192EC36B00C697BB /* RecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB73F192EC36B00C697BB /* RecentDocumentListViewModel.m */; };
 		199AB743192EC38100C697BB /* FolderDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */; };
 		199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199ABC1B19754E5F00FAC2C1 /* Check@2x.png */; };
+		199ABC201978D14600FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */; };
+		199ABC211978D7F200FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */; };
 		199FED5E19710601003A75AA /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5A19710601003A75AA /* Back@2x.png */; };
 		199FED5F19710601003A75AA /* Forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5C19710601003A75AA /* Forward@2x.png */; };
 		199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */; };
@@ -323,6 +325,8 @@
 		199AB741192EC38100C697BB /* FolderDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderDocumentListViewModel.h; sourceTree = "<group>"; };
 		199AB742192EC38100C697BB /* FolderDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDocumentListViewModel.m; sourceTree = "<group>"; };
 		199ABC1C19754E5F00FAC2C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Check@2x.png"; sourceTree = "<group>"; };
+		199ABC1E1978D14600FAC2C1 /* PDFDocumentSearchStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchStateCell.h; sourceTree = "<group>"; };
+		199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentSearchStateCell.m; sourceTree = "<group>"; };
 		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
 		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
 		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
@@ -485,6 +489,8 @@
 			children = (
 				191B7D58196AE278004B35CA /* PDFDocumentSearch.h */,
 				191B7D59196AE278004B35CA /* PDFDocumentSearch.m */,
+				199ABC1E1978D14600FAC2C1 /* PDFDocumentSearchStateCell.h */,
+				199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */,
 				191B7D5C196AE286004B35CA /* PDFDocumentSearchItem.h */,
 				191B7D5D196AE286004B35CA /* PDFDocumentSearchItem.m */,
 				191B7D60196AE292004B35CA /* PDFDocumentSearchResult.h */,
@@ -1100,6 +1106,7 @@
 				191B7D5E196AE286004B35CA /* PDFDocumentSearchItem.m in Sources */,
 				19D12BC418C318C5001C2066 /* PDFText.m in Sources */,
 				19D12BC718C319E5001C2066 /* PDFTextState.m in Sources */,
+				199ABC201978D14600FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */,
 				191B7D5A196AE278004B35CA /* PDFDocumentSearch.m in Sources */,
 				19F7BA84186052E2009E8916 /* PDFDocumentViewController.m in Sources */,
 				1941123B1936EA24008AD461 /* RootFolder.m in Sources */,
@@ -1204,6 +1211,7 @@
 				1994B048194CA1780021B08C /* FileCell.m in Sources */,
 				1994B04A194CA1780021B08C /* Folder.m in Sources */,
 				191B7D63196AE292004B35CA /* PDFDocumentSearchResult.m in Sources */,
+				199ABC211978D7F200FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */,
 				1994B04C194CA1780021B08C /* RootFolder.m in Sources */,
 				1994B04E194CA1780021B08C /* FolderTableDataSource.m in Sources */,
 				191B7D65196AE2B1004B35CA /* PDFDocumentSearchTests.m in Sources */,

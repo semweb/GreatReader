@@ -30,6 +30,14 @@
 
 @implementation PDFDocumentSearchViewModel
 
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
+{
+    if ([key isEqual:@"searching"]) {
+        return [NSSet setWithObjects:@"search.searching", nil];
+    }
+    return NSSet.set;
+}
+
 - (instancetype)initWithSearch:(PDFDocumentSearch *)search
                        outline:(PDFDocumentOutline *)outline
 {
@@ -81,12 +89,7 @@
 
 - (BOOL)searching
 {
-    return NO;
-}
-
-- (NSString *)progressDescription
-{
-    return @"";
+    return self.search.searching;
 }
 
 - (PDFDocumentSearchResult *)resultAtIndexPath:(NSIndexPath *)indexPath

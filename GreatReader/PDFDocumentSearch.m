@@ -16,7 +16,7 @@
 #import "PDFDocumentSearchResult.h"
 
 @interface PDFDocumentSearch ()
-@property (nonatomic, assign) BOOL searching;
+@property (nonatomic, assign, readwrite) BOOL searching;
 @property (nonatomic, assign) BOOL cancel;
 @end
 
@@ -35,9 +35,14 @@
 {
     self.cancel = YES;
     while (self.searching) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
     }
     self.cancel = NO;
+}
+
+- (void)doneSearching
+{
+    self.searching = NO;
 }
 
 - (void)searchWithString:(NSString *)keyword
@@ -55,9 +60,9 @@
             [self searchWithString:keyword
                             atPage:i];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.searching = NO;
-        });
+        [self performSelectorOnMainThread:@selector(doneSearching)
+                               withObject:nil
+                            waitUntilDone:YES];
     });
 }
 

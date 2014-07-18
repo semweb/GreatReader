@@ -21,6 +21,7 @@
 - (instancetype)initWithDocument:(PDFDocument *)document;
 @property (nonatomic, weak, readonly) PDFDocument *document;
 @property (nonatomic, weak) id<PDFDocumentSearchDelegate> delegate;
+@property (nonatomic, assign, readonly) BOOL searching;
 - (void)searchWithString:(NSString *)keyword;
 - (void)cancelSearch;
 @end

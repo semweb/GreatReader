@@ -95,16 +95,19 @@
 - (void)search:(PDFDocumentSearch *)search
  didFindString:(PDFDocumentSearchResult *)result
 {
-    self.block(search, result);
+    if (self.block) {
+        self.block(search, result);
+    }
 }
 
-// - (void)testCancel
-// {
-//     PDFDocumentSearch *search = [PDFDocumentSearch test_searchWithPDFName:@"PDFDocumentSearchTests5"];
-//     search.delegate = self;        
-//     self.expectations = @[@"oooooooooooooooooooooooooxxxoo"];
-//     [search searchWithString:@"xxx"];
-//     [self wait];        
-// }
+- (void)testCancel
+{  
+    PDFDocumentSearch *search = [PDFDocumentSearch test_searchWithPDFName:@"PDFDocumentSearchTests3"];
+    search.delegate = self;        
+    [search searchWithString:@"xxx"];
+    XCTAssertTrue(search.searching, @"");
+    [search cancelSearch];
+    XCTAssertTrue(!search.searching, @"");    
+}
 
 @end

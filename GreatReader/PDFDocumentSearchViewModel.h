@@ -20,7 +20,6 @@
 - (PDFDocumentSearchResult *)resultAtIndexPath:(NSIndexPath *)indexPath;
 @property (nonatomic, strong, readonly) NSArray *sections;
 @property (nonatomic, readonly) BOOL searching;
-@property (nonatomic, readonly) NSString *progressDescription;
 @end
 
 @interface PDFDocumentSearchViewSection : NSObject

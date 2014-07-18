@@ -8,8 +8,11 @@
 
 #import "PDFDocumentSearchViewController.h"
 
+#import <KVOController/FBKVOController.h>
+
 #import "PDFDocumentSearchViewModel.h"
 #import "PDFDocumentSearchResult.h"
+#import "PDFDocumentSearchStateCell.h"
 #import "PDFDocumentViewController.h"
 #import "NSArray+GreatReaderAdditions.h"
 
@@ -18,6 +21,8 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 @interface PDFDocumentSearchViewController () <UISearchBarDelegate>
 @property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) PDFDocumentSearchStateCell *stateCell;
+@property (nonatomic, strong) FBKVOController *kvoController;
 @end
 
 @implementation PDFDocumentSearchViewController
@@ -40,6 +45,8 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 {
     [super viewDidLoad];
 
+    self.kvoController = [FBKVOController controllerWithObserver:self];
+
     self.searchBar = [[UISearchBar alloc] initWithFrame:[self.navigationController.navigationBar bounds]];
     self.searchBar.delegate = self;
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
@@ -51,6 +58,15 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
                      forKeyPath:@"sections"
                         options:NSKeyValueObservingOptionOld
                         context:NULL];
+
+    PDFDocumentSearchStateCell *cell = [[PDFDocumentSearchStateCell alloc] init];
+    self.stateCell = cell;
+    [self.kvoController observe:self.viewModel
+                        keyPath:@"searching"
+                        options:0
+                          block:^(id vc, PDFDocumentSearchViewModel *vm, NSDictionary *change) {
+        cell.searching = vm.searching;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -82,23 +98,35 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.viewModel.sections.count;
+    return self.viewModel.sections.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];
-    return viewSection.results.count;
+    if (section == tableView.numberOfSections - 1) {
+        return 1;
+    } else {
+        PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];
+        return viewSection.results.count;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];    
-    return viewSection.title;
+    if (section == tableView.numberOfSections - 1) {
+        return nil;
+    } else {    
+        PDFDocumentSearchViewSection *viewSection = self.viewModel.sections[section];
+        return viewSection.title;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == tableView.numberOfSections - 1) {
+        return self.stateCell;
+    }
+
     PDFDocumentSearchResult *result = [self.viewModel resultAtIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PDFDocumentSearchViewControllerCellIdentifier
