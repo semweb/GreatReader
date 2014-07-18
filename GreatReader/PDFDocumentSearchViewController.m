@@ -29,7 +29,6 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 - (void)dealloc
 {
-    [self.viewModel removeObserver:self forKeyPath:@"sections"];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -53,11 +52,6 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
     self.searchBar.showsCancelButton = YES;
     [self.searchBar becomeFirstResponder];
     self.navigationItem.titleView = self.searchBar;
-
-    [self.viewModel addObserver:self
-                     forKeyPath:@"sections"
-                        options:NSKeyValueObservingOptionOld
-                        context:NULL];
 
     PDFDocumentSearchStateCell *cell = [[PDFDocumentSearchStateCell alloc] init];
     self.stateCell = cell;
@@ -164,25 +158,23 @@ NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSe
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.viewModel startSearchWithKeyword:searchBar.text];
+    [self.viewModel startSearchWithKeyword:searchBar.text
+                                foundBlock:^(NSUInteger section, NSUInteger row) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row
+                                                    inSection:section];
+        if (row == 0) {
+            NSIndexSet *set = [NSIndexSet indexSetWithIndex:section];
+            [self.tableView insertSections:set
+                          withRowAnimation:UITableViewRowAnimationTop];
+        } else {
+            [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationTop];
+        }
+    } completionBlock:^(BOOL finished) {
+    }];
+
+    [self.tableView reloadData];
     [self.searchBar resignFirstResponder];
-}
-
-#pragma mark -
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    NSIndexSet *indexes = [change objectForKey:NSKeyValueChangeIndexesKey];
-    NSKeyValueChange kind = [[change objectForKey:NSKeyValueChangeKindKey] unsignedIntegerValue];
-    if (kind == NSKeyValueChangeInsertion) {
-        [self.tableView insertSections:indexes
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    } else if (kind == NSKeyValueChangeReplacement) {
-        [self.tableView reloadSections:indexes
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    } else {
-        [self.tableView reloadData];
-    }
 }
 
 @end

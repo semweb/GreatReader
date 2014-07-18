@@ -26,6 +26,8 @@
 @property (nonatomic, strong) PDFDocumentSearch *search;
 @property (nonatomic, strong) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readwrite) NSArray *sections;
+@property (nonatomic, copy) void (^foundBlock)(NSUInteger, NSUInteger);
+@property (nonatomic, copy) void (^completionBlock)(BOOL);
 @end
 
 @implementation PDFDocumentSearchViewModel
@@ -57,7 +59,11 @@
 }
 
 - (void)startSearchWithKeyword:(NSString *)keyword
+                    foundBlock:(void (^)(NSUInteger section, NSUInteger row))foundBlock
+               completionBlock:(void (^)(BOOL finished))completionBlock
 {
+    self.foundBlock = foundBlock;
+    self.completionBlock = completionBlock;
     [self.sectionsProxy removeAllObjects];
     [self.search searchWithString:keyword];
 }
@@ -81,9 +87,14 @@
         section.results = [results copy];
         [self.sectionsProxy replaceObjectAtIndex:self.sections.count - 1
                                       withObject:section];
+        if (self.foundBlock) {
+            self.foundBlock(self.sections.count - 1,
+                            section.results.count - 1);
+        }
     } else {
         section.results = @[result];
         [self.sectionsProxy addObject:section];
+        self.foundBlock(self.sections.count - 1, 0);
     }
 }
 
