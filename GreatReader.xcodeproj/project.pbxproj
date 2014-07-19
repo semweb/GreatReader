@@ -327,6 +327,7 @@
 		199ABC1C19754E5F00FAC2C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Check@2x.png"; sourceTree = "<group>"; };
 		199ABC1E1978D14600FAC2C1 /* PDFDocumentSearchStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchStateCell.h; sourceTree = "<group>"; };
 		199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentSearchStateCell.m; sourceTree = "<group>"; };
+		199ABC26197A529D00FAC2C1 /* DocumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCell.h; sourceTree = "<group>"; };
 		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
 		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
 		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
@@ -664,6 +665,7 @@
 				191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */,
 				199AB738192E350500C697BB /* DocumentListViewController.h */,
 				199AB739192E350500C697BB /* DocumentListViewController.m */,
+				199ABC26197A529D00FAC2C1 /* DocumentCell.h */,
 				191B7D3819684F44004B35CA /* DocumentTableViewCell.h */,
 				191B7D3919684F44004B35CA /* DocumentTableViewCell.m */,
 				191B7D3C19684F5B004B35CA /* DocumentCollectionViewCell.h */,

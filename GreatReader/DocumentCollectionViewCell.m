@@ -8,43 +8,54 @@
 
 #import "DocumentCollectionViewCell.h"
 
+#import <KVOController/FBKVOController.h>
+
 #import "Device.h"
 #import "PDFDocument.h"
 
 @interface DocumentCollectionViewCell ()
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) FBKVOController *kvoController;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) IBOutlet UIView *selectionView;
+@property (nonatomic, strong, readwrite) IBOutlet UIImageView *imageView;
 @end
 
 @implementation DocumentCollectionViewCell
 
-- (void)dealloc
+- (void)awakeFromNib
 {
-    [self removeObserver:self forKeyPath:@"document.name"];              
-    [self removeObserver:self forKeyPath:@"document.iconImage"];
+    CGFloat scale = [UIScreen mainScreen].scale;
+    self.imageView.layer.borderWidth = 1.0 / scale;
+    self.imageView.layer.borderColor = UIColor.blackColor.CGColor;
+    self.selectionView.hidden = !self.selected;
+    self.selectionView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    self.selectionView.layer.borderWidth = 1.0 / scale;
+    self.selectionView.layer.borderColor = UIColor.blackColor.CGColor;    
 }
 
 - (void)setDocument:(PDFDocument *)document
 {
     _document = document;
-}
-
-- (void)awakeFromNib
-{
-    [self addObserver:self
-           forKeyPath:@"document.name"
-              options:NSKeyValueObservingOptionOld
-              context:NULL];
-    [self addObserver:self
-           forKeyPath:@"document.iconImage"
-              options:NSKeyValueObservingOptionOld
-              context:NULL];
+    self.kvoController = [FBKVOController controllerWithObserver:self];
+    [self.kvoController observe:_document
+                        keyPath:@"name"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(DocumentCollectionViewCell *cell, id doc, NSDictionary *change) {
+        cell.textLabel.text = document.name;
+    }];
+    [self.kvoController observe:_document
+                        keyPath:@"iconImage"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(DocumentCollectionViewCell *cell, id doc, NSDictionary *change) {
+        cell.imageView.image = document.iconImage;
+        [cell setNeedsLayout];
+    }];        
 }
 
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
-    [self setNeedsDisplay];
+    self.selectionView.hidden = !selected;
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -52,45 +63,22 @@
     [super setHighlighted:highlighted];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)layoutSubviews
 {
-    if ([keyPath isEqualToString:@"document.name"]) {
-        self.titleLabel.text = self.document.name;
-    } else if ([keyPath isEqualToString:@"document.iconImage"]) {
-        [self setNeedsDisplay];
-    }
-}
+    [super layoutSubviews];
 
-- (void)drawRect:(CGRect)rect
-{
-    if (self.document.iconImage) {
-        // draw image
-        CGSize imageSize = self.document.iconImage.size;
-        CGRect r = CGRectMake(roundf(rect.size.width / 2.0 - imageSize.width / 2.0),
-                              roundf(rect.size.width - imageSize.height),
-                              roundf(imageSize.width),
-                              roundf(imageSize.height));
-        [self.document.iconImage drawInRect:r];
-        // draw selected white overlay
-        if (self.selected) {
-            [[[UIColor whiteColor] colorWithAlphaComponent:0.4] set];
-            [[UIBezierPath bezierPathWithRect:r] fill];
-        }        
-        // draw border
-        CGFloat lineWidth = 1.0 / [UIScreen mainScreen].scale;
-        CGRect bezierPathRect = CGRectInset(r, lineWidth / 2.0, lineWidth / 2.0);
-        [[UIColor blackColor] set];
-        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:bezierPathRect];
-        bezierPath.lineWidth = lineWidth;
-        [bezierPath stroke];
-        // draw selected check mark
-        if (self.selected) {
-            UIImage *checkImage = [UIImage imageNamed:@"Check"];
-            const CGFloat margin = IsPad() ? 6 : 4;
-            [checkImage drawAtPoint:CGPointMake(CGRectGetMaxX(r) - checkImage.size.width - margin,
-                                                CGRectGetMaxY(r) - checkImage.size.height - margin)];
-        }
+    [self.imageView sizeToFit];
+    CGRect frame = self.imageView.frame;
+    CGFloat scale = MAX(frame.size.width / self.frame.size.width,
+                        frame.size.height / self.frame.size.width);
+    if (scale > 1.0) {
+        frame.size = CGSizeMake(floorf(frame.size.width / scale),
+                                floorf(frame.size.height / scale));
     }
+    frame.origin = CGPointMake(self.frame.size.width / 2 - frame.size.width / 2,
+                               self.frame.size.width - frame.size.height);
+    self.imageView.frame = frame;
+    self.selectionView.frame = frame;
 }
 
 @end

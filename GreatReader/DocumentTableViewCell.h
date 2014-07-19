@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DocumentCell.h"
+
 @class PDFDocument;
 
-@interface DocumentTableViewCell : UITableViewCell
+@interface DocumentTableViewCell : UITableViewCell <DocumentCell>
 @property (nonatomic, strong) PDFDocument *document;
 @end
