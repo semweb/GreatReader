@@ -31,6 +31,8 @@
 #import "PDFRecentDocumentList.h"
 #import "PDFRecentDocumentListViewModel.h"
 #import "PDFRecentDocumentListViewController.h"
+#import "RecentDocumentListViewController.h"
+#import "RecentDocumentListViewModel.h"
 
 NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
 NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
@@ -413,13 +415,11 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         vc.modalPresentationStyle = UIModalPresentationCustom;
         vc.transitioningDelegate = self;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueHistory]) {
-        PDFRecentDocumentListViewController *vc = (PDFRecentDocumentListViewController *)segue.destinationViewController;
-        PDFRecentDocumentListViewModel *model = [[PDFRecentDocumentListViewModel alloc]
-                                                    initWithDocumentList:self.document.store.documentList
-                                                           withoutActive:YES];
-        vc.model = model;
-        vc.modalPresentationStyle = UIModalPresentationCustom;
-        vc.transitioningDelegate = self;
+        UINavigationController *navi = (UINavigationController *)segue.destinationViewController;
+        RecentDocumentListViewController *vc = (RecentDocumentListViewController *)navi.topViewController;
+        RecentDocumentListViewModel *model = [[RecentDocumentListViewModel alloc]
+                                                    initWithDocumentList:self.document.store.documentList];
+        vc.viewModel = model;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueSearch]) {
         UINavigationController *navi =
                 (UINavigationController *)segue.destinationViewController;

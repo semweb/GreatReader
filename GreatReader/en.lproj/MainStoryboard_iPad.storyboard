@@ -35,7 +35,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AII-yI-J9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3268" y="-906"/>
+            <point key="canvasLocation" x="3404" y="-768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="haa-9g-aja">
@@ -211,7 +211,7 @@
                 </barButtonItem>
                 <barButtonItem image="History.png" id="xeQ-to-Tsd" userLabel="History">
                     <connections>
-                        <segue destination="YOo-XR-U3h" kind="popover" identifier="PDFDocumentViewControllerSegueHistory" popoverAnchorBarButtonItem="xeQ-to-Tsd" id="lOz-N8-s7o">
+                        <segue destination="SO8-cL-Ijw" kind="popover" identifier="PDFDocumentViewControllerSegueHistory" popoverAnchorBarButtonItem="xeQ-to-Tsd" id="iAl-bb-Cfv">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -256,7 +256,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOz-67-Ngz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3024" y="-2134"/>
+            <point key="canvasLocation" x="3884" y="-768"/>
         </scene>
         <!--Document Brightness View Controller-->
         <scene sceneID="nJ3-sg-scW">
@@ -347,58 +347,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwm-lr-zLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2953" y="-768"/>
-        </scene>
-        <!--Recent Document List View Controller-->
-        <scene sceneID="fzN-1g-S2W">
-            <objects>
-                <viewController id="YOo-XR-U3h" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WCW-8V-9RE"/>
-                        <viewControllerLayoutGuide type="bottom" id="vXM-oZ-Ftx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HdH-I3-E45">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="300"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2gI-1s-zPt">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="300"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="jpq-MT-abR">
-                                    <size key="itemSize" width="180" height="230"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PDFRecentDocumentListViewControllerCellIdentifier" id="Wrl-uI-hvA">
-                                        <rect key="frame" x="20" y="45" width="180" height="230"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="YOo-XR-U3h" id="n4h-8s-9ZP"/>
-                                    <outlet property="delegate" destination="YOo-XR-U3h" id="yJB-ET-fm3"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="1024" height="300"/>
-                    <connections>
-                        <outlet property="collectionView" destination="2gI-1s-zPt" id="meI-F0-W0k"/>
-                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" unwindAction="exitHistory:" id="z2O-Ed-vfW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2kr-vH-1Tx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2040" y="-1317"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="zdk-8W-gA5">
@@ -614,6 +562,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22o-Tk-0QO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="2128"/>
+        </scene>
+        <!--Recent Document List View Controller - Root View Controller-->
+        <scene sceneID="ZSf-xL-N2b">
+            <objects>
+                <tableViewController id="VE9-dR-ezt" customClass="RecentDocumentListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TRH-CU-X3b">
+                        <rect key="frame" x="0.0" y="64" width="320" height="960"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sRu-NX-14q">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sRu-NX-14q" id="irv-YG-PDP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VE9-dR-ezt" id="YmC-5N-euu"/>
+                            <outlet property="delegate" destination="VE9-dR-ezt" id="BUH-Lo-0Xc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="axv-0K-4Bz"/>
+                    <connections>
+                        <segue destination="A5M-y9-xh8" kind="unwind" identifier="RecentDocumentListViewControllerSegueExit" unwindAction="exitHistory:" id="VwF-b9-rOe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tzN-hh-YNn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2962" y="-2389"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RmJ-Fx-Tez">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="SO8-cL-Ijw" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1024"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w45-a4-fQt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VE9-dR-ezt" kind="relationship" relationship="rootViewController" id="m3M-AR-jhl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHh-RB-yQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2054" y="-2389"/>
         </scene>
     </scenes>
     <resources>

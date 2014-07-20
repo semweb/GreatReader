@@ -143,6 +143,8 @@
 		199ABC211978D7F200FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */; };
 		199ABC24197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */; };
 		199ABC25197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */; };
+		199ABC29197BE94100FAC2C1 /* RecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC28197BE94100FAC2C1 /* RecentDocumentListViewController.m */; };
+		199ABC2A197BE94100FAC2C1 /* RecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC28197BE94100FAC2C1 /* RecentDocumentListViewController.m */; };
 		199FED5E19710601003A75AA /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5A19710601003A75AA /* Back@2x.png */; };
 		199FED5F19710601003A75AA /* Forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5C19710601003A75AA /* Forward@2x.png */; };
 		199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */; };
@@ -329,9 +331,11 @@
 		199ABC1C19754E5F00FAC2C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Check@2x.png"; sourceTree = "<group>"; };
 		199ABC1E1978D14600FAC2C1 /* PDFDocumentSearchStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchStateCell.h; sourceTree = "<group>"; };
 		199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentSearchStateCell.m; sourceTree = "<group>"; };
-		199ABC26197A529D00FAC2C1 /* DocumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCell.h; sourceTree = "<group>"; };
 		199ABC22197A488600FAC2C1 /* DocumentModalTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModalTransitionAnimator.h; sourceTree = "<group>"; };
 		199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentModalTransitionAnimator.m; sourceTree = "<group>"; };
+		199ABC26197A529D00FAC2C1 /* DocumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCell.h; sourceTree = "<group>"; };
+		199ABC27197BE94100FAC2C1 /* RecentDocumentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentDocumentListViewController.h; sourceTree = "<group>"; };
+		199ABC28197BE94100FAC2C1 /* RecentDocumentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentDocumentListViewController.m; sourceTree = "<group>"; };
 		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
 		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
 		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
@@ -672,6 +676,8 @@
 				199AB738192E350500C697BB /* DocumentListViewController.h */,
 				199AB739192E350500C697BB /* DocumentListViewController.m */,
 				199ABC26197A529D00FAC2C1 /* DocumentCell.h */,
+				199ABC27197BE94100FAC2C1 /* RecentDocumentListViewController.h */,
+				199ABC28197BE94100FAC2C1 /* RecentDocumentListViewController.m */,
 				191B7D3819684F44004B35CA /* DocumentTableViewCell.h */,
 				191B7D3919684F44004B35CA /* DocumentTableViewCell.m */,
 				191B7D3C19684F5B004B35CA /* DocumentCollectionViewCell.h */,
@@ -1103,6 +1109,7 @@
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
 				19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */,
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
+				199ABC29197BE94100FAC2C1 /* RecentDocumentListViewController.m in Sources */,
 				190FFBC3196D8780004BEA59 /* PDFDocumentSearchViewModel.m in Sources */,
 				190FFBC9196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */,
 				190FFBD0196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
@@ -1177,6 +1184,7 @@
 				190FFBC0196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */,
 				1994B004194CA1780021B08C /* PDFDocumentInfo.m in Sources */,
 				1994B006194CA1780021B08C /* PDFDocumentInfoView.m in Sources */,
+				199ABC2A197BE94100FAC2C1 /* RecentDocumentListViewController.m in Sources */,
 				191B7D67196AE2BD004B35CA /* PDFDocumentSearchItemTests.m in Sources */,
 				190FFBCA196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */,
 				1994B008194CA1780021B08C /* PDFDocumentOutline.m in Sources */,

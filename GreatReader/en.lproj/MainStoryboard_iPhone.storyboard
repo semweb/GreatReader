@@ -40,6 +40,53 @@
             </objects>
             <point key="canvasLocation" x="-861" y="-1305"/>
         </scene>
+        <!--Recent Document List View Controller - Root View Controller-->
+        <scene sceneID="sfl-Rb-whK">
+            <objects>
+                <tableViewController id="eHp-nf-0wy" customClass="RecentDocumentListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wO7-CA-Fyt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5ap-1D-YwG">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ap-1D-YwG" id="NQO-ft-OCq">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eHp-nf-0wy" id="qkB-XT-She"/>
+                            <outlet property="delegate" destination="eHp-nf-0wy" id="t4P-Jh-2TU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="oFM-ge-5Xx"/>
+                    <connections>
+                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="RecentDocumentListViewControllerSegueExit" unwindAction="exitHistory:" id="G85-fB-k3E"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wDR-mp-opK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1478" y="-1607"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Fi-YG-Cxh">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Xf6-ak-ILA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cIu-CJ-GCd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eHp-nf-0wy" kind="relationship" relationship="rootViewController" id="odi-jL-y35"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C0n-2T-trT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1002" y="-1601"/>
+        </scene>
         <!--Document Bookmark List View Controller-->
         <scene sceneID="wln-lS-Njg">
             <objects>
@@ -65,7 +112,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYN-qD-K6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="-1484"/>
+            <point key="canvasLocation" x="2000" y="-828"/>
         </scene>
         <!--Document Brightness View Controller-->
         <scene sceneID="39z-o3-2mo">
@@ -133,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ih1-7b-frr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1008" y="-2325"/>
+            <point key="canvasLocation" x="1002" y="-2053"/>
         </scene>
         <!--Document Outline Container View Controller-->
         <scene sceneID="TlA-jR-eP5">
@@ -443,7 +490,7 @@
                 </barButtonItem>
                 <barButtonItem image="History.png" id="FWY-Mv-FS9" userLabel="History">
                     <connections>
-                        <segue destination="f5f-aF-dRJ" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="sKJ-j2-2GX"/>
+                        <segue destination="Xf6-ak-ILA" kind="modal" identifier="PDFDocumentViewControllerSegueHistory" id="qfV-FC-htv"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem image="Find.png" id="oGZ-Ya-lPq" userLabel="Find">
@@ -455,78 +502,6 @@
                 <exit id="sxN-FY-cQq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="433" y="-1010"/>
-        </scene>
-        <!--Recent Document List View Controller-->
-        <scene sceneID="7j0-Vc-1tt">
-            <objects>
-                <viewController id="f5f-aF-dRJ" customClass="PDFRecentDocumentListViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0gm-3x-f4x"/>
-                        <viewControllerLayoutGuide type="bottom" id="NpX-bQ-Be5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="O5J-hx-xhi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2a-DY-9Vo" customClass="UIToolbar">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="Mm0-go-pLG"/>
-                                </constraints>
-                            </view>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-p9-S1x">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="rPQ-L7-v7T"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="IN9-JQ-VBg">
-                                    <size key="itemSize" width="100" height="140"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="30" maxX="10" maxY="10"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PDFRecentDocumentListViewControllerCellIdentifier" id="jEe-l0-5VW">
-                                        <rect key="frame" x="10" y="30" width="100" height="140"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="f5f-aF-dRJ" id="Gr2-PN-W4I"/>
-                                    <outlet property="delegate" destination="f5f-aF-dRJ" id="alR-yw-pXb"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="R2a-DY-9Vo" firstAttribute="leading" secondItem="O5J-hx-xhi" secondAttribute="leading" id="DMR-fC-baV"/>
-                            <constraint firstAttribute="trailing" secondItem="dBQ-p9-S1x" secondAttribute="trailing" id="O2d-VO-zdP"/>
-                            <constraint firstItem="dBQ-p9-S1x" firstAttribute="leading" secondItem="O5J-hx-xhi" secondAttribute="leading" id="P7Y-Nn-7HM"/>
-                            <constraint firstItem="dBQ-p9-S1x" firstAttribute="top" secondItem="O5J-hx-xhi" secondAttribute="top" id="SaW-2h-zzi"/>
-                            <constraint firstItem="R2a-DY-9Vo" firstAttribute="top" secondItem="O5J-hx-xhi" secondAttribute="top" id="mSX-FM-fgh"/>
-                            <constraint firstAttribute="trailing" secondItem="R2a-DY-9Vo" secondAttribute="trailing" id="zlS-cR-MaU"/>
-                        </constraints>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="180"/>
-                    <connections>
-                        <outlet property="collectionView" destination="dBQ-p9-S1x" id="6zp-L4-GWT"/>
-                        <segue destination="sxN-FY-cQq" kind="unwind" identifier="PDFRecentDocumentListViewControllerSeguePDFDocument" unwindAction="exitHistory:" id="LCB-el-pnN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CGI-rw-pXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1076" y="-1586"/>
         </scene>
         <!--Document List Navigation Controller - Item-->
         <scene sceneID="qcv-XT-txJ">
@@ -671,6 +646,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9mq-TY-gdn"/>
+        <segue reference="SNn-xC-9k6"/>
     </inferredMetricsTieBreakers>
 </document>
