@@ -48,15 +48,21 @@
     [transitionContext.containerView insertSubview:toViewController.view
                                       belowSubview:fromViewController.view];
 
-    // Even if device is landscape, view frame is not rotated.
-    // Need to layout here.
-    [toViewController.view layoutIfNeeded];
-
     DocumentListViewController *documentListViewController =
             [self documentListViewControllerFromContainer:documentListContainer];
     PDFDocumentViewController *documentViewController =
             [self documentViewControllerFromContainer:documentContainer];
-    id<DocumentCell> documentCell = [documentListViewController selectedDocumentCell];
+    if (!self.presenting) {
+        [documentListViewController reload];
+    }
+
+    // Even if device is landscape, view frame is not rotated.
+    // Need to layout here.
+    [toViewController.view layoutIfNeeded];    
+    
+    id<DocumentCell> documentCell = self.presenting
+            ? [documentListViewController selectedDocumentCell]
+            : [documentListViewController documentCellForDocument:documentViewController.document];
     UIImageView *imageView = documentCell.imageView;
     UIImage *image = imageView.image;
     CGRect frameInDocumentList = [imageView convertRect:imageView.bounds

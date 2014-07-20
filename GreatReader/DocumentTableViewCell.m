@@ -8,51 +8,39 @@
 
 #import "DocumentTableViewCell.h"
 
+#import <KVOController/FBKVOController.h>
+
 #import "PDFDocument.h"
 
 @interface DocumentTableViewCell ()
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *iconView;
+@property (nonatomic, strong) FBKVOController *kvoController;
 @end
 
 @implementation DocumentTableViewCell
 
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"document.name"];              
-    [self removeObserver:self forKeyPath:@"document.iconImage"];
-}
-
 - (void)awakeFromNib
 {
     CGFloat scale = UIScreen.mainScreen.scale;
-    self.iconView.layer.borderWidth = 1.0 / scale;
-    
-    [self addObserver:self
-           forKeyPath:@"document.name"
-              options:NSKeyValueObservingOptionOld
-              context:NULL];
-    [self addObserver:self
-           forKeyPath:@"document.iconImage"
-              options:NSKeyValueObservingOptionOld
-              context:NULL];
+    self.imageView.layer.borderWidth = 1.0 / scale;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setDocument:(PDFDocument *)document
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"document.name"]) {
-        self.titleLabel.text = self.document.name;
-    } else if ([keyPath isEqualToString:@"document.iconImage"]) {
-        self.iconView.image = self.document.iconImage;
-        [self setNeedsLayout];
-    }
+    _document = document;
+    self.kvoController = [FBKVOController controllerWithObserver:self];
+    [self.kvoController observe:_document
+                        keyPath:@"name"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(DocumentTableViewCell *cell, id doc, NSDictionary *change) {
+        cell.textLabel.text = document.name;
+    }];
+    [self.kvoController observe:_document
+                        keyPath:@"iconImage"
+                        options:NSKeyValueObservingOptionInitial
+                          block:^(DocumentTableViewCell *cell, id doc, NSDictionary *change) {
+        cell.imageView.image = document.iconImage;
+        [cell setNeedsLayout];
+    }];        
 }
 
 - (void)layoutSubviews
@@ -60,9 +48,9 @@
     [super layoutSubviews];
 
     if (self.document.iconImage) {
-        [self.iconView sizeToFit];
-        CGFloat w = self.iconView.frame.size.width;
-        CGFloat h = self.iconView.frame.size.height;
+        [self.imageView sizeToFit];
+        CGFloat w = self.imageView.frame.size.width;
+        CGFloat h = self.imageView.frame.size.height;
         if (w < h) {
             w = (w / h) * 50;
             h = 50;
@@ -70,8 +58,16 @@
             h = (h / w) * 50;
             w = 50;
         }
-        self.iconView.bounds = CGRectMake(0, 0, w, h);
-        self.iconView.center = CGPointMake(35, 30);
+        self.imageView.bounds = CGRectMake(0, 0, w, h);
+        self.imageView.center = CGPointMake(35, 30);
+
+        CGFloat maxX = CGRectGetMaxX(self.textLabel.frame);
+        self.textLabel.frame = ({
+            CGRect f = self.textLabel.frame;
+            f.origin.x = CGRectGetMaxX(self.imageView.frame) + 10;
+            f.size.width = maxX - f.origin.x;
+            f;
+        });
     }
 }
 

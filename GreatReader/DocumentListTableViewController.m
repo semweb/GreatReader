@@ -19,7 +19,7 @@
 #import "PDFDocumentViewController.h"
 
 @interface DocumentListTableViewController ()
-
+@property (nonatomic, strong, readwrite) id<DocumentCell> selectedDocumentCell; 
 @end
 
 @implementation DocumentListTableViewController
@@ -145,8 +145,11 @@
     if (self.editing) {
         [self updateButtonsEnabled];
     } else {
+        DocumentTableViewCell *cell = (DocumentTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
-                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+                                  sender:cell];
+        self.selectedDocumentCell = cell;
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -167,6 +170,10 @@
 - (void)reloadView
 {
     [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:NO];
+                                                        
 }
 
 - (NSArray *)selectedIndexPaths
@@ -196,6 +203,16 @@
             });
         }
     }
+}
+
+- (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document
+{
+    for (DocumentTableViewCell *cell in [self.tableView visibleCells]) {
+        if (cell.document == document) {
+            return cell;
+        }
+    }
+    return nil;
 }
 
 @end

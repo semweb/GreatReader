@@ -120,14 +120,6 @@
     }
 }
 
-// - (id<DocumentCell>)selectedDocumentCell
-// {
-//     NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-//     NSIndexPath *indexPath = [indexPaths firstObject];
-//     DocumentCollectionViewCell *cell = (DocumentCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-//     return cell;
-// }
-
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document
 {
     for (DocumentCollectionViewCell *cell in [self.collectionView visibleCells]) {
