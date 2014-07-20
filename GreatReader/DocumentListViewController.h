@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol DocumentCell;
+@class PDFDocument;
 @class DocumentListViewModel;
 
 extern NSString * const DocumentListViewControllerCellIdentifier;
@@ -25,6 +28,8 @@ extern NSString * const DocumentListViewControllerSeguePDFDocument;
 - (NSArray *)selectedDocuments;
 - (void)openDocumentsAtURL:(NSURL *)URL;
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths;
+- (id<DocumentCell>)selectedDocumentCell;
+- (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document;
 @end
 
 

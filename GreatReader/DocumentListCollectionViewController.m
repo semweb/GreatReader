@@ -18,6 +18,7 @@
 #import "PDFDocumentViewController.h"
 
 @interface DocumentListCollectionViewController ()
+@property (nonatomic, strong, readwrite) id<DocumentCell> selectedDocumentCell;
 @end
 
 @implementation DocumentListCollectionViewController
@@ -119,6 +120,24 @@
     }
 }
 
+// - (id<DocumentCell>)selectedDocumentCell
+// {
+//     NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+//     NSIndexPath *indexPath = [indexPaths firstObject];
+//     DocumentCollectionViewCell *cell = (DocumentCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+//     return cell;
+// }
+
+- (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document
+{
+    for (DocumentCollectionViewCell *cell in [self.collectionView visibleCells]) {
+        if (cell.document == document) {
+            return cell;
+        }
+    }
+    return nil;
+}
+
 #pragma mark -
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -133,8 +152,10 @@
     if (self.editing) {
         [self updateButtonsEnabled];
     } else {
+        DocumentCollectionViewCell *cell = (DocumentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
         [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
-                                  sender:[collectionView cellForItemAtIndexPath:indexPath]];
+                                  sender:cell];
+        self.selectedDocumentCell = cell;
         [collectionView deselectItemAtIndexPath:indexPath animated:NO];
     }
 }

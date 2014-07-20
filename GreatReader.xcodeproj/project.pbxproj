@@ -141,6 +141,8 @@
 		199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199ABC1B19754E5F00FAC2C1 /* Check@2x.png */; };
 		199ABC201978D14600FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */; };
 		199ABC211978D7F200FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */; };
+		199ABC24197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */; };
+		199ABC25197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */; };
 		199FED5E19710601003A75AA /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5A19710601003A75AA /* Back@2x.png */; };
 		199FED5F19710601003A75AA /* Forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 199FED5C19710601003A75AA /* Forward@2x.png */; };
 		199FED6119713049003A75AA /* PDFDocumentBackForwardListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */; };
@@ -328,6 +330,8 @@
 		199ABC1E1978D14600FAC2C1 /* PDFDocumentSearchStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchStateCell.h; sourceTree = "<group>"; };
 		199ABC1F1978D14600FAC2C1 /* PDFDocumentSearchStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentSearchStateCell.m; sourceTree = "<group>"; };
 		199ABC26197A529D00FAC2C1 /* DocumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCell.h; sourceTree = "<group>"; };
+		199ABC22197A488600FAC2C1 /* DocumentModalTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModalTransitionAnimator.h; sourceTree = "<group>"; };
+		199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentModalTransitionAnimator.m; sourceTree = "<group>"; };
 		199FED5B19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Back@2x.png"; sourceTree = "<group>"; };
 		199FED5D19710601003A75AA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Forward@2x.png"; sourceTree = "<group>"; };
 		199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBackForwardListTests.m; sourceTree = "<group>"; };
@@ -654,6 +658,8 @@
 				190FFBBC196D7F64004BEA59 /* Search */,
 				195B728A18EA352E000C5A8B /* Device.h */,
 				191B7D181963830B004B35CA /* PDFPageSelectionKnob.h */,
+				199ABC22197A488600FAC2C1 /* DocumentModalTransitionAnimator.h */,
+				199ABC23197A488600FAC2C1 /* DocumentModalTransitionAnimator.m */,
 				191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */,
 				190FFBD21970A1D1004BEA59 /* PDFDocumentPageSliderModel.h */,
 				190FFBD31970A1D1004BEA59 /* PDFDocumentPageSliderModel.m */,
@@ -1127,6 +1133,7 @@
 				19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */,
 				191B7D3A19684F44004B35CA /* DocumentTableViewCell.m in Sources */,
 				195B728C18EA352E000C5A8B /* Device.m in Sources */,
+				199ABC24197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */,
 				19D99DC11884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,
 				191B7D62196AE292004B35CA /* PDFDocumentSearchResult.m in Sources */,
 				19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */,
@@ -1179,6 +1186,7 @@
 				1994B010194CA1780021B08C /* PDFDocumentOutlineContainerViewController.m in Sources */,
 				1994B012194CA1780021B08C /* PDFDocumentPageSlider.m in Sources */,
 				1994B014194CA1780021B08C /* PDFDocumentPageSliderDataSource.m in Sources */,
+				199ABC25197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */,
 				1994B017194CA1780021B08C /* PDFDocumentPageSliderItem.m in Sources */,
 				191B7D3719684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
 				1994B018194CA1780021B08C /* PDFDocumentPageSliderItemView.m in Sources */,

@@ -10,6 +10,7 @@
 
 #import "Device.h"
 #import "DocumentListViewModel.h"
+#import "DocumentModalTransitionAnimator.h"
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFRecentDocumentCell.h"
 #import "PDFDocument.h"
@@ -21,7 +22,7 @@
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
 
-@interface DocumentListViewController ()
+@interface DocumentListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
 @property (nonatomic, strong) UIBarButtonItem *deleteItem;
 @property (nonatomic, strong) UIDocumentInteractionController *interactionController;
@@ -178,6 +179,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
         PDFDocument *document = [self.selectedDocuments firstObject];
         vc.document = document;
         [document.store addHistory:document];
+        navi.modalPresentationStyle = UIModalPresentationCustom;
+        navi.transitioningDelegate = self;
     }
 }
 
@@ -188,6 +191,23 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     return [self.selectedIndexPaths grt_map:^(NSIndexPath *indexPath) {
         return [self.viewModel documentAtIndex:indexPath.item];
     }];    
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    DocumentModalTransitionAnimator *animator = [DocumentModalTransitionAnimator new];
+    animator.presenting = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    DocumentModalTransitionAnimator *animator = [DocumentModalTransitionAnimator new];
+    return animator;
 }
 
 #pragma mark -
@@ -204,6 +224,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (NSArray *)selectedIndexPaths { return nil; }
 - (void)openDocumentsAtURL:(NSURL *)URL {}
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {}
+- (id<DocumentCell>)selectedDocumentCell { return nil; }
+- (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document { return nil; }
 
 @end
 

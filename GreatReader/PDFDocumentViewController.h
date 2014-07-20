@@ -12,9 +12,11 @@
 
 @class PDFDocument;
 @class PDFRecentDocumentList;
+@class PDFPageViewController;
 
 @interface PDFDocumentViewController : UIViewController <PDFDocumentPageSliderDelegate>
 @property (nonatomic, strong) PDFDocument *document;
+@property (nonatomic, readonly) PDFPageViewController *currentPageViewController;
 
 - (IBAction)exitCrop:(UIStoryboardSegue *)segue;
 - (IBAction)exitBrightness:(UIStoryboardSegue *)segue;
