@@ -223,6 +223,9 @@
                                           glyphs,
                                           NULL,
                                           1);
+    CGFontRelease(cgFont);
+    CFRelease(ctFont);
+    free(glyphs);
     return w * 100;
 }
 

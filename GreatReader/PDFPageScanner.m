@@ -228,25 +228,26 @@ void ConcatMatrix(CGPDFScannerRef scanner, void *info)
 
 - (void)dealloc
 {
-    CGPDFScannerRelease(self.CGPDFScanner);
-    CGPDFPageRelease(self.CGPDFPage);    
+    CGPDFScannerRelease(_CGPDFScanner);
+    CGPDFPageRelease(_CGPDFPage);    
 }
 
 - (instancetype)initWithCGPDFPage:(CGPDFPageRef)CGPDFPage
 {
     self = [super init];
     if (self) {
-        self.stateStack = [NSMutableArray array];
+        _stateStack = [NSMutableArray array];
         [self startNewState];
         
         CGPDFContentStreamRef cs = CGPDFContentStreamCreateWithPage(CGPDFPage);
         CGPDFOperatorTableRef table = [self createPDFOperatorTable];
         CGPDFScannerRef scanner = CGPDFScannerCreate(cs, table, (void *)self);
-        self.CGPDFScanner = scanner;
-        self.CGPDFPage = CGPDFPageRetain(CGPDFPage);
+        _CGPDFScanner = scanner;
+        _CGPDFPage = CGPDFPageRetain(CGPDFPage);
 
         CGPDFContentStreamRelease(cs);
         CGPDFOperatorTableRelease(table);
+        
     }
     return self;
 }

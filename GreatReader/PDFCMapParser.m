@@ -21,7 +21,7 @@ typedef void (^PDFCMapParserHandler)(NSArray *lines);
 {
     self = [super init];
     if (self) {
-        NSData *data = (__bridge NSData *)CGPDFStreamCopyData(stream, nil);
+        NSData *data = (__bridge_transfer NSData *)CGPDFStreamCopyData(stream, nil);
         NSString *string = [[NSString alloc] initWithData:data
                                                  encoding:NSUTF8StringEncoding];
         self.lines = [string componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet];

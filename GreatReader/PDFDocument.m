@@ -224,13 +224,11 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 
     CGRect pageRect = page.rect;
     CGFloat ratio = pageRect.size.height / pageRect.size.width;
-    CGFloat x, y, w, h;
+    CGFloat w, h;
     if (pageRect.size.width > pageRect.size.height) {
         w = width; h = width * ratio;
-        x = 0; y = (width - h) / 2.0;
     } else {
         w = width / ratio; h = width;
-        x = (width - w) / 2.0; y = 0;
     }
     
     CGRect rect = CGRectMake(0, 0, w, h);

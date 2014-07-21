@@ -414,7 +414,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGa-Oe-iG3" customClass="UIToolbar">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="480" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YmW-Zf-FjA" customClass="PDFDocumentPageSlider">
@@ -438,7 +438,7 @@
                             <constraint firstAttribute="trailing" secondItem="rGa-Oe-iG3" secondAttribute="trailing" id="38U-5i-Vm4"/>
                             <constraint firstItem="rGa-Oe-iG3" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="59w-IA-zV5"/>
                             <constraint firstAttribute="trailing" secondItem="JhM-1f-b4p" secondAttribute="trailing" id="BEz-5n-Bp2"/>
-                            <constraint firstItem="bWV-8V-RzY" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="bottom" constant="-44" id="Rg6-eb-VYM"/>
+                            <constraint firstItem="bWV-8V-RzY" firstAttribute="top" secondItem="rGa-Oe-iG3" secondAttribute="bottom" id="Rg6-eb-VYM"/>
                             <constraint firstItem="JhM-1f-b4p" firstAttribute="top" secondItem="3" secondAttribute="top" id="TPt-8K-C0Z"/>
                             <constraint firstItem="JhM-1f-b4p" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="lX7-Xx-n8i"/>
                             <constraint firstAttribute="bottom" secondItem="JhM-1f-b4p" secondAttribute="bottom" id="pz4-Ya-6CP"/>
