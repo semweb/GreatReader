@@ -407,7 +407,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 (UINavigationController *)segue.destinationViewController;
         PDFDocumentCropViewController *vc =
                 (PDFDocumentCropViewController *)navi.topViewController;
-        vc.crop = self.document.crop;        
+        vc.crop = self.document.crop;
+        vc.document = self.document;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueBrightness]) {
         PDFDocumentBrightnessViewController *vc =
                 (PDFDocumentBrightnessViewController *)segue.destinationViewController;

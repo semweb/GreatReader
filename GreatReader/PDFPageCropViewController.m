@@ -64,7 +64,7 @@
     self.overlayView.frame = self.contentView.frame;
     if (self.first) {
         self.first = NO;
-        CGRect cropRect = [self.crop cropRectAtPage:self.crop.document.currentPage];
+        CGRect cropRect = [self.crop cropRectAtPage:self.page.index];
         self.overlayView.cropRect = cropRect;
     }
 }

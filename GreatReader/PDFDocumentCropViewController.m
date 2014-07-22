@@ -58,7 +58,7 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     });
     [self updateModeButton];
 
-    PDFPage *page = [self.crop.document pageAtIndex:self.crop.document.currentPage];
+    PDFPage *page = [self.document pageAtIndex:self.document.currentPage];
     self.pdfPageViewController =
             [[PDFPageCropViewController alloc] initWithPage:page];
     self.pdfPageViewController.crop = self.crop;    
@@ -173,7 +173,7 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 
 - (BOOL)isOddPage
 {
-    return self.crop.document.currentPage % 2 != 0;
+    return self.document.currentPage % 2 != 0;
 }
 
 #pragma mark -

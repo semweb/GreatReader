@@ -8,18 +8,15 @@
 
 #import "PDFDocumentCrop.h"
 
-#import "PDFDocument.h"
-
 @interface PDFDocumentCrop ()
 @end
 
 @implementation PDFDocumentCrop
 
-- (id)initWithPDFDocument:(PDFDocument *)document
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        _document = document;
         _oddCropRect = CGRectZero;
         _evenCropRect = CGRectZero;
         _mode = PDFDocumentCropModeSame;

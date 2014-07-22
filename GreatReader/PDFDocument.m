@@ -86,7 +86,6 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
         _bookmarkList.document = self;        
         _brightness = [decoder decodeFloatForKey:@"brightness"];
         _crop = [decoder decodeObjectForKey:@"crop"];
-        _crop.document = self;
     }
     return self;
 }
@@ -160,7 +159,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 - (PDFDocumentCrop *)crop
 {
     if (!_crop) {
-        _crop = [[PDFDocumentCrop alloc] initWithPDFDocument:self];
+        _crop = [[PDFDocumentCrop alloc] init];
     }
     return _crop;
 }

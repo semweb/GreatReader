@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class PDFDocument;
 @class PDFPage;
 
 typedef NS_ENUM(NSUInteger, PDFDocumentCropMode) {
@@ -18,8 +17,6 @@ typedef NS_ENUM(NSUInteger, PDFDocumentCropMode) {
 };
 
 @interface PDFDocumentCrop : NSObject
-- (id)initWithPDFDocument:(PDFDocument *)document;
-@property (nonatomic, assign) PDFDocument *document;
 @property (nonatomic, assign) CGRect oddCropRect;
 @property (nonatomic, assign) CGRect evenCropRect;
 @property (nonatomic, assign) PDFDocumentCropMode mode;
