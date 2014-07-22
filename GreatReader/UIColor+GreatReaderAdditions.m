@@ -12,18 +12,25 @@
 
 + (UIColor *)grt_defaultTintColor
 {
-    return [UIColor colorWithRed:25/255.0
-                           green:134/255.0
-                            blue:251/255.0
-                           alpha:1.0];
+    static dispatch_once_t onceToken;
+    static UIColor *tintColor = nil;
+    dispatch_once(&onceToken, ^{
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        tintColor = toolbar.tintColor;
+    });
+    return tintColor;
 }
 
 + (UIColor *)grt_defaultBlackTintColor
 {
-    return [UIColor colorWithRed:70/255.0
-                           green:170/255.0
-                            blue:220/255.0
-                           alpha:1.0];
+    static dispatch_once_t onceToken;
+    static UIColor *bTintColor = nil;
+    dispatch_once(&onceToken, ^{
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        toolbar.barStyle = UIBarStyleBlack;
+        bTintColor = toolbar.tintColor;
+    });
+    return bTintColor;    
 }
 
 @end

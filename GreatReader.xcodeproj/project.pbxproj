@@ -205,6 +205,10 @@
 		19DB6A5518825AB50023B118 /* PDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A5418825AB50023B118 /* PDFPage.m */; };
 		19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A581882618B0023B118 /* PDFPageContentView.m */; };
 		19DB6A5D188262790023B118 /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A5C188262790023B118 /* PDFPageViewController.m */; };
+		19E525BA197EA88F005D0304 /* NSArray+GreatReaderAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E525B9197EA88F005D0304 /* NSArray+GreatReaderAdditionsTests.m */; };
+		19E525BC197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E525BB197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m */; };
+		19E525BE197EB050005D0304 /* NSString+GreatReaderAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E525BD197EB050005D0304 /* NSString+GreatReaderAdditionsTests.m */; };
+		19E525C0197EB16F005D0304 /* UIColor+GreatReaderAdditionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E525BF197EB16F005D0304 /* UIColor+GreatReaderAdditionsTests.m */; };
 		19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
 		19F6FD9A18EE2DC7001E05D5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1997502818D08C73008D514B /* CoreText.framework */; };
 		19F6FDA918F0000E001E05D5 /* History@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F6FDA718F0000E001E05D5 /* History@2x.png */; };
@@ -432,6 +436,10 @@
 		19DB6A581882618B0023B118 /* PDFPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageContentView.m; sourceTree = "<group>"; };
 		19DB6A5B188262790023B118 /* PDFPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageViewController.h; sourceTree = "<group>"; };
 		19DB6A5C188262790023B118 /* PDFPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageViewController.m; sourceTree = "<group>"; };
+		19E525B9197EA88F005D0304 /* NSArray+GreatReaderAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GreatReaderAdditionsTests.m"; sourceTree = "<group>"; };
+		19E525BB197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+GreatReaderAdditionsTests.m"; sourceTree = "<group>"; };
+		19E525BD197EB050005D0304 /* NSString+GreatReaderAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+GreatReaderAdditionsTests.m"; sourceTree = "<group>"; };
+		19E525BF197EB16F005D0304 /* UIColor+GreatReaderAdditionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GreatReaderAdditionsTests.m"; sourceTree = "<group>"; };
 		19F6FDA818F0000E001E05D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/History@2x.png"; sourceTree = "<group>"; };
 		19F6FDAA18F25F01001E05D5 /* PDFDocumentOutlineContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutlineContainerViewController.h; sourceTree = "<group>"; };
 		19F6FDAB18F25F01001E05D5 /* PDFDocumentOutlineContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentOutlineContainerViewController.m; sourceTree = "<group>"; };
@@ -813,6 +821,17 @@
 			name = "NOT USED";
 			sourceTree = "<group>";
 		};
+		19E525B8197EA861005D0304 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				19E525B9197EA88F005D0304 /* NSArray+GreatReaderAdditionsTests.m */,
+				19E525BB197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m */,
+				19E525BD197EB050005D0304 /* NSString+GreatReaderAdditionsTests.m */,
+				19E525BF197EB16F005D0304 /* UIColor+GreatReaderAdditionsTests.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		19F7BA58186052E2009E8916 = {
 			isa = PBXGroup;
 			children = (
@@ -882,6 +901,7 @@
 		19F7BA91186052E2009E8916 /* GreatReaderTests */ = {
 			isa = PBXGroup;
 			children = (
+				19E525B8197EA861005D0304 /* Category */,
 				1994B072194F255C0021B08C /* Test.pdf */,
 				191B7D6D196CBC7B004B35CA /* Sample.pdf */,
 				191B7D70196D4B72004B35CA /* PDFDocumentSearchTests1.pdf */,
@@ -1247,6 +1267,7 @@
 				1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */,
 				1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */,
 				191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
+				19E525BE197EB050005D0304 /* NSString+GreatReaderAdditionsTests.m in Sources */,
 				1994B078194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
 				1994AFF4194CA1780021B08C /* NSArray+GreatReaderAdditions.m in Sources */,
 				190FFBD51970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */,
@@ -1255,11 +1276,13 @@
 				1994AFF6194CA1780021B08C /* PDFDocument.m in Sources */,
 				1994AFF8194CA1780021B08C /* PDFPageLoopeView.m in Sources */,
 				190FFBC6196E0C88004BEA59 /* PDFDocumentSearchViewModelTests.m in Sources */,
+				19E525BC197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m in Sources */,
 				1994AFFA194CA1780021B08C /* PDFDocumentBookmarkList.m in Sources */,
 				1994AFFC194CA1780021B08C /* PDFDocumentBookmarkListViewController.m in Sources */,
 				191B7D241967AD27004B35CA /* PDFPageTests.m in Sources */,
 				1994AFFE194CA1780021B08C /* PDFDocumentCrop.m in Sources */,
 				1994B000194CA1780021B08C /* PDFDocumentCropOverlayView.m in Sources */,
+				19E525C0197EB16F005D0304 /* UIColor+GreatReaderAdditionsTests.m in Sources */,
 				1994B002194CA1780021B08C /* PDFDocumentCropViewController.m in Sources */,
 				190FFBC0196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */,
 				1994B004194CA1780021B08C /* PDFDocumentInfo.m in Sources */,
@@ -1299,6 +1322,7 @@
 				1994B038194CA1780021B08C /* PDFUtils.m in Sources */,
 				1994B03A194CA1780021B08C /* PDFCMap.m in Sources */,
 				1994B03C194CA1780021B08C /* PDFCMapParser.m in Sources */,
+				19E525BA197EA88F005D0304 /* NSArray+GreatReaderAdditionsTests.m in Sources */,
 				1994B03E194CA1780021B08C /* PDFRenderingCharacter.m in Sources */,
 				1994B040194CA1780021B08C /* PDFFontDescriptor.m in Sources */,
 				1994B042194CA1780021B08C /* PDFTextState.m in Sources */,

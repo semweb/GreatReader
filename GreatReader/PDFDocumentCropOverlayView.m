@@ -49,8 +49,6 @@
     CGRect r = CGRectMake(roundf(rect.size.width - drawWidth) / 2.0,
                           roundf(rect.size.height - drawWidth) / 2.0,
                           drawWidth, drawWidth);
-    // [[UIColor grt_defaultTintColor] set];
-    // [[UIBezierPath bezierPathWithOvalInRect:r] fill];
     [[UIColor redColor] set];    
     [[UIBezierPath bezierPathWithOvalInRect:r] fill];    
 }

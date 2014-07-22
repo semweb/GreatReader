@@ -62,8 +62,10 @@ NSString * const kPrivateDocuments = @"PrivateDocuments";
     NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
     NSString *extension = [path pathExtension];
     while ([self fileExistsAtPath:path]) {
-        path = [[dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%d", name, inc++]]
-                                 stringByAppendingPathExtension:extension];
+        path = [dirPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%d", name, inc++]];
+        if (extension.length > 0) {
+            path = [path stringByAppendingPathComponent:extension];
+        }
     }
     return [NSURL fileURLWithPath:path];
 }
