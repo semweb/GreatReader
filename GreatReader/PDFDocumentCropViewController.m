@@ -137,6 +137,11 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
     return self.fullScreen;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark -
 
 - (void)toggleFullScreen
