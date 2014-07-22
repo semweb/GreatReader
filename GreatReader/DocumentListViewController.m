@@ -237,5 +237,10 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     return self.visibleViewController;
 }
 
+- (UIViewController *)childViewControllerForStatusBarHidden
+{
+    return self.visibleViewController;
+}
+
 @end
 
