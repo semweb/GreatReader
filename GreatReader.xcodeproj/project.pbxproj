@@ -568,7 +568,7 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		19ABA73418D910D600E123AB /* UI */ = {
+		19ABA73418D910D600E123AB /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
 				19090475191398D60014CC95 /* GRTModalTransitionAnimator.h */,
@@ -576,7 +576,7 @@
 				19ABA73518DC705800E123AB /* GRTNavigationController.h */,
 				19ABA73618DC705800E123AB /* GRTNavigationController.m */,
 			);
-			name = UI;
+			name = "Custom UI";
 			sourceTree = "<group>";
 		};
 		19D99DC71884F324006FDA6F /* Category */ = {
@@ -622,10 +622,10 @@
 				19E525B5197E1DA2005D0304 /* History */,
 				19E525B4197E1D79005D0304 /* Home */,
 				19E525B0197E1D1C005D0304 /* Outline/Bookmark */,
-				19E525AE197E1CFE005D0304 /* PDFCore */,
+				19E525AE197E1CFE005D0304 /* Parser */,
 				190FFBBC196D7F64004BEA59 /* Search */,
 				19E525B2197E1D46005D0304 /* Startup */,
-				19ABA73418D910D600E123AB /* UI */,
+				19ABA73418D910D600E123AB /* Custom UI */,
 				19E525B3197E1D63005D0304 /* Utility */,
 			);
 			name = Classes;
@@ -668,25 +668,19 @@
 			name = File/Folder;
 			sourceTree = "<group>";
 		};
-		19E525AE197E1CFE005D0304 /* PDFCore */ = {
+		19E525AE197E1CFE005D0304 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
 				1997501818CAC3E7008D514B /* PDFCMap.h */,
 				1997501918CAC3E7008D514B /* PDFCMap.m */,
 				1997501B18CACB9B008D514B /* PDFCMapParser.h */,
 				1997501C18CACB9B008D514B /* PDFCMapParser.m */,
-				1943EB55187FA59E00F0B61D /* PDFDocument.h */,
-				1943EB56187FA59E00F0B61D /* PDFDocument.m */,
-				194112361936B0A3008AD461 /* PDFDocumentStore.h */,
-				194112371936B0A3008AD461 /* PDFDocumentStore.m */,
 				19D12BCD18C741A4001C2066 /* PDFFont.h */,
 				19D12BCE18C741A4001C2066 /* PDFFont.m */,
 				19D12BCA18C74192001C2066 /* PDFFontCollection.h */,
 				19D12BCB18C74192001C2066 /* PDFFontCollection.m */,
 				1997502118CE904C008D514B /* PDFFontDescriptor.h */,
 				1997502218CE904C008D514B /* PDFFontDescriptor.m */,
-				19DB6A5318825AB50023B118 /* PDFPage.h */,
-				19DB6A5418825AB50023B118 /* PDFPage.m */,
 				19D12BBF18C2F06B001C2066 /* PDFPageScanner.h */,
 				19D12BC018C2F06B001C2066 /* PDFPageScanner.m */,
 				1997501E18CDE3F8008D514B /* PDFRenderingCharacter.h */,
@@ -698,12 +692,18 @@
 				1997501518C8B9C9008D514B /* PDFUtils.h */,
 				1997501618C8B9C9008D514B /* PDFUtils.m */,
 			);
-			name = PDFCore;
+			name = Parser;
 			sourceTree = "<group>";
 		};
 		19E525AF197E1D09005D0304 /* Document/Page */ = {
 			isa = PBXGroup;
 			children = (
+				1943EB55187FA59E00F0B61D /* PDFDocument.h */,
+				1943EB56187FA59E00F0B61D /* PDFDocument.m */,
+				194112361936B0A3008AD461 /* PDFDocumentStore.h */,
+				194112371936B0A3008AD461 /* PDFDocumentStore.m */,
+				19DB6A5318825AB50023B118 /* PDFPage.h */,
+				19DB6A5418825AB50023B118 /* PDFPage.m */,
 				190FFBCE196F9D22004BEA59 /* PDFDocumentBackForwardList.h */,
 				190FFBCF196F9D22004BEA59 /* PDFDocumentBackForwardList.m */,
 				19ABA5C518D6A90E00E123AB /* PDFDocumentBrightnessViewController.h */,
