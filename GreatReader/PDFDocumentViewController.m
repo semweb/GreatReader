@@ -29,8 +29,6 @@
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
 #import "PDFRecentDocumentList.h"
-#import "PDFRecentDocumentListViewModel.h"
-#import "PDFRecentDocumentListViewController.h"
 #import "RecentDocumentListViewController.h"
 #import "RecentDocumentListViewModel.h"
 
@@ -537,8 +535,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     if ([viewController isKindOfClass:PDFDocumentBrightnessViewController.class]) {
         return 108;
-    } else if ([viewController isKindOfClass:PDFRecentDocumentListViewController.class]) {
-        return 180;
     } else {
         return 0;
     }

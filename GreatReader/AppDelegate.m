@@ -20,7 +20,6 @@
 #import "PDFDocumentStore.h"
 #import "PDFDocumentViewController.h"
 #import "PDFRecentDocumentList.h"
-#import "PDFRecentDocumentListViewController.h"
 #import "RecentDocumentListViewModel.h"
 #import "RootFolder.h"
 

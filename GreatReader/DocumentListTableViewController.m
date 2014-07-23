@@ -12,7 +12,6 @@
 #import "DocumentListViewModel.h"
 #import "DocumentTableViewCell.h"
 #import "NSArray+GreatReaderAdditions.h"
-#import "PDFRecentDocumentCell.h"
 #import "PDFDocument.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"

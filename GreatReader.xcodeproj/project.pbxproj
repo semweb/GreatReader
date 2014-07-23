@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19090471191329B10014CC95 /* PDFRecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090470191329B10014CC95 /* PDFRecentDocumentListViewModel.m */; };
 		19090477191398D60014CC95 /* GRTModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */; };
 		190FFBBF196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBBE196D7F81004BEA59 /* PDFDocumentSearchViewController.m */; };
 		190FFBC0196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBBE196D7F81004BEA59 /* PDFDocumentSearchViewController.m */; };
@@ -97,10 +96,7 @@
 		1994B024194CA1780021B08C /* PDFPageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E10188E77E3006FDA6F /* PDFPageCropViewController.m */; };
 		1994B026194CA1780021B08C /* PDFPageScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC018C2F06B001C2066 /* PDFPageScanner.m */; };
 		1994B028194CA1780021B08C /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19DB6A5C188262790023B118 /* PDFPageViewController.m */; };
-		1994B02A194CA1780021B08C /* PDFRecentDocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */; };
 		1994B02C194CA1780021B08C /* PDFRecentDocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */; };
-		1994B02E194CA1780021B08C /* PDFRecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */; };
-		1994B030194CA1780021B08C /* PDFRecentDocumentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090470191329B10014CC95 /* PDFRecentDocumentListViewModel.m */; };
 		1994B032194CA1780021B08C /* PDFText.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC318C318C5001C2066 /* PDFText.m */; };
 		1994B034194CA1780021B08C /* PDFFontCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCB18C74192001C2066 /* PDFFontCollection.m */; };
 		1994B036194CA1780021B08C /* PDFFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BCE18C741A4001C2066 /* PDFFont.m */; };
@@ -163,8 +159,6 @@
 		19ABA5C718D6A90E00E123AB /* PDFDocumentBrightnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA5C618D6A90E00E123AB /* PDFDocumentBrightnessViewController.m */; };
 		19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA73618DC705800E123AB /* GRTNavigationController.m */; };
 		19BB31D718A344870091F6AB /* PDFRecentDocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */; };
-		19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */; };
-		19BB31DD18A495C90091F6AB /* PDFRecentDocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */; };
 		19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31E218A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m */; };
 		19C9615618FB5A3B00D1857C /* PDFDocumentPageSliderItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615518FB5A3B00D1857C /* PDFDocumentPageSliderItemView.m */; };
 		19C9615918FB5A4E00D1857C /* PDFDocumentPageSliderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615818FB5A4E00D1857C /* PDFDocumentPageSliderItem.m */; };
@@ -187,8 +181,6 @@
 		19D8708518BA2EB700FA2B66 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D8708318BA2EB700FA2B66 /* Icon-60@2x.png */; };
 		19D8708E18BABF0500FA2B66 /* PDFDocumentBookmarkList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8708D18BABF0500FA2B66 /* PDFDocumentBookmarkList.m */; };
 		19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8709318BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m */; };
-		19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */; };
-		19D870A318BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */; };
 		19D870A618C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */; };
 		19D99DB71882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */; };
 		19D99DBA18827192006FDA6F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D99DB918827192006FDA6F /* QuartzCore.framework */; };
@@ -247,8 +239,6 @@
 
 /* Begin PBXFileReference section */
 		1203664657EB4C89B3EAC3F1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		1909046F191329B10014CC95 /* PDFRecentDocumentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentListViewModel.h; sourceTree = "<group>"; };
-		19090470191329B10014CC95 /* PDFRecentDocumentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentListViewModel.m; sourceTree = "<group>"; };
 		19090475191398D60014CC95 /* GRTModalTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModalTransitionAnimator.h; sourceTree = "<group>"; };
 		19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModalTransitionAnimator.m; sourceTree = "<group>"; };
 		190FFBBD196D7F81004BEA59 /* PDFDocumentSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchViewController.h; sourceTree = "<group>"; };
@@ -365,10 +355,6 @@
 		19ABA73618DC705800E123AB /* GRTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTNavigationController.m; sourceTree = "<group>"; };
 		19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentList.h; sourceTree = "<group>"; };
 		19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentList.m; sourceTree = "<group>"; };
-		19BB31D818A494CB0091F6AB /* PDFRecentDocumentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentListViewController.h; sourceTree = "<group>"; };
-		19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentListViewController.m; sourceTree = "<group>"; };
-		19BB31DB18A495C90091F6AB /* PDFRecentDocumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentCell.h; sourceTree = "<group>"; };
-		19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentCell.m; sourceTree = "<group>"; };
 		19BB31E118A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+GreatReaderAdditions.h"; sourceTree = "<group>"; };
 		19BB31E218A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+GreatReaderAdditions.m"; sourceTree = "<group>"; };
 		19C9615418FB5A3B00D1857C /* PDFDocumentPageSliderItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentPageSliderItemView.h; sourceTree = "<group>"; };
@@ -406,8 +392,6 @@
 		19D8708D18BABF0500FA2B66 /* PDFDocumentBookmarkList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBookmarkList.m; sourceTree = "<group>"; };
 		19D8709218BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentBookmarkListViewController.h; sourceTree = "<group>"; };
 		19D8709318BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBookmarkListViewController.m; sourceTree = "<group>"; };
-		19D8709F18BEF12F00FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFRecentDocumentCell_iPad.xib; sourceTree = "<group>"; };
-		19D870A218BEF14900FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFRecentDocumentCell_iPhone.xib; sourceTree = "<group>"; };
 		19D870A518C0D59200FA2B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PDFDocumentOutlineItemCell.xib; sourceTree = "<group>"; };
 		19D99DB51882713A006FDA6F /* PDFPageContentTiledLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageContentTiledLayer.h; sourceTree = "<group>"; };
 		19D99DB61882713A006FDA6F /* PDFPageContentTiledLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageContentTiledLayer.m; sourceTree = "<group>"; };
@@ -698,6 +682,8 @@
 		19E525AF197E1D09005D0304 /* Document/Page */ = {
 			isa = PBXGroup;
 			children = (
+				19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */,
+				19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */,
 				1943EB55187FA59E00F0B61D /* PDFDocument.h */,
 				1943EB56187FA59E00F0B61D /* PDFDocument.m */,
 				194112361936B0A3008AD461 /* PDFDocumentStore.h */,
@@ -842,23 +828,6 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		19E525B7197E1E35005D0304 /* NOT USED */ = {
-			isa = PBXGroup;
-			children = (
-				19BB31DB18A495C90091F6AB /* PDFRecentDocumentCell.h */,
-				19BB31DC18A495C90091F6AB /* PDFRecentDocumentCell.m */,
-				19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */,
-				19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */,
-				19BB31D818A494CB0091F6AB /* PDFRecentDocumentListViewController.h */,
-				19BB31D918A494CB0091F6AB /* PDFRecentDocumentListViewController.m */,
-				1909046F191329B10014CC95 /* PDFRecentDocumentListViewModel.h */,
-				19090470191329B10014CC95 /* PDFRecentDocumentListViewModel.m */,
-				19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */,
-				19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */,
-			);
-			name = "NOT USED";
-			sourceTree = "<group>";
-		};
 		19E525B8197EA861005D0304 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,7 +880,6 @@
 		19F7BA6A186052E2009E8916 /* GreatReader */ = {
 			isa = PBXGroup;
 			children = (
-				19E525B7197E1E35005D0304 /* NOT USED */,
 				19E525B6197E1DFF005D0304 /* Storyboards */,
 				19430E4A18E7B33E00BB4238 /* Libraries */,
 				19D99DEA188A7E76006FDA6F /* Images */,
@@ -1066,11 +1034,9 @@
 				191B7D56196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
 				19C9616A1905E6E400D1857C /* CropBoth@2x.png in Resources */,
 				19C9616B1905E6E400D1857C /* CropEven@2x.png in Resources */,
-				19D870A018BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib in Resources */,
 				199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */,
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
 				19D99E02188A7EB7006FDA6F /* Folder@2x.png in Resources */,
-				19D870A318BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib in Resources */,
 				19ABA5BE18D66FF700E123AB /* Setting@2x.png in Resources */,
 				19ABA5BD18D66FF700E123AB /* Outline@2x.png in Resources */,
 				19D8708218BA2DB600FA2B66 /* Images.xcassets in Resources */,
@@ -1238,7 +1204,6 @@
 				195B728F18EB870A000C5A8B /* GRTArrayController.m in Sources */,
 				19D99DCA1884F33E006FDA6F /* NSArray+GreatReaderAdditions.m in Sources */,
 				19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */,
-				19090471191329B10014CC95 /* PDFRecentDocumentListViewModel.m in Sources */,
 				19C9615918FB5A4E00D1857C /* PDFDocumentPageSliderItem.m in Sources */,
 				199AB73A192E350500C697BB /* DocumentListViewController.m in Sources */,
 				191B7D3619684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
@@ -1272,14 +1237,12 @@
 				19D99DB71882713A006FDA6F /* PDFPageContentTiledLayer.m in Sources */,
 				1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */,
 				19C9615618FB5A3B00D1857C /* PDFDocumentPageSliderItemView.m in Sources */,
-				19BB31DA18A494CB0091F6AB /* PDFRecentDocumentListViewController.m in Sources */,
 				191B7D3A19684F44004B35CA /* DocumentTableViewCell.m in Sources */,
 				195B728C18EA352E000C5A8B /* Device.m in Sources */,
 				199ABC24197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */,
 				19D99DC11884ECF8006FDA6F /* PDFDocumentOutline.m in Sources */,
 				191B7D62196AE292004B35CA /* PDFDocumentSearchResult.m in Sources */,
 				19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */,
-				19BB31DD18A495C90091F6AB /* PDFRecentDocumentCell.m in Sources */,
 				19ABA5C718D6A90E00E123AB /* PDFDocumentBrightnessViewController.m in Sources */,
 				194112381936B0A3008AD461 /* PDFDocumentStore.m in Sources */,
 				19DB6A5D188262790023B118 /* PDFPageViewController.m in Sources */,
@@ -1347,11 +1310,8 @@
 				1994B026194CA1780021B08C /* PDFPageScanner.m in Sources */,
 				191B7D5F196AE286004B35CA /* PDFDocumentSearchItem.m in Sources */,
 				1994B028194CA1780021B08C /* PDFPageViewController.m in Sources */,
-				1994B02A194CA1780021B08C /* PDFRecentDocumentCell.m in Sources */,
 				191B7D5B196AE278004B35CA /* PDFDocumentSearch.m in Sources */,
 				1994B02C194CA1780021B08C /* PDFRecentDocumentList.m in Sources */,
-				1994B02E194CA1780021B08C /* PDFRecentDocumentListViewController.m in Sources */,
-				1994B030194CA1780021B08C /* PDFRecentDocumentListViewModel.m in Sources */,
 				193ED264197F347F00A5DC0D /* PDFDocumentInfoTests.m in Sources */,
 				1994B032194CA1780021B08C /* PDFText.m in Sources */,
 				1994B034194CA1780021B08C /* PDFFontCollection.m in Sources */,
@@ -1642,22 +1602,6 @@
 				19D8708418BA2EB700FA2B66 /* en */,
 			);
 			name = "Icon-60@2x.png";
-			sourceTree = "<group>";
-		};
-		19D8709E18BEF12F00FA2B66 /* PDFRecentDocumentCell_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				19D8709F18BEF12F00FA2B66 /* en */,
-			);
-			name = PDFRecentDocumentCell_iPad.xib;
-			sourceTree = "<group>";
-		};
-		19D870A118BEF14900FA2B66 /* PDFRecentDocumentCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				19D870A218BEF14900FA2B66 /* en */,
-			);
-			name = PDFRecentDocumentCell_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		19D870A418C0D59200FA2B66 /* PDFDocumentOutlineItemCell.xib */ = {
