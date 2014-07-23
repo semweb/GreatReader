@@ -85,7 +85,6 @@
 		1994B00E194CA1780021B08C /* PDFDocumentOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99E04188CDC60006FDA6F /* PDFDocumentOutlineViewController.m */; };
 		1994B010194CA1780021B08C /* PDFDocumentOutlineContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F6FDAB18F25F01001E05D5 /* PDFDocumentOutlineContainerViewController.m */; };
 		1994B012194CA1780021B08C /* PDFDocumentPageSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */; };
-		1994B014194CA1780021B08C /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
 		1994B017194CA1780021B08C /* PDFDocumentPageSliderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615818FB5A4E00D1857C /* PDFDocumentPageSliderItem.m */; };
 		1994B018194CA1780021B08C /* PDFDocumentPageSliderItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615518FB5A3B00D1857C /* PDFDocumentPageSliderItemView.m */; };
 		1994B01A194CA1780021B08C /* PDFDocumentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 194112371936B0A3008AD461 /* PDFDocumentStore.m */; };
@@ -175,7 +174,6 @@
 		19C9616B1905E6E400D1857C /* CropEven@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C961681905E6E400D1857C /* CropEven@2x.png */; };
 		19C9616E19069E2D00D1857C /* CropNone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C9616C19069E2D00D1857C /* CropNone@2x.png */; };
 		19CA78A418AF12E600200362 /* PDFDocumentPageSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */; };
-		19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */; };
 		19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */; };
 		19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CA78AC18B1C41300200362 /* PDFDocumentInfo.m */; };
 		19D12BC418C318C5001C2066 /* PDFText.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D12BC318C318C5001C2066 /* PDFText.m */; };
@@ -382,8 +380,6 @@
 		19C9616D19069E2D00D1857C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/CropNone@2x.png"; sourceTree = "<group>"; };
 		19CA78A218AF12E600200362 /* PDFDocumentPageSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentPageSlider.h; sourceTree = "<group>"; };
 		19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentPageSlider.m; sourceTree = "<group>"; };
-		19CA78A518AF132F00200362 /* PDFDocumentPageSliderDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentPageSliderDataSource.h; sourceTree = "<group>"; };
-		19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentPageSliderDataSource.m; sourceTree = "<group>"; };
 		19CA78A818B1C40400200362 /* PDFDocumentInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentInfoView.h; sourceTree = "<group>"; };
 		19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfoView.m; sourceTree = "<group>"; };
 		19CA78AB18B1C41300200362 /* PDFDocumentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentInfo.h; sourceTree = "<group>"; };
@@ -712,8 +708,6 @@
 				19CA78A918B1C40400200362 /* PDFDocumentInfoView.m */,
 				19CA78A218AF12E600200362 /* PDFDocumentPageSlider.h */,
 				19CA78A318AF12E600200362 /* PDFDocumentPageSlider.m */,
-				19CA78A518AF132F00200362 /* PDFDocumentPageSliderDataSource.h */,
-				19CA78A618AF132F00200362 /* PDFDocumentPageSliderDataSource.m */,
 				19C9615718FB5A4E00D1857C /* PDFDocumentPageSliderItem.h */,
 				19C9615818FB5A4E00D1857C /* PDFDocumentPageSliderItem.m */,
 				19C9615418FB5A3B00D1857C /* PDFDocumentPageSliderItemView.h */,
@@ -1261,7 +1255,6 @@
 				1941123B1936EA24008AD461 /* RootFolder.m in Sources */,
 				19D99E11188E77E3006FDA6F /* PDFPageCropViewController.m in Sources */,
 				190FFBD41970A1D1004BEA59 /* PDFDocumentPageSliderModel.m in Sources */,
-				19CA78A718AF132F00200362 /* PDFDocumentPageSliderDataSource.m in Sources */,
 				19430E5118E80A6F00BB4238 /* LibraryUtils.m in Sources */,
 				19D99E14188FDF79006FDA6F /* PDFDocumentCropOverlayView.m in Sources */,
 				19C9615C18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m in Sources */,
@@ -1331,7 +1324,6 @@
 				1994B00E194CA1780021B08C /* PDFDocumentOutlineViewController.m in Sources */,
 				1994B010194CA1780021B08C /* PDFDocumentOutlineContainerViewController.m in Sources */,
 				1994B012194CA1780021B08C /* PDFDocumentPageSlider.m in Sources */,
-				1994B014194CA1780021B08C /* PDFDocumentPageSliderDataSource.m in Sources */,
 				199ABC25197A488600FAC2C1 /* DocumentModalTransitionAnimator.m in Sources */,
 				1994B017194CA1780021B08C /* PDFDocumentPageSliderItem.m in Sources */,
 				191B7D3719684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
