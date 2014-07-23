@@ -19,7 +19,6 @@
 {
     self = [super init];
     if (self) {
-        // self.needsDisplayOnBoundsChange = YES;
         self.levelsOfDetail = 16;
         self.levelsOfDetailBias = 16 - 1;
         self.tileSize = CGSizeMake(4096, 4096);

@@ -58,11 +58,6 @@
     self.selectionView.hidden = !selected;
 }
 
-- (void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];

@@ -21,15 +21,6 @@ NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSeg
 @implementation PDFDocumentBookmarkListViewController
 @synthesize bookmarkList = bookmarkList_;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,12 +31,6 @@ NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSeg
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     }    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

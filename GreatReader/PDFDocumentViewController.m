@@ -209,15 +209,9 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     page.crop = self.document.crop;    
     PDFPageViewController *vc =
             [[PDFPageViewController alloc] initWithPage:page];
-    UITapGestureRecognizer *doubleRecognizer =
-            [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                    action:@selector(doubleTapped:)];
-    doubleRecognizer.numberOfTapsRequired = 2;
-    [vc.view addGestureRecognizer:doubleRecognizer];
     UITapGestureRecognizer *singleRecognizer =
             [[UITapGestureRecognizer alloc] initWithTarget:self
                                                     action:@selector(singleTapped:)];
-    [singleRecognizer requireGestureRecognizerToFail:doubleRecognizer];
     [vc.view addGestureRecognizer:singleRecognizer];
 
     return vc;
@@ -351,11 +345,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     self.fullScreen = !self.fullScreen;
 }
 
-- (void)doubleTapped:(id)sender
-{
-
-}
-
 #pragma mark -
 
 - (BOOL)prefersStatusBarHidden
@@ -377,8 +366,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)showSetting:(id)sender
 {
-    // [self performSegueWithIdentifier:PDFDocumentViewControllerSegueCrop
-    //                           sender:sender];
 }
 
 - (void)showOutline:(id)sender

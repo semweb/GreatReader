@@ -66,7 +66,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 
     self.contentView = [[PDFPageContentView alloc] initWithFrame:self.frameThatFits];
     self.contentView.delegate = self;
@@ -151,12 +150,6 @@
     });
 
     return frame;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillLayoutSubviews

@@ -25,14 +25,6 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 
 @implementation PDFDocumentOutlineViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,12 +46,6 @@ NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItem
 {
     [super viewDidAppear:animated];
     [self scrollToCurrentPage];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Scroll to currentPage

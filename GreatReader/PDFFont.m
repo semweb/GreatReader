@@ -292,16 +292,6 @@
     return [self.descendantFonts lastObject];
 }
 
-// - (PDFFontDescriptor *)fontDescriptorWithFontDictionary:(CGPDFDictionaryRef)fontDictionary
-// {
-//     CGPDFArrayRef descendantFonts = PDFDictionaryGetArray(fontDictionary, "DescendantFonts");
-//     CGPDFDictionaryRef descendantFont = PDFArrayGetDictionary(descendantFonts, 0);
-//     CGPDFDictionaryRef dic = PDFDictionaryGetDictionary(descendantFont, "FontDescriptor");
-//     PDFFontDescriptor *fontDescriptor =
-//             [[PDFFontDescriptor alloc] initWithFontDescriptorDictionary:dic];
-//     return fontDescriptor;
-// }
-
 - (NSString *)stringWithPDFString:(CGPDFStringRef)pdfString
 {
     size_t length = CGPDFStringGetLength(pdfString);

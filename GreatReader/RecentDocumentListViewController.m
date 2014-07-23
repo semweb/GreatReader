@@ -23,15 +23,6 @@ NSString * const RecentDocumentListViewControllerSegueExit = @"RecentDocumentLis
 
 @implementation RecentDocumentListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,12 +36,6 @@ NSString * const RecentDocumentListViewControllerSegueExit = @"RecentDocumentLis
                                                                               target:self
                                                                               action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = doneItem;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -

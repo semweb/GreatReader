@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class GRTArrayController;
 @class PDFDocument;
 @class PDFDocumentStore;
 

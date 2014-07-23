@@ -40,8 +40,6 @@
                      : CGRectMake(80, 74, 40, 14);
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
@@ -78,10 +76,6 @@
     
     [[UIColor colorWithWhite:128/255.0 alpha:1.0] set];
     UIRectFill(rect);
-    // [self.image drawInRect:CGRectMake(0,
-    //                                   - CGRectGetHeight([[self class] arrowRect]) / 2.0,
-    //                                   CGRectGetWidth(rect),
-    //                                   CGRectGetHeight(rect))];
     [self.image drawInRect:CGRectMake(-CGRectGetWidth(rect) / 2.0,
                                       -CGRectGetHeight(rect) / 2.0 - CGRectGetHeight([[self class] arrowRect]) / 2.0,
                                       CGRectGetWidth(rect) * 2.0,

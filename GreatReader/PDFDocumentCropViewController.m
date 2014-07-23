@@ -26,15 +26,6 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 
 @implementation PDFDocumentCropViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -115,12 +106,6 @@ NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewC
 
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.modeButton];
     self.navigationItem.leftBarButtonItem = item;    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -
