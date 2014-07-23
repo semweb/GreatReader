@@ -54,6 +54,8 @@
 		191B7D7A196D4B72004B35CA /* PDFDocumentSearchTests3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D74196D4B72004B35CA /* PDFDocumentSearchTests3.pdf */; };
 		191B7D7B196D4B72004B35CA /* PDFDocumentSearchTests4.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 191B7D76196D4B72004B35CA /* PDFDocumentSearchTests4.pdf */; };
 		193ED260197F313300A5DC0D /* PDFDocumentCropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193ED25F197F313300A5DC0D /* PDFDocumentCropTests.m */; };
+		193ED264197F347F00A5DC0D /* PDFDocumentInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193ED263197F347F00A5DC0D /* PDFDocumentInfoTests.m */; };
+		193ED267197FBF5A00A5DC0D /* OutlineTests.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 193ED265197FBF5A00A5DC0D /* OutlineTests.pdf */; };
 		194112381936B0A3008AD461 /* PDFDocumentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 194112371936B0A3008AD461 /* PDFDocumentStore.m */; };
 		1941123B1936EA24008AD461 /* RootFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1941123A1936EA24008AD461 /* RootFolder.m */; };
 		19430E4E18E7B3ED00BB4238 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19430E4D18E7B3ED00BB4238 /* Crashlytics.framework */; };
@@ -293,6 +295,8 @@
 		191B7D75196D4B72004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/PDFDocumentSearchTests3.pdf; sourceTree = "<group>"; };
 		191B7D77196D4B72004B35CA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/PDFDocumentSearchTests4.pdf; sourceTree = "<group>"; };
 		193ED25F197F313300A5DC0D /* PDFDocumentCropTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentCropTests.m; sourceTree = "<group>"; };
+		193ED263197F347F00A5DC0D /* PDFDocumentInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentInfoTests.m; sourceTree = "<group>"; };
+		193ED266197FBF5A00A5DC0D /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/OutlineTests.pdf; sourceTree = "<group>"; };
 		194112361936B0A3008AD461 /* PDFDocumentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentStore.h; sourceTree = "<group>"; };
 		194112371936B0A3008AD461 /* PDFDocumentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentStore.m; sourceTree = "<group>"; };
 		194112391936EA24008AD461 /* RootFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootFolder.h; sourceTree = "<group>"; };
@@ -528,6 +532,30 @@
 				193ED25F197F313300A5DC0D /* PDFDocumentCropTests.m */,
 			);
 			name = Crop;
+			sourceTree = "<group>";
+		};
+		193ED261197F33B500A5DC0D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				193ED265197FBF5A00A5DC0D /* OutlineTests.pdf */,
+				1994B072194F255C0021B08C /* Test.pdf */,
+				191B7D6D196CBC7B004B35CA /* Sample.pdf */,
+				191B7D70196D4B72004B35CA /* PDFDocumentSearchTests1.pdf */,
+				191B7D72196D4B72004B35CA /* PDFDocumentSearchTests2.pdf */,
+				191B7D74196D4B72004B35CA /* PDFDocumentSearchTests3.pdf */,
+				191B7D76196D4B72004B35CA /* PDFDocumentSearchTests4.pdf */,
+				190FFBCB196E97A6004BEA59 /* PDFDocumentSearchTests5.pdf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		193ED262197F33D000A5DC0D /* Document/Page */ = {
+			isa = PBXGroup;
+			children = (
+				199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */,
+				193ED263197F347F00A5DC0D /* PDFDocumentInfoTests.m */,
+			);
+			name = Document/Page;
 			sourceTree = "<group>";
 		};
 		19430E4A18E7B33E00BB4238 /* Libraries */ = {
@@ -911,15 +939,10 @@
 		19F7BA91186052E2009E8916 /* GreatReaderTests */ = {
 			isa = PBXGroup;
 			children = (
+				193ED262197F33D000A5DC0D /* Document/Page */,
+				193ED261197F33B500A5DC0D /* Resources */,
 				193ED25E197F312700A5DC0D /* Crop */,
 				19E525B8197EA861005D0304 /* Category */,
-				1994B072194F255C0021B08C /* Test.pdf */,
-				191B7D6D196CBC7B004B35CA /* Sample.pdf */,
-				191B7D70196D4B72004B35CA /* PDFDocumentSearchTests1.pdf */,
-				191B7D72196D4B72004B35CA /* PDFDocumentSearchTests2.pdf */,
-				191B7D74196D4B72004B35CA /* PDFDocumentSearchTests3.pdf */,
-				191B7D76196D4B72004B35CA /* PDFDocumentSearchTests4.pdf */,
-				190FFBCB196E97A6004BEA59 /* PDFDocumentSearchTests5.pdf */,
 				19F7BA92186052E2009E8916 /* Supporting Files */,
 				1994B070194F23AA0021B08C /* PDFDocumentTests.m */,
 				191B7D66196AE2BD004B35CA /* PDFDocumentSearchItemTests.m */,
@@ -927,7 +950,6 @@
 				190FFBC5196E0C88004BEA59 /* PDFDocumentSearchViewModelTests.m */,
 				190FFBC7196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.h */,
 				190FFBC8196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m */,
-				199FED6019713049003A75AA /* PDFDocumentBackForwardListTests.m */,
 				191B7D231967AD27004B35CA /* PDFPageTests.m */,
 			);
 			path = GreatReaderTests;
@@ -1074,6 +1096,7 @@
 				191B7D6F196CBC7B004B35CA /* Sample.pdf in Resources */,
 				191B7D57196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
 				1994B06E194CA1E90021B08C /* MainStoryboard_iPad.storyboard in Resources */,
+				193ED267197FBF5A00A5DC0D /* OutlineTests.pdf in Resources */,
 				19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */,
 				191B7D79196D4B72004B35CA /* PDFDocumentSearchTests2.pdf in Resources */,
 			);
@@ -1328,6 +1351,7 @@
 				1994B02C194CA1780021B08C /* PDFRecentDocumentList.m in Sources */,
 				1994B02E194CA1780021B08C /* PDFRecentDocumentListViewController.m in Sources */,
 				1994B030194CA1780021B08C /* PDFRecentDocumentListViewModel.m in Sources */,
+				193ED264197F347F00A5DC0D /* PDFDocumentInfoTests.m in Sources */,
 				1994B032194CA1780021B08C /* PDFText.m in Sources */,
 				1994B034194CA1780021B08C /* PDFFontCollection.m in Sources */,
 				1994B036194CA1780021B08C /* PDFFont.m in Sources */,
@@ -1448,6 +1472,14 @@
 				191B7D77196D4B72004B35CA /* en */,
 			);
 			name = PDFDocumentSearchTests4.pdf;
+			sourceTree = "<group>";
+		};
+		193ED265197FBF5A00A5DC0D /* OutlineTests.pdf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				193ED266197FBF5A00A5DC0D /* en */,
+			);
+			name = OutlineTests.pdf;
 			sourceTree = "<group>";
 		};
 		1994B072194F255C0021B08C /* Test.pdf */ = {
