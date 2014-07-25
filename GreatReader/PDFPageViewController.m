@@ -20,6 +20,7 @@
 @end
 
 @interface PDFPageViewController () <UIScrollViewDelegate,
+                                     UIGestureRecognizerDelegate,
                                      PDFPageContentViewDelegate>
 @property (nonatomic, strong, readwrite) PDFPage *page;
 @property (nonatomic, strong, readwrite) PDFPageContentView *contentView;
@@ -73,11 +74,22 @@
     [self.view addSubview:self.contentView];
     [self.scrollView setContentSize:self.contentView.frame.size];
 
-    UITapGestureRecognizer *tapGestureRecognizer =
-            [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                    action:@selector(doubleTapped:)];
-    tapGestureRecognizer.numberOfTapsRequired = 2;
-    [self.contentView addGestureRecognizer:tapGestureRecognizer];
+    [self.contentView addGestureRecognizer:({
+        UITapGestureRecognizer *tapGestureRecognizer =
+                [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                        action:@selector(doubleTapped:)];
+        tapGestureRecognizer.delegate = self;
+        tapGestureRecognizer.numberOfTapsRequired = 2;
+        tapGestureRecognizer;
+    })];
+    [self.contentView addGestureRecognizer:({
+        UITapGestureRecognizer *tapGestureRecognizer =
+                [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                        action:@selector(singleTapped:)];
+        tapGestureRecognizer.delegate = self;        
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer;
+    })];    
 
     // CATiledLayerの描画が始まるまで、低画質で描画しておく
     UIImage *lowResolutionImage = [self.page thumbnailImageWithSize:self.contentView.frame.size
@@ -182,7 +194,14 @@
     [self.contentView zoomFinished];
 }
 
-#pragma mark - Double Tapped
+#pragma mark - Tapped
+
+- (void)singleTapped:(UITapGestureRecognizer *)recognizer
+{
+    if (self.tapAction) {
+        self.tapAction();
+    }
+}
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
 {
@@ -232,7 +251,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    return ![touch.view isKindOfClass:UIControl.class];
+    return self.page.selectedCharacters.count == 0;
 }
 
 #pragma mark -

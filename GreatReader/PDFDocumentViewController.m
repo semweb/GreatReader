@@ -209,10 +209,9 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     page.crop = self.document.crop;    
     PDFPageViewController *vc =
             [[PDFPageViewController alloc] initWithPage:page];
-    UITapGestureRecognizer *singleRecognizer =
-            [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                    action:@selector(singleTapped:)];
-    [vc.view addGestureRecognizer:singleRecognizer];
+    vc.tapAction = ^{
+        [self toggleFullScreen];
+    };
 
     return vc;
 }
@@ -338,13 +337,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     }
 }
 
-#pragma mark - Tap
-
-- (void)singleTapped:(id)sender
-{
-    self.fullScreen = !self.fullScreen;
-}
-
 #pragma mark -
 
 - (BOOL)prefersStatusBarHidden
@@ -422,6 +414,13 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
             popoverController.passthroughViews = @[];
         });
     }
+}
+
+#pragma mark -
+
+- (void)toggleFullScreen
+{
+    self.fullScreen = !self.fullScreen;
 }
 
 #pragma mark - Ribbon Action

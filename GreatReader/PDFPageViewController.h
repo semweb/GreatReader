@@ -18,4 +18,5 @@
 @property (nonatomic, readonly) CGRect frameThatFits;
 @property (nonatomic, strong, readonly) PDFPage *page;
 @property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, copy) void (^tapAction)(void);
 @end
