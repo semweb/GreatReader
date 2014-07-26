@@ -94,6 +94,9 @@
 {
     [self updateSelectionViews];
     [self updateSelectionKnobs];
+    if (self.page.selectedCharacters.count == 0) {
+        [self hideMenuControllerIfNeeded];
+    }
 }
 
 - (void)updateSelectionViews
@@ -269,18 +272,18 @@
 - (void)knobChanged:(PDFPageSelectionKnob *)knob
 {
     CGFloat scale = self.scale;
-    PDFRenderingCharacter *start = ({
+    PDFRenderingCharacter *start = knob == self.selectionStartKnob ? ({
         CGPoint point = [self convertPoint:self.selectionStartKnob.point
                                   fromView:self.selectionStartKnob.superview];
         [self.page nearestCharacterAtPoint:CGPointMake(point.x / scale,
                                                        point.y / scale)];
-    });
-    PDFRenderingCharacter *end = ({
+    }) : nil;
+    PDFRenderingCharacter *end = knob == self.selectionEndKnob ? ({
         CGPoint point = [self convertPoint:self.selectionEndKnob.point
                                   fromView:self.selectionEndKnob.superview];
         [self.page nearestCharacterAtPoint:CGPointMake(point.x / scale,
                                                        point.y / scale)];
-    });
+    }) : nil;
     [self.page selectCharactersFrom:start
                                  to:end];
 
@@ -326,12 +329,16 @@
                                                                        point.y / scale)];
     if (c) {
         [self.page selectWordForCharacter:c];
+    } else {
+        [self.page unselectCharacters];
     }
 
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [self showSelectionMenuFromRect:self.selectionFrame
-                                 inView:self];
         [self hideLoope];
+        if (self.page.selectedCharacters.count > 0) {
+            [self showSelectionMenuFromRect:self.selectionFrame
+                                     inView:self];
+        }
     } else {
         [self showLoopeAtPoint:point
                         inView:[self.delegate loopeContainerViewForContentView:self]];
