@@ -18,6 +18,7 @@
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentSearch.h"
 #import "PDFPage.h"
+#import "PDFPageLinkList.h"
 
 NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
 
@@ -126,6 +127,8 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
     CGPDFPageRef cgPage = CGPDFDocumentGetPage(self.CGPDFDocument, index);
     if (cgPage) {
         PDFPage *page = [[PDFPage alloc] initWithCGPDFPage:cgPage];
+        page.linkList = [[PDFPageLinkList alloc] initWithCGPDFPage:cgPage
+                                                           outline:self.outline];
         return page;
     } else {
         return nil;

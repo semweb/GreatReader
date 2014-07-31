@@ -108,14 +108,30 @@
 
 - (void)show
 {
+    [self cancelHideIfNeeded];    
     [UIView animateWithDuration:0.25
                      animations:^{ self.alpha = 1.0; }];
 }
 
 - (void)hide
 {
+    [self cancelHideIfNeeded];
     [UIView animateWithDuration:0.25
                      animations:^{ self.alpha = 0.0; }];
+}
+
+- (void)showAndHide
+{
+    // need not to send 'cancelHideIfNeeded' bacause 'show' method calls it
+    [self show];
+    [self performSelector:@selector(hide) withObject:nil afterDelay:2.0];
+}
+
+- (void)cancelHideIfNeeded
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(hide)
+                                               object:nil];
 }
 
 @end

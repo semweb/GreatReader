@@ -8,8 +8,12 @@
 
 #import "PDFPageViewController.h"
 
+#import "PDFDocumentOutlineItem.h"
+#import "PDFDocumentViewController.h"
 #import "PDFPage.h"
 #import "PDFPageContentView.h"
+#import "PDFPageLink.h"
+#import "PDFPageLinkList.h"
 #import "PDFPageScanner.h"
 #import "PDFPageSelectionKnob.h"
 
@@ -198,7 +202,14 @@
 
 - (void)singleTapped:(UITapGestureRecognizer *)recognizer
 {
-    if (self.tapAction) {
+    CGFloat scale = self.contentView.scale;
+    CGPoint point = [recognizer locationInView:self.contentView];
+    PDFPageLink *link = [self.page linkAtPoint:CGPointMake(point.x / scale,
+                                                           point.y / scale)];
+    if (link) {
+        [self.documentViewController goAtIndex:link.outlineItem.pageNumber
+                                      animated:YES];
+    } else if (self.tapAction) {
         self.tapAction();
     }
 }

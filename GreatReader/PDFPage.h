@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class PDFDocumentCrop;
+@class PDFPageLink;
+@class PDFPageLinkList;
 @class PDFRenderingCharacter;
 
 @interface PDFPage : NSObject
@@ -17,6 +19,7 @@
 @property (nonatomic, readonly) CGRect rect;
 @property (nonatomic, readonly) CGRect croppedRect;
 @property (nonatomic, weak) PDFDocumentCrop *crop;
+@property (nonatomic, strong) PDFPageLinkList *linkList;
 @property (nonatomic, strong) NSArray *characters;
 @property (nonatomic, readonly) NSArray *selectedFrames;
 @property (nonatomic, readonly) NSArray *selectedCharacters;
@@ -31,4 +34,5 @@
 - (void)selectCharactersFrom:(PDFRenderingCharacter *)fromCharacter
                           to:(PDFRenderingCharacter *)toCharacter;
 - (void)unselectCharacters;
+- (PDFPageLink *)linkAtPoint:(CGPoint)point;
 @end

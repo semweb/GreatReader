@@ -10,9 +10,11 @@
 
 @class PDFPage;
 @class PDFPageContentView;
+@class PDFDocumentViewController;
 
 @interface PDFPageViewController : UIViewController
 - (instancetype)initWithPage:(PDFPage *)page;
+@property (nonatomic, weak) PDFDocumentViewController *documentViewController;
 @property (nonatomic, readonly) CGRect contentFrame;
 @property (nonatomic, strong, readonly) PDFPageContentView *contentView;
 @property (nonatomic, readonly) CGRect frameThatFits;

@@ -10,12 +10,15 @@
 
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFDocumentCrop.h"
+#import "PDFPageLink.h"
+#import "PDFPageLinkList.h"
 #import "PDFRenderingCharacter.h"
 #import "PDFText.h"
 #import "PDFTextState.h"
 
 @interface PDFPage ()
 @property (nonatomic, strong, readwrite) NSArray *characterFrames;
+@property (nonatomic, strong) NSArray *linkFrames;
 @property (nonatomic, assign) NSRange selectedRange;
 @end
 
@@ -112,9 +115,57 @@
 {
     _characters = characters;
     [self updateCharacterFrames];
+    [self updateLinkFrames];
+}
+
+- (PDFPageLink *)linkAtPoint:(CGPoint)point
+{
+    if (self.linkFrames.count != self.linkList.links.count) {
+        return nil;
+    }
+
+    __block PDFPageLink *hit = nil;
+    [self.linkList.links enumerateObjectsUsingBlock:^(PDFPageLink *link, NSUInteger idx, BOOL *stop) {
+        NSValue *v = [self.linkFrames objectAtIndex:idx];
+        if (CGRectContainsPoint(v.CGRectValue, point)) {
+            *stop = YES;
+            hit = link;
+        }
+    }];
+
+    return hit;
+}
+
+- (void)updateLinkFrames
+{
+    CGAffineTransform baseTransform = self.baseTransform;
+    NSArray *linkFrames = [self.linkList.links grt_map:^(PDFPageLink *link) {
+        return [NSValue valueWithCGRect:CGRectApplyAffineTransform(link.rect, baseTransform)];
+    }];
+    self.linkFrames = linkFrames;
 }
 
 - (void)updateCharacterFrames
+{
+    CGAffineTransform baseTransform = self.baseTransform;
+    NSArray *characters = [self.characters copy];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSArray *frames = [characters grt_map:^(PDFRenderingCharacter *character) {
+            CGAffineTransform t = CGAffineTransformIdentity;
+            t = CGAffineTransformConcat(t, character.state.transform);        
+            t = CGAffineTransformConcat(t, baseTransform);
+            return [NSValue valueWithCGRect:CGRectApplyAffineTransform(character.frame, t)];
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([characters isEqual:self.characters]) {
+                self.characterFrames = frames;
+            }
+        });
+    });
+}
+
+- (CGAffineTransform)baseTransform
 {
     CGRect pdfRect = self.rect;
     
@@ -128,25 +179,13 @@
     CGAffineTransform translationTransform =
             CGAffineTransformMakeTranslation(-drawRect.origin.x,
                                              -drawRect.origin.y);
-                                             // 0);
 
-    NSArray *characters = [self.characters copy];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        NSArray *frames = [characters grt_map:^(PDFRenderingCharacter *character) {
-            CGAffineTransform t = CGAffineTransformIdentity;
-            t = CGAffineTransformConcat(t, character.state.transform);        
-            t = CGAffineTransformConcat(t, transform);
-            t = CGAffineTransformConcat(t, translationTransform);
-            t = CGAffineTransformConcat(t, scaleTransform);
-            return [NSValue valueWithCGRect:CGRectApplyAffineTransform(character.frame, t)];
-        }];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([characters isEqual:self.characters]) {
-                self.characterFrames = frames;
-            }
-        });
-    });
+    CGAffineTransform t = CGAffineTransformIdentity;
+    t = CGAffineTransformConcat(t, transform);
+    t = CGAffineTransformConcat(t, translationTransform);
+    t = CGAffineTransformConcat(t, scaleTransform);
+
+    return t;
 }
 
 - (PDFRenderingCharacter *)characterAtPoint:(CGPoint)point

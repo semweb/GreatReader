@@ -209,6 +209,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     page.crop = self.document.crop;    
     PDFPageViewController *vc =
             [[PDFPageViewController alloc] initWithPage:page];
+    vc.documentViewController = self;
     vc.tapAction = ^{
         [self toggleFullScreen];
     };
@@ -295,7 +296,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                                        animated:animated
                                      completion:NULL];
     [self.document goTo:index addHistory:addHistory];
-    [self.infoView show];
+    [self.infoView showAndHide];
 }
 
 - (void)goAtIndex:(NSUInteger)index animated:(BOOL)animated

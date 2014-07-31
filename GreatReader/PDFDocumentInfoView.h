@@ -14,4 +14,5 @@
 @property (nonatomic, strong) PDFDocumentInfo *info;
 - (void)show;
 - (void)hide;
+- (void)showAndHide;
 @end

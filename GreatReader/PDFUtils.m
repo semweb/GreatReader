@@ -96,6 +96,13 @@ const char * PDFDictionaryGetName(CGPDFDictionaryRef d, const char *key)
     return name;
 }
 
+CGPDFObjectRef PDFDictionaryGetObject(CGPDFDictionaryRef d, const char *key)
+{
+    CGPDFObjectRef obj = NULL;
+    CGPDFDictionaryGetObject(d, key, &obj);
+    return obj;
+}
+
 // CGPDFArrayRef
 CGPDFDictionaryRef PDFArrayGetDictionary(CGPDFArrayRef a, size_t index)
 {
@@ -116,6 +123,13 @@ CGPDFInteger PDFArrayGetInteger(CGPDFArrayRef a, size_t index)
     CGPDFInteger integer = -1;
     CGPDFArrayGetInteger(a, index, &integer);
     return integer;
+}
+
+CGPDFReal PDFArrayGetNumber(CGPDFArrayRef array, size_t index)
+{
+    CGPDFReal number = -1;
+    CGPDFArrayGetNumber(array, index, &number);
+    return number;
 }
 
 CGPDFObjectRef PDFArrayGetObject(CGPDFArrayRef a, size_t index)

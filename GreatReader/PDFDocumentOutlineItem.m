@@ -11,6 +11,7 @@
 @interface PDFDocumentOutlineItem ()
 @property (nonatomic, strong, readwrite) NSString *title;
 @property (nonatomic, assign, readwrite) NSUInteger pageNumber;
+@property (nonatomic, assign, readwrite) CGPDFObjectRef destination;
 @property (nonatomic, strong, readwrite) NSArray *children;
 @end
 
@@ -18,11 +19,13 @@
 
 - (instancetype)initWithTitle:(NSString *)title
                    pageNumber:(NSUInteger)pageNumber
+                  destination:(CGPDFObjectRef)destination
                      children:(NSArray *)children
 {
     self = [super init];
     if (self) {
         _title = title;
+        _destination = destination;
         _pageNumber = pageNumber;
         _children = children;
     }

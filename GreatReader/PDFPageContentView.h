@@ -10,6 +10,7 @@
 
 @class PDFPage;
 @class PDFPageContentView;
+@class PDFPageLink;
 
 @protocol PDFPageContentViewDelegate <NSObject>
 - (void)contentView:(PDFPageContentView *)contentView

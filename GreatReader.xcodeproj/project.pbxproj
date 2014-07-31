@@ -61,6 +61,10 @@
 		1943EB57187FA59E00F0B61D /* PDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1943EB56187FA59E00F0B61D /* PDFDocument.m */; };
 		195B728C18EA352E000C5A8B /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 195B728B18EA352E000C5A8B /* Device.m */; };
 		195B729518EDB1E0000C5A8B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195B729318EDB0A7000C5A8B /* XCTest.framework */; };
+		19640D5019891FEF004A47E8 /* PDFPageLinkList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D4F19891FEF004A47E8 /* PDFPageLinkList.m */; };
+		19640D5119891FEF004A47E8 /* PDFPageLinkList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D4F19891FEF004A47E8 /* PDFPageLinkList.m */; };
+		19640D541989205A004A47E8 /* PDFPageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D531989205A004A47E8 /* PDFPageLink.m */; };
+		19640D551989205A004A47E8 /* PDFPageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D531989205A004A47E8 /* PDFPageLink.m */; };
 		1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */; };
 		1994AFEE194CA1770021B08C /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA73618DC705800E123AB /* GRTNavigationController.m */; };
 		1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615B18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m */; };
@@ -285,6 +289,10 @@
 		195B728A18EA352E000C5A8B /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		195B728B18EA352E000C5A8B /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		195B729318EDB0A7000C5A8B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		19640D4E19891FEF004A47E8 /* PDFPageLinkList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageLinkList.h; sourceTree = "<group>"; };
+		19640D4F19891FEF004A47E8 /* PDFPageLinkList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageLinkList.m; sourceTree = "<group>"; };
+		19640D521989205A004A47E8 /* PDFPageLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageLink.h; sourceTree = "<group>"; };
+		19640D531989205A004A47E8 /* PDFPageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageLink.m; sourceTree = "<group>"; };
 		1994B070194F23AA0021B08C /* PDFDocumentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentTests.m; sourceTree = "<group>"; };
 		1994B073194F255C0021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = en.lproj/Test.pdf; sourceTree = "<group>"; };
 		1994B075194FF4DA0021B08C /* NSString+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+GreatReaderAdditions.h"; sourceTree = "<group>"; };
@@ -684,6 +692,10 @@
 				191B7D191963830B004B35CA /* PDFPageSelectionKnob.m */,
 				19DB6A5B188262790023B118 /* PDFPageViewController.h */,
 				19DB6A5C188262790023B118 /* PDFPageViewController.m */,
+				19640D4E19891FEF004A47E8 /* PDFPageLinkList.h */,
+				19640D4F19891FEF004A47E8 /* PDFPageLinkList.m */,
+				19640D521989205A004A47E8 /* PDFPageLink.h */,
+				19640D531989205A004A47E8 /* PDFPageLink.m */,
 			);
 			name = Document/Page;
 			sourceTree = "<group>";
@@ -1144,6 +1156,7 @@
 				1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */,
 				1994B077194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
 				19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */,
+				19640D5019891FEF004A47E8 /* PDFPageLinkList.m in Sources */,
 				191B7D3E19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
 				19D99DD71888E798006FDA6F /* File.m in Sources */,
 				1997502018CDE3F8008D514B /* PDFRenderingCharacter.m in Sources */,
@@ -1172,6 +1185,7 @@
 				190FFBC3196D8780004BEA59 /* PDFDocumentSearchViewModel.m in Sources */,
 				190FFBC9196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */,
 				190FFBD0196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
+				19640D541989205A004A47E8 /* PDFPageLink.m in Sources */,
 				19D12BCC18C74192001C2066 /* PDFFontCollection.m in Sources */,
 				19CA78A418AF12E600200362 /* PDFDocumentPageSlider.m in Sources */,
 				1997502318CE904C008D514B /* PDFFontDescriptor.m in Sources */,
@@ -1258,6 +1272,7 @@
 				1994B01E194CA1780021B08C /* PDFPage.m in Sources */,
 				1994B020194CA1780021B08C /* PDFPageContentTiledLayer.m in Sources */,
 				1994B022194CA1780021B08C /* PDFPageContentView.m in Sources */,
+				19640D551989205A004A47E8 /* PDFPageLink.m in Sources */,
 				1994B024194CA1780021B08C /* PDFPageCropViewController.m in Sources */,
 				1994B026194CA1780021B08C /* PDFPageScanner.m in Sources */,
 				1994B028194CA1780021B08C /* PDFPageViewController.m in Sources */,
@@ -1286,6 +1301,7 @@
 				191B7D65196AE2B1004B35CA /* PDFDocumentSearchTests.m in Sources */,
 				1994B051194CA1780021B08C /* DocumentListViewController.m in Sources */,
 				1994B053194CA1780021B08C /* DocumentListViewModel.m in Sources */,
+				19640D5119891FEF004A47E8 /* PDFPageLinkList.m in Sources */,
 				1994B055194CA1780021B08C /* RecentDocumentListViewModel.m in Sources */,
 				1994B057194CA1780021B08C /* FolderDocumentListViewModel.m in Sources */,
 				1994B058194CA1780021B08C /* Device.m in Sources */,

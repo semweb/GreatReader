@@ -60,11 +60,14 @@
         NSArray *children = [self childrenForItem:dic
                                          document:document];
         NSString *title = [self titleOfDictionary:dic];
+        CGPDFObjectRef dest = NULL;
         NSUInteger pageNumber = [self pageNumberOfDictionary:dic
-                                                    document:document];
+                                                    document:document
+                                                 destination:&dest];
         PDFDocumentOutlineItem *item = [[PDFDocumentOutlineItem alloc]
                                            initWithTitle:title
                                               pageNumber:pageNumber
+                                             destination:dest
                                                 children:children];
         return item;
     }];
@@ -81,6 +84,7 @@
 
 - (NSUInteger)pageNumberOfDictionary:(CGPDFDictionaryRef)dictionary
                             document:(CGPDFDocumentRef)document
+                         destination:(CGPDFObjectRef *)destination
 {
     CGPDFDictionaryRef pageDictionary = NULL;
     CGPDFArrayRef destArray = NULL;
@@ -89,9 +93,11 @@
     
     CGPDFDictionaryRef a = nil; CGPDFDictionaryGetDictionary(dictionary, "A", &a);
     if (a != NULL) {
+        CGPDFDictionaryGetObject(a, "D", destination);
         if (CGPDFDictionaryGetArray(a, "D", &destArray) ||
             CGPDFDictionaryGetString(a, "D", &destString)) {}
     } else {
+        CGPDFDictionaryGetObject(dictionary, "Dest", destination);
         if (CGPDFDictionaryGetArray(dictionary, "Dest", &destArray) ||
             CGPDFDictionaryGetString(dictionary, "Dest", &destString) ||
             CGPDFDictionaryGetName(dictionary, "Dest", &destName)) {}
@@ -232,6 +238,56 @@
     return [[self.items grt_map:^(PDFDocumentOutlineItem *item) {
         return item.description;
     }] componentsJoinedByString:@"\n"];
+}
+
+#pragma mark -
+
+- (PDFDocumentOutlineItem *)findItemForDestination:(CGPDFObjectRef)destination
+{
+    NSString * (^destinationName)(CGPDFObjectRef) = ^(CGPDFObjectRef obj) {
+        switch (CGPDFObjectGetType(obj)) {
+            case kCGPDFObjectTypeName: {
+                const char *name = NULL;
+                CGPDFObjectGetValue(obj, kCGPDFObjectTypeName, &name);
+                return [[NSString alloc] initWithCString:name encoding:NSUTF8StringEncoding];
+            }
+            case kCGPDFObjectTypeString: {
+                CGPDFStringRef str = NULL;
+                CGPDFObjectGetValue(obj, kCGPDFObjectTypeString, &str);
+                return (__bridge_transfer NSString *)CGPDFStringCopyTextString(str);
+            }
+            case kCGPDFObjectTypeArray: {
+                return (NSString *)nil;
+            }
+            default: {
+                return (NSString *)nil;
+            }
+        }
+    };
+    __block __weak PDFDocumentOutlineItem * (^weak_find)(PDFDocumentOutlineItem *);
+    PDFDocumentOutlineItem * (^find)(PDFDocumentOutlineItem *) = ^(PDFDocumentOutlineItem *parent) {
+        for (PDFDocumentOutlineItem *item in parent.children) {
+            CGPDFObjectRef outlineDest = item.destination;
+            NSString *destName1 = destinationName(destination);
+            NSString *destName2 = destinationName(outlineDest);
+            if ([destName1 isEqual:destName2]) {
+                return item;
+            } else {
+                PDFDocumentOutlineItem *childItem = weak_find(item);
+                if (childItem) {
+                    return childItem;
+                }
+            }
+        }
+        return (PDFDocumentOutlineItem *)nil;
+    };
+    weak_find = find;
+
+    for (PDFDocumentOutlineItem *item in self.items) {
+        PDFDocumentOutlineItem *found = find(item);
+        if (found) return found;
+    }
+    return nil;
 }
 
 @end

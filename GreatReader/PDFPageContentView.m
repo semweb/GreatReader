@@ -10,7 +10,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "NSArray+GreatReaderAdditions.h"
 #import "PDFPage.h"
+#import "PDFPageLink.h"
+#import "PDFPageLinkList.h"
 #import "PDFPageContentTiledLayer.h"
 #import "PDFPageLoopeView.h"
 #import "PDFPageSelectionKnob.h"
@@ -108,7 +111,7 @@
     NSMutableArray *lines = NSMutableArray.array;
     for (NSValue *v in self.page.selectedFrames) {
         CGRect r = v.CGRectValue;
-        CGRect scaleFrame = CGRectApplyAffineTransform(r, self.selectionTransform);
+        CGRect scaleFrame = CGRectApplyAffineTransform(r, self.displayTransform);
         if (CGRectEqualToRect(rect, CGRectZero)) {
             rect = scaleFrame;
             [lines addObject:[NSValue valueWithCGRect:rect]];            
@@ -194,7 +197,7 @@
     }
 }
 
-- (CGAffineTransform)selectionTransform
+- (CGAffineTransform)displayTransform
 {
     CGAffineTransform invertTransform = CGAffineTransformInvert(self.transform);
     CGRect f = CGRectApplyAffineTransform(self.frame, invertTransform);    
