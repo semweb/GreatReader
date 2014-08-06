@@ -71,7 +71,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    NSLog(@"%@", self);
 }
 
 /*

@@ -15,6 +15,7 @@
 #import "PDFDocumentBackForwardList.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentCrop.h"
+#import "PDFDocumentNameList.h"
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentSearch.h"
 #import "PDFPage.h"
@@ -23,6 +24,7 @@
 NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
 
 @interface PDFDocument ()
+@property (nonatomic, strong) PDFDocumentNameList *nameList;
 @property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
 @property (nonatomic, strong, readwrite) UIImage *thumbnailImage;
 @property (nonatomic, strong, readwrite) UIImage *iconImage;
@@ -128,7 +130,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
     if (cgPage) {
         PDFPage *page = [[PDFPage alloc] initWithCGPDFPage:cgPage];
         page.linkList = [[PDFPageLinkList alloc] initWithCGPDFPage:cgPage
-                                                           outline:self.outline];
+                                                          nameList:self.nameList];
         return page;
     } else {
         return nil;
@@ -196,6 +198,14 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
         }];
     }
     return _backForwardList;
+}
+
+- (PDFDocumentNameList *)nameList
+{
+    if (!_nameList) {
+        _nameList = [[PDFDocumentNameList alloc] initWithCGPDFDocument:self.CGPDFDocument];        
+    }
+    return _nameList;
 }
 
 #pragma mark -

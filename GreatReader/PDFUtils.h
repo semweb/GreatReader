@@ -16,6 +16,7 @@ CGPDFInteger PDFDictionaryGetInteger(CGPDFDictionaryRef dictionary, const char *
 void PDFDictionaryLog(CGPDFDictionaryRef D);
 const char * PDFDictionaryGetName(CGPDFDictionaryRef d, const char *key);
 CGPDFObjectRef PDFDictionaryGetObject(CGPDFDictionaryRef d, const char *key);
+NSString * PDFDictionaryGetString(CGPDFDictionaryRef d, const char *key);
 
 // CGPDFArrayRef
 CGPDFDictionaryRef PDFArrayGetDictionary(CGPDFArrayRef array, size_t index);
@@ -23,3 +24,4 @@ CGPDFArrayRef PDFArrayGetArray(CGPDFArrayRef array, size_t index);
 CGPDFInteger PDFArrayGetInteger(CGPDFArrayRef array, size_t index);
 CGPDFReal PDFArrayGetNumber(CGPDFArrayRef array, size_t index);
 CGPDFObjectRef PDFArrayGetObject(CGPDFArrayRef array, size_t index);
+NSString * PDFArrayGetString(CGPDFArrayRef array, size_t index);

@@ -103,6 +103,13 @@ CGPDFObjectRef PDFDictionaryGetObject(CGPDFDictionaryRef d, const char *key)
     return obj;
 }
 
+NSString * PDFDictionaryGetString(CGPDFDictionaryRef d, const char *key)
+{
+    CGPDFStringRef string = nil;
+    CGPDFDictionaryGetString(d, key, &string);
+    return (__bridge_transfer NSString *)CGPDFStringCopyTextString(string);
+}
+
 // CGPDFArrayRef
 CGPDFDictionaryRef PDFArrayGetDictionary(CGPDFArrayRef a, size_t index)
 {
@@ -137,4 +144,11 @@ CGPDFObjectRef PDFArrayGetObject(CGPDFArrayRef a, size_t index)
     CGPDFObjectRef object = NULL;
     CGPDFArrayGetObject(a, index, &object);
     return object;
+}
+
+NSString * PDFArrayGetString(CGPDFArrayRef array, size_t index)
+{
+    CGPDFStringRef string = NULL;
+    CGPDFArrayGetString(array, index, &string);
+    return (__bridge_transfer NSString *)CGPDFStringCopyTextString(string);
 }

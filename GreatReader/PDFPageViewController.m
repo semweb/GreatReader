@@ -207,7 +207,7 @@
     PDFPageLink *link = [self.page linkAtPoint:CGPointMake(point.x / scale,
                                                            point.y / scale)];
     if (link) {
-        [self.documentViewController goAtIndex:link.outlineItem.pageNumber
+        [self.documentViewController goAtIndex:link.pageNumber
                                       animated:YES];
     } else if (self.tapAction) {
         self.tapAction();

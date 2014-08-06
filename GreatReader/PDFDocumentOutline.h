@@ -14,5 +14,4 @@
 @property (nonatomic, strong, readonly) NSArray *items;
 - (instancetype)initWithCGPDFDocument:(CGPDFDocumentRef)document;
 - (NSString *)sectionTitleAtIndex:(NSUInteger)index;
-- (PDFDocumentOutlineItem *)findItemForDestination:(CGPDFObjectRef)destination;
 @end

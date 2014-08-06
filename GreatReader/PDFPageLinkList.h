@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class PDFDocumentOutline;
+@class PDFDocumentNameList;
 @class PDFPageLink;
 
 @interface PDFPageLinkList : NSObject
 - (instancetype)initWithCGPDFPage:(CGPDFPageRef)cgPage
-                          outline:(PDFDocumentOutline *)outline;
+                         nameList:(PDFDocumentNameList *)nameList;
 @property (nonatomic, readonly) NSArray *links;
 @end

@@ -29,6 +29,7 @@
 #import "PDFPage.h"
 #import "PDFPageViewController.h"
 #import "PDFRecentDocumentList.h"
+#import "PDFDocumentNameList.h"
 #import "RecentDocumentListViewController.h"
 #import "RecentDocumentListViewModel.h"
 

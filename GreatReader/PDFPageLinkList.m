@@ -8,26 +8,25 @@
 
 #import "PDFPageLinkList.h"
 
-#import "PDFDocumentOutline.h"
-#import "PDFDocumentOutlineItem.h"
+#import "PDFDocumentNameList.h"
 #import "PDFPageLink.h"
 #import "PDFUtils.h"
 
 @implementation PDFPageLinkList
 
 - (instancetype)initWithCGPDFPage:(CGPDFPageRef)cgPage
-                          outline:(PDFDocumentOutline *)outline
+                         nameList:(PDFDocumentNameList *)nameList
 {
     self = [super init];
     if (self) {
         _links = [self parse:cgPage
-                     outline:outline];
+                    nameList:nameList];
     }
     return self;
 }
 
 - (NSArray *)parse:(CGPDFPageRef)cgPage
-           outline:(PDFDocumentOutline *)outline
+          nameList:(PDFDocumentNameList *)nameList
 {
     NSMutableArray *results = NSMutableArray.array;
     
@@ -38,22 +37,45 @@
         const char *subtype = PDFDictionaryGetName(a, "Subtype");
         if (!strcmp(subtype, "Link")) {
             CGPDFObjectRef dest = PDFDictionaryGetObject(a, "Dest");
-            PDFDocumentOutlineItem *outlineItem = [outline findItemForDestination:dest];
-            if (outlineItem) {
+            NSString *key = [self stringForDest:dest];            
+            NSUInteger pageNumber = [nameList pageNumberForName:key];
+            if (pageNumber != NSNotFound) {
                 CGPDFArrayRef rect = PDFDictionaryGetArray(a, "Rect");
                 CGFloat minX = PDFArrayGetNumber(rect, 0);
                 CGFloat minY = PDFArrayGetNumber(rect, 1);
                 CGFloat maxX = PDFArrayGetNumber(rect, 2);
                 CGFloat maxY = PDFArrayGetNumber(rect, 3);
                 CGRect cgrect = CGRectMake(minX, minY, maxX - minX, maxY - minY);
-                PDFPageLink *link = [[PDFPageLink alloc] initWithOutlineItem:outlineItem
-                                                                        rect:cgrect];
+                PDFPageLink *link = [[PDFPageLink alloc] initWithPageNumber:pageNumber
+                                                                       rect:cgrect];
                 [results addObject:link];
             }
         }
     }
 
     return results;
+}
+
+- (NSString *)stringForDest:(CGPDFObjectRef)dest
+{
+    switch (CGPDFObjectGetType(dest)) {
+        case kCGPDFObjectTypeName: {
+            const char *name = NULL;
+            CGPDFObjectGetValue(dest, kCGPDFObjectTypeName, &name);
+            return [[NSString alloc] initWithCString:name encoding:NSUTF8StringEncoding];
+        }
+        case kCGPDFObjectTypeString: {
+            CGPDFStringRef str = NULL;
+            CGPDFObjectGetValue(dest, kCGPDFObjectTypeString, &str);
+            return (__bridge_transfer NSString *)CGPDFStringCopyTextString(str);
+        }
+        case kCGPDFObjectTypeArray: {
+            return nil;
+        }
+        default: {
+            return nil;
+        }
+    }
 }
 
 @end

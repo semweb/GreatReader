@@ -8,21 +8,19 @@
 
 #import "PDFPageLink.h"
 
-#import "PDFDocumentOutlineItem.h"
-
 @interface PDFPageLink ()
-@property (nonatomic, readwrite, strong) PDFDocumentOutlineItem *outlineItem;
+@property (nonatomic, readwrite, assign) NSUInteger pageNumber;
 @property (nonatomic, readwrite, assign) CGRect rect;
 @end
 
 @implementation PDFPageLink
 
-- (instancetype)initWithOutlineItem:(PDFDocumentOutlineItem *)item
+- (instancetype)initWithPageNumber:(NSUInteger)pageNumber
                                rect:(CGRect)rect
 {
     self = [super init];
     if (self) {
-        _outlineItem = item;
+        _pageNumber = pageNumber;
         _rect = rect;
     }
     return self;
