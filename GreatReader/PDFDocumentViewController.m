@@ -292,10 +292,21 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (void)goAtIndex:(NSUInteger)index addHistory:(BOOL)addHistory animated:(BOOL)animated
 {
     UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionForward;
-    [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
-                                      direction:direction
-                                       animated:animated
-                                     completion:NULL];
+    NSArray *viewControllers = @[[self pageViewControllerAtIndex:index]];
+    __weak UIPageViewController *pvc = self.pageViewController;
+    [pvc setViewControllers:viewControllers
+                  direction:direction
+                   animated:animated
+                 completion:^(BOOL finished) {
+        if (animated) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [pvc setViewControllers:viewControllers
+                              direction:direction
+                               animated:NO
+                             completion:NULL];
+            });
+        }
+    }];
     [self.document goTo:index addHistory:addHistory];
     [self.infoView showAndHide];
 }
