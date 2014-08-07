@@ -12,4 +12,5 @@
 - (instancetype)initWithStream:(CGPDFStreamRef)stream;
 - (unichar)unicodeFromCID:(char)cid;
 - (char)CIDFromUnicode:(unichar)unicode;
+- (BOOL)canConvertCID:(char)cid;
 @end

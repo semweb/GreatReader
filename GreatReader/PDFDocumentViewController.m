@@ -203,7 +203,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (PDFPageViewController *)pageViewControllerAtIndex:(NSUInteger)index
 {
-    PDFPage *page = [self.document pageAtIndex:index];
+    PDFPage *page = [self.document pageAtIndex:index];    
     if (!page) {
         return nil;
     }

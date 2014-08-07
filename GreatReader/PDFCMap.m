@@ -32,6 +32,11 @@
     return self;
 }
 
+- (BOOL)canConvertCID:(char)cid
+{
+    return [self.unicodeFromCID objectForKey:@(cid)] != nil;
+}
+
 - (unichar)unicodeFromCID:(char)cid
 {
     NSNumber *num = [self.unicodeFromCID objectForKey:@(cid)];

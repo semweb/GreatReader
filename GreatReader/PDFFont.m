@@ -301,7 +301,12 @@
     if (self.cmap) {
         for (int i = 0; i < length; i += 2) {
             unichar code = chars[i] << 8 | chars[i + 1];
-            unichar unicode = [self.cmap unicodeFromCID:code];
+            unichar unicode;
+            if ([self.cmap canConvertCID:code]) {
+                unicode = [self.cmap unicodeFromCID:code];
+            } else {
+                unicode = [self unicodeFromCID:code];
+            }
             [string appendFormat:@"%C", unicode];
         }
         return string;
@@ -407,7 +412,7 @@ static CGGlyph s_glyphs[65535];
             CGPDFArrayRef wArray = NULL;
             CGPDFObjectGetValue(o, type, &wArray);
             for (int j = 0; j < CGPDFArrayGetCount(wArray); j++) {
-                CGPDFInteger width = PDFArrayGetInteger(wArray, j);
+                CGPDFReal width = PDFArrayGetNumber(wArray, j);
                 [widths setObject:@(width) forKey:@(from + j)];
             }            
         }
