@@ -75,7 +75,7 @@
     NSString *text = [[contents grt_map:^(PDFRenderingCharacter *character) {
         return character.stringDescription;
     }] componentsJoinedByString:@""];
-    NSRange range = [text rangeOfString:keyword];
+    NSRange range = [text rangeOfString:keyword options:NSCaseInsensitiveSearch];
     while (range.location != NSNotFound) {
         PDFDocumentSearchResult *result =
                 [self searchResultWithCharacters:contents
