@@ -71,7 +71,7 @@
 {
     NSFileManager *fm = [NSFileManager new];
     NSString *dirPath = [NSFileManager grt_privateDocumentsPath];
-    NSURL *URL = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir"]];    
+    NSURL *URL = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir.pdf"]];
 
     NSURL *result1 = [fm grt_incrementURLIfNecessary:URL];
     XCTAssertEqualObjects(URL, result1);
@@ -81,7 +81,7 @@
                   attributes:nil
                        error:NULL];
     NSURL *result2 = [fm grt_incrementURLIfNecessary:URL];
-    NSURL *expectation2 = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir-1"]];
+    NSURL *expectation2 = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir-1.pdf"]];
     XCTAssertEqualObjects(result2, expectation2);
 
     [fm createDirectoryAtURL:result2
@@ -89,7 +89,7 @@
                   attributes:nil
                        error:NULL];
     NSURL *result3 = [fm grt_incrementURLIfNecessary:URL];
-    NSURL *expectation3 = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir-2"]];
+    NSURL *expectation3 = [NSURL fileURLWithPath:[dirPath stringByAppendingPathComponent:@"Dir-2.pdf"]];
     XCTAssertEqualObjects(result3, expectation3);
 }
 
