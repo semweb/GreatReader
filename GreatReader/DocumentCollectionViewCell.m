@@ -55,7 +55,18 @@
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
-    self.selectionView.hidden = !selected;
+    [self updateSelectionViewVisibility];
+}
+
+- (void)setEditing:(BOOL)editing
+{
+    _editing = editing;
+    [self updateSelectionViewVisibility];
+}
+
+- (void)updateSelectionViewVisibility
+{
+    self.selectionView.hidden = !self.editing || !self.selected;
 }
 
 - (void)layoutSubviews

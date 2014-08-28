@@ -14,4 +14,5 @@
 
 @interface DocumentCollectionViewCell : UICollectionViewCell <DocumentCell>
 @property (nonatomic, strong) PDFDocument *document;
+@property (nonatomic, assign) BOOL editing;
 @end

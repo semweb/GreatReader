@@ -45,6 +45,17 @@
 
 #pragma mark -
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    for (DocumentCollectionViewCell *cell in self.collectionView.visibleCells) {
+        cell.editing = editing;
+    }
+}
+
+#pragma mark -
+
 - (void)longPressed:(UILongPressGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan && !self.editing) {
@@ -171,6 +182,7 @@ didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 
     PDFDocument *document = [self.viewModel documentAtIndex:indexPath.item];
     cell.document = document;
+    cell.editing = self.editing;
     
     return cell;    
 }
