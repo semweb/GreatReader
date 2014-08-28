@@ -122,6 +122,7 @@
             [self.collectionView selectItemAtIndexPath:indexPath
                                               animated:YES
                                         scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+            self.selectedDocumentCell = (id<DocumentCell>)[self.collectionView cellForItemAtIndexPath:indexPath];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
                 [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
