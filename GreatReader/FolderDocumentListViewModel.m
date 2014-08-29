@@ -30,7 +30,7 @@
 
 - (NSString *)title
 {
-    return @"Documents";
+    return LocalizedString(@"Documents");
 }
 
 - (NSUInteger)count

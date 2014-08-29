@@ -31,7 +31,7 @@
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Brightness"];
+        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:LocalizedString(@"Brightness")];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                 target:self
                                                                                 action:@selector(done:)];

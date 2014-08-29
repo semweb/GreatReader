@@ -124,6 +124,10 @@
 		1994B07B195C366D0021B08C /* Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1994B079195C366D0021B08C /* Home@2x.png */; };
 		1994B07E195C44220021B08C /* Documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1994B07C195C44220021B08C /* Documents@2x.png */; };
 		1994B0831960113B0021B08C /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1994B0811960113B0021B08C /* Icon-76.png */; };
+		199610EC19AFFB4D00A0786F /* Localize.m in Sources */ = {isa = PBXBuildFile; fileRef = 199610EB19AFFB4D00A0786F /* Localize.m */; };
+		199610ED19AFFB4D00A0786F /* Localize.m in Sources */ = {isa = PBXBuildFile; fileRef = 199610EB19AFFB4D00A0786F /* Localize.m */; };
+		199610F119AFFC5200A0786F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 199610F419AFFC5200A0786F /* Localizable.strings */; };
+		199610F219AFFC5200A0786F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 199610F419AFFC5200A0786F /* Localizable.strings */; };
 		1997501718C8B9C9008D514B /* PDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501618C8B9C9008D514B /* PDFUtils.m */; };
 		1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501918CAC3E7008D514B /* PDFCMap.m */; };
 		1997501D18CACB9B008D514B /* PDFCMapParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997501C18CACB9B008D514B /* PDFCMapParser.m */; };
@@ -304,6 +308,10 @@
 		1994B07A195C366D0021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Home@2x.png"; sourceTree = "<group>"; };
 		1994B07D195C44220021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Documents@2x.png"; sourceTree = "<group>"; };
 		1994B0821960113B0021B08C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Icon-76.png"; sourceTree = "<group>"; };
+		199610EA19AFFB4D00A0786F /* Localize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Localize.h; sourceTree = "<group>"; };
+		199610EB19AFFB4D00A0786F /* Localize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Localize.m; sourceTree = "<group>"; };
+		199610F319AFFC5200A0786F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		199610F519AFFD2A00A0786F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1997501518C8B9C9008D514B /* PDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFUtils.h; sourceTree = "<group>"; };
 		1997501618C8B9C9008D514B /* PDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFUtils.m; sourceTree = "<group>"; };
 		1997501818CAC3E7008D514B /* PDFCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFCMap.h; sourceTree = "<group>"; };
@@ -757,6 +765,8 @@
 				195B728B18EA352E000C5A8B /* Device.m */,
 				19430E4F18E80A6F00BB4238 /* LibraryUtils.h */,
 				19430E5018E80A6F00BB4238 /* LibraryUtils.m */,
+				199610EA19AFFB4D00A0786F /* Localize.h */,
+				199610EB19AFFB4D00A0786F /* Localize.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -875,6 +885,7 @@
 				19430E5C18E8DCF100BB4238 /* API_KEY.plist */,
 				19F7BA6C186052E2009E8916 /* GreatReader-Info.plist */,
 				19F7BA6D186052E2009E8916 /* InfoPlist.strings */,
+				199610F419AFFC5200A0786F /* Localizable.strings */,
 				19F7BA70186052E2009E8916 /* main.m */,
 				19F7BA72186052E2009E8916 /* GreatReader-Prefix.pch */,
 				19F7BA76186052E2009E8916 /* Default.png */,
@@ -974,6 +985,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = 19F7BA58186052E2009E8916;
 			productRefGroup = 19F7BA62186052E2009E8916 /* Products */;
@@ -1001,6 +1013,7 @@
 				19F7BA79186052E2009E8916 /* Default@2x.png in Resources */,
 				19F7BA7B186052E2009E8916 /* Default-568h@2x.png in Resources */,
 				1994B07B195C366D0021B08C /* Home@2x.png in Resources */,
+				199610F119AFFC5200A0786F /* Localizable.strings in Resources */,
 				19ABA5C418D6701200E123AB /* RibbonOn@2x.png in Resources */,
 				19ABA5BC18D66FF700E123AB /* Find@2x.png in Resources */,
 				19C9616519033FD000D1857C /* CropOdd@2x.png in Resources */,
@@ -1042,6 +1055,7 @@
 				191B7D7A196D4B72004B35CA /* PDFDocumentSearchTests3.pdf in Resources */,
 				191B7D6F196CBC7B004B35CA /* Sample.pdf in Resources */,
 				191B7D57196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
+				199610F219AFFC5200A0786F /* Localizable.strings in Resources */,
 				1994B06E194CA1E90021B08C /* MainStoryboard_iPad.storyboard in Resources */,
 				193ED267197FBF5A00A5DC0D /* OutlineTests.pdf in Resources */,
 				19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */,
@@ -1184,6 +1198,7 @@
 				19DB6A591882618B0023B118 /* PDFPageContentView.m in Sources */,
 				199AB73A192E350500C697BB /* DocumentListViewController.m in Sources */,
 				191B7D3619684E2A004B35CA /* DocumentListCollectionViewController.m in Sources */,
+				199610EC19AFFB4D00A0786F /* Localize.m in Sources */,
 				19D8709418BC01E000FA2B66 /* PDFDocumentBookmarkListViewController.m in Sources */,
 				19F6FD8D18EE2D5D001E05D5 /* PDFPageScanner.m in Sources */,
 				1997501718C8B9C9008D514B /* PDFUtils.m in Sources */,
@@ -1265,6 +1280,7 @@
 				1994B004194CA1780021B08C /* PDFDocumentInfo.m in Sources */,
 				1994B006194CA1780021B08C /* PDFDocumentInfoView.m in Sources */,
 				199ABC2A197BE94100FAC2C1 /* RecentDocumentListViewController.m in Sources */,
+				199610ED19AFFB4D00A0786F /* Localize.m in Sources */,
 				190FFBCA196E0D6D004BEA59 /* PDFDocumentSearch+TestAdditions.m in Sources */,
 				1994B008194CA1780021B08C /* PDFDocumentOutline.m in Sources */,
 				1994B00A194CA1780021B08C /* PDFDocumentOutlineItem.m in Sources */,
@@ -1446,6 +1462,15 @@
 				1994B0821960113B0021B08C /* en */,
 			);
 			name = "Icon-76.png";
+			sourceTree = "<group>";
+		};
+		199610F419AFFC5200A0786F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				199610F319AFFC5200A0786F /* en */,
+				199610F519AFFD2A00A0786F /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		199ABC1B19754E5F00FAC2C1 /* Check@2x.png */ = {

@@ -41,7 +41,9 @@
 
     NSMutableAttributedString *string = [NSMutableAttributedString new];
     [string appendAttributedString:
-        [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"page: %d\n", (int)self.page]
+        [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",
+                                                             [NSString stringWithFormat:LocalizedString(@"page: %d"),
+                                                                       (int)self.page]]
                                         attributes:boldAttributes]];
     [string appendAttributedString:
         [[NSAttributedString alloc] initWithString:[self.surroundingText substringToIndex:self.range.location]

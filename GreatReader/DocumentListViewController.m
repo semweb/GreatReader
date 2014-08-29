@@ -34,7 +34,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     [super viewDidLoad];
 
     self.navigationItem.title = self.viewModel.title;
-    self.title = self.viewModel.title;
+    self.title = self.viewModel.title;    
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
@@ -59,6 +59,15 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
 #pragma mark -
 
+- (void)setViewModel:(DocumentListViewModel *)viewModel
+{
+    _viewModel = viewModel;
+    self.navigationItem.title = self.viewModel.title;
+    self.title = self.viewModel.title;
+}
+
+#pragma mark -
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
@@ -67,7 +76,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
     if (editing) {
         self.deleteItem =
-                [[UIBarButtonItem alloc] initWithTitle:@"Delete"
+                [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Delete")
                                                  style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(delete:)];
@@ -113,8 +122,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                         destructiveButtonTitle:@"Delete"
+                                              cancelButtonTitle:LocalizedString(@"Cancel")
+                                         destructiveButtonTitle:LocalizedString(@"Delete")
                                               otherButtonTitles:nil];
     if (IsPad()) {
         [sheet showFromBarButtonItem:sender animated:YES];
