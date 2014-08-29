@@ -47,11 +47,7 @@
         toViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth
               | UIViewAutoresizingFlexibleBottomMargin;
         toViewController.view.frame = fromViewController.view.frame;
-        CGRect endFrame = ({
-            CGRect f = toViewController.view.frame;
-            f.size = [self sizeForViewController:toViewController];
-            f;
-        });
+        CGRect endFrame = [self showFrameForViewController:toViewController];
         toViewController.view.frame = [self hideFrameForViewController:toViewController];
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
@@ -86,17 +82,27 @@
     CGRect f = viewController.view.frame;
     switch (viewController.interfaceOrientation) {
         case UIInterfaceOrientationLandscapeLeft:
-            f.origin.x -= self.presentedContentHeight;
+            f.origin.x = -self.presentedContentHeight;
             break;
         case UIInterfaceOrientationLandscapeRight:
-            f.origin.x += self.presentedContentHeight;
+            f.origin.x = CGRectGetWidth(viewController.view.superview.frame);
             break;
         default:
-            f.origin.y -= self.presentedContentHeight;
+            f.origin.y = -self.presentedContentHeight;
             break;
     }
     f.size = [self sizeForViewController:viewController];
     return f;
+}
+
+- (CGRect)showFrameForViewController:(UIViewController *)viewController
+{
+    CGRect f = viewController.view.frame;
+    if (viewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        f.origin.x = (CGRectGetWidth(f) - self.presentedContentHeight);
+    }
+    f.size = [self sizeForViewController:viewController];
+    return f;    
 }
 
 - (CGSize)sizeForViewController:(UIViewController *)viewController
