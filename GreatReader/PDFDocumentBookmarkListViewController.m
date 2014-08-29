@@ -12,11 +12,7 @@
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentViewController.h"
 
-NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSegueExit";
-
-@interface PDFDocumentBookmarkListViewController ()
-
-@end
+static NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmarkListSegueExit";
 
 @implementation PDFDocumentBookmarkListViewController
 @synthesize bookmarkList = bookmarkList_;

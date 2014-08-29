@@ -17,8 +17,8 @@
 {
     self = [super init];
     if (self) {
-        self.text = text;
-        self.state = state;
+        _text = text;
+        _state = state;
     }
     return self;
 }

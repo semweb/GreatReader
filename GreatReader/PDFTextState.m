@@ -10,11 +10,11 @@
 
 @implementation PDFTextState
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.ctm = CGAffineTransformIdentity;
+        _ctm = CGAffineTransformIdentity;
     }
     return self;
 }

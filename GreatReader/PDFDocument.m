@@ -78,7 +78,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 
 #pragma mark - NSCoding
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     NSString *path = [PDFDocument absolutePathWithRelativePath:
                                    [decoder decodeObjectForKey:@"path"]];

@@ -16,7 +16,7 @@
 NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification";
 
 @interface Folder ()
-@property (nonatomic, readwrite, weak) PDFDocumentStore *store;
+@property (nonatomic, weak, readwrite) PDFDocumentStore *store;
 @end
 
 @implementation Folder

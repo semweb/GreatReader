@@ -23,15 +23,6 @@
 
 @implementation DocumentListCollectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -88,7 +79,7 @@
 - (void)registerNibForCell
 {
     NSString *nibName = @"DocumentCollectionViewCell";
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    if (IsPad()) {
         nibName = [nibName stringByAppendingString:@"_iPad"];
     } else {
         nibName = [nibName stringByAppendingString:@"_iPhone"];

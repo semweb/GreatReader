@@ -23,7 +23,7 @@
     [self removeObserver:self forKeyPath:@"info.pageDescription"];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {

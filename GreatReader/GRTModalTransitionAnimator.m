@@ -33,7 +33,7 @@
     GRTModalDismissButton *button = self.dimButton;
     button.tapped = ^{
         [fromViewController dismissViewControllerAnimated:YES
-                                               completion:NULL];
+                                               completion:nil];
     };
     button.frame = fromViewController.view.frame;
 
@@ -127,7 +127,7 @@
 
 @implementation GRTModalDismissButton
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {

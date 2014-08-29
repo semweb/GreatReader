@@ -10,12 +10,9 @@
 
 #import "Device.h"
 
-@interface PDFPageLoopeView ()
-@end
-
 @implementation PDFPageLoopeView
 
-- (id)init
+- (instancetype)init
 {
     self = [super initWithFrame:[[self class] frame]];
     if (self) {

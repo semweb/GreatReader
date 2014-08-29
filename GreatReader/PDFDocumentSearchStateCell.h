@@ -10,5 +10,5 @@
 
 @interface PDFDocumentSearchStateCell : UITableViewCell
 @property (nonatomic, assign) BOOL searching;
-- (id)init;
+- (instancetype)init;
 @end

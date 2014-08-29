@@ -8,7 +8,7 @@
 
 #import "NSFileManager+GreatReaderAdditions.h"
 
-NSString * const kPrivateDocuments = @"PrivateDocuments";
+static NSString * const kPrivateDocuments = @"PrivateDocuments";
 
 @implementation NSFileManager (GreatReaderAdditions)
 

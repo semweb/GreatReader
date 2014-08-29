@@ -23,8 +23,8 @@
 {
     self = [super init];
     if (self) {
-        self.unicodeFromCID = [NSMutableDictionary dictionary];
-        self.CIDFromUnicode = [NSMutableDictionary dictionary];
+        _unicodeFromCID = [NSMutableDictionary dictionary];
+        _CIDFromUnicode = [NSMutableDictionary dictionary];
         PDFCMapParser *parser = [[PDFCMapParser alloc] initWithStream:stream];
         parser.delegate = self;
         [parser parse];

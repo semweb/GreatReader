@@ -8,6 +8,7 @@
 
 #import "PDFDocumentBrightnessViewController.h"
 
+#import "Device.h"
 #import "PDFDocument.h"
 #import "PDFDocumentViewController.h"
 
@@ -29,7 +30,7 @@
 {
     [super viewDidLoad];
 
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if (IsPhone()) {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:LocalizedString(@"Brightness")];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -66,7 +67,7 @@
 - (IBAction)done:(id)sender
 {
     [self dismissViewControllerAnimated:YES
-                             completion:NULL];
+                             completion:nil];
 }
 
 - (void)sliderChanged:(UISlider *)slider

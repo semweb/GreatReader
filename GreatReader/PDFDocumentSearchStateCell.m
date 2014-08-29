@@ -14,7 +14,7 @@
 
 @implementation PDFDocumentSearchStateCell
 
-- (id)init
+- (instancetype)init
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     if (self) {

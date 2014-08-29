@@ -16,8 +16,8 @@
 #import "PDFDocumentViewController.h"
 #import "NSArray+GreatReaderAdditions.h"
 
-NSString * const PDFDocumentSearchViewControllerSegueExit = @"PDFDocumentSearchViewControllerSegueExit";
-NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSearchViewControllerCellIdentifier";
+static NSString * const PDFDocumentSearchViewControllerSegueExit = @"PDFDocumentSearchViewControllerSegueExit";
+static NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDocumentSearchViewControllerCellIdentifier";
 
 @interface PDFDocumentSearchViewController () <UISearchBarDelegate>
 @property (nonatomic, strong) UISearchBar *searchBar;

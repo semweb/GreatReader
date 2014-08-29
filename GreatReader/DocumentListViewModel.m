@@ -8,9 +8,6 @@
 
 #import "DocumentListViewModel.h"
 
-@interface DocumentListViewModel ()
-@end
-
 @implementation DocumentListViewModel
 - (NSString *)title { return nil; }
 - (NSUInteger)count { return 0; }

@@ -18,7 +18,7 @@
 
 @implementation PDFDocumentBookmarkList
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [self init];
     if (self) {

@@ -12,9 +12,9 @@
 @class PDFDocumentStore;
 
 @interface PDFRecentDocumentList : NSObject
-@property (nonatomic, readonly) NSUInteger count;
-@property (nonatomic, readonly, strong) NSArray *documents;
-@property (nonatomic, readonly, weak) PDFDocumentStore *store;
+@property (nonatomic, assign, readonly) NSUInteger count;
+@property (nonatomic, strong, readonly) NSArray *documents;
+@property (nonatomic, weak, readonly) PDFDocumentStore *store;
 - (instancetype)initWithStore:(PDFDocumentStore *)store;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (void)addHistory:(PDFDocument *)document;

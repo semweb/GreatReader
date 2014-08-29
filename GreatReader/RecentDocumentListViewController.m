@@ -14,12 +14,8 @@
 #import "DocumentTableViewCell.h"
 #import "RecentDocumentListViewModel.h"
 
-NSString * const RecentDocumentListViewControllerCellIdentifier = @"RecentDocumentListViewControllerCellIdentifier";
-NSString * const RecentDocumentListViewControllerSegueExit = @"RecentDocumentListViewControllerSegueExit";
-
-@interface RecentDocumentListViewController ()
-
-@end
+static NSString * const RecentDocumentListViewControllerCellIdentifier = @"RecentDocumentListViewControllerCellIdentifier";
+static NSString * const RecentDocumentListViewControllerSegueExit = @"RecentDocumentListViewControllerSegueExit";
 
 @implementation RecentDocumentListViewController
 

@@ -15,7 +15,7 @@
 #import "PDFPageCropViewController.h"
 #import "PDFPageViewController.h"
 
-NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewControllerSegueExit";
+static NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCropViewControllerSegueExit";
 
 @interface PDFDocumentCropViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) PDFPageCropViewController *pdfPageViewController;

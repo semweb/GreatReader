@@ -15,9 +15,9 @@
 #import "PDFDocumentStore.h"
 
 @interface PDFRecentDocumentList ()
-@property (nonatomic, readwrite, strong) NSArray *documents;
+@property (nonatomic, strong, readwrite) NSArray *documents;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier bgTask;
-@property (nonatomic, readwrite, weak) PDFDocumentStore *store;
+@property (nonatomic, weak, readwrite) PDFDocumentStore *store;
 @end
 
 @implementation PDFRecentDocumentList
@@ -31,9 +31,9 @@
 {
     self = [super init];
     if (self) {
-        self.store = store;
+        _store = store;
         NSArray *list = [self load];
-        self.documents = list;
+        _documents = list;
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(documentDeleted:)
                                                    name:PDFDocumentDeletedNotification
@@ -145,6 +145,7 @@
 - (void)didEnterBackground:(NSNotification *)notification
 {
     self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
         self.bgTask = UIBackgroundTaskInvalid;
     }];
     [self save];

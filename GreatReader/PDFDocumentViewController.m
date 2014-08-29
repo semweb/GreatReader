@@ -33,11 +33,11 @@
 #import "RecentDocumentListViewController.h"
 #import "RecentDocumentListViewModel.h"
 
-NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
-NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
-NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewControllerSegueBrightness";
-NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
-NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentViewControllerSegueSearch";
+static NSString * const PDFDocumentViewControllerSegueOutline = @"PDFDocumentViewControllerSegueOutline";
+static NSString * const PDFDocumentViewControllerSegueCrop = @"PDFDocumentViewControllerSegueCrop";
+static NSString * const PDFDocumentViewControllerSegueBrightness = @"PDFDocumentViewControllerSegueBrightness";
+static NSString * const PDFDocumentViewControllerSegueHistory = @"PDFDocumentViewControllerSegueHistory";
+static NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentViewControllerSegueSearch";
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
                                          UIPageViewControllerDelegate,
@@ -303,7 +303,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
                 [pvc setViewControllers:viewControllers
                               direction:direction
                                animated:NO
-                             completion:NULL];
+                             completion:nil];
             });
         }
     }];
@@ -361,16 +361,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (void)done:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)showSearch:(id)sender
-{
-
-}
-
-- (void)showSetting:(id)sender
-{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)showOutline:(id)sender
@@ -449,10 +440,9 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     [self goAtIndex:self.document.currentPage animated:NO];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        // なぜかdimissされないので
+    if (IsPad()) {
         [self dismissViewControllerAnimated:YES
-                                 completion:NULL];
+                                 completion:nil];
     }
 }
 
@@ -465,7 +455,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (IBAction)exitHistory:(UIStoryboardSegue *)segue
 {
     if (IsPhone()) {
-        [self dismissViewControllerAnimated:YES completion:NULL];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -492,7 +482,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
                                       direction:direction
                                        animated:YES
-                                     completion:NULL];
+                                     completion:nil];
     [self.infoView show]; 
 }
 
@@ -505,7 +495,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
                                       direction:direction
                                        animated:YES
-                                     completion:NULL];
+                                     completion:nil];
     [self.infoView show]; 
 }
 

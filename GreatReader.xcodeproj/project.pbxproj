@@ -68,7 +68,6 @@
 		19640D5819908C7F004A47E8 /* PDFDocumentNameList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D5719908C7F004A47E8 /* PDFDocumentNameList.m */; };
 		19640D5919908C7F004A47E8 /* PDFDocumentNameList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D5719908C7F004A47E8 /* PDFDocumentNameList.m */; };
 		1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */; };
-		1994AFEE194CA1770021B08C /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA73618DC705800E123AB /* GRTNavigationController.m */; };
 		1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615B18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m */; };
 		1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31E218A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m */; };
 		1994AFF4194CA1780021B08C /* NSArray+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DC91884F33E006FDA6F /* NSArray+GreatReaderAdditions.m */; };
@@ -157,7 +156,6 @@
 		19ABA5C318D6701200E123AB /* RibbonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5BF18D6701200E123AB /* RibbonOff@2x.png */; };
 		19ABA5C418D6701200E123AB /* RibbonOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19ABA5C118D6701200E123AB /* RibbonOn@2x.png */; };
 		19ABA5C718D6A90E00E123AB /* PDFDocumentBrightnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA5C618D6A90E00E123AB /* PDFDocumentBrightnessViewController.m */; };
-		19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ABA73618DC705800E123AB /* GRTNavigationController.m */; };
 		19BB31D718A344870091F6AB /* PDFRecentDocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */; };
 		19BB31E318A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31E218A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m */; };
 		19C9615C18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615B18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m */; };
@@ -351,8 +349,6 @@
 		19ABA5C218D6701200E123AB /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/RibbonOn@2x.png"; sourceTree = "<group>"; };
 		19ABA5C518D6A90E00E123AB /* PDFDocumentBrightnessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentBrightnessViewController.h; sourceTree = "<group>"; };
 		19ABA5C618D6A90E00E123AB /* PDFDocumentBrightnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentBrightnessViewController.m; sourceTree = "<group>"; };
-		19ABA73518DC705800E123AB /* GRTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTNavigationController.h; sourceTree = "<group>"; };
-		19ABA73618DC705800E123AB /* GRTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTNavigationController.m; sourceTree = "<group>"; };
 		19BB31D518A344870091F6AB /* PDFRecentDocumentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRecentDocumentList.h; sourceTree = "<group>"; };
 		19BB31D618A344870091F6AB /* PDFRecentDocumentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRecentDocumentList.m; sourceTree = "<group>"; };
 		19BB31E118A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+GreatReaderAdditions.h"; sourceTree = "<group>"; };
@@ -549,8 +545,6 @@
 			children = (
 				19090475191398D60014CC95 /* GRTModalTransitionAnimator.h */,
 				19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */,
-				19ABA73518DC705800E123AB /* GRTNavigationController.h */,
-				19ABA73618DC705800E123AB /* GRTNavigationController.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -589,7 +583,6 @@
 				19D99DC71884F324006FDA6F /* Category */,
 				19E525B1197E1D23005D0304 /* Crop */,
 				19E525AF197E1D09005D0304 /* Document/Page */,
-				19E525AD197E1CF4005D0304 /* File/Folder */,
 				19D99DCC1888E56C006FDA6F /* Folder */,
 				19E525B5197E1DA2005D0304 /* History */,
 				19E525B4197E1D79005D0304 /* Home */,
@@ -631,13 +624,6 @@
 				19D8707E18BA2D8700FA2B66 /* Icon-76@2x.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		19E525AD197E1CF4005D0304 /* File/Folder */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = File/Folder;
 			sourceTree = "<group>";
 		};
 		19E525AE197E1CFE005D0304 /* Parser */ = {
@@ -1175,7 +1161,6 @@
 				191B7D1A1963830B004B35CA /* PDFPageSelectionKnob.m in Sources */,
 				1997501A18CAC3E7008D514B /* PDFCMap.m in Sources */,
 				1994B077194FF4DA0021B08C /* NSString+GreatReaderAdditions.m in Sources */,
-				19ABA73718DC705800E123AB /* GRTNavigationController.m in Sources */,
 				19640D5019891FEF004A47E8 /* PDFPageLinkList.m in Sources */,
 				191B7D3E19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
 				19D99DD71888E798006FDA6F /* File.m in Sources */,
@@ -1252,7 +1237,6 @@
 				191B7D271967B2D8004B35CA /* PDFPageSelectionKnob.m in Sources */,
 				190FFBD1196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
 				1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */,
-				1994AFEE194CA1770021B08C /* GRTNavigationController.m in Sources */,
 				1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */,
 				1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */,
 				191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,

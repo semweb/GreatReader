@@ -21,7 +21,7 @@
 
 @implementation PDFDocumentCropOverlayKnob
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -69,7 +69,7 @@
 
 @implementation PDFDocumentCropOverlayView
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {

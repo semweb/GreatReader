@@ -22,13 +22,13 @@
 #import "RecentDocumentListViewModel.h"
 #import "RootFolder.h"
 
-NSString * const RestorationDocumentListTabBar = @"RestorationDocumentListTabBar";
-NSString * const RestorationDocumentListRecentNavi = @"RestorationDocumentListRecentNavi";
-NSString * const RestorationDocumentListRecent = @"RestorationDocumentListRecent";
-NSString * const RestorationDocumentListFolderNavi = @"RestorationDocumentListFolderNavi";
-NSString * const RestorationDocumentListFolder = @"RestorationDocumentListFolder";
-NSString * const RestorationPDFDocument = @"RestorationPDFDocument";
-NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
+static NSString * const RestorationDocumentListTabBar = @"RestorationDocumentListTabBar";
+static NSString * const RestorationDocumentListRecentNavi = @"RestorationDocumentListRecentNavi";
+static NSString * const RestorationDocumentListRecent = @"RestorationDocumentListRecent";
+static NSString * const RestorationDocumentListFolderNavi = @"RestorationDocumentListFolderNavi";
+static NSString * const RestorationDocumentListFolder = @"RestorationDocumentListFolder";
+static NSString * const RestorationPDFDocument = @"RestorationPDFDocument";
+static NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
 
 
 @interface AppDelegate () <UITabBarControllerDelegate>
@@ -95,9 +95,8 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
         vc.document = [documentList.documents firstObject];
         [vc.document.store addHistory:vc.document];
         return vc;
-    } else {
-        return nil;
     }
+    return nil;
 }
 						
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
@@ -108,18 +107,16 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
 
     NSFileManager *fm = [NSFileManager new];
     NSURL *uniqueDestURL = [fm grt_incrementURLIfNecessary:destURL];
-    NSError *error = nil;
     if ([fm moveItemAtURL:url
                     toURL:uniqueDestURL
-                    error:&error]) {
+                    error:NULL]) {
         NSString *path = [[uniqueDestURL path] stringByRemovingPercentEncoding];
         PDFDocument *document = [self.documentStore documentAtPath:path];
         [self.documentStore addHistory:document];
         [self openURL:uniqueDestURL];
         return YES;
-    } else {
-        return NO;
     }
+    return NO;
 }
 
 #pragma mark - Open Document in GreatReader

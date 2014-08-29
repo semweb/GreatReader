@@ -8,12 +8,9 @@
 
 #import "File.h"
 
-@interface File ()
-@end
-
 @implementation File
 
-- (id)initWithPath:(NSString *)path
+- (instancetype)initWithPath:(NSString *)path
 {
     self = [super init];
     if (self) {

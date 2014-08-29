@@ -14,8 +14,8 @@
 #import "PDFDocumentOutlineItemCell.h"
 #import "PDFDocumentViewController.h"
 
-NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
-NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItemCellIdentifier";
+static NSString * const PDFDocumentOutlineSegueExit = @"PDFDocumentOutlineSegueExit";
+static NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutlineItemCellIdentifier";
 
 @interface PDFDocumentOutlineViewController ()
 @property (nonatomic, strong) NSArray *outlineItems;

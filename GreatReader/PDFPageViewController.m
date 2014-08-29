@@ -8,6 +8,7 @@
 
 #import "PDFPageViewController.h"
 
+#import "Device.h"
 #import "PDFDocumentOutlineItem.h"
 #import "PDFDocumentViewController.h"
 #import "PDFPage.h"
@@ -293,7 +294,7 @@
 {
     UIReferenceLibraryViewController *vc = [[UIReferenceLibraryViewController alloc]
                                                initWithTerm:selectedString];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    if (IsPad()) {
         self.popover = [[UIPopoverController alloc] initWithContentViewController:vc];
         [self.popover presentPopoverFromRect:contentView.selectionFrame
                                       inView:contentView
@@ -302,7 +303,7 @@
     } else {
         [self presentViewController:vc
                            animated:YES
-                         completion:NULL];        
+                         completion:nil];        
     }
 }
 

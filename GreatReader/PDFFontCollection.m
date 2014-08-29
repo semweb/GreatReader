@@ -33,7 +33,7 @@ void PDFFontCollectionGetFont(const char *key, CGPDFObjectRef object, void *info
 {
     self = [super init];
     if (self) {
-        self.fonts = [NSMutableDictionary dictionary];
+        _fonts = [NSMutableDictionary dictionary];
         CGPDFDictionaryRef fontDictionary = [self findFontDictionaryInPage:CGPDFPage];
         if (fontDictionary) {
             CGPDFDictionaryApplyFunction(fontDictionary,

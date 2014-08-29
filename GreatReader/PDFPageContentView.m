@@ -53,13 +53,11 @@
 
 - (void)dealloc
 {
-    // dealloc後にdrawInContextが呼ばれてしまわないように
-    // tileViewのdeallocでやると、間に合わないので、ここで。
     self.tileView.layer.delegate = nil;
     [self removeObserver:self forKeyPath:@"page.selectedFrames"];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
