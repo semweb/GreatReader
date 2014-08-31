@@ -12,26 +12,25 @@ This is a "great" PDF reader designed for both iPhone and iPad.
 
 ## Features
 
+- Universal app
+    - Support for iPhone / iPad
 - iBooks-like design
-    - UI is simple. Easy to use.
-- Recently books
-    - Show book histories. Therefore you can find books that you read recently.
+    - Support your reading experience with simple User Interface.
+- Recently read books
+    - Show your reading histories. Therefore you can find books that you read recently.
 - Cropping
-    - Crop white space to make contents bigger.
-- Slider
-    - Back forward support.
-    - Show page title when change page.
+    - Crop page merging to show contents bigger automatically.
 - Outline
-    - You can find current page because table scrolls to it when outline is opened. 
-- Need not to pinch in/out with two-fingers.
-    - Double tap to zoom in/out.
-    - Fit device width when device is rotated.
+    - Show current document structure so that you can see your position and move around easily.
+- No more pinch in/out.
+    - Zoom in/out with double tap.
+    - Fit document to device size automatically when rotating.
 
 ## Todo
 
 - iOS 8 support
 - Stars
-    - Attach star to your favorite book.
+    - Attach star to your favorite books.
     - Show star tab on startup screen.
 - Cloud support
     - iCloud / iCloud Drive
