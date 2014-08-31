@@ -17,7 +17,7 @@
 @interface PDFDocumentPageSlider ()
 @property (nonatomic, strong) UIView *knobView;
 @property (nonatomic, strong) NSArray *itemViews;
-@property (nonatomic, assign) BOOL moved;
+@property (nonatomic, assign) BOOL started;
 @property (nonatomic, strong) FBKVOController *kvoController;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *forwardButton;
@@ -187,16 +187,26 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];    
+    UITouch *touch = [touches anyObject];
+
+    self.started = NO;
+    if (!CGRectContainsPoint(self.knobView.bounds,
+                            [touch locationInView:self.knobView])) {
+        return;
+    }
+    
     CGPoint point = [touch locationInView:self];
     NSUInteger index = [self indexAtPoint:point];
     if (index != NSNotFound) {
         [self.delegate pageSlider:self didStartAtIndex:index];
+        self.started = YES;
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.started) return;
+    
     UITouch *touch = [touches anyObject];    
     CGPoint point = [touch locationInView:self];
     NSUInteger index = [self indexAtPoint:point];
