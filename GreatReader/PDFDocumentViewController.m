@@ -452,12 +452,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 
 - (IBAction)exitBookmark:(UIStoryboardSegue *)segue {}
 
-- (IBAction)exitHistory:(UIStoryboardSegue *)segue
-{
-    if (IsPhone()) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
+- (IBAction)exitHistory:(UIStoryboardSegue *)segue {}
 
 - (IBAction)exitSearch:(UIStoryboardSegue *)segue {}
 
