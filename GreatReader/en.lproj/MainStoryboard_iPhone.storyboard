@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1281" y="-1029"/>
         </scene>
-        <!--Document List Navigation Controller - Item-->
+        <!--Navigation Controller - Item-->
         <scene sceneID="i8m-H8-hjV">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="sql-Sx-Fo6" customClass="DocumentListNavigationController" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="sql-Sx-Fo6" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="skx-G5-eih"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fmB-KD-vgr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -265,7 +265,7 @@
         <!--Navigation Controller-->
         <scene sceneID="l5C-HC-3nx">
             <objects>
-                <navigationController definesPresentationContext="YES" id="Vcl-pE-Usv" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="Vcl-pE-Usv" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="p1p-mU-Uub">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.27450980392156865" green="0.66666666666666663" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
@@ -503,10 +503,10 @@
             </objects>
             <point key="canvasLocation" x="433" y="-1010"/>
         </scene>
-        <!--Document List Navigation Controller - Item-->
+        <!--Navigation Controller - Item-->
         <scene sceneID="qcv-XT-txJ">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="0Uu-9z-4wD" customClass="DocumentListNavigationController" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="0Uu-9z-4wD" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="BGz-FG-rIX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P6q-Pn-GdS">
                         <autoresizingMask key="autoresizingMask"/>

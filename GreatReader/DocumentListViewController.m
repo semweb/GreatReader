@@ -221,19 +221,3 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document { return nil; }
 
 @end
-
-
-@implementation DocumentListNavigationController : UINavigationController
-
-- (UIViewController *)childViewControllerForStatusBarStyle
-{
-    return self.visibleViewController;
-}
-
-- (UIViewController *)childViewControllerForStatusBarHidden
-{
-    return self.visibleViewController;
-}
-
-@end
-

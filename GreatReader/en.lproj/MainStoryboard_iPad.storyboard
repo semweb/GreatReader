@@ -40,7 +40,7 @@
         <!--Navigation Controller-->
         <scene sceneID="haa-9g-aja">
             <objects>
-                <navigationController definesPresentationContext="YES" id="4t9-hJ-dfS" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="4t9-hJ-dfS" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eGK-y4-d7N">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.27450980392156865" green="0.66666666666666663" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
@@ -315,7 +315,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qzX-rb-cpd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2EF-ue-E9a">
-                        <rect key="frame" x="0.0" y="64" width="320" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -368,10 +368,10 @@
             </objects>
             <point key="canvasLocation" x="-3165" y="-937"/>
         </scene>
-        <!--Document List Navigation Controller - Item-->
+        <!--Navigation Controller - Item-->
         <scene sceneID="WqK-0j-y7z">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" customClass="DocumentListNavigationController" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="Documents.png" id="H5N-lw-U82"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="krL-CF-hEr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -483,10 +483,10 @@
             </objects>
             <point key="canvasLocation" x="-1182" y="-1381"/>
         </scene>
-        <!--Document List Navigation Controller - Recently-->
+        <!--Navigation Controller - Recently-->
         <scene sceneID="Ozj-gD-FY1">
             <objects>
-                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" customClass="DocumentListNavigationController" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" customClass="GRTNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recently" image="TabHistory.png" id="akT-1K-BKR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5PW-wp-4f6">
                         <autoresizingMask key="autoresizingMask"/>

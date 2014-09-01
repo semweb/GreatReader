@@ -31,8 +31,3 @@ extern NSString * const DocumentListViewControllerSeguePDFDocument;
 - (id<DocumentCell>)selectedDocumentCell;
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document;
 @end
-
-
-@interface DocumentListNavigationController : UINavigationController
-@end
-
