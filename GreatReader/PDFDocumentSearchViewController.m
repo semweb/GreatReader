@@ -36,9 +36,14 @@ static NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDoc
     self.searchBar = [[UISearchBar alloc] initWithFrame:[self.navigationController.navigationBar bounds]];
     self.searchBar.delegate = self;
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    self.searchBar.showsCancelButton = YES;
     [self.searchBar becomeFirstResponder];
     self.navigationItem.titleView = self.searchBar;
+
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                           target:self
+                                                           action:@selector(cancel:)];
+    self.navigationItem.rightBarButtonItem = cancelItem;
 
     PDFDocumentSearchStateCell *cell = [[PDFDocumentSearchStateCell alloc] init];
     self.stateCell = cell;
@@ -135,13 +140,15 @@ static NSString * const PDFDocumentSearchViewControllerCellIdentifier = @"PDFDoc
     }
 }
 
-#pragma mark - UISearchBarDelegate
+#pragma mark - Cancel
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+- (void)cancel:(id)sender
 {
     [self performSegueWithIdentifier:PDFDocumentSearchViewControllerSegueExit
                               sender:self];
 }
+
+#pragma mark - UISearchBarDelegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
