@@ -5,8 +5,7 @@ GreatReader
 
 ## Introduction
 
-![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/en.lproj/Icon-60@2x.png)
-　![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/en.lproj/Icon-76@2x.png)
+![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png)
 
 This is a "great" PDF reader designed for both iPhone and iPad.
 
