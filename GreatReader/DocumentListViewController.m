@@ -33,9 +33,6 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = self.viewModel.title;
-    self.title = self.viewModel.title;    
-
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     [self registerNibForCell];
