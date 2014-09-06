@@ -41,4 +41,6 @@ extern NSString * const PDFDocumentDeletedNotification;
 - (void)goForward;
 - (void)goTo:(NSUInteger)page
   addHistory:(BOOL)addHistory;
++ (NSString *)absolutePathWithRelativePath:(NSString *)relativePath;
++ (NSString *)relativePathWithAbsolutePath:(NSString *)absolutePath;
 @end

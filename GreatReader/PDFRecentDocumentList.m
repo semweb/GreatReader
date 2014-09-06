@@ -108,8 +108,10 @@
 
 - (PDFDocument *)findDocumentAtPath:(NSString *)path
 {
+    NSString *rPath = [PDFDocument relativePathWithAbsolutePath:path];
     for (PDFDocument *doc in self.documents) {
-        if ([doc.path isEqual:path]) {
+        NSString *docrPath = [PDFDocument relativePathWithAbsolutePath:doc.path];
+        if ([rPath isEqual:docrPath]) {
             return doc;
         }
     }
