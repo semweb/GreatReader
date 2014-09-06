@@ -42,7 +42,7 @@
     NSMutableAttributedString *string = [NSMutableAttributedString new];
     [string appendAttributedString:
         [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",
-                                                             [NSString stringWithFormat:LocalizedString(@"Page: %d"),
+                                                             [NSString stringWithFormat:LocalizedString(@"find.page-format"),
                                                                        (int)self.page]]
                                         attributes:boldAttributes]];
     [string appendAttributedString:

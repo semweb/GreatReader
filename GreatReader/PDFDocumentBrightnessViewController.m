@@ -32,7 +32,7 @@
 
     if (IsPhone()) {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:LocalizedString(@"Brightness")];
+        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:LocalizedString(@".brightness")];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                 target:self
                                                                                 action:@selector(done:)];

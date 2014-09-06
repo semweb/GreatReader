@@ -73,7 +73,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
     if (editing) {
         self.deleteItem =
-                [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Delete")
+                [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".delete")
                                                  style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(delete:)];
@@ -119,8 +119,8 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
-                                              cancelButtonTitle:LocalizedString(@"Cancel")
-                                         destructiveButtonTitle:LocalizedString(@"Delete")
+                                              cancelButtonTitle:LocalizedString(@".cancel")
+                                         destructiveButtonTitle:LocalizedString(@".delete")
                                               otherButtonTitles:nil];
     if (IsPad()) {
         [sheet showFromBarButtonItem:sender animated:YES];

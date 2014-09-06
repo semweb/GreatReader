@@ -21,7 +21,7 @@ static NSString * const PDFDocumentBookmarkListSegueExit = @"PDFDocumentBookmark
 {
     [super viewDidLoad];
 
-    self.title = LocalizedString(@"Bookmarks");
+    self.title = LocalizedString(@".bookmarks");
 
     if (IsPhone()) {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);

@@ -29,7 +29,7 @@
 
 - (NSString *)title
 {
-    return LocalizedString(@"Recently Read");
+    return LocalizedString(@"home.recently-read");
 }
 
 - (NSUInteger)count

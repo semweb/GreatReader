@@ -81,16 +81,16 @@ static NSString * const PDFDocumentCropViewControllerSegueExit = @"PDFDocumentCr
 
     if (self.crop.mode == PDFDocumentCropModeSame) {
         imageName = @"CropBoth";
-        title = LocalizedString(@"Same Crops\nOdd and Even");
+        title = LocalizedString(@"crop.same-crops-odd-and-even");
     } else if (self.crop.mode == PDFDocumentCropModeDifferent) {
         if (self.isOddPage) {
             imageName = @"CropOdd";
         } else {
             imageName = @"CropEven";
         }
-        title = LocalizedString(@"Different Crops\nOdd and Even");        
+        title = LocalizedString(@"crop.different-crops-odd-and-even");        
     } else {
-        title = LocalizedString(@"No Crops");
+        title = LocalizedString(@"crop.no-crops");
         imageName = @"CropNone";
     }
     [self.modeButton setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]

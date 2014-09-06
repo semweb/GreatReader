@@ -36,9 +36,9 @@
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
-                                              cancelButtonTitle:LocalizedString(@"Cancel")
-                                         destructiveButtonTitle:LocalizedString(@"Delete")
-                                              otherButtonTitles:LocalizedString(@"Remove History"), nil];
+                                              cancelButtonTitle:LocalizedString(@".cancel")
+                                         destructiveButtonTitle:LocalizedString(@".delete")
+                                              otherButtonTitles:LocalizedString(@".remove-history"), nil];
     if (IsPad()) {
         [sheet showFromBarButtonItem:sender animated:YES];
     } else {

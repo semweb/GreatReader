@@ -354,10 +354,10 @@
     UIMenuController *menuController = [UIMenuController sharedMenuController];
     NSMutableArray* menuItems = [NSMutableArray array];
     [menuItems addObject:
-                   [[UIMenuItem alloc] initWithTitle:@"Copy"
+                   [[UIMenuItem alloc] initWithTitle:LocalizedString(@".copy")
                                               action:@selector(copySelectedString:)]];
     [menuItems addObject:
-                   [[UIMenuItem alloc] initWithTitle:@"Define"
+                   [[UIMenuItem alloc] initWithTitle:LocalizedString(@".define")
                                               action:@selector(lookupSelectedString:)]];    
     menuController.menuItems = menuItems;
     menuController.arrowDirection = UIMenuControllerArrowDefault;

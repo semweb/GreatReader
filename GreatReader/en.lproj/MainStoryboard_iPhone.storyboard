@@ -531,7 +531,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-TK-6Cz">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-TK-6Cz" customClass="DocumentListCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -555,15 +555,45 @@
                                 <connections>
                                     <outlet property="dataSource" destination="lOA-vd-e91" id="2dY-hD-yu6"/>
                                     <outlet property="delegate" destination="lOA-vd-e91" id="KoX-8c-D8Q"/>
+                                    <outlet property="emptyDescriptionLabel" destination="6ya-MI-XDo" id="Dtc-xX-fbA"/>
+                                    <outlet property="emptyTitleLabel" destination="Iif-do-Vky" id="QD3-bH-xuJ"/>
+                                    <outlet property="emptyView" destination="iza-s6-O3C" id="x9G-4D-vi3"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iza-s6-O3C">
+                                <rect key="frame" x="20" y="232" width="280" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Books" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iif-do-Vky">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please open files from other apps or share ones with iTunes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6ya-MI-XDo">
+                                        <rect key="frame" x="0.0" y="55" width="280" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="rzY-D4-bpd"/>
+                                    <constraint firstAttribute="height" constant="105" id="u0v-2y-IlT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fXj-TK-6Cz" firstAttribute="top" secondItem="YEV-uc-cNH" secondAttribute="top" id="CwR-zJ-gYP"/>
                             <constraint firstItem="fXj-TK-6Cz" firstAttribute="leading" secondItem="YEV-uc-cNH" secondAttribute="leading" id="Tc6-cb-K7l"/>
                             <constraint firstAttribute="bottom" secondItem="fXj-TK-6Cz" secondAttribute="bottom" id="VOl-cZ-Xxq"/>
+                            <constraint firstAttribute="centerX" secondItem="iza-s6-O3C" secondAttribute="centerX" id="eDv-Pu-Vdl"/>
                             <constraint firstAttribute="trailing" secondItem="fXj-TK-6Cz" secondAttribute="trailing" id="rqb-7J-OC5"/>
+                            <constraint firstAttribute="centerY" secondItem="iza-s6-O3C" secondAttribute="centerY" id="tpL-M8-PfJ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Documents" image="Documents.png" id="bQf-he-0c6"/>

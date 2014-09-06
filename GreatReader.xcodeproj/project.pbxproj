@@ -216,6 +216,8 @@
 		19F7BA8E186052E2009E8916 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F7BA66186052E2009E8916 /* Foundation.framework */; };
 		19F7BA96186052E2009E8916 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19F7BA94186052E2009E8916 /* InfoPlist.strings */; };
 		19FE765B19B9338F00E64550 /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE765A19B9338F00E64550 /* GRTNavigationController.m */; };
+		19FE766219BAD11100E64550 /* DocumentListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE766119BAD11100E64550 /* DocumentListCollectionView.m */; };
+		19FE766319BAD11100E64550 /* DocumentListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE766119BAD11100E64550 /* DocumentListCollectionView.m */; };
 		B9BA68E216644211A0D47024 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
 		C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */; };
 /* End PBXBuildFile section */
@@ -442,6 +444,8 @@
 		19F7BA95186052E2009E8916 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19FE765919B9338F00E64550 /* GRTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTNavigationController.h; sourceTree = "<group>"; };
 		19FE765A19B9338F00E64550 /* GRTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTNavigationController.m; sourceTree = "<group>"; };
+		19FE766019BAD11100E64550 /* DocumentListCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListCollectionView.h; sourceTree = "<group>"; };
+		19FE766119BAD11100E64550 /* DocumentListCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListCollectionView.m; sourceTree = "<group>"; };
 		460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatReaderTests.xcconfig"; path = "Pods/Pods-GreatReaderTests.xcconfig"; sourceTree = "<group>"; };
 		8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatReaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AE020033EA4C089CF48093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -761,6 +765,8 @@
 				191B7D3D19684F5B004B35CA /* DocumentCollectionViewCell.m */,
 				191B7D48196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib */,
 				191B7D44196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib */,
+				19FE766019BAD11100E64550 /* DocumentListCollectionView.h */,
+				19FE766119BAD11100E64550 /* DocumentListCollectionView.m */,
 				191B7D3419684E2A004B35CA /* DocumentListCollectionViewController.h */,
 				191B7D3519684E2A004B35CA /* DocumentListCollectionViewController.m */,
 				191B7D3019682BB4004B35CA /* DocumentListTableViewController.h */,
@@ -1191,6 +1197,7 @@
 				19D99E05188CDC60006FDA6F /* PDFDocumentOutlineViewController.m in Sources */,
 				19D12BC418C318C5001C2066 /* PDFText.m in Sources */,
 				19D12BC718C319E5001C2066 /* PDFTextState.m in Sources */,
+				19FE766219BAD11100E64550 /* DocumentListCollectionView.m in Sources */,
 				199ABC201978D14600FAC2C1 /* PDFDocumentSearchStateCell.m in Sources */,
 				19FE765B19B9338F00E64550 /* GRTNavigationController.m in Sources */,
 				191B7D5A196AE278004B35CA /* PDFDocumentSearch.m in Sources */,
@@ -1273,6 +1280,7 @@
 				190FFBC4196D8780004BEA59 /* PDFDocumentSearchViewModel.m in Sources */,
 				1994B01E194CA1780021B08C /* PDFPage.m in Sources */,
 				1994B020194CA1780021B08C /* PDFPageContentTiledLayer.m in Sources */,
+				19FE766319BAD11100E64550 /* DocumentListCollectionView.m in Sources */,
 				1994B022194CA1780021B08C /* PDFPageContentView.m in Sources */,
 				19640D551989205A004A47E8 /* PDFPageLink.m in Sources */,
 				1994B024194CA1780021B08C /* PDFPageCropViewController.m in Sources */,

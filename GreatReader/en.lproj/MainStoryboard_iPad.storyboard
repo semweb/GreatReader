@@ -437,7 +437,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-vj-aVB">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-vj-aVB" customClass="DocumentListCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -461,14 +461,46 @@
                                 <connections>
                                     <outlet property="dataSource" destination="7OG-jc-M8R" id="NfM-fo-b1O"/>
                                     <outlet property="delegate" destination="7OG-jc-M8R" id="lsF-Uv-j7b"/>
+                                    <outlet property="emptyDescriptionLabel" destination="8uZ-Zu-yrR" id="DC2-e7-Uqf"/>
+                                    <outlet property="emptyTitleLabel" destination="qnc-Ak-L4w" id="TCz-wt-Sza"/>
+                                    <outlet property="emptyView" destination="cHM-my-eAn" id="ric-Cw-4Fw"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHM-my-eAn">
+                                <rect key="frame" x="244" y="459" width="280" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Books" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnc-Ak-L4w">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please open files from other apps or share ones with iTunes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="8uZ-Zu-yrR">
+                                        <rect key="frame" x="0.0" y="55" width="280" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="105" id="Nn1-yU-lDH"/>
+                                    <constraint firstAttribute="width" constant="280" id="OhB-iZ-Led"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="105" id="acl-qW-zLS"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="lvg-e5-R3j"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="cHM-my-eAn" secondAttribute="centerX" id="dIH-p9-chA"/>
                             <constraint firstItem="ccI-vj-aVB" firstAttribute="top" secondItem="fYo-uX-q1P" secondAttribute="top" id="gZw-qL-Vq2"/>
                             <constraint firstAttribute="trailing" secondItem="ccI-vj-aVB" secondAttribute="trailing" id="hCr-oJ-iFr"/>
                             <constraint firstItem="ccI-vj-aVB" firstAttribute="leading" secondItem="fYo-uX-q1P" secondAttribute="leading" id="jUT-PB-ocF"/>
+                            <constraint firstAttribute="centerY" secondItem="cHM-my-eAn" secondAttribute="centerY" id="nHu-Pz-6OA"/>
                             <constraint firstAttribute="bottom" secondItem="ccI-vj-aVB" secondAttribute="bottom" id="nRd-cp-H8m"/>
                         </constraints>
                     </view>
@@ -632,6 +664,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Fnl-35-kp3"/>
+        <segue reference="Rf6-8C-drt"/>
     </inferredMetricsTieBreakers>
 </document>
