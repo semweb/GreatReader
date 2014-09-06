@@ -88,7 +88,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSUInteger index = indexPath.row;
-        [self.viewModel deleteDocuments:@[[self.viewModel documentAtIndex:index]]];
+        [self.viewModel removeDocumentHistories:@[[self.viewModel documentAtIndex:index]]];
         [tableView deleteRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationAutomatic];
     }
