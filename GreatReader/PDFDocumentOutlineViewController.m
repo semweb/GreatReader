@@ -34,6 +34,13 @@ static NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutl
     [self.tableView registerNib:nib
          forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];
 
+    if (IsPhone() &&
+        [[[UIDevice currentDevice] systemVersion] compare:@"8"] == NSOrderedAscending) {
+
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+    }
+
     self.activeIndex = -1;
     [self.outlineItems enumerateObjectsUsingBlock:^(NSDictionary *item,
                                                     NSUInteger idx,
