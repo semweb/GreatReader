@@ -218,6 +218,10 @@
 		19FE765B19B9338F00E64550 /* GRTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE765A19B9338F00E64550 /* GRTNavigationController.m */; };
 		19FE766219BAD11100E64550 /* DocumentListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE766119BAD11100E64550 /* DocumentListCollectionView.m */; };
 		19FE766319BAD11100E64550 /* DocumentListCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE766119BAD11100E64550 /* DocumentListCollectionView.m */; };
+		19FE766819BC303E00E64550 /* Pride and Prejudice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */; };
+		19FE766919BC303E00E64550 /* Pride and Prejudice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */; };
+		19FE766A19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */; };
+		19FE766B19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */; };
 		B9BA68E216644211A0D47024 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
 		C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */; };
 /* End PBXBuildFile section */
@@ -446,6 +450,8 @@
 		19FE765A19B9338F00E64550 /* GRTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTNavigationController.m; sourceTree = "<group>"; };
 		19FE766019BAD11100E64550 /* DocumentListCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentListCollectionView.h; sourceTree = "<group>"; };
 		19FE766119BAD11100E64550 /* DocumentListCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListCollectionView.m; sourceTree = "<group>"; };
+		19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Pride and Prejudice.pdf"; path = "Samples/Pride and Prejudice.pdf"; sourceTree = "<group>"; };
+		19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "The Adventres of Sherlock Holmes.pdf"; path = "Samples/The Adventres of Sherlock Holmes.pdf"; sourceTree = "<group>"; };
 		460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatReaderTests.xcconfig"; path = "Pods/Pods-GreatReaderTests.xcconfig"; sourceTree = "<group>"; };
 		8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatReaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AE020033EA4C089CF48093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -858,6 +864,7 @@
 		19F7BA6A186052E2009E8916 /* GreatReader */ = {
 			isa = PBXGroup;
 			children = (
+				19FE766419BB4BC800E64550 /* Resources */,
 				19E525B6197E1DFF005D0304 /* Storyboards */,
 				19430E4A18E7B33E00BB4238 /* Libraries */,
 				19D99DEA188A7E76006FDA6F /* Images */,
@@ -910,6 +917,23 @@
 				19F7BA94186052E2009E8916 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19FE766419BB4BC800E64550 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19FE766519BC302C00E64550 /* SamplePDF */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		19FE766519BC302C00E64550 /* SamplePDF */ = {
+			isa = PBXGroup;
+			children = (
+				19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */,
+				19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */,
+			);
+			name = SamplePDF;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1011,8 +1035,10 @@
 				19ABA5C318D6701200E123AB /* RibbonOff@2x.png in Resources */,
 				191B7D56196957A2004B35CA /* DocumentTableViewCell.xib in Resources */,
 				19C9616A1905E6E400D1857C /* CropBoth@2x.png in Resources */,
+				19FE766819BC303E00E64550 /* Pride and Prejudice.pdf in Resources */,
 				19C9616B1905E6E400D1857C /* CropEven@2x.png in Resources */,
 				199ABC1D19754E5F00FAC2C1 /* Check@2x.png in Resources */,
+				19FE766A19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */,
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
 				19D99E02188A7EB7006FDA6F /* Folder@2x.png in Resources */,
 				19ABA5BE18D66FF700E123AB /* Setting@2x.png in Resources */,
@@ -1031,10 +1057,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				191B7D47196925DB004B35CA /* DocumentCollectionViewCell_iPhone.xib in Resources */,
+				19FE766919BC303E00E64550 /* Pride and Prejudice.pdf in Resources */,
 				190FFBCD196E97A6004BEA59 /* PDFDocumentSearchTests5.pdf in Resources */,
 				191B7D7B196D4B72004B35CA /* PDFDocumentSearchTests4.pdf in Resources */,
 				191B7D78196D4B72004B35CA /* PDFDocumentSearchTests1.pdf in Resources */,
 				1994B074194F255C0021B08C /* Test.pdf in Resources */,
+				19FE766B19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */,
 				1994B06F194CA1EC0021B08C /* MainStoryboard_iPhone.storyboard in Resources */,
 				191B7D4B196925ED004B35CA /* DocumentCollectionViewCell_iPad.xib in Resources */,
 				191B7D7A196D4B72004B35CA /* PDFDocumentSearchTests3.pdf in Resources */,

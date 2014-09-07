@@ -30,6 +30,8 @@ static NSString * const RestorationDocumentListFolder = @"RestorationDocumentLis
 static NSString * const RestorationPDFDocument = @"RestorationPDFDocument";
 static NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
 
+static NSString * const LastAppVersion = @"LastAppVersion";
+
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 @property (nonatomic, strong) PDFDocumentStore *documentStore;
@@ -45,6 +47,8 @@ static NSString * const StoryboardPDFDocument = @"StoryboardPDFDocument";
     if (CrashlyticsEnabled()) {
         [Crashlytics startWithAPIKey:GetCrashlyticsAPIKey()];
     }
+
+    [self migrateIfNeeded];
 
     self.documentStore = PDFDocumentStore.new;
     [self.documentStore.rootFolder load];
@@ -156,6 +160,40 @@ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     tabBarController.title = viewController.title;
+}
+
+#pragma mark -
+
+- (void)migrateIfNeeded
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *lastVersion = [defaults objectForKey:LastAppVersion];
+    if (!lastVersion) {
+        [self copySamplePDFFiles];
+    }
+    NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    [defaults setObject:currentVersion forKey:LastAppVersion];
+    [defaults synchronize];
+}
+
+- (void)copySamplePDFFiles
+{
+    NSArray *pdfs = @[@"Pride and Prejudice",
+                      @"The Adventres of Sherlock Holmes"];
+    NSFileManager *fm = [NSFileManager new];
+    for (NSString *pdf in pdfs) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:pdf ofType:@"pdf"];
+        NSString *toPath = [[[NSFileManager grt_documentsPath]
+                               stringByAppendingPathComponent:pdf]
+                               stringByAppendingPathExtension:@"pdf"];
+        NSError *error = nil;
+        [fm copyItemAtPath:path
+                    toPath:toPath
+                     error:&error];
+        if (error) {
+            NSLog(@"%@", error);
+        }
+    }
 }
 
 @end
