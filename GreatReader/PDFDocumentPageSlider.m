@@ -14,6 +14,37 @@
 #import "PDFDocumentPageSliderModel.h"
 #import "UIColor+GreatReaderAdditions.h"
 
+@interface PDFDocumentPageSliderKnobView : UIView
+@end
+
+@implementation PDFDocumentPageSliderKnobView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = self.tintColor;
+        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = self.tintColor.CGColor;
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 7;
+        self.layer.zPosition = 1000;
+    }
+    return self;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    CGRect b = self.bounds;
+    b.origin.x -= 15;
+    b.origin.y -= 15;
+    b.size.width += 30;
+    b.size.height += 30;
+    return CGRectContainsPoint(b, point);
+}
+
+@end
+
 @interface PDFDocumentPageSlider ()
 @property (nonatomic, strong) UIView *knobView;
 @property (nonatomic, strong) NSArray *itemViews;
@@ -27,13 +58,7 @@
 
 - (void)awakeFromNib
 {
-    self.knobView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
-    self.knobView.backgroundColor = self.tintColor;    
-    self.knobView.layer.borderWidth = 1.0;
-    self.knobView.layer.borderColor = self.tintColor.CGColor;
-    self.knobView.layer.masksToBounds = YES;
-    self.knobView.layer.cornerRadius = 7;
-    self.knobView.layer.zPosition = 1000;
+    self.knobView = [[PDFDocumentPageSliderKnobView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [self addSubview:self.knobView];
 
     self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -190,8 +215,8 @@
     UITouch *touch = [touches anyObject];
 
     self.started = NO;
-    if (!CGRectContainsPoint(self.knobView.bounds,
-                            [touch locationInView:self.knobView])) {
+    if (![self.knobView pointInside:[touch locationInView:self.knobView]
+                          withEvent:event]) {
         return;
     }
     
