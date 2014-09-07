@@ -29,29 +29,11 @@ static NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutl
 {
     [super viewDidLoad];
 
-    self.activeIndex = -1;
-
     NSString *nibName = @"PDFDocumentOutlineItemCell";
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.tableView registerNib:nib
          forCellReuseIdentifier:PDFDocumentOutlineItemCellIdentifier];
 
-    if (IsPhone()) {
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self scrollToCurrentPage];
-}
-
-#pragma mark - Scroll to currentPage
-
-- (void)scrollToCurrentPage
-{
     self.activeIndex = -1;
     [self.outlineItems enumerateObjectsUsingBlock:^(NSDictionary *item,
                                                     NSUInteger idx,
@@ -66,8 +48,19 @@ static NSString * const PDFDocumentOutlineItemCellIdentifier = @"PDFDocumentOutl
         else if (from > self.currentPage) {
             *stop = YES;
         }
-    }];
+    }];    
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self scrollToCurrentPage];
+}
+
+#pragma mark - Scroll to currentPage
+
+- (void)scrollToCurrentPage
+{
     if (self.activeIndex > 0) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeIndex
                                                     inSection:0];
