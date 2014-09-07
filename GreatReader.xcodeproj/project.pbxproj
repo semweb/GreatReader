@@ -222,6 +222,7 @@
 		19FE766919BC303E00E64550 /* Pride and Prejudice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */; };
 		19FE766A19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */; };
 		19FE766B19BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */; };
+		19FE766D19BC334D00E64550 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19FE766C19BC334D00E64550 /* Settings.bundle */; };
 		B9BA68E216644211A0D47024 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
 		C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */; };
 /* End PBXBuildFile section */
@@ -452,6 +453,7 @@
 		19FE766119BAD11100E64550 /* DocumentListCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentListCollectionView.m; sourceTree = "<group>"; };
 		19FE766619BC303E00E64550 /* Pride and Prejudice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Pride and Prejudice.pdf"; path = "Samples/Pride and Prejudice.pdf"; sourceTree = "<group>"; };
 		19FE766719BC303E00E64550 /* The Adventres of Sherlock Holmes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "The Adventres of Sherlock Holmes.pdf"; path = "Samples/The Adventres of Sherlock Holmes.pdf"; sourceTree = "<group>"; };
+		19FE766C19BC334D00E64550 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		460F24679C2A4BC58634EF69 /* Pods-GreatReaderTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatReaderTests.xcconfig"; path = "Pods/Pods-GreatReaderTests.xcconfig"; sourceTree = "<group>"; };
 		8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatReaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AE020033EA4C089CF48093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -886,6 +888,7 @@
 				19F7BA76186052E2009E8916 /* Default.png */,
 				19F7BA78186052E2009E8916 /* Default@2x.png */,
 				19F7BA7A186052E2009E8916 /* Default-568h@2x.png */,
+				19FE766C19BC334D00E64550 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1042,6 +1045,7 @@
 				19F7BA7E186052E2009E8916 /* MainStoryboard_iPhone.storyboard in Resources */,
 				19D99E02188A7EB7006FDA6F /* Folder@2x.png in Resources */,
 				19ABA5BE18D66FF700E123AB /* Setting@2x.png in Resources */,
+				19FE766D19BC334D00E64550 /* Settings.bundle in Resources */,
 				19ABA5BD18D66FF700E123AB /* Outline@2x.png in Resources */,
 				19D8708218BA2DB600FA2B66 /* Images.xcassets in Resources */,
 				191B7D2A1967E5E2004B35CA /* TabHistory@2x.png in Resources */,
