@@ -7,6 +7,8 @@ GreatReader
 
 ![](https://raw.githubusercontent.com/semweb/GreatReader/master/GreatReader/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png)
 
+[![](https://raw.github.com/wiki/semweb/GreatReader/images/AppStoreBadge.png)](https://itunes.apple.com/us/app/greatreader/id903651112)
+
 This is a "great" PDF reader designed for both iPhone and iPad.
 
 ## Features
