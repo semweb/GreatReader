@@ -45,8 +45,12 @@
             self.presenting ? toViewController : fromViewController;
 
     toViewController.view.frame = fromViewController.view.frame;
-    [transitionContext.containerView insertSubview:toViewController.view
-                                      belowSubview:fromViewController.view];
+    if (self.presenting) {
+        [transitionContext.containerView addSubview:toViewController.view];
+        toViewController.view.hidden = YES;
+    } else {
+        fromViewController.view.hidden = YES;
+    }
 
     DocumentListViewController *documentListViewController =
             [self documentListViewControllerFromContainer:documentListContainer];
@@ -58,8 +62,8 @@
 
     // Even if device is landscape, view frame is not rotated.
     // Need to layout here.
-    [toViewController.view layoutIfNeeded];    
-    
+    [toViewController.view layoutIfNeeded];
+
     id<DocumentCell> documentCell = self.presenting
             ? [documentListViewController selectedDocumentCell]
             : [documentListViewController documentCellForDocument:documentViewController.document];
@@ -81,11 +85,7 @@
 
     CGRect fromRect = self.presenting ? frameInDocumentList : frameInDocument;
     CGRect toRect = self.presenting ? frameInDocument : frameInDocumentList;
-    animationView.frame = fromRect;    
-   
-    if (!self.presenting) {
-        fromViewController.view.hidden = YES;
-    }
+    animationView.frame = fromRect;
 
     [UIView performSystemAnimation:0
                            onViews:@[]
@@ -94,9 +94,9 @@
         animationView.frame = toRect;
         backgroundView.alpha = self.presenting ? 1 : 0;
     } completion:^(BOOL finished) {
+        toViewController.view.hidden = NO;
         [backgroundView removeFromSuperview];
         [animationView removeFromSuperview];
-        [fromViewController.view removeFromSuperview];
         [transitionContext completeTransition:YES];
     }];
 }
