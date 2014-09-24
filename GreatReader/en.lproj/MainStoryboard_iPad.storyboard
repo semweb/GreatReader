@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="3eD-fd-rSp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="3eD-fd-rSp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Document Outline View Controller - Outline-->
+        <!--Outline-->
         <scene sceneID="mgw-NJ-K5b">
             <objects>
                 <tableViewController storyboardIdentifier="PDFDocumentOutlineViewController" id="5eq-hl-Cwd" customClass="PDFDocumentOutlineViewController" sceneMemberID="viewController">
@@ -67,7 +67,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AY7-Fr-hPj" customClass="PDFDocumentCropLayoutView">
                                 <rect key="frame" x="40" y="40" width="688" height="944"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -102,7 +101,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xep-9F-hOO">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -127,16 +125,13 @@
                         <subviews>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-aL-M8y">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hir-j8-6Gt" customClass="UIToolbar">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhS-Jv-ZGv" customClass="PDFDocumentPageSlider">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -226,7 +221,7 @@
             </objects>
             <point key="canvasLocation" x="1017" y="-1262"/>
         </scene>
-        <!--Document Bookmark List View Controller - Root View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="1YO-mY-3JB">
             <objects>
                 <tableViewController storyboardIdentifier="PDFDocumentBookmarkListViewController" id="Gp0-VY-DLf" customClass="PDFDocumentBookmarkListViewController" sceneMemberID="viewController">
@@ -272,7 +267,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jay-3B-iNT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" id="ycG-JQ-hCw">
@@ -368,7 +362,7 @@
             </objects>
             <point key="canvasLocation" x="-3165" y="-937"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Item-->
         <scene sceneID="WqK-0j-y7z">
             <objects>
                 <navigationController restorationIdentifier="RestorationDocumentListFolderNavi" definesPresentationContext="YES" id="2aF-f9-ur1" customClass="GRTNavigationController" sceneMemberID="viewController">
@@ -384,7 +378,7 @@
             </objects>
             <point key="canvasLocation" x="-2085" y="-1381"/>
         </scene>
-        <!--Document List Table View Controller - Recently-->
+        <!--Recently-->
         <scene sceneID="TJR-cn-TqV">
             <objects>
                 <viewController id="Wns-Jz-2QB" customClass="DocumentListTableViewController" sceneMemberID="viewController">
@@ -398,7 +392,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="k7s-BV-Ceb">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Wns-Jz-2QB" id="2yi-Ov-NyO"/>
@@ -425,7 +418,7 @@
             </objects>
             <point key="canvasLocation" x="-1182" y="-95"/>
         </scene>
-        <!--Document List Collection View Controller - Documents-->
+        <!--Documents-->
         <scene sceneID="q21-a8-OeV">
             <objects>
                 <viewController restorationIdentifier="RestorationDocumentListFolder" id="7OG-jc-M8R" customClass="DocumentListCollectionViewController" sceneMemberID="viewController">
@@ -439,7 +432,6 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ccI-vj-aVB" customClass="DocumentListCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Y39-dW-gAL">
                                     <size key="itemSize" width="50" height="50"/>
@@ -468,18 +460,15 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHM-my-eAn">
                                 <rect key="frame" x="244" y="459" width="280" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Books" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnc-Ak-L4w">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please open files from other apps or share ones with iTunes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="8uZ-Zu-yrR">
                                         <rect key="frame" x="0.0" y="55" width="280" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -515,7 +504,7 @@
             </objects>
             <point key="canvasLocation" x="-1182" y="-1381"/>
         </scene>
-        <!--Navigation Controller - Recently-->
+        <!--Recently-->
         <scene sceneID="Ozj-gD-FY1">
             <objects>
                 <navigationController restorationIdentifier="RestorationDocumentListRecentNavi" definesPresentationContext="YES" id="tFC-Hh-hUb" customClass="GRTNavigationController" sceneMemberID="viewController">
@@ -546,12 +535,12 @@
             </objects>
             <point key="canvasLocation" x="-71" y="-794"/>
         </scene>
-        <!--Document Search View Controller - Root View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="EOq-qQ-GXz">
             <objects>
                 <tableViewController id="Osw-UP-MBc" customClass="PDFDocumentSearchViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0jw-8G-mP6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -586,7 +575,6 @@
                 <navigationController definesPresentationContext="YES" id="1mF-zY-8xE" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="v9Z-EZ-6G4">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -597,12 +585,12 @@
             </objects>
             <point key="canvasLocation" x="2040" y="2128"/>
         </scene>
-        <!--Recent Document List View Controller - Root View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="ZSf-xL-N2b">
             <objects>
                 <tableViewController id="VE9-dR-ezt" customClass="RecentDocumentListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TRH-CU-X3b">
-                        <rect key="frame" x="0.0" y="64" width="320" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
