@@ -133,15 +133,14 @@
         CGSize size = frame.size;
         if (CGAffineTransformEqualToTransform(self.contentView.transform,
                                               CGAffineTransformIdentity)) {
-                
-            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+            if (viewRatio > 1.0) {
                 if (pageRatio > viewRatio) {
                     size.height = boundsSize.height;
-                    size.width = size.height / pageRatio;        
+                    size.width = size.height / pageRatio;
                 } else {
                     size.width = boundsSize.width;
                     size.height = size.width * pageRatio;
-                }        
+                }
             } else {
                 size.width = boundsSize.width;
                 size.height = size.width * pageRatio;
@@ -157,7 +156,7 @@
         } else {
             origin.x = 0;
         }
-        
+
         if (frame.size.height < boundsSize.height) {
             origin.y = (boundsSize.height - frame.size.height) / 2;
         } else {
