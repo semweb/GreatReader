@@ -31,7 +31,6 @@
     [super viewDidLoad];
 
     if (IsPhone()) {
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:LocalizedString(@".brightness")];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                 target:self
@@ -116,18 +115,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return nil;
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-                                         duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:interfaceOrientation
-                                            duration:duration];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 @end

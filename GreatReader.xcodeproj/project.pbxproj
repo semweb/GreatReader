@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19090477191398D60014CC95 /* GRTModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */; };
 		190FFBBF196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBBE196D7F81004BEA59 /* PDFDocumentSearchViewController.m */; };
 		190FFBC0196D7F81004BEA59 /* PDFDocumentSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBBE196D7F81004BEA59 /* PDFDocumentSearchViewController.m */; };
 		190FFBC3196D8780004BEA59 /* PDFDocumentSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 190FFBC2196D8780004BEA59 /* PDFDocumentSearchViewModel.m */; };
@@ -67,7 +66,6 @@
 		19640D551989205A004A47E8 /* PDFPageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D531989205A004A47E8 /* PDFPageLink.m */; };
 		19640D5819908C7F004A47E8 /* PDFDocumentNameList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D5719908C7F004A47E8 /* PDFDocumentNameList.m */; };
 		19640D5919908C7F004A47E8 /* PDFDocumentNameList.m in Sources */ = {isa = PBXBuildFile; fileRef = 19640D5719908C7F004A47E8 /* PDFDocumentNameList.m */; };
-		1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */; };
 		1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C9615B18FB92FA00D1857C /* UIColor+GreatReaderAdditions.m */; };
 		1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB31E218A88CBD0091F6AB /* NSFileManager+GreatReaderAdditions.m */; };
 		1994AFF4194CA1780021B08C /* NSArray+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D99DC91884F33E006FDA6F /* NSArray+GreatReaderAdditions.m */; };
@@ -240,8 +238,6 @@
 
 /* Begin PBXFileReference section */
 		1203664657EB4C89B3EAC3F1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		19090475191398D60014CC95 /* GRTModalTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModalTransitionAnimator.h; sourceTree = "<group>"; };
-		19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModalTransitionAnimator.m; sourceTree = "<group>"; };
 		190FFBBD196D7F81004BEA59 /* PDFDocumentSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchViewController.h; sourceTree = "<group>"; };
 		190FFBBE196D7F81004BEA59 /* PDFDocumentSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentSearchViewController.m; sourceTree = "<group>"; };
 		190FFBC1196D8780004BEA59 /* PDFDocumentSearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentSearchViewModel.h; sourceTree = "<group>"; };
@@ -556,8 +552,6 @@
 			children = (
 				19FE765919B9338F00E64550 /* GRTNavigationController.h */,
 				19FE765A19B9338F00E64550 /* GRTNavigationController.m */,
-				19090475191398D60014CC95 /* GRTModalTransitionAnimator.h */,
-				19090476191398D60014CC95 /* GRTModalTransitionAnimator.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1203,7 +1197,6 @@
 				19F7BA71186052E2009E8916 /* main.m in Sources */,
 				191B7D3219682BB4004B35CA /* DocumentListTableViewController.m in Sources */,
 				19A418BB18E6D1B4002DDFC9 /* PDFPageLoopeView.m in Sources */,
-				19090477191398D60014CC95 /* GRTModalTransitionAnimator.m in Sources */,
 				19F6FDAC18F25F01001E05D5 /* PDFDocumentOutlineContainerViewController.m in Sources */,
 				19CA78AD18B1C41300200362 /* PDFDocumentInfo.m in Sources */,
 				19CA78AA18B1C40400200362 /* PDFDocumentInfoView.m in Sources */,
@@ -1273,7 +1266,6 @@
 			files = (
 				191B7D271967B2D8004B35CA /* PDFPageSelectionKnob.m in Sources */,
 				190FFBD1196F9D22004BEA59 /* PDFDocumentBackForwardList.m in Sources */,
-				1994AFEC194CA1770021B08C /* GRTModalTransitionAnimator.m in Sources */,
 				1994AFF1194CA1780021B08C /* UIColor+GreatReaderAdditions.m in Sources */,
 				1994AFF3194CA1780021B08C /* NSFileManager+GreatReaderAdditions.m in Sources */,
 				191B7D3F19684F5B004B35CA /* DocumentCollectionViewCell.m in Sources */,
@@ -1741,7 +1733,7 @@
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "GreatReader/GreatReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1762,7 +1754,7 @@
 				GCC_PREFIX_HEADER = "GreatReader/GreatReader-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "GreatReader/GreatReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

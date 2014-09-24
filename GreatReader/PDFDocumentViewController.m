@@ -9,7 +9,6 @@
 #import "PDFDocumentViewController.h"
 
 #import "Device.h"
-#import "GRTModalTransitionAnimator.h"
 #import "PDFDocument.h"
 #import "PDFDocumentBookmarkList.h"
 #import "PDFDocumentBookmarkListViewController.h"
@@ -41,6 +40,7 @@ static NSString * const PDFDocumentViewControllerSegueSearch = @"PDFDocumentView
 
 @interface PDFDocumentViewController () <UIPageViewControllerDataSource,
                                          UIPageViewControllerDelegate,
+                                         UIPopoverPresentationControllerDelegate,
                                          UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, assign) BOOL fullScreen;
@@ -394,8 +394,8 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
         PDFDocumentBrightnessViewController *vc =
                 (PDFDocumentBrightnessViewController *)segue.destinationViewController;
         vc.document = self.document;
-        vc.modalPresentationStyle = UIModalPresentationCustom;
-        vc.transitioningDelegate = self;
+        UIPopoverPresentationController *pc = [vc popoverPresentationController];
+        pc.delegate = self;
     } else if ([segue.identifier isEqualToString:PDFDocumentViewControllerSegueHistory]) {
         UINavigationController *navi = (UINavigationController *)segue.destinationViewController;
         RecentDocumentListViewController *vc = (RecentDocumentListViewController *)navi.topViewController;
@@ -472,7 +472,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     [self.document goBack];
     NSUInteger index = self.document.currentPage;
-    
+
     UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionReverse;
     [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
                                       direction:direction
@@ -485,7 +485,7 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
     [self.document goForward];
     NSUInteger index = self.document.currentPage;
-    
+
     UIPageViewControllerNavigationDirection direction = UIPageViewControllerNavigationDirectionForward;
     [self.pageViewController setViewControllers:@[[self pageViewControllerAtIndex:index]]
                                       direction:direction
@@ -494,42 +494,19 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     [self.infoView show]; 
 }
 
-#pragma mark - UIViewControllerTransitioningDelegate Methods
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                   presentingController:(UIViewController *)presenting
-                                                                       sourceController:(UIViewController *)source
-{
-    GRTModalTransitionAnimator *animator = [GRTModalTransitionAnimator new];
-    animator.presentedContentHeight = [self heightForViewController:presented];
-    animator.presenting = YES;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    GRTModalTransitionAnimator *animator = [GRTModalTransitionAnimator new];
-    animator.presentedContentHeight = [self heightForViewController:dismissed];
-    return animator;
-}
-
-#pragma mark -
-
-- (CGFloat)heightForViewController:(UIViewController *)viewController
-{
-    if ([viewController isKindOfClass:PDFDocumentBrightnessViewController.class]) {
-        return 108;
-    } else {
-        return 0;
-    }
-}
-
 #pragma mark -
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:duration];
     [self prepareNavigationBar];
+}
+
+#pragma mark -
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
 }
 
 
