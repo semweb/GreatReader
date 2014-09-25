@@ -113,6 +113,11 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     return self.editing ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
 #pragma mark - Edit Action
 
 - (void)delete:(id)sender

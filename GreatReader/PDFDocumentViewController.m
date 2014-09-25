@@ -321,23 +321,24 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (void)setFullScreen:(BOOL)fullScreen
 {
     _fullScreen = fullScreen;
-    
+
     CGFloat alpha = self.fullScreen ? 0.0 : 1.0;
     CGRect barFrame = self.navigationController.navigationBar.frame;
     barFrame.origin.y = 20;
-    self.navigationController.navigationBar.frame = barFrame;    
+    self.navigationController.navigationBar.frame = barFrame;
     if (!fullScreen) {
         [self.navigationController setNavigationBarHidden:NO animated:NO];
-        self.navigationController.navigationBar.alpha = 0.0;                    
+        self.navigationController.navigationBar.alpha = 0.0;
     }
-    
+
     [UIView animateWithDuration:0.125
                      animations:^{
         [self setNeedsStatusBarAppearanceUpdate];
         self.toolbar.alpha = alpha;
         self.navigationController.navigationBar.alpha = alpha;
+        self.navigationController.navigationBar.frame = barFrame;
     } completion:^(BOOL finished) {
-        [self.navigationController setNavigationBarHidden:fullScreen animated:NO];            
+        [self.navigationController setNavigationBarHidden:fullScreen animated:NO];
     }];
 
     self.navigationController.navigationBar.frame = CGRectZero;
