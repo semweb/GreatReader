@@ -440,11 +440,6 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
 - (IBAction)exitCrop:(UIStoryboardSegue *)segue
 {
     [self goAtIndex:self.document.currentPage animated:NO];
-    
-    if (IsPad()) {
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
-    }
 }
 
 - (IBAction)exitBrightness:(UIStoryboardSegue *)segue {}
