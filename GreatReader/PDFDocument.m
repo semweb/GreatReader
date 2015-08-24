@@ -27,7 +27,6 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 @property (nonatomic, strong) PDFDocumentNameList *nameList;
 @property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
 @property (nonatomic, strong, readwrite) UIImage *thumbnailImage;
-@property (nonatomic, strong, readwrite) UIImage *iconImage;
 @property (nonatomic, strong, readwrite) PDFDocumentOutline *outline;
 @property (nonatomic, strong, readwrite) PDFDocumentCrop *crop;
 @property (nonatomic, strong, readwrite) PDFDocumentBookmarkList *bookmarkList;

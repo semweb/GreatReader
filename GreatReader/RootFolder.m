@@ -11,7 +11,6 @@
 #import "NSArray+GreatReaderAdditions.h"
 
 @interface RootFolder ()
-@property (nonatomic, strong, readwrite) NSArray *files;
 @end
 
 @implementation RootFolder
