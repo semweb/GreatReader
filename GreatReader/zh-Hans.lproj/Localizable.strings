@@ -1,0 +1,15 @@
+".bookmarks" = "书签";
+".brightness" = "亮度";
+".cancel" = "取消";
+".copy" = "复制";
+".define" = "定义";
+".delete" = "删除";
+".remove-history" = "清除历史纪录";
+"crop.different-crops-odd-and-even" = "奇数偶数页面区别裁切";
+"crop.no-crops" = "无裁切";
+"crop.same-crops-odd-and-even" = "奇数偶数页面相同裁切";
+"find.page-format" = "页码: %d";
+"home.all-documents" = "所有书目";
+"home.no-books" = "没有书目";
+"home.no-books-description" = "请从其它应用里用此应用打开文件或通过itunes分享";
+"home.recently-read" = "最近读过";
