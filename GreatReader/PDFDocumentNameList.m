@@ -50,8 +50,11 @@
     } else if (names) {
         for (int i = 0; i < CGPDFArrayGetCount(names); i++) {
             NSString *string = PDFArrayGetString(names, i);
-            CGPDFDictionaryRef dic = PDFArrayGetDictionary(names, i + 1);
-            CGPDFArrayRef d = PDFDictionaryGetArray(dic, "D");
+            CGPDFArrayRef d = PDFArrayGetArray(names, i + 1);
+            if (!d) {
+                CGPDFDictionaryRef dic = PDFArrayGetDictionary(names, i + 1);
+                d = PDFDictionaryGetArray(dic, "D");
+            }
             CGPDFDictionaryRef page = PDFArrayGetDictionary(d, 0);
             [results setObject:@([self pageNumberForPage:page document:document])
                         forKey:string];
