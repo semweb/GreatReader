@@ -52,7 +52,7 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
         [fm fileExistsAtPath:absPath isDirectory:&isDirectory];
         File *file = nil;
         if (isDirectory) {
-            file = [[Folder alloc] initWithPath:absPath];
+            file = [[Folder alloc] initWithPath:absPath store:self.store];
         } else {
             file = [self.store documentAtPath:absPath];
         }
