@@ -84,6 +84,18 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
     return NO;
 }
 
+- (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error
+{
+    NSString *fullSubFolderPath = [self.path stringByAppendingPathComponent:subFolderName];
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    if ([fileManager createDirectoryAtPath:fullSubFolderPath withIntermediateDirectories:YES attributes:nil error:error]) {
+        return [[Folder alloc] initWithPath:fullSubFolderPath store:self.store];
+    }
+    
+    return nil;
+}
+
 #pragma mark - PDFDocumentDeletedNotification
 
 - (void)documentDeleted:(NSNotification *)notification

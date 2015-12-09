@@ -115,4 +115,18 @@
     XCTAssertEqual(subFolder.store, documentStore, @"Sub folder must points to same document store");
 }
 
+- (void)testCreateSubFolder
+{
+    NSString *testSubFolderName = @"Test Sub Folder";
+    
+    Folder *folder = [[Folder alloc] initWithPath:self.tempDirectory store:nil];
+    [folder load];
+    
+    Folder *subFolder = [folder createSubFolderWithName:testSubFolderName error:nil];
+    
+    XCTAssertNotNil(subFolder, @"Created sub folder must not be nil");
+    XCTAssertTrue([subFolder isKindOfClass:[Folder class]], @"Created sub folder must have right class");
+    XCTAssertTrue([self.fileManager fileExistsAtPath:subFolder.path], @"Created sub folder must exists in file system");
+}
+
 @end
