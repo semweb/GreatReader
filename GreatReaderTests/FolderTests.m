@@ -77,4 +77,21 @@
     XCTAssertTrue([folder.files containsObject:document], @"Folder files must contains test PDF document");
 }
 
+- (void)testFolderFilesContainsOneSubFodler
+{
+    NSString *subFolderName = @"Test Folder";
+    NSString *subFolderPath = [self.tempDirectory stringByAppendingPathComponent:subFolderName];
+    [self.fileManager createDirectoryAtPath:subFolderPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    Folder *folder = [[Folder alloc] initWithPath:self.tempDirectory store:nil];
+    [folder load];
+    
+    XCTAssertEqual([folder.files count], 1, @"Folder files must contains only one folder item");
+    
+    id subFolder = [folder.files firstObject];
+    XCTAssertTrue([subFolder isKindOfClass:[Folder class]], @"Folder item must be instance of Folder class");
+    
+    XCTAssertTrue([((Folder *)subFolder).path isEqualToString:subFolderPath], @"Sub folder path must be consistent");
+}
+
 @end
