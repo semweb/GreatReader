@@ -55,6 +55,15 @@
     [self.fileManager removeItemAtPath:self.tempDirectory error:nil];
 }
 
+- (NSString *)createSubFolderInTemporaryTestDirectory
+{
+    NSString *subFolderName = @"Test Folder";
+    NSString *subFolderPath = [self.tempDirectory stringByAppendingPathComponent:subFolderName];
+    [self.fileManager createDirectoryAtPath:subFolderPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    return subFolderPath;
+}
+
 #pragma mark - Tests
 
 - (void)testFolderFilesContainsOnePDFDocument
@@ -79,9 +88,7 @@
 
 - (void)testFolderFilesContainsOneSubFodler
 {
-    NSString *subFolderName = @"Test Folder";
-    NSString *subFolderPath = [self.tempDirectory stringByAppendingPathComponent:subFolderName];
-    [self.fileManager createDirectoryAtPath:subFolderPath withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *subFolderPath = [self createSubFolderInTemporaryTestDirectory];
     
     Folder *folder = [[Folder alloc] initWithPath:self.tempDirectory store:nil];
     [folder load];
@@ -92,6 +99,20 @@
     XCTAssertTrue([subFolder isKindOfClass:[Folder class]], @"Folder item must be instance of Folder class");
     
     XCTAssertTrue([((Folder *)subFolder).path isEqualToString:subFolderPath], @"Sub folder path must be consistent");
+}
+
+- (void)testDocumentStorePropagatesToSubFolder
+{
+    [self createSubFolderInTemporaryTestDirectory];
+    
+    PDFDocumentStore *documentStore = [[PDFDocumentStore alloc] init];
+    
+    Folder *folder = [[Folder alloc] initWithPath:self.tempDirectory store:documentStore];
+    [folder load];
+    
+    Folder *subFolder = [folder.files firstObject];
+    
+    XCTAssertEqual(subFolder.store, documentStore, @"Sub folder must points to same document store");
 }
 
 @end
