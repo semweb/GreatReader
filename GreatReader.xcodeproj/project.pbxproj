@@ -225,6 +225,7 @@
 		B9BA68E216644211A0D47024 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7AE020033EA4C089CF48093 /* libPods.a */; };
 		C1FD2FAE92804B4A904FA43B /* libPods-GreatReaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */; };
 		F669B8691C17A63800CD9550 /* FolderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B8681C17A63800CD9550 /* FolderTests.m */; };
+		F669B86C1C18EF1900CD9550 /* NSFileManager+TestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B86B1C18EF1900CD9550 /* NSFileManager+TestAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -459,6 +460,8 @@
 		8ACE7A04AC7141EB9F88899D /* libPods-GreatReaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatReaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AE020033EA4C089CF48093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F669B8681C17A63800CD9550 /* FolderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTests.m; sourceTree = "<group>"; };
+		F669B86A1C18EF1900CD9550 /* NSFileManager+TestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+TestAdditions.h"; sourceTree = "<group>"; };
+		F669B86B1C18EF1900CD9550 /* NSFileManager+TestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+TestAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -910,6 +913,8 @@
 				193ED26D197FC4BC00A5DC0D /* PDFDocument+TestAdditions.h */,
 				193ED26E197FC4BC00A5DC0D /* PDFDocument+TestAdditions.m */,
 				191B7D231967AD27004B35CA /* PDFPageTests.m */,
+				F669B86A1C18EF1900CD9550 /* NSFileManager+TestAdditions.h */,
+				F669B86B1C18EF1900CD9550 /* NSFileManager+TestAdditions.m */,
 			);
 			path = GreatReaderTests;
 			sourceTree = "<group>";
@@ -1365,6 +1370,7 @@
 				1994B053194CA1780021B08C /* DocumentListViewModel.m in Sources */,
 				19640D5119891FEF004A47E8 /* PDFPageLinkList.m in Sources */,
 				1994B055194CA1780021B08C /* RecentDocumentListViewModel.m in Sources */,
+				F669B86C1C18EF1900CD9550 /* NSFileManager+TestAdditions.m in Sources */,
 				1994B057194CA1780021B08C /* FolderDocumentListViewModel.m in Sources */,
 				1994B058194CA1780021B08C /* Device.m in Sources */,
 				1994B05C194CA1780021B08C /* LibraryUtils.m in Sources */,

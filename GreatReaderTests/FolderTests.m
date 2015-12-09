@@ -13,6 +13,7 @@
 #import "Folder.h"
 #import "PDFDocument+TestAdditions.h"
 #import "PDFDocumentStore.h"
+#import "NSFileManager+TestAdditions.h"
 
 @interface FolderTests : XCTestCase
 @property (nonatomic, strong) NSFileManager *fileManager;
@@ -46,22 +47,17 @@
 
 - (void)createTemporaryTestDirectory
 {
-    self.tempDirectory = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
-    [self.fileManager createDirectoryAtPath:self.tempDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    self.tempDirectory = [self.fileManager createTemporaryTestDirectory];
 }
 
 - (void)removeTemporaryTestDirectory
 {
-    [self.fileManager removeItemAtPath:self.tempDirectory error:nil];
+    [self.fileManager removeTemporaryTestDirectory:self.tempDirectory];
 }
 
 - (NSString *)createSubFolderInTemporaryTestDirectory
 {
-    NSString *subFolderName = @"Test Folder";
-    NSString *subFolderPath = [self.tempDirectory stringByAppendingPathComponent:subFolderName];
-    [self.fileManager createDirectoryAtPath:subFolderPath withIntermediateDirectories:YES attributes:nil error:nil];
-    
-    return subFolderPath;
+    return [self.fileManager createSubFolderInTemporaryTestDirectory:self.tempDirectory];
 }
 
 #pragma mark - Tests
