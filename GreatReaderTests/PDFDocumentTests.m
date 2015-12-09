@@ -13,6 +13,7 @@
 
 @interface PDFDocumentTests : XCTestCase
 @property (nonatomic, strong) PDFDocument *document;
+@property (nonatomic, strong) NSFileManager *fileManager;
 @end
 
 @implementation PDFDocumentTests
@@ -25,14 +26,18 @@
                                  pathForResource:@"Test"
                                           ofType:@"pdf"];
     NSString *path = [[NSFileManager grt_documentsPath] stringByAppendingPathComponent:@"Test.pdf"];
-    NSFileManager *fm = [NSFileManager new];
-    [fm copyItemAtPath:resourcePath toPath:path error:NULL];
+    self.fileManager = [NSFileManager new];
+    [self.fileManager copyItemAtPath:resourcePath toPath:path error:NULL];
     self.document = [[PDFDocument alloc] initWithPath:path];
 }
 
 - (void)tearDown
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [self.fileManager removeItemAtPath:self.document.path error:nil];
+    
+    self.document = nil;
+    self.fileManager = nil;
+    
     [super tearDown];
 }
 
