@@ -22,6 +22,7 @@
 #import "PDFPageLinkList.h"
 
 NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
+NSString * const PDFDocumentMovedNotification = @"PDFDocumentMovedNotification";
 
 @interface PDFDocument ()
 @property (nonatomic, readwrite) NSString *path;
@@ -365,6 +366,11 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
     if ([fileManager moveItemAtPath:self.path toPath:newFullDocumentPath error:error]) {
         self.path = newFullDocumentPath;
         if ([fileManager moveItemAtPath:oldImagePath toPath:self.imagePath error:error]) {
+            
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:PDFDocumentMovedNotification
+                              object:self];
+            
             return YES;
         }
     }

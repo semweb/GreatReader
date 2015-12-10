@@ -19,6 +19,7 @@
 @class PDFPage;
 
 extern NSString * const PDFDocumentDeletedNotification;
+extern NSString * const PDFDocumentMovedNotification;
 
 @interface PDFDocument : File <NSCoding>
 @property (nonatomic, assign, readonly) NSUInteger numberOfPages;
