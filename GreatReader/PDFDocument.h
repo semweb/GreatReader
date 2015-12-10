@@ -37,6 +37,7 @@ extern NSString * const PDFDocumentDeletedNotification;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
 - (void)delete;
+- (BOOL)moveToDirectory:(NSString *)directoryPath error:(NSError **)error;
 - (void)goBack;
 - (void)goForward;
 - (void)goTo:(NSUInteger)page
