@@ -174,13 +174,25 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     self.actionItem.enabled = self.selectedIndexPaths.count == 1;
 }
 
+#pragma mark - Create folder
+
+- (void)createFolderNamed:(NSString *)folderName
+{
+    NSError *error = nil;
+    [self.viewModel createFolderInCurrentFolderWithName:folderName error:&error];
+    
+    [self reload];
+}
+
 #pragma mark - UIAlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:LocalizedString(@".ok")]) {
-        // perform action
+        UITextField *alertTextField = [alertView textFieldAtIndex:0];
+        NSString *folderName = alertTextField.text;
+        [self createFolderNamed:folderName];
     }
 }
 
