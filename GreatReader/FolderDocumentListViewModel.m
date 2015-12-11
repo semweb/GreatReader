@@ -53,4 +53,9 @@
     [self.folder.store deleteDocuments:documents];
 }
 
+- (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error
+{
+    return [self.folder createSubFolderWithName:folderName error:error];
+}
+
 @end

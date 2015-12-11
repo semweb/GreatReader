@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class Folder;
 @class PDFDocument;
 @class PDFRecentDocumentList;
 
@@ -18,4 +19,5 @@
 - (void)reload;
 - (void)deleteDocuments:(NSArray *)documents;
 - (void)removeDocumentHistories:(NSArray *)documents;
+- (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error;
 @end

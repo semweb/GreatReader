@@ -227,6 +227,7 @@
 		F669B8691C17A63800CD9550 /* FolderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B8681C17A63800CD9550 /* FolderTests.m */; };
 		F669B86C1C18EF1900CD9550 /* NSFileManager+TestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B86B1C18EF1900CD9550 /* NSFileManager+TestAdditions.m */; };
 		F669B86F1C1A45CD00CD9550 /* PDFDocumentStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B86E1C1A45CD00CD9550 /* PDFDocumentStoreTests.m */; };
+		F669B8721C1A6CA400CD9550 /* FolderDocumentListViewModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F669B8711C1A6CA400CD9550 /* FolderDocumentListViewModelTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,6 +465,7 @@
 		F669B86A1C18EF1900CD9550 /* NSFileManager+TestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+TestAdditions.h"; sourceTree = "<group>"; };
 		F669B86B1C18EF1900CD9550 /* NSFileManager+TestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+TestAdditions.m"; sourceTree = "<group>"; };
 		F669B86E1C1A45CD00CD9550 /* PDFDocumentStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentStoreTests.m; sourceTree = "<group>"; };
+		F669B8711C1A6CA400CD9550 /* FolderDocumentListViewModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDocumentListViewModelTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -907,6 +909,7 @@
 				19E525B8197EA861005D0304 /* Category */,
 				F669B8671C17A5E100CD9550 /* Folder */,
 				F669B86D1C1A457F00CD9550 /* Store */,
+				F669B8701C1A6C7100CD9550 /* ViewModels */,
 				19F7BA92186052E2009E8916 /* Supporting Files */,
 				1994B070194F23AA0021B08C /* PDFDocumentTests.m */,
 				191B7D64196AE2B1004B35CA /* PDFDocumentSearchTests.m */,
@@ -973,6 +976,14 @@
 				F669B86E1C1A45CD00CD9550 /* PDFDocumentStoreTests.m */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		F669B8701C1A6C7100CD9550 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F669B8711C1A6CA400CD9550 /* FolderDocumentListViewModelTests.m */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1322,6 +1333,7 @@
 				19E525BC197EAADA005D0304 /* NSFileManager+GreatReaderAdditionsTests.m in Sources */,
 				1994AFFA194CA1780021B08C /* PDFDocumentBookmarkList.m in Sources */,
 				1994AFFC194CA1780021B08C /* PDFDocumentBookmarkListViewController.m in Sources */,
+				F669B8721C1A6CA400CD9550 /* FolderDocumentListViewModelTests.m in Sources */,
 				F669B8691C17A63800CD9550 /* FolderTests.m in Sources */,
 				191B7D241967AD27004B35CA /* PDFPageTests.m in Sources */,
 				19640D5919908C7F004A47E8 /* PDFDocumentNameList.m in Sources */,

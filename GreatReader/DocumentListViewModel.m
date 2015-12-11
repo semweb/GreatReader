@@ -15,4 +15,5 @@
 - (void)reload {}
 - (void)deleteDocuments:(NSArray *)documents {}
 - (void)removeDocumentHistories:(NSArray *)documents {}
+- (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error { return NO; }
 @end
