@@ -9,6 +9,7 @@
 #import "FolderDocumentListViewModel.h"
 
 #import "Folder.h"
+#import "RootFolder.h"
 #import "PDFDocument.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
@@ -30,7 +31,11 @@
 
 - (NSString *)title
 {
-    return LocalizedString(@"home.all-documents");
+    if ([self.folder isKindOfClass:[RootFolder class]]) {
+        return LocalizedString(@"home.all-documents");
+    } else {
+        return self.folder.name;
+    }
 }
 
 - (NSUInteger)count

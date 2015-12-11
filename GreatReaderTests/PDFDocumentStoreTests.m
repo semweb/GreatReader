@@ -28,7 +28,7 @@
     [super setUp];
     
     self.pdfDocumentStore = [[PDFDocumentStore alloc] init];
-    self.fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path"];
+    self.fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:self.pdfDocumentStore];
 }
 
 - (void)tearDown

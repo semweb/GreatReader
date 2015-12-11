@@ -12,12 +12,15 @@
 
 #import "FolderDocumentListViewModel.h"
 #import "Folder.h"
+#import "RootFolder.h"
 
 @interface FolderDocumentListViewModelTests : XCTestCase
 
 @end
 
 @implementation FolderDocumentListViewModelTests
+
+#pragma mark - SetUp / TearDown
 
 - (void)setUp
 {
@@ -29,19 +32,39 @@
     [super tearDown];
 }
 
-- (void)testCreateFolderInCurrentFolderCalled
+#pragma mark - Tests
+
+- (void)testCreateSubFolderCalledOnFolder
 {
-    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path"];
-    id fakeFolderMaock = OCMPartialMock(fakeFolder);
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    id fakeFolderMock = OCMPartialMock(fakeFolder);
     
-    OCMStub([fakeFolderMaock createSubFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]).andReturn(nil);
+    OCMStub([fakeFolderMock createSubFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]).andReturn(nil);
     
     FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
     
     NSError *error = nil;
     [folderViewModel createFolderInCurrentFolderWithName:@"fake_name" error:&error];
     
-    OCMVerify([fakeFolderMaock createSubFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+    OCMVerify([fakeFolderMock createSubFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+}
+
+- (void)testRightTitleProvidedForRootFolder
+{
+    RootFolder *fakeRootFolder = [[RootFolder alloc] initWithPath:@"fake_root_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeRootFolder];
+    
+    XCTAssertTrue([folderViewModel.title isEqualToString:LocalizedString(@"home.all-documents")], @"ViewModel must provide right localaized title for root folder");
+}
+
+- (void)testRightTitleProvidedForOrdinaryFolder
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
+    
+    XCTAssertTrue([folderViewModel.title isEqualToString:fakeFolder.name], @"ViewModel must provide right title for ordinary folder");
 }
 
 @end
