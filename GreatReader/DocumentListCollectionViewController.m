@@ -133,6 +133,11 @@
     return nil;
 }
 
+- (BOOL)isCreateFolderBarButtonItemNeeded
+{
+    return YES;
+}
+
 #pragma mark -
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath

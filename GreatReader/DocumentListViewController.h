@@ -30,4 +30,5 @@ extern NSString * const DocumentListViewControllerSeguePDFDocument;
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths;
 - (id<DocumentCell>)selectedDocumentCell;
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document;
+- (BOOL)isCreateFolderBarButtonItemNeeded;
 @end

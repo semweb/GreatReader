@@ -24,6 +24,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 @interface DocumentListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
 @property (nonatomic, strong) UIBarButtonItem *deleteItem;
+@property (nonatomic, strong) UIBarButtonItem *createFolderItem;
 @property (nonatomic, strong) UIDocumentInteractionController *interactionController;
 @end
 
@@ -83,11 +84,24 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
                                                               target:self
                                                               action:@selector(performAction:)];
         self.actionItem.enabled = NO;
-        [self.navigationItem setLeftBarButtonItems:@[self.deleteItem, self.actionItem]
+        NSArray *barButtonItems = @[self.deleteItem, self.actionItem];
+        if ([self isCreateFolderBarButtonItemNeeded]) {
+            self.createFolderItem =
+                    [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".create-folder")
+                                                     style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:nil];
+            self.createFolderItem.enabled = YES;
+            barButtonItems = [barButtonItems arrayByAddingObject:self.createFolderItem];
+        }
+        [self.navigationItem setLeftBarButtonItems:barButtonItems
                                           animated:animated];
     } else {
         self.deleteItem = nil;
         self.actionItem = nil;
+        if ([self isCreateFolderBarButtonItemNeeded]) {
+            self.createFolderItem = nil;
+        }
         [self.navigationItem setLeftBarButtonItems:@[] animated:animated];
 
         [self deselectAll:animated];
@@ -221,5 +235,6 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {}
 - (id<DocumentCell>)selectedDocumentCell { return nil; }
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document { return nil; }
+- (BOOL)isCreateFolderBarButtonItemNeeded { return NO; }
 
 @end
