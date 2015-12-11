@@ -13,6 +13,8 @@
 #import "DocumentModalTransitionAnimator.h"
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFDocument.h"
+#import "Folder.h"
+#import "FolderDocumentListViewModel.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFDocumentViewController.h"
@@ -20,6 +22,7 @@
 
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
+NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewControllerSegueFolder";
 
 @interface DocumentListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
@@ -223,6 +226,12 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
         [document.store addHistory:document];
         navi.modalPresentationStyle = UIModalPresentationCustom;
         navi.transitioningDelegate = self;
+    } else if ([segue.identifier isEqual:DocumentListViewControllerSegueFolder]) {
+        DocumentListViewController *folderListViewController = (DocumentListViewController *)segue.destinationViewController;
+        Folder *folder = [self.selectedDocuments firstObject];
+        FolderDocumentListViewModel *folderModel = [[FolderDocumentListViewModel alloc] initWithFolder:folder];
+        folderListViewController.viewModel = folderModel;
+        [folderListViewController reload];
     }
 }
 

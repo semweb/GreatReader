@@ -15,6 +15,7 @@
 
 extern NSString * const DocumentListViewControllerCellIdentifier;
 extern NSString * const DocumentListViewControllerSeguePDFDocument;
+extern NSString * const DocumentListViewControllerSegueFolder;
 
 @interface DocumentListViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) DocumentListViewModel *viewModel;

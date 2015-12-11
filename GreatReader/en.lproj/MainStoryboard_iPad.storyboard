@@ -448,6 +448,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="7OG-jc-M8R" kind="push" identifier="DocumentListViewControllerSegueFolder" id="xgJ-Sn-CLj"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -652,6 +655,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="RNs-Ya-jBR"/>
         <segue reference="Rf6-8C-drt"/>
     </inferredMetricsTieBreakers>
 </document>
