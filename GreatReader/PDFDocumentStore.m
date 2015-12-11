@@ -8,6 +8,7 @@
 
 #import "PDFDocumentStore.h"
 
+#import "Folder.h"
 #import "RootFolder.h"
 #import "PDFDocument.h"
 #import "PDFRecentDocumentList.h"
@@ -67,6 +68,29 @@
 - (void)deleteDocument:(PDFDocument *)document
 {
     [document delete];
+}
+
+- (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error
+{
+    __block BOOL movedAllDocuments = YES;
+    
+    [documents enumerateObjectsUsingBlock:^(PDFDocument *document,
+                                           NSUInteger idx,
+                                           BOOL *stop) {
+        if (![self moveDocument:document toFolder:folder error:error])
+        {
+            *stop = YES;
+            movedAllDocuments = NO;
+            return;
+        }
+    }];
+    
+    return movedAllDocuments;
+}
+
+- (BOOL)moveDocument:(PDFDocument *)document toFolder:(Folder *)folder error:(NSError **)error
+{
+    return [document moveToDirectory:folder.path error:error];
 }
 
 @end
