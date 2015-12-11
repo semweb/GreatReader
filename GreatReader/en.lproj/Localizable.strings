@@ -2,8 +2,11 @@
 ".brightness" = "Brightness";
 ".cancel" = "Cancel";
 ".copy" = "Copy";
+".create-folder" = "New Folder";
+".create-folder-alert-title" = "Enter New Folder Name";
 ".define" = "Define";
 ".delete" = "Delete";
+".ok" = "OK";
 ".remove-history" = "Remove History";
 "crop.different-crops-odd-and-even" = "Different Crops\nin Odd and Even";
 "crop.no-crops" = "No Crops";

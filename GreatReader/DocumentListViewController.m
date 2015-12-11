@@ -90,7 +90,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
                     [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".create-folder")
                                                      style:UIBarButtonItemStylePlain
                                                     target:self
-                                                    action:nil];
+                                                    action:@selector(showCreateFolderAlertView)];
             self.createFolderItem.enabled = YES;
             barButtonItems = [barButtonItems arrayByAddingObject:self.createFolderItem];
         }
@@ -148,6 +148,17 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
     }
 }
 
+- (void)showCreateFolderAlertView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalizedString(@".create-folder-alert-title")
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:LocalizedString(@".cancel")
+                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+}
+
 - (void)performAction:(id)sender
 {
     PDFDocument *doc = [self.selectedDocuments firstObject];
@@ -161,6 +172,16 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     self.deleteItem.enabled = self.selectedIndexPaths.count > 0;
     self.actionItem.enabled = self.selectedIndexPaths.count == 1;
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:LocalizedString(@".ok")]) {
+        // perform action
+    }
 }
 
 #pragma mark - UIActionSheet Delegate
