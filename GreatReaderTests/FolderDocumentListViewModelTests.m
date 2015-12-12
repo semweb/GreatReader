@@ -13,6 +13,7 @@
 #import "FolderDocumentListViewModel.h"
 #import "Folder.h"
 #import "RootFolder.h"
+#import "PDFDocumentStore.h"
 
 @interface FolderDocumentListViewModelTests : XCTestCase
 
@@ -65,6 +66,23 @@
     FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
     
     XCTAssertTrue([folderViewModel.title isEqualToString:fakeFolder.name], @"ViewModel must provide right title for ordinary folder");
+}
+
+- (void)testMoveDocumentsCalledOnPDFDocumentStore
+{
+    PDFDocumentStore *fakePDFDocumentStore = [[PDFDocumentStore alloc] init];
+    
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:fakePDFDocumentStore];
+    
+    id fakePDFDocumentStoreMock = OCMPartialMock(fakePDFDocumentStore);
+    OCMStub([fakePDFDocumentStoreMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]).andReturn(YES);
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
+    
+    NSError *error = nil;
+    [folderViewModel moveDocuments:nil toFolder:nil error:&error];
+    
+    OCMVerify([fakePDFDocumentStoreMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
 }
 
 @end

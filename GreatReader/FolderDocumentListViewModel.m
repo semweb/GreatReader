@@ -63,4 +63,9 @@
     return [self.folder createSubFolderWithName:folderName error:error];
 }
 
+- (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error
+{
+    return [self.folder.store moveDocuments:documents toFolder:folder error:error];
+}
+
 @end
