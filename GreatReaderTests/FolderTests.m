@@ -152,4 +152,34 @@
     XCTAssertTrue([fakeFolder containsFile:fakeFile], @"Folder must contain file on path with double slashes");
 }
 
+- (void)testDeleteFolder
+{
+    NSString *subFolderPath = [self createSubFolderInTemporaryTestDirectory];
+    
+    Folder *folder = [[Folder alloc] initWithPath:subFolderPath store:nil];
+    
+    [folder delete];
+    
+    XCTAssertFalse([self.fileManager fileExistsAtPath:subFolderPath], @"Folder must be deleted");
+}
+
+- (void)testFolderDeletedNotificationPosted
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    id fileManagerClassMock = OCMClassMock([NSFileManager class]);
+    OCMStub([fileManagerClassMock removeItemAtPath:fakeFolder.path error:((NSError *__autoreleasing *)[OCMArg anyPointer])]).andReturn(YES);
+    
+    id observerMock = OCMObserverMock();
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:FolderDeletedNotification object:fakeFolder];
+    [[observerMock expect] notificationWithName:FolderDeletedNotification object:fakeFolder];
+    
+    [fakeFolder delete];
+    
+    OCMVerifyAll(observerMock);
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+    [fileManagerClassMock stopMocking];
+}
+
 @end

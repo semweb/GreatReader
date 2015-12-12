@@ -43,6 +43,10 @@
                                                    name:PDFDocumentMovedNotification
                                                  object:nil];
         [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(folderDeleted:)
+                                                   name:FolderDeletedNotification
+                                                 object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(didEnterBackground:)
                                                    name:UIApplicationDidEnterBackgroundNotification
                                                  object:nil];
@@ -150,6 +154,19 @@
 {
     // don't need to do anything particular with documents, as only document path changed
     // so, just save changes
+    [self saveLater];
+}
+
+- (void)folderDeleted:(NSNotification *)notification
+{
+    Folder *deletedFolder = notification.object;
+    for (PDFDocument *doc in [self.documents copy]) {
+        if ([deletedFolder containsFile:doc]) {
+            [doc delete];
+            [self.documentsProxy removeObject:doc];
+        }
+    }
+    
     [self saveLater];
 }
 

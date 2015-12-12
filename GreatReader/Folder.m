@@ -14,6 +14,7 @@
 #import "PDFDocumentStore.h"
 
 NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification";
+NSString * const FolderDeletedNotification = @"FolderDeletedNotification";
 
 @interface Folder ()
 @property (nonatomic, weak, readwrite) PDFDocumentStore *store;
@@ -36,6 +37,10 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(fileDeleted:)
                                                      name:PDFDocumentDeletedNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(fileDeleted:)
+                                                     name:FolderDeletedNotification
                                                    object:nil];
     }
     return self;
@@ -104,7 +109,20 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
     return [standardFilePath hasPrefix:standardFolderPath];
 }
 
-#pragma mark - PDFDocumentDeletedNotification
+- (void)delete
+{
+    // post notification before actual deletion of folder, because we want to delete some files
+    // like generated pdf document thumbnails, which are stored in caches
+    // (btw thumbnails cannot be deleted directly without implicit deletion of pdf document)
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:FolderDeletedNotification
+                      object:self];
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    [fileManager removeItemAtPath:self.path error:nil];
+}
+
+#pragma mark - PDFDocumentDeletedNotification and FolderDeletedNotification
 
 - (void)fileDeleted:(NSNotification *)notification
 {

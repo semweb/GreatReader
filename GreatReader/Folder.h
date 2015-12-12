@@ -13,6 +13,7 @@
 @class PDFDocumentStore;
 
 extern NSString * const FolderFileRemovedNotification;
+extern NSString * const FolderDeletedNotification;
 
 @interface Folder : File
 @property (nonatomic, strong) NSArray *files;
@@ -23,4 +24,5 @@ extern NSString * const FolderFileRemovedNotification;
 - (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error;
 - (BOOL)containsFile:(File *)file;
+- (void)delete;
 @end
