@@ -22,4 +22,5 @@ extern NSString * const FolderFileRemovedNotification;
 - (void)load;
 - (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error;
+- (BOOL)containsFile:(File *)file;
 @end

@@ -96,6 +96,14 @@ NSString * const FolderFileRemovedNotification = @"FolderFileRemovedNotification
     return nil;
 }
 
+- (BOOL)containsFile:(File *)file
+{
+    NSString *standardFilePath = [file.path stringByStandardizingPath];
+    NSString *standardFolderPath = [self.path stringByStandardizingPath];
+    
+    return [standardFilePath hasPrefix:standardFolderPath];
+}
+
 #pragma mark - PDFDocumentDeletedNotification
 
 - (void)documentDeleted:(NSNotification *)notification

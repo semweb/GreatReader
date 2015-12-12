@@ -82,7 +82,7 @@
     XCTAssertTrue([folder.files containsObject:document], @"Folder files must contains test PDF document");
 }
 
-- (void)testFolderFilesContainsOneSubFodler
+- (void)testFolderFilesContainsOneSubFolder
 {
     NSString *subFolderPath = [self createSubFolderInTemporaryTestDirectory];
     
@@ -123,6 +123,33 @@
     XCTAssertNotNil(subFolder, @"Created sub folder must not be nil");
     XCTAssertTrue([subFolder isKindOfClass:[Folder class]], @"Created sub folder must have right class");
     XCTAssertTrue([self.fileManager fileExistsAtPath:subFolder.path], @"Created sub folder must exists in file system");
+}
+
+- (void)testFolderContainsFileOnSimplePath
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    File *fakeFile = [[File alloc] initWithPath:@"fake_folder_path/file.ext"];
+    
+    XCTAssertTrue([fakeFolder containsFile:fakeFile], @"Folder must contain file on simple path");
+}
+
+- (void)testFolderContainsFileInOneOfSubFolders
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    File *fakeFile = [[File alloc] initWithPath:@"fake_folder_path/sub_folder/sub_folder/file.ext"];
+    
+    XCTAssertTrue([fakeFolder containsFile:fakeFile], @"Folder must contain file in one of sub folders");
+}
+
+- (void)testFolderContainsFileOnPathWithDoubleSlashes
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_root_folder_name/fake_folder_name" store:nil];
+    
+    File *fakeFile = [[File alloc] initWithPath:@"fake_root_folder_name//fake_folder_name//file.ext"];
+    
+    XCTAssertTrue([fakeFolder containsFile:fakeFile], @"Folder must contain file on path with double slashes");
 }
 
 @end
