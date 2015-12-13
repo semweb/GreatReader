@@ -194,8 +194,10 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 - (void)updateButtonsEnabled
 {
     self.deleteItem.enabled = self.selectedIndexPaths.count > 0;
-    self.actionItem.enabled = self.selectedIndexPaths.count == 1;
-    self.moveToItem.enabled = self.selectedIndexPaths.count > 0;
+    self.actionItem.enabled = (self.selectedIndexPaths.count == 1) && ![self.viewModel checkIfHasFolderInDocuments:self.selectedDocuments];
+    if ([self isMoveToBarButtonItemNeeded]) {
+        self.moveToItem.enabled = (self.selectedIndexPaths.count > 0) && ![self.viewModel checkIfHasFolderInDocuments:self.selectedDocuments];
+    }
 }
 
 #pragma mark - Create folder

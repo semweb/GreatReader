@@ -78,4 +78,19 @@
     return NO;
 }
 
+- (BOOL)checkIfHasFolderInDocuments:(NSArray *)documents
+{
+    __block BOOL hasFolder = NO;
+    
+    [documents enumerateObjectsUsingBlock:^(File *file, NSUInteger index, BOOL *stop) {
+        if ([file isKindOfClass:[Folder class]]) {
+            hasFolder = YES;
+            *stop = YES;
+            return;
+        }
+    }];
+    
+    return hasFolder;
+}
+
 @end

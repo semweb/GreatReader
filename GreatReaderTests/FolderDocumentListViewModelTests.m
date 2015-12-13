@@ -14,6 +14,7 @@
 #import "Folder.h"
 #import "RootFolder.h"
 #import "PDFDocumentStore.h"
+#import "PDFDocument.h"
 
 @interface FolderDocumentListViewModelTests : XCTestCase
 
@@ -113,6 +114,28 @@
     [folderViewModel createFolderInCurrentFolderWithName:nil andMoveDocuments:nil error:&error];
     
     OCMVerify([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+}
+
+- (void)testCheckIfHasFolderInDocumentsReturnFalseForDocumentsWithoutFolder
+{
+    PDFDocument *fakeFirstDocument = [[PDFDocument alloc] initWithPath:@"fake_first_document_path"];
+    PDFDocument *fakeSecondDocument = [[PDFDocument alloc] initWithPath:@"fake_second_document_path"];
+    NSArray *documents = @[fakeFirstDocument, fakeSecondDocument];
+
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:nil];
+    
+    XCTAssertFalse([folderViewModel checkIfHasFolderInDocuments:documents], @"Must return false for two PDF documents");
+}
+
+- (void)testCheckIfHasFolderInDocumentsReturnTrueForDocumentsWithFolder
+{
+    PDFDocument *fakeDocument = [[PDFDocument alloc] initWithPath:@"fake_document_path"];
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    NSArray *documents = @[fakeDocument, fakeFolder];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:nil];
+    
+    XCTAssertTrue([folderViewModel checkIfHasFolderInDocuments:documents], @"Must return true for PDF document and folder");
 }
 
 @end
