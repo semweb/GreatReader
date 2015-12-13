@@ -27,7 +27,7 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 @interface DocumentListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
 @property (nonatomic, strong) UIBarButtonItem *deleteItem;
-@property (nonatomic, strong) UIBarButtonItem *createFolderItem;
+@property (nonatomic, strong) UIBarButtonItem *moveToItem;
 @property (nonatomic, strong) UIDocumentInteractionController *interactionController;
 @end
 
@@ -88,22 +88,22 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
                                                               action:@selector(performAction:)];
         self.actionItem.enabled = NO;
         NSArray *barButtonItems = @[self.deleteItem, self.actionItem];
-        if ([self isCreateFolderBarButtonItemNeeded]) {
-            self.createFolderItem =
-                    [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".create-folder")
+        if ([self isMoveToBarButtonItemNeeded]) {
+            self.moveToItem =
+                    [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".move-to")
                                                      style:UIBarButtonItemStylePlain
                                                     target:self
-                                                    action:@selector(showCreateFolderAlertView)];
-            self.createFolderItem.enabled = YES;
-            barButtonItems = [barButtonItems arrayByAddingObject:self.createFolderItem];
+                                                    action:nil];
+            self.moveToItem.enabled = NO;
+            barButtonItems = [barButtonItems arrayByAddingObject:self.moveToItem];
         }
         [self.navigationItem setLeftBarButtonItems:barButtonItems
                                           animated:animated];
     } else {
         self.deleteItem = nil;
         self.actionItem = nil;
-        if ([self isCreateFolderBarButtonItemNeeded]) {
-            self.createFolderItem = nil;
+        if ([self isMoveToBarButtonItemNeeded]) {
+            self.moveToItem = nil;
         }
         [self.navigationItem setLeftBarButtonItems:@[] animated:animated];
 
@@ -277,6 +277,6 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {}
 - (id<DocumentCell>)selectedDocumentCell { return nil; }
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document { return nil; }
-- (BOOL)isCreateFolderBarButtonItemNeeded { return NO; }
+- (BOOL)isMoveToBarButtonItemNeeded { return NO; }
 
 @end

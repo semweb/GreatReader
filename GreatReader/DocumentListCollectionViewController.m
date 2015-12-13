@@ -134,7 +134,7 @@
     return nil;
 }
 
-- (BOOL)isCreateFolderBarButtonItemNeeded
+- (BOOL)isMoveToBarButtonItemNeeded
 {
     return YES;
 }

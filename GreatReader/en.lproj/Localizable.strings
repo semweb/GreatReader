@@ -6,6 +6,7 @@
 ".create-folder-alert-title" = "Enter New Folder Name";
 ".define" = "Define";
 ".delete" = "Delete";
+".move-to" = "Move To...";
 ".ok" = "OK";
 ".remove-history" = "Remove History";
 "crop.different-crops-odd-and-even" = "Different Crops\nin Odd and Even";
