@@ -68,4 +68,14 @@
     return [self.folder.store moveDocuments:documents toFolder:folder error:error];
 }
 
+- (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error
+{
+    Folder *newFolder = [self createFolderInCurrentFolderWithName:folderName error:error];
+    if (newFolder) {
+        return [self moveDocuments:documents toFolder:newFolder error:error];
+    }
+    
+    return NO;
+}
+
 @end

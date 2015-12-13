@@ -85,4 +85,34 @@
     OCMVerify([fakePDFDocumentStoreMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
 }
 
+- (void)testCreateFolderAndMoveDocumentsCallsCreateFolder
+{
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:nil];
+    
+    id folderViewModelMock = OCMPartialMock(folderViewModel);
+    OCMStub([folderViewModelMock createFolderInCurrentFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+    
+    NSError *error = nil;
+    [folderViewModel createFolderInCurrentFolderWithName:nil andMoveDocuments:nil error:&error];
+    
+    OCMVerify([folderViewModelMock createFolderInCurrentFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+}
+
+- (void)testCreateFolderAndMoveDocumentsCallsMoveDocuments
+{
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:nil];
+    
+    id folderMock = OCMClassMock([Folder class]);
+    
+    id folderViewModelMock = OCMPartialMock(folderViewModel);
+    OCMStub([folderViewModelMock createFolderInCurrentFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]).andReturn(folderMock);
+    
+    OCMStub([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+    
+    NSError *error = nil;
+    [folderViewModel createFolderInCurrentFolderWithName:nil andMoveDocuments:nil error:&error];
+    
+    OCMVerify([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+}
+
 @end

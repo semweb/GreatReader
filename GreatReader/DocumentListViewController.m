@@ -208,16 +208,13 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     [self reload];
 }
 
-- (void)createFolderNamed:(NSString *)folderName moveDocuments:(NSArray *)documetns
+- (void)createFolderNamed:(NSString *)folderName andMoveDocuments:(NSArray *)documetns
 {
-    NSError *createFolderError = nil;
-    Folder *newFolder = [self.viewModel createFolderInCurrentFolderWithName:folderName error:&createFolderError];
-    
-    NSError *moveDocumentsError = nil;
-    [self.viewModel moveDocuments:documetns toFolder:newFolder error:&moveDocumentsError];
-    
-    [self reload];
-    [self updateButtonsEnabled];
+    NSError *error = nil;
+    if ([self.viewModel createFolderInCurrentFolderWithName:folderName andMoveDocuments:documetns error:&error]) {
+        [self reload];
+        [self updateButtonsEnabled];
+    }
 }
 
 #pragma mark - UIAlertView Delegate
@@ -228,7 +225,7 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     if([title isEqualToString:LocalizedString(@".ok")]) {
         UITextField *alertTextField = [alertView textFieldAtIndex:0];
         NSString *folderName = alertTextField.text;
-        [self createFolderNamed:folderName moveDocuments:self.selectedDocuments];
+        [self createFolderNamed:folderName andMoveDocuments:self.selectedDocuments];
     }
 }
 

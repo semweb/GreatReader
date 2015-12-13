@@ -21,4 +21,5 @@
 - (void)removeDocumentHistories:(NSArray *)documents;
 - (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error;
 - (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error;
+- (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error;
 @end
