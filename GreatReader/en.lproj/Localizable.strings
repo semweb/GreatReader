@@ -10,6 +10,7 @@
 ".new-folder" = "New Folder";
 ".ok" = "OK";
 ".remove-history" = "Remove History";
+".up-folder" = "Up Folder";
 "crop.different-crops-odd-and-even" = "Different Crops\nin Odd and Even";
 "crop.no-crops" = "No Crops";
 "crop.same-crops-odd-and-even" = "Same Crops\nin Odd and Even";

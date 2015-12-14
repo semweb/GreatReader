@@ -49,7 +49,7 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 {
     [super viewWillAppear:animated];
     
-    [self reloadView];
+    [self reload];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -142,44 +142,27 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 
 - (void)delete:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:LocalizedString(@".cancel")
-                                         destructiveButtonTitle:LocalizedString(@".delete")
-                                              otherButtonTitles:nil];
+    UIActionSheet *sheet = [self sheetWithCancelButtonTitle:LocalizedString(@".cancel")
+                                     destructiveButtonTitle:LocalizedString(@".delete")
+                                           otherTitlesArray:nil];
     sheet.tag = DELETE_SHEET_TAG;
+    
     [self showActionSheet:sheet forSender:sender];
 }
 
 - (void)move:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:LocalizedString(@".cancel")
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:LocalizedString(@".new-folder"), nil];
-    sheet.tag = MOVE_SHEET_TAG;
-    [self showActionSheet:sheet forSender:sender];
-}
-
-- (void)showActionSheet:(UIActionSheet *)sheet forSender:(id)sender
-{
-    if (IsPad()) {
-        [sheet showFromBarButtonItem:sender animated:YES];
-    } else {
-        [sheet showInView:self.view];
+    NSArray *otherButtonTitles = @[LocalizedString(@".new-folder")];
+    if (![self.viewModel checkIfCurrentFolderIsRootFolder]) {
+        otherButtonTitles = [otherButtonTitles arrayByAddingObject:LocalizedString(@".up-folder")];
     }
-}
-
-- (void)showCreateFolderAlertView
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalizedString(@".create-folder-alert-title")
-                                                        message:nil
-                                                       delegate:self
-                                              cancelButtonTitle:LocalizedString(@".cancel")
-                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
-    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alertView show];
+    
+    UIActionSheet *sheet = [self sheetWithCancelButtonTitle:LocalizedString(@".cancel")
+                                     destructiveButtonTitle:nil
+                                           otherTitlesArray:otherButtonTitles];
+    sheet.tag = MOVE_SHEET_TAG;
+    
+    [self showActionSheet:sheet forSender:sender];
 }
 
 - (void)performAction:(id)sender
@@ -200,7 +183,7 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     }
 }
 
-#pragma mark - Create folder
+#pragma mark - Folders
 
 - (void)createFolderNamed:(NSString *)folderName
 {
@@ -212,10 +195,21 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     }
 }
 
-- (void)createFolderNamed:(NSString *)folderName andMoveDocuments:(NSArray *)documetns
+- (void)createFolderNamed:(NSString *)folderName andMoveDocuments:(NSArray *)documents
 {
     NSError *error = nil;
-    if ([self.viewModel createFolderInCurrentFolderWithName:folderName andMoveDocuments:documetns error:&error]) {
+    if ([self.viewModel createFolderInCurrentFolderWithName:folderName andMoveDocuments:documents error:&error]) {
+        [self reload];
+        [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
+    }
+}
+
+- (void)moveSelectedDocumentsToSuperFolder
+{
+    NSError *error = nil;
+    if ([self.viewModel findSuperFolderAndMoveDocuments:self.selectedDocuments error:&error]) {
         [self reload];
         [self updateButtonsEnabled];
     } else {
@@ -236,7 +230,55 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     }
 }
 
-#pragma mark -
+#pragma mark - Action Sheets
+
+- (UIActionSheet *)sheetWithCancelButtonTitle:(NSString *)cancelButtonTitle
+                       destructiveButtonTitle:(NSString *)destructiveButtonTitle
+                             otherTitlesArray:(NSArray *)otherTitlesArray
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:nil];
+    
+    for(NSString *title in otherTitlesArray) {
+        [sheet addButtonWithTitle:title];
+    }
+    
+    BOOL hasDestructiveButton = (destructiveButtonTitle != nil);
+    if (hasDestructiveButton) {
+        [sheet addButtonWithTitle:destructiveButtonTitle];
+        sheet.destructiveButtonIndex = otherTitlesArray.count;
+    }
+    
+    [sheet addButtonWithTitle:cancelButtonTitle];
+    sheet.cancelButtonIndex = otherTitlesArray.count + (int)hasDestructiveButton;
+    
+    return sheet;
+}
+
+- (void)showActionSheet:(UIActionSheet *)sheet forSender:(id)sender
+{
+    if (IsPad()) {
+        [sheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [sheet showInView:self.view];
+    }
+}
+
+#pragma mark - Alerts
+
+- (void)showCreateFolderAlertView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalizedString(@".create-folder-alert-title")
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:LocalizedString(@".cancel")
+                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+}
 
 - (void)showAlertForError:(NSError *)error
 {
@@ -274,6 +316,8 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     } else if (actionSheet.tag == MOVE_SHEET_TAG) {
         if ([title isEqualToString:LocalizedString(@".new-folder")]) {
             [self showCreateFolderAlertView];
+        } else if ([title isEqualToString:LocalizedString(@".up-folder")]) {
+            [self moveSelectedDocumentsToSuperFolder];
         }
     }
 }
