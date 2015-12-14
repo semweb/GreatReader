@@ -185,4 +185,16 @@
     [fileManagerClassMock stopMocking];
 }
 
+- (void)testFindSuperFolder
+{
+    NSString *fakeSuperFolderPath = @"fake_super_folder_path";
+    NSString *fakeCurrentFolderPath = [fakeSuperFolderPath stringByAppendingPathComponent:@"fake_folder_name"];
+    
+    Folder *fakeCurrentFolder = [[Folder alloc] initWithPath:fakeCurrentFolderPath store:nil];
+    
+    Folder *superFolder = [fakeCurrentFolder findSuperFolder];
+    
+    XCTAssertTrue([superFolder.path isEqualToString:fakeSuperFolderPath], @"Folder must find super folder");
+}
+
 @end

@@ -89,6 +89,12 @@ NSString * const FolderDeletedNotification = @"FolderDeletedNotification";
     return NO;
 }
 
+- (Folder *)findSuperFolder
+{
+    NSString *superFolderPath = [self.path stringByDeletingLastPathComponent];
+    return [[Folder alloc] initWithPath:superFolderPath store:self.store];
+}
+
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error
 {
     NSString *fullSubFolderPath = [self.path stringByAppendingPathComponent:subFolderName];

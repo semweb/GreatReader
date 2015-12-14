@@ -22,6 +22,7 @@ extern NSString * const FolderDeletedNotification;
                        store:(PDFDocumentStore *)store;
 - (void)load;
 - (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
+- (Folder *)findSuperFolder;
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error;
 - (BOOL)containsFile:(File *)file;
 @end
