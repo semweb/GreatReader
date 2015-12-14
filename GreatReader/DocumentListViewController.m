@@ -205,9 +205,11 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 - (void)createFolderNamed:(NSString *)folderName
 {
     NSError *error = nil;
-    [self.viewModel createFolderInCurrentFolderWithName:folderName error:&error];
-    
-    [self reload];
+    if ([self.viewModel createFolderInCurrentFolderWithName:folderName error:&error] != nil) {
+        [self reload];
+    } else {
+        [self showAlertForError:error];
+    }
 }
 
 - (void)createFolderNamed:(NSString *)folderName andMoveDocuments:(NSArray *)documetns
@@ -216,6 +218,8 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     if ([self.viewModel createFolderInCurrentFolderWithName:folderName andMoveDocuments:documetns error:&error]) {
         [self reload];
         [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
     }
 }
 
@@ -227,7 +231,22 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     if ([self.viewModel deleteDocuments:self.selectedDocuments error:&error]) {
         [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
         [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
     }
+}
+
+#pragma mark -
+
+- (void)showAlertForError:(NSError *)error
+{
+    NSString *errorDesc = error.localizedDescription;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errorDesc
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
+    [alertView show];
 }
 
 #pragma mark - UIAlertView Delegate

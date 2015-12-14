@@ -21,6 +21,7 @@ extern NSString * const DocumentListViewControllerSegueFolder;
 @property (nonatomic, strong) DocumentListViewModel *viewModel;
 - (void)reload;
 - (void)updateButtonsEnabled;
+- (void)showAlertForError:(NSError *)error;
 
 - (void)deselectAll:(BOOL)animated;
 - (void)registerNibForCell;
