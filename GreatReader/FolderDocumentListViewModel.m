@@ -68,6 +68,17 @@
     return [self.folder.store moveDocuments:documents toFolder:folder error:error];
 }
 
+- (BOOL)findSuperFolderAndMoveDocuments:(NSArray *)documents error:(NSError **)error
+{
+    Folder *superFolder = [self.folder findSuperFolder];
+    if (superFolder)
+    {
+        return [self moveDocuments:documents toFolder:superFolder error:error];
+    }
+    
+    return NO;
+}
+
 - (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error
 {
     Folder *newFolder = [self createFolderInCurrentFolderWithName:folderName error:error];

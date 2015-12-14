@@ -36,6 +36,8 @@
 
 #pragma mark - Tests
 
+#pragma mark SubFolder
+
 - (void)testCreateSubFolderCalledOnFolder
 {
     Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
@@ -50,6 +52,8 @@
     
     OCMVerify([fakeFolderMock createSubFolderWithName:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
 }
+
+#pragma mark Folder Title
 
 - (void)testRightTitleProvidedForRootFolder
 {
@@ -69,6 +73,8 @@
     XCTAssertTrue([folderViewModel.title isEqualToString:fakeFolder.name], @"ViewModel must provide right title for ordinary folder");
 }
 
+#pragma mark Move Documents
+
 - (void)testMoveDocumentsCalledOnPDFDocumentStore
 {
     PDFDocumentStore *fakePDFDocumentStore = [[PDFDocumentStore alloc] init];
@@ -85,6 +91,8 @@
     
     OCMVerify([fakePDFDocumentStoreMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
 }
+
+#pragma mark Create Folder and Move Documents
 
 - (void)testCreateFolderAndMoveDocumentsCallsCreateFolder
 {
@@ -115,6 +123,45 @@
     
     OCMVerify([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
 }
+
+#pragma mark Find Super Folder and Move Documents
+
+- (void)testFindSuperFolderAndMoveDocumentsCallsFindSuperFolderOnCurrentFolder
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
+    
+    id fakeFolderMock = OCMPartialMock(fakeFolder);
+    OCMStub([fakeFolderMock findSuperFolder]);
+    
+    NSError *error = nil;
+    [folderViewModel findSuperFolderAndMoveDocuments:nil error:&error];
+    
+    OCMVerify([fakeFolderMock findSuperFolder]);
+}
+
+- (void)testFindSuperFolderAndMoveDocumentsCallsMoveDocumentsToFolder
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
+    
+    id folderMock = OCMClassMock([Folder class]);
+    
+    id fakeFolderMock = OCMPartialMock(fakeFolder);
+    OCMStub([fakeFolderMock findSuperFolder]).andReturn(folderMock);
+    
+    id folderViewModelMock = OCMPartialMock(folderViewModel);
+    OCMStub([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+    
+    NSError *error = nil;
+    [folderViewModel findSuperFolderAndMoveDocuments:nil error:&error];
+    
+    OCMVerify([folderViewModelMock moveDocuments:[OCMArg any] toFolder:[OCMArg any] error:((NSError *__autoreleasing *)[OCMArg anyPointer])]);
+}
+
+#pragma mark Has Folder in Documents
 
 - (void)testCheckIfHasFolderInDocumentsReturnFalseForDocumentsWithoutFolder
 {
