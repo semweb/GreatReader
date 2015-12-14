@@ -219,6 +219,17 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
     }
 }
 
+#pragma mark - Delete documents
+
+- (void)deleteSelectedDocuments
+{
+    NSError *error = nil;
+    if ([self.viewModel deleteDocuments:self.selectedDocuments error:&error]) {
+        [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
+        [self updateButtonsEnabled];
+    }
+}
+
 #pragma mark - UIAlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -239,9 +250,7 @@ NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewContr
 
     if (actionSheet.tag == DELETE_SHEET_TAG) {
         if (actionSheet.destructiveButtonIndex == buttonIndex) {
-            [self.viewModel deleteDocuments:self.selectedDocuments];
-            [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
-            [self updateButtonsEnabled];
+            [self deleteSelectedDocuments];
         }
     } else if (actionSheet.tag == MOVE_SHEET_TAG) {
         if ([title isEqualToString:LocalizedString(@".new-folder")]) {

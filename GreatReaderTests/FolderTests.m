@@ -158,8 +158,10 @@
     
     Folder *folder = [[Folder alloc] initWithPath:subFolderPath store:nil];
     
-    [folder delete];
+    NSError *error = nil;
+    BOOL success = [folder deleteWithPossibleError:&error];
     
+    XCTAssertTrue(success, @"Delete folder method must return true");
     XCTAssertFalse([self.fileManager fileExistsAtPath:subFolderPath], @"Folder must be deleted");
 }
 
@@ -174,7 +176,8 @@
     [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:FolderDeletedNotification object:fakeFolder];
     [[observerMock expect] notificationWithName:FolderDeletedNotification object:fakeFolder];
     
-    [fakeFolder delete];
+    NSError *error = nil;
+    [fakeFolder deleteWithPossibleError:&error];
     
     OCMVerifyAll(observerMock);
     

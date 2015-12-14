@@ -37,7 +37,6 @@ extern NSString * const PDFDocumentMovedNotification;
 @property (nonatomic, strong, readonly) PDFDocumentBackForwardList *backForwardList;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
-- (void)delete;
 - (BOOL)moveToDirectory:(NSString *)directoryPath error:(NSError **)error;
 - (void)goBack;
 - (void)goForward;

@@ -24,4 +24,9 @@
     return self.path.lastPathComponent;
 }
 
+- (BOOL)deleteWithPossibleError:(NSError **)error
+{
+    return NO;
+}
+
 @end

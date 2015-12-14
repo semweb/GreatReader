@@ -42,9 +42,9 @@
     return [self.documentList documentAtIndex:index];
 }
 
-- (void)deleteDocuments:(NSArray *)documents
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error
 {
-    [self.documentList.store deleteDocuments:documents];
+    return [self.documentList.store deleteDocuments:documents error:error];
 }
 
 - (void)removeDocumentHistories:(NSArray *)documents

@@ -109,7 +109,7 @@ NSString * const FolderDeletedNotification = @"FolderDeletedNotification";
     return [standardFilePath hasPrefix:standardFolderPath];
 }
 
-- (void)delete
+- (BOOL)deleteWithPossibleError:(NSError **)error
 {
     // post notification before actual deletion of folder, because we want to delete some files
     // like generated pdf document thumbnails, which are stored in caches
@@ -119,7 +119,7 @@ NSString * const FolderDeletedNotification = @"FolderDeletedNotification";
                       object:self];
     
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    [fileManager removeItemAtPath:self.path error:nil];
+    return [fileManager removeItemAtPath:self.path error:error];
 }
 
 #pragma mark - PDFDocumentDeletedNotification and FolderDeletedNotification

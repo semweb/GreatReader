@@ -24,5 +24,4 @@ extern NSString * const FolderDeletedNotification;
 - (BOOL)removeItemAtIndex:(NSUInteger)index error:(NSError **)error;
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error;
 - (BOOL)containsFile:(File *)file;
-- (void)delete;
 @end

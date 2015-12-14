@@ -13,7 +13,7 @@
 - (NSUInteger)count { return 0; }
 - (PDFDocument *)documentAtIndex:(NSUInteger)index { return nil; }
 - (void)reload {}
-- (void)deleteDocuments:(NSArray *)documents {}
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error { return NO; }
 - (void)removeDocumentHistories:(NSArray *)documents {}
 - (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error { return NO; }
 - (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error { return NO; }

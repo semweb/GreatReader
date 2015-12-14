@@ -162,7 +162,7 @@
     Folder *deletedFolder = notification.object;
     for (PDFDocument *doc in [self.documents copy]) {
         if ([deletedFolder containsFile:doc]) {
-            [doc delete];
+            [doc deleteWithPossibleError:nil];
             [self.documentsProxy removeObject:doc];
         }
     }

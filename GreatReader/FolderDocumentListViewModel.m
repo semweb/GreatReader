@@ -53,9 +53,9 @@
     [self.folder load];
 }
 
-- (void)deleteDocuments:(NSArray *)documents
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error
 {
-    [self.folder.store deleteDocuments:documents];
+    return [self.folder.store deleteDocuments:documents error:error];
 }
 
 - (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error

@@ -14,4 +14,5 @@
 @property (nonatomic, strong) UIImage *iconImage;
 @property (nonatomic, assign) BOOL fileNotExist;
 - (instancetype)initWithPath:(NSString *)path;
+- (BOOL)deleteWithPossibleError:(NSError **)error;
 @end

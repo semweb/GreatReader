@@ -344,15 +344,21 @@ NSString * const PDFDocumentMovedNotification = @"PDFDocumentMovedNotification";
 
 #pragma mark -
 
-- (void)delete
+- (BOOL)deleteWithPossibleError:(NSError **)error
 {
     NSFileManager *fileManager = [NSFileManager new];
-    [fileManager removeItemAtPath:self.path error:NULL];
-    [fileManager removeItemAtPath:self.imagePath error:NULL];
-
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:PDFDocumentDeletedNotification
-                      object:self];
+    if ([fileManager removeItemAtPath:self.path error:error]) {
+        if ([fileManager removeItemAtPath:self.imagePath error:error]) {
+            
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:PDFDocumentDeletedNotification
+                              object:self];
+            
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 - (BOOL)moveToDirectory:(NSString *)directoryPath error:(NSError **)error

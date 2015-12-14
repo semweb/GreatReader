@@ -56,18 +56,27 @@
     [self.documentList addHistory:document];
 }
 
-- (void)deleteDocuments:(NSArray *)documents
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error
 {
+    __block BOOL deletedAllDocuments = YES;
+    
     [documents enumerateObjectsUsingBlock:^(PDFDocument *document,
                                             NSUInteger idx,
                                             BOOL *stop) {
-        [self deleteDocument:document];
+        if (![self deleteDocument:document error:error])
+        {
+            *stop = YES;
+            deletedAllDocuments = NO;
+            return;
+        }
     }];
+    
+    return deletedAllDocuments;
 }
 
-- (void)deleteDocument:(PDFDocument *)document
+- (BOOL)deleteDocument:(PDFDocument *)document error:(NSError **)error
 {
-    [document delete];
+    return [document deleteWithPossibleError:error];
 }
 
 - (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error
