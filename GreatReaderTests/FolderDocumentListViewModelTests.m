@@ -185,4 +185,24 @@
     XCTAssertTrue([folderViewModel checkIfHasFolderInDocuments:documents], @"Must return true for PDF document and folder");
 }
 
+#pragma mark - Type of Current Folder
+
+- (void)testCurrentFolderIsOrdinaryFolder
+{
+    Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeFolder];
+    
+    XCTAssertFalse([folderViewModel checkIfCurrentFolderIsRootFolder], @"Current folder must not be RootFolder");
+}
+
+- (void)testCurrentFolderIsRootFolder
+{
+    RootFolder *fakeRootFolder = [[RootFolder alloc] initWithPath:@"fake_root_folder_path" store:nil];
+    
+    FolderDocumentListViewModel *folderViewModel = [[FolderDocumentListViewModel alloc] initWithFolder:fakeRootFolder];
+    
+    XCTAssertTrue([folderViewModel checkIfCurrentFolderIsRootFolder], @"Current folder must be RootFolder");
+}
+
 @end

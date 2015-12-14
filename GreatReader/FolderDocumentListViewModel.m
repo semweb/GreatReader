@@ -89,6 +89,11 @@
     return NO;
 }
 
+- (BOOL)checkIfCurrentFolderIsRootFolder
+{
+    return [self.folder isKindOfClass:[RootFolder class]];
+}
+
 - (BOOL)checkIfHasFolderInDocuments:(NSArray *)documents
 {
     __block BOOL hasFolder = NO;

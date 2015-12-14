@@ -23,5 +23,6 @@
 - (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error;
 - (BOOL)findSuperFolderAndMoveDocuments:(NSArray *)documents error:(NSError **)error;
 - (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error;
+- (BOOL)checkIfCurrentFolderIsRootFolder;
 - (BOOL)checkIfHasFolderInDocuments:(NSArray *)documents;
 @end
