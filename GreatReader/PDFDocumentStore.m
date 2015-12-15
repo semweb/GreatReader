@@ -63,8 +63,7 @@
     [documents enumerateObjectsUsingBlock:^(PDFDocument *document,
                                             NSUInteger idx,
                                             BOOL *stop) {
-        if (![self deleteDocument:document error:error])
-        {
+        if (![self deleteDocument:document error:error]) {
             *stop = YES;
             deletedAllDocuments = NO;
             return;
@@ -84,10 +83,9 @@
     __block BOOL movedAllDocuments = YES;
     
     [documents enumerateObjectsUsingBlock:^(PDFDocument *document,
-                                           NSUInteger idx,
-                                           BOOL *stop) {
-        if (![self moveDocument:document toFolder:folder error:error])
-        {
+                                            NSUInteger idx,
+                                            BOOL *stop) {
+        if (![self moveDocument:document toFolder:folder error:error]) {
             *stop = YES;
             movedAllDocuments = NO;
             return;
