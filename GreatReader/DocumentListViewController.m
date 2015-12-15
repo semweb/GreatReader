@@ -13,17 +13,24 @@
 #import "DocumentModalTransitionAnimator.h"
 #import "NSArray+GreatReaderAdditions.h"
 #import "PDFDocument.h"
+#import "Folder.h"
+#import "FolderDocumentListViewModel.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
 #import "PDFDocumentViewController.h"
 #import "UIColor+GreatReaderAdditions.h"
 
+#define DELETE_SHEET_TAG 1
+#define   MOVE_SHEET_TAG 2
+
 NSString * const DocumentListViewControllerCellIdentifier = @"DocumentListViewControllerCellIdentifier";
 NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListViewControllerSeguePDFDocument";
+NSString * const DocumentListViewControllerSegueFolder = @"DocumentListViewControllerSegueFolder";
 
 @interface DocumentListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIBarButtonItem *actionItem;
 @property (nonatomic, strong) UIBarButtonItem *deleteItem;
+@property (nonatomic, strong) UIBarButtonItem *moveToItem;
 @property (nonatomic, strong) UIDocumentInteractionController *interactionController;
 @end
 
@@ -42,7 +49,7 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 {
     [super viewWillAppear:animated];
     
-    [self reloadView];
+    [self reload];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -83,11 +90,24 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
                                                               target:self
                                                               action:@selector(performAction:)];
         self.actionItem.enabled = NO;
-        [self.navigationItem setLeftBarButtonItems:@[self.deleteItem, self.actionItem]
+        NSArray *barButtonItems = @[self.deleteItem, self.actionItem];
+        if ([self isMoveToBarButtonItemNeeded]) {
+            self.moveToItem =
+                    [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@".move-to")
+                                                     style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(move:)];
+            self.moveToItem.enabled = NO;
+            barButtonItems = [barButtonItems arrayByAddingObject:self.moveToItem];
+        }
+        [self.navigationItem setLeftBarButtonItems:barButtonItems
                                           animated:animated];
     } else {
         self.deleteItem = nil;
         self.actionItem = nil;
+        if ([self isMoveToBarButtonItemNeeded]) {
+            self.moveToItem = nil;
+        }
         [self.navigationItem setLeftBarButtonItems:@[] animated:animated];
 
         [self deselectAll:animated];
@@ -122,16 +142,27 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 
 - (void)delete:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:LocalizedString(@".cancel")
-                                         destructiveButtonTitle:LocalizedString(@".delete")
-                                              otherButtonTitles:nil];
-    if (IsPad()) {
-        [sheet showFromBarButtonItem:sender animated:YES];
-    } else {
-        [sheet showInView:self.view];
+    UIActionSheet *sheet = [self sheetWithCancelButtonTitle:LocalizedString(@".cancel")
+                                     destructiveButtonTitle:LocalizedString(@".delete")
+                                           otherTitlesArray:nil];
+    sheet.tag = DELETE_SHEET_TAG;
+    
+    [self showActionSheet:sheet forSender:sender];
+}
+
+- (void)move:(id)sender
+{
+    NSArray *otherButtonTitles = @[LocalizedString(@".new-folder")];
+    if (![self.viewModel checkIfCurrentFolderIsRootFolder]) {
+        otherButtonTitles = [otherButtonTitles arrayByAddingObject:LocalizedString(@".up-folder")];
     }
+    
+    UIActionSheet *sheet = [self sheetWithCancelButtonTitle:LocalizedString(@".cancel")
+                                     destructiveButtonTitle:nil
+                                           otherTitlesArray:otherButtonTitles];
+    sheet.tag = MOVE_SHEET_TAG;
+    
+    [self showActionSheet:sheet forSender:sender];
 }
 
 - (void)performAction:(id)sender
@@ -146,17 +177,148 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (void)updateButtonsEnabled
 {
     self.deleteItem.enabled = self.selectedIndexPaths.count > 0;
-    self.actionItem.enabled = self.selectedIndexPaths.count == 1;
+    self.actionItem.enabled = (self.selectedIndexPaths.count == 1) && ![self.viewModel checkIfHasFolderInDocuments:self.selectedDocuments];
+    if ([self isMoveToBarButtonItemNeeded]) {
+        self.moveToItem.enabled = (self.selectedIndexPaths.count > 0) && ![self.viewModel checkIfHasFolderInDocuments:self.selectedDocuments];
+    }
+}
+
+#pragma mark - Folders
+
+- (void)createFolderNamed:(NSString *)folderName
+{
+    NSError *error = nil;
+    if ([self.viewModel createFolderInCurrentFolderWithName:folderName error:&error] != nil) {
+        [self reload];
+    } else {
+        [self showAlertForError:error];
+    }
+}
+
+- (void)createFolderNamed:(NSString *)folderName andMoveDocuments:(NSArray *)documents
+{
+    NSError *error = nil;
+    if ([self.viewModel createFolderInCurrentFolderWithName:folderName andMoveDocuments:documents error:&error]) {
+        [self reload];
+        [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
+    }
+}
+
+- (void)moveSelectedDocumentsToSuperFolder
+{
+    NSError *error = nil;
+    if ([self.viewModel findSuperFolderAndMoveDocuments:self.selectedDocuments error:&error]) {
+        [self reload];
+        [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
+    }
+}
+
+#pragma mark - Delete documents
+
+- (void)deleteSelectedDocuments
+{
+    NSError *error = nil;
+    if ([self.viewModel deleteDocuments:self.selectedDocuments error:&error]) {
+        [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
+        [self updateButtonsEnabled];
+    } else {
+        [self showAlertForError:error];
+    }
+}
+
+#pragma mark - Action Sheets
+
+- (UIActionSheet *)sheetWithCancelButtonTitle:(NSString *)cancelButtonTitle
+                       destructiveButtonTitle:(NSString *)destructiveButtonTitle
+                             otherTitlesArray:(NSArray *)otherTitlesArray
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:nil];
+    
+    for(NSString *title in otherTitlesArray) {
+        [sheet addButtonWithTitle:title];
+    }
+    
+    BOOL hasDestructiveButton = (destructiveButtonTitle != nil);
+    if (hasDestructiveButton) {
+        [sheet addButtonWithTitle:destructiveButtonTitle];
+        sheet.destructiveButtonIndex = otherTitlesArray.count;
+    }
+    
+    [sheet addButtonWithTitle:cancelButtonTitle];
+    sheet.cancelButtonIndex = otherTitlesArray.count + (int)hasDestructiveButton;
+    
+    return sheet;
+}
+
+- (void)showActionSheet:(UIActionSheet *)sheet forSender:(id)sender
+{
+    if (IsPad()) {
+        [sheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [sheet showInView:self.view];
+    }
+}
+
+#pragma mark - Alerts
+
+- (void)showCreateFolderAlertView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalizedString(@".create-folder-alert-title")
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:LocalizedString(@".cancel")
+                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+}
+
+- (void)showAlertForError:(NSError *)error
+{
+    NSString *errorDesc = error.localizedDescription;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errorDesc
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:LocalizedString(@".ok"), nil] ;
+    [alertView show];
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:LocalizedString(@".ok")]) {
+        UITextField *alertTextField = [alertView textFieldAtIndex:0];
+        NSString *folderName = alertTextField.text;
+        [self createFolderNamed:folderName andMoveDocuments:self.selectedDocuments];
+    }
 }
 
 #pragma mark - UIActionSheet Delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.destructiveButtonIndex == buttonIndex) {
-        [self.viewModel deleteDocuments:self.selectedDocuments];
-        [self deleteCellsAtIndexPaths:self.selectedIndexPaths];
-        [self updateButtonsEnabled];
+    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+
+    if (actionSheet.tag == DELETE_SHEET_TAG) {
+        if (actionSheet.destructiveButtonIndex == buttonIndex) {
+            [self deleteSelectedDocuments];
+        }
+    } else if (actionSheet.tag == MOVE_SHEET_TAG) {
+        if ([title isEqualToString:LocalizedString(@".new-folder")]) {
+            [self showCreateFolderAlertView];
+        } else if ([title isEqualToString:LocalizedString(@".up-folder")]) {
+            [self moveSelectedDocumentsToSuperFolder];
+        }
     }
 }
 
@@ -176,6 +338,12 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
         [document.store addHistory:document];
         navi.modalPresentationStyle = UIModalPresentationCustom;
         navi.transitioningDelegate = self;
+    } else if ([segue.identifier isEqual:DocumentListViewControllerSegueFolder]) {
+        DocumentListViewController *folderListViewController = (DocumentListViewController *)segue.destinationViewController;
+        Folder *folder = [self.selectedDocuments firstObject];
+        FolderDocumentListViewModel *folderModel = [[FolderDocumentListViewModel alloc] initWithFolder:folder];
+        folderListViewController.viewModel = folderModel;
+        [folderListViewController reload];
     }
 }
 
@@ -221,5 +389,6 @@ NSString * const DocumentListViewControllerSeguePDFDocument = @"DocumentListView
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {}
 - (id<DocumentCell>)selectedDocumentCell { return nil; }
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document { return nil; }
+- (BOOL)isMoveToBarButtonItemNeeded { return NO; }
 
 @end

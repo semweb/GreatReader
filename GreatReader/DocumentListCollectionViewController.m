@@ -12,6 +12,7 @@
 #import "DocumentListViewModel.h"
 #import "NSArray+GreatReaderAdditions.h"
 #import "DocumentCollectionViewCell.h"
+#import "Folder.h"
 #import "PDFDocument.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
@@ -133,6 +134,11 @@
     return nil;
 }
 
+- (BOOL)isMoveToBarButtonItemNeeded
+{
+    return YES;
+}
+
 #pragma mark -
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -148,7 +154,8 @@
         [self updateButtonsEnabled];
     } else {
         DocumentCollectionViewCell *cell = (DocumentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:DocumentListViewControllerSeguePDFDocument
+        NSString *segueID = [cell.document isKindOfClass:[Folder class]] ? DocumentListViewControllerSegueFolder : DocumentListViewControllerSeguePDFDocument;
+        [self performSegueWithIdentifier:segueID
                                   sender:cell];
         self.selectedDocumentCell = cell;
         [collectionView deselectItemAtIndexPath:indexPath animated:NO];

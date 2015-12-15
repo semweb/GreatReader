@@ -9,6 +9,7 @@
 #import "FolderDocumentListViewModel.h"
 
 #import "Folder.h"
+#import "RootFolder.h"
 #import "PDFDocument.h"
 #import "PDFDocumentStore.h"
 #import "PDFRecentDocumentList.h"
@@ -30,7 +31,11 @@
 
 - (NSString *)title
 {
-    return LocalizedString(@"home.all-documents");
+    if ([self.folder isKindOfClass:[RootFolder class]]) {
+        return LocalizedString(@"home.all-documents");
+    } else {
+        return self.folder.name;
+    }
 }
 
 - (NSUInteger)count
@@ -48,9 +53,59 @@
     [self.folder load];
 }
 
-- (void)deleteDocuments:(NSArray *)documents
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error
 {
-    [self.folder.store deleteDocuments:documents];
+    return [self.folder.store deleteDocuments:documents error:error];
+}
+
+- (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error
+{
+    return [self.folder createSubFolderWithName:folderName error:error];
+}
+
+- (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error
+{
+    return [self.folder.store moveDocuments:documents toFolder:folder error:error];
+}
+
+- (BOOL)findSuperFolderAndMoveDocuments:(NSArray *)documents error:(NSError **)error
+{
+    Folder *superFolder = [self.folder findSuperFolder];
+    if (superFolder) {
+        return [self moveDocuments:documents toFolder:superFolder error:error];
+    }
+    
+    return NO;
+}
+
+- (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error
+{
+    Folder *newFolder = [self createFolderInCurrentFolderWithName:folderName error:error];
+    if (newFolder) {
+        return [self moveDocuments:documents toFolder:newFolder error:error];
+    }
+    
+    return NO;
+}
+
+- (BOOL)checkIfCurrentFolderIsRootFolder
+{
+    return [self.folder isKindOfClass:[RootFolder class]];
+}
+
+- (BOOL)checkIfHasFolderInDocuments:(NSArray *)documents
+{
+    __block BOOL hasFolder = NO;
+    
+    [documents enumerateObjectsUsingBlock:^(File *file, NSUInteger index, BOOL *stop) {
+        if ([file isKindOfClass:[Folder class]]) {
+            hasFolder = YES;
+            *stop = YES;
+            return;
+        }
+    }];
+    
+    return hasFolder;
 }
 
 @end

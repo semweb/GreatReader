@@ -22,8 +22,10 @@
 #import "PDFPageLinkList.h"
 
 NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotification";
+NSString * const PDFDocumentMovedNotification = @"PDFDocumentMovedNotification";
 
 @interface PDFDocument ()
+@property (nonatomic, readwrite) NSString *path;
 @property (nonatomic, strong) PDFDocumentNameList *nameList;
 @property (nonatomic, assign, readwrite) NSUInteger numberOfPages;
 @property (nonatomic, strong, readwrite) UIImage *thumbnailImage;
@@ -39,6 +41,8 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 @end
 
 @implementation PDFDocument
+
+@synthesize path = _path; // synth path property in order to change it on moving to another directory
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
 {
@@ -58,6 +62,7 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
     self = [super initWithPath:path];
     if (self) {       
         NSURL *URL = [NSURL fileURLWithPath:path];
+        _path = path;
         _CGPDFDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)URL);
         if (_CGPDFDocument) {
             _numberOfPages = CGPDFDocumentGetNumberOfPages(_CGPDFDocument);
@@ -339,15 +344,44 @@ NSString * const PDFDocumentDeletedNotification = @"PDFDocumentDeletedNotificati
 
 #pragma mark -
 
-- (void)delete
+- (BOOL)deleteWithPossibleError:(NSError **)error
 {
     NSFileManager *fileManager = [NSFileManager new];
-    [fileManager removeItemAtPath:self.path error:NULL];
-    [fileManager removeItemAtPath:self.imagePath error:NULL];
+    if ([fileManager removeItemAtPath:self.path error:error]) {
+        if ([fileManager removeItemAtPath:self.imagePath error:error]) {
+            
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:PDFDocumentDeletedNotification
+                              object:self];
+            
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:PDFDocumentDeletedNotification
-                      object:self];
+- (BOOL)moveToDirectory:(NSString *)directoryPath error:(NSError **)error
+{
+    NSString *oldImagePath = [self.imagePath copy];
+    
+    NSString *documentFileName = [self.path lastPathComponent];
+    NSString *newFullDocumentPath = [directoryPath stringByAppendingPathComponent:documentFileName];
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    if ([fileManager moveItemAtPath:self.path toPath:newFullDocumentPath error:error]) {
+        self.path = newFullDocumentPath;
+        if ([fileManager moveItemAtPath:oldImagePath toPath:self.imagePath error:error]) {
+            
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:PDFDocumentMovedNotification
+                              object:self];
+            
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark -

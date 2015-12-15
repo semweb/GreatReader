@@ -60,6 +60,11 @@
     }
 }
 
+- (Folder *)findSuperFolder
+{
+    return nil;
+}
+
 #pragma mark -
 
 - (void)didEnterBackground:(NSNotification *)notification

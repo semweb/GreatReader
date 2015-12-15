@@ -9,3 +9,5 @@ Podfile.lock
 Pods/*
 
 /API_KEY.plist
+
+Build/*

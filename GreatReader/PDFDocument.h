@@ -19,6 +19,7 @@
 @class PDFPage;
 
 extern NSString * const PDFDocumentDeletedNotification;
+extern NSString * const PDFDocumentMovedNotification;
 
 @interface PDFDocument : File <NSCoding>
 @property (nonatomic, assign, readonly) NSUInteger numberOfPages;
@@ -36,7 +37,7 @@ extern NSString * const PDFDocumentDeletedNotification;
 @property (nonatomic, strong, readonly) PDFDocumentBackForwardList *backForwardList;
 - (PDFPage *)pageAtIndex:(NSUInteger)index;
 - (void)toggleRibbon;
-- (void)delete;
+- (BOOL)moveToDirectory:(NSString *)directoryPath error:(NSError **)error;
 - (void)goBack;
 - (void)goForward;
 - (void)goTo:(NSUInteger)page

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class Folder;
 @class PDFDocument;
 @class PDFRecentDocumentList;
 
@@ -16,6 +17,12 @@
 - (NSUInteger)count;
 - (PDFDocument *)documentAtIndex:(NSUInteger)index;
 - (void)reload;
-- (void)deleteDocuments:(NSArray *)documents;
+- (BOOL)deleteDocuments:(NSArray *)documents error:(NSError **)error;
 - (void)removeDocumentHistories:(NSArray *)documents;
+- (Folder *)createFolderInCurrentFolderWithName:(NSString *)folderName error:(NSError **)error;
+- (BOOL)moveDocuments:(NSArray *)documents toFolder:(Folder *)folder error:(NSError **)error;
+- (BOOL)findSuperFolderAndMoveDocuments:(NSArray *)documents error:(NSError **)error;
+- (BOOL)createFolderInCurrentFolderWithName:(NSString *)folderName andMoveDocuments:(NSArray *)documents error:(NSError **)error;
+- (BOOL)checkIfCurrentFolderIsRootFolder;
+- (BOOL)checkIfHasFolderInDocuments:(NSArray *)documents;
 @end

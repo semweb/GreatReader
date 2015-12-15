@@ -534,6 +534,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="lOA-vd-e91" kind="push" identifier="DocumentListViewControllerSegueFolder" id="hpu-lW-lKn"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -652,5 +655,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SNn-xC-9k6"/>
+        <segue reference="ndV-OF-VVv"/>
     </inferredMetricsTieBreakers>
 </document>

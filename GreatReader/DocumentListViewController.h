@@ -15,11 +15,13 @@
 
 extern NSString * const DocumentListViewControllerCellIdentifier;
 extern NSString * const DocumentListViewControllerSeguePDFDocument;
+extern NSString * const DocumentListViewControllerSegueFolder;
 
-@interface DocumentListViewController : UIViewController <UIActionSheetDelegate>
+@interface DocumentListViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) DocumentListViewModel *viewModel;
 - (void)reload;
 - (void)updateButtonsEnabled;
+- (void)showAlertForError:(NSError *)error;
 
 - (void)deselectAll:(BOOL)animated;
 - (void)registerNibForCell;
@@ -30,4 +32,5 @@ extern NSString * const DocumentListViewControllerSeguePDFDocument;
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths;
 - (id<DocumentCell>)selectedDocumentCell;
 - (id<DocumentCell>)documentCellForDocument:(PDFDocument *)document;
+- (BOOL)isMoveToBarButtonItemNeeded;
 @end
