@@ -71,8 +71,7 @@
 - (BOOL)findSuperFolderAndMoveDocuments:(NSArray *)documents error:(NSError **)error
 {
     Folder *superFolder = [self.folder findSuperFolder];
-    if (superFolder)
-    {
+    if (superFolder) {
         return [self moveDocuments:documents toFolder:superFolder error:error];
     }
     
