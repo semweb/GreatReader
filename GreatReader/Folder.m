@@ -97,14 +97,34 @@ NSString * const FolderDeletedNotification = @"FolderDeletedNotification";
 
 - (Folder *)createSubFolderWithName:(NSString *)subFolderName error:(NSError **)error
 {
-    NSString *fullSubFolderPath = [self.path stringByAppendingPathComponent:subFolderName];
+    subFolderName = [self clearFolderName:subFolderName];
     
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    if ([fileManager createDirectoryAtPath:fullSubFolderPath withIntermediateDirectories:YES attributes:nil error:error]) {
-        return [[Folder alloc] initWithPath:fullSubFolderPath store:self.store];
+    if ([subFolderName length] > 0) {
+        NSString *fullSubFolderPath = [self.path stringByAppendingPathComponent:subFolderName];
+        
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        if ([fileManager createDirectoryAtPath:fullSubFolderPath withIntermediateDirectories:YES attributes:nil error:error]) {
+            return [[Folder alloc] initWithPath:fullSubFolderPath store:self.store];
+        }
+    } else {
+        if (error != NULL) {
+            *error = [[NSError alloc] initWithDomain:@"GRT_Folder_Errors"
+                                                code:-1
+                                            userInfo:@{ NSLocalizedDescriptionKey : @"Incorrect new folder name" }];
+        }
     }
     
     return nil;
+}
+
+- (NSString *)clearFolderName:(NSString *)folderName
+{
+    folderName = [folderName stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
+    folderName = [folderName stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    folderName = [folderName stringByTrimmingCharactersInSet:[NSCharacterSet illegalCharacterSet]];
+    folderName = [folderName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":/"]];
+    
+    return folderName;
 }
 
 - (BOOL)containsFile:(File *)file
