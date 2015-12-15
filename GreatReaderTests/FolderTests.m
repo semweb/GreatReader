@@ -125,6 +125,15 @@
     XCTAssertTrue([self.fileManager fileExistsAtPath:subFolder.path], @"Created sub folder must exists in file system");
 }
 
+- (void)testCannotCreateSubFolderWithEmptyName
+{
+    NSString *emptySubFolderName = @"";
+    
+    Folder *folder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
+    
+    XCTAssertFalse([folder createSubFolderWithName:emptySubFolderName error:nil], @"Must not create sub folder with empty name");
+}
+
 - (void)testFolderContainsFileOnSimplePath
 {
     Folder *fakeFolder = [[Folder alloc] initWithPath:@"fake_folder_path" store:nil];
