@@ -20,6 +20,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+
     CGFloat scale = UIScreen.mainScreen.scale;
     self.imageView.layer.borderWidth = 1.0 / scale;
 }
