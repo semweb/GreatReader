@@ -58,6 +58,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+
     self.knobView = [[PDFDocumentPageSliderKnobView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [self addSubview:self.knobView];
 
