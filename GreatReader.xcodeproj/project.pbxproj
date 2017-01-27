@@ -963,14 +963,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19F7BA9C186052E2009E8916 /* Build configuration list for PBXNativeTarget "GreatReader" */;
 			buildPhases = (
-				B90DBE927FA4794E5248104C /* 📦 Check Pods Manifest.lock */,
+				B90DBE927FA4794E5248104C /* [CP] Check Pods Manifest.lock */,
 				191B7D2B19681379004B35CA /* ShellScript */,
 				19F7BA5D186052E2009E8916 /* Sources */,
 				19F7BA5E186052E2009E8916 /* Frameworks */,
 				19F7BA5F186052E2009E8916 /* Resources */,
 				19430E4918E7B2B800BB4238 /* ShellScript */,
-				0A6863B2F611C4270C15EA97 /* 📦 Embed Pods Frameworks */,
-				607005BA149D9AF251BB0EFE /* 📦 Copy Pods Resources */,
+				0A6863B2F611C4270C15EA97 /* [CP] Embed Pods Frameworks */,
+				607005BA149D9AF251BB0EFE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -985,13 +985,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19F7BA9F186052E2009E8916 /* Build configuration list for PBXNativeTarget "GreatReaderTests" */;
 			buildPhases = (
-				CFAE8C05352FA5A22744CE39 /* 📦 Check Pods Manifest.lock */,
+				CFAE8C05352FA5A22744CE39 /* [CP] Check Pods Manifest.lock */,
 				19F7BA85186052E2009E8916 /* Sources */,
 				19F7BA86186052E2009E8916 /* Frameworks */,
 				19F7BA87186052E2009E8916 /* Resources */,
 				19F7BA88186052E2009E8916 /* ShellScript */,
-				807EF875B7F37D19CF7745A7 /* 📦 Embed Pods Frameworks */,
-				87BC50443177DAE57BEB08EA /* 📦 Copy Pods Resources */,
+				807EF875B7F37D19CF7745A7 /* [CP] Embed Pods Frameworks */,
+				87BC50443177DAE57BEB08EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1103,14 +1103,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A6863B2F611C4270C15EA97 /* 📦 Embed Pods Frameworks */ = {
+		0A6863B2F611C4270C15EA97 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1157,14 +1157,14 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		607005BA149D9AF251BB0EFE /* 📦 Copy Pods Resources */ = {
+		607005BA149D9AF251BB0EFE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1172,14 +1172,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GreatReader/Pods-GreatReader-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		807EF875B7F37D19CF7745A7 /* 📦 Embed Pods Frameworks */ = {
+		807EF875B7F37D19CF7745A7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1187,14 +1187,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GreatReaderTests/Pods-GreatReaderTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		87BC50443177DAE57BEB08EA /* 📦 Copy Pods Resources */ = {
+		87BC50443177DAE57BEB08EA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1202,34 +1202,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GreatReaderTests/Pods-GreatReaderTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B90DBE927FA4794E5248104C /* 📦 Check Pods Manifest.lock */ = {
+		B90DBE927FA4794E5248104C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		CFAE8C05352FA5A22744CE39 /* 📦 Check Pods Manifest.lock */ = {
+		CFAE8C05352FA5A22744CE39 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1787,6 +1787,7 @@
 				INFOPLIST_FILE = "GreatReader/GreatReader-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1808,6 +1809,7 @@
 				INFOPLIST_FILE = "GreatReader/GreatReader-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
