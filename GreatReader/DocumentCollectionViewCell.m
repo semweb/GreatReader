@@ -24,13 +24,14 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     CGFloat scale = [UIScreen mainScreen].scale;
     self.imageView.layer.borderWidth = 1.0 / scale;
     self.imageView.layer.borderColor = UIColor.blackColor.CGColor;
     self.selectionView.hidden = !self.selected;
     self.selectionView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
     self.selectionView.layer.borderWidth = 1.0 / scale;
-    self.selectionView.layer.borderColor = UIColor.blackColor.CGColor;    
+    self.selectionView.layer.borderColor = UIColor.blackColor.CGColor;
 }
 
 - (void)setDocument:(PDFDocument *)document
