@@ -18,6 +18,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     self.emptyTitleLabel.text = LocalizedString(@"home.no-books");
     self.emptyDescriptionLabel.text = LocalizedString(@"home.no-books-description");
 }
