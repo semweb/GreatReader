@@ -1,0 +1,15 @@
+PODS:
+  - KVOController (1.1.0)
+  - OCMock (3.3)
+
+DEPENDENCIES:
+  - KVOController
+  - OCMock (~> 3.0)
+
+SPEC CHECKSUMS:
+  KVOController: 321b5fc59300fcaabd42c0f679baa7a27efbb2fd
+  OCMock: d68685bde31f69cb61d518dcb39269080c78b5ed
+
+PODFILE CHECKSUM: e72e615d8d042ee9655f1941e7ee1e0ac889e4c5
+
+COCOAPODS: 1.0.0
