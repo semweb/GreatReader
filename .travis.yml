@@ -1,7 +1,0 @@
-language: objective-c
-
-before_install:
-  - gem install cocoapods -v '0.32.1'
-
-script:
-  - xcodebuild -workspace GreatReader.xcworkspace -scheme GreatReader -destination 'OS=8.0,name=iPhone 5s' test
